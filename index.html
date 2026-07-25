@@ -34,12 +34,15 @@
 
       --dark:#211D1B;
       --gray:#706762;
+      --gray-light:#9F9691;
+
       --white:#FFFFFF;
       --border:#EEDFD7;
 
-      --sidebar:#211D1B;
       --green:#2D8A62;
       --red:#B64839;
+
+      --sidebar:#211D1B;
     }
 
     *{
@@ -60,7 +63,9 @@
     }
 
     button,
-    input{
+    input,
+    select,
+    textarea{
       font:inherit;
     }
 
@@ -107,6 +112,7 @@
       z-index:10;
     }
 
+
     .top-row{
       display:flex;
       align-items:center;
@@ -114,6 +120,7 @@
 
       gap:20px;
     }
+
 
     .logo{
       color:var(--orange);
@@ -124,11 +131,14 @@
       letter-spacing:-2px;
     }
 
+
     .session-chip{
       display:none;
 
       align-items:center;
-      gap:9px;
+      gap:8px;
+
+      max-width:190px;
 
       padding:7px 11px;
 
@@ -139,25 +149,30 @@
       border-radius:100px;
 
       background:
-        rgba(255,255,255,.6);
-
-      font-size:11px;
+        rgba(255,255,255,.65);
 
       color:var(--gray);
+
+      font-size:11px;
     }
+
 
     .session-chip.visible{
       display:flex;
     }
 
+
     .session-dot{
       width:7px;
       height:7px;
+
+      flex:0 0 auto;
 
       border-radius:50%;
 
       background:#42A87C;
     }
+
 
     .hero-content{
       flex:1;
@@ -171,6 +186,7 @@
       padding-bottom:20px;
     }
 
+
     .eyebrow{
       margin-bottom:19px;
 
@@ -180,14 +196,12 @@
       font-weight:800;
 
       letter-spacing:.14em;
-
       text-transform:uppercase;
     }
 
+
     h1{
-      font-family:
-        "Playfair Display",
-        serif;
+      font-family:"Playfair Display",serif;
 
       font-size:
         clamp(54px,5.4vw,92px);
@@ -199,22 +213,23 @@
       font-weight:600;
     }
 
+
     h1 span{
       color:var(--orange);
     }
+
 
     .accent-line{
       width:70px;
       height:4px;
 
-      margin:
-        27px 0
-        23px;
+      margin:27px 0 23px;
 
       border-radius:100px;
 
       background:var(--orange);
     }
+
 
     .hero-description{
       max-width:600px;
@@ -227,6 +242,7 @@
       line-height:1.6;
     }
 
+
     .hero-actions{
       display:flex;
 
@@ -234,6 +250,7 @@
 
       margin-top:31px;
     }
+
 
     .btn{
       min-height:56px;
@@ -248,6 +265,7 @@
       transition:.2s;
     }
 
+
     .btn-primary{
       color:white;
 
@@ -258,11 +276,13 @@
         rgba(235,104,65,.19);
     }
 
+
     .btn-primary:hover{
       transform:translateY(-2px);
 
       background:var(--orange-dark);
     }
+
 
     .btn-secondary{
       color:var(--dark);
@@ -274,6 +294,7 @@
         1px solid
         rgba(235,104,65,.22);
     }
+
 
     .btn-secondary:hover{
       background:white;
@@ -295,6 +316,7 @@
       overflow:hidden;
     }
 
+
     .map-title{
       position:absolute;
 
@@ -306,6 +328,7 @@
       pointer-events:none;
     }
 
+
     .map-title span{
       display:block;
 
@@ -315,24 +338,23 @@
       font-weight:800;
 
       letter-spacing:.13em;
-
       text-transform:uppercase;
     }
+
 
     .map-title strong{
       display:block;
 
       margin-top:4px;
 
-      font-family:
-        "Playfair Display",
-        serif;
+      font-family:"Playfair Display",serif;
 
       font-size:25px;
       font-weight:600;
 
       line-height:1.1;
     }
+
 
     .chart-holder{
       width:100%;
@@ -341,6 +363,7 @@
 
       position:relative;
     }
+
 
     #chartdiv{
       width:100%;
@@ -381,10 +404,9 @@
 
       pointer-events:none;
 
-      transition:
-        opacity .22s,
-        transform .22s;
+      transition:.22s;
     }
+
 
     .province-card.visible{
       opacity:1;
@@ -393,6 +415,7 @@
 
       pointer-events:auto;
     }
+
 
     .province-card small{
       display:block;
@@ -409,17 +432,17 @@
       letter-spacing:.09em;
     }
 
+
     .province-card strong{
       display:block;
 
-      font-family:
-        "Playfair Display",
-        serif;
+      font-family:"Playfair Display",serif;
 
       font-size:27px;
 
       line-height:1.1;
     }
+
 
     .province-card p{
       margin-top:6px;
@@ -430,6 +453,7 @@
 
       line-height:1.45;
     }
+
 
     .province-card button{
       width:100%;
@@ -448,6 +472,7 @@
 
       font-weight:800;
     }
+
 
     .clear-province{
       margin-top:10px;
@@ -474,11 +499,13 @@
       background:white;
     }
 
+
     .section-heading{
       max-width:850px;
 
       margin-bottom:50px;
     }
+
 
     .section-label{
       color:var(--orange);
@@ -487,16 +514,14 @@
       font-weight:800;
 
       letter-spacing:.13em;
-
       text-transform:uppercase;
     }
+
 
     .section-heading h2{
       margin-top:10px;
 
-      font-family:
-        "Playfair Display",
-        serif;
+      font-family:"Playfair Display",serif;
 
       font-size:
         clamp(42px,5vw,70px);
@@ -506,6 +531,7 @@
       line-height:1;
     }
 
+
     .section-heading p{
       margin-top:15px;
 
@@ -513,6 +539,7 @@
 
       font-size:17px;
     }
+
 
     .category-grid{
       display:grid;
@@ -522,6 +549,7 @@
 
       gap:15px;
     }
+
 
     .category{
       min-height:220px;
@@ -544,6 +572,7 @@
       transition:.2s;
     }
 
+
     .category:hover{
       transform:translateY(-5px);
 
@@ -554,6 +583,7 @@
         0 18px 45px
         rgba(60,30,15,.08);
     }
+
 
     .category-icon{
       width:46px;
@@ -569,11 +599,13 @@
       font-size:24px;
     }
 
+
     .category strong{
       margin-top:auto;
 
       font-size:20px;
     }
+
 
     .category p{
       margin-top:5px;
@@ -587,6 +619,514 @@
 
 
     /* =====================================================
+       NUEVO EXPLORADOR
+    ===================================================== */
+
+    .marketplace-view{
+      display:none;
+
+      min-height:100vh;
+
+      background:#FBF8F6;
+    }
+
+
+    .marketplace-view.visible{
+      display:block;
+    }
+
+
+    .marketplace-header{
+      position:sticky;
+      top:0;
+
+      z-index:100;
+
+      min-height:77px;
+
+      padding:0 5%;
+
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+
+      gap:25px;
+
+      background:
+        rgba(255,255,255,.94);
+
+      backdrop-filter:blur(18px);
+
+      border-bottom:
+        1px solid
+        #EFE7E2;
+    }
+
+
+    .marketplace-brand{
+      color:var(--orange);
+
+      font-size:27px;
+      font-weight:800;
+
+      letter-spacing:-1.5px;
+
+      cursor:pointer;
+    }
+
+
+    .marketplace-header-right{
+      display:flex;
+      align-items:center;
+
+      gap:10px;
+    }
+
+
+    .province-pill{
+      padding:9px 13px;
+
+      border:
+        1px solid
+        var(--border);
+
+      border-radius:100px;
+
+      background:var(--cream);
+
+      color:var(--dark);
+
+      font-size:12px;
+      font-weight:700;
+    }
+
+
+    .header-account{
+      min-height:38px;
+
+      padding:0 14px;
+
+      border:
+        1px solid
+        var(--border);
+
+      border-radius:100px;
+
+      background:white;
+
+      font-size:12px;
+      font-weight:700;
+    }
+
+
+    .marketplace-content{
+      width:min(1220px,90%);
+
+      margin:auto;
+
+      padding:
+        55px 0
+        100px;
+    }
+
+
+    .breadcrumb{
+      display:flex;
+      align-items:center;
+      flex-wrap:wrap;
+
+      gap:7px;
+
+      color:var(--gray);
+
+      font-size:11px;
+    }
+
+
+    .breadcrumb button{
+      padding:0;
+
+      border:none;
+
+      background:transparent;
+
+      color:var(--gray);
+
+      font-size:11px;
+    }
+
+
+    .breadcrumb button:hover{
+      color:var(--orange);
+    }
+
+
+    .market-hero{
+      margin-top:25px;
+
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+
+      gap:30px;
+    }
+
+
+    .market-hero-copy{
+      max-width:760px;
+    }
+
+
+    .market-hero h2{
+      font-family:"Playfair Display",serif;
+
+      font-size:
+        clamp(43px,5.5vw,72px);
+
+      line-height:.98;
+
+      letter-spacing:-.045em;
+    }
+
+
+    .market-hero p{
+      margin-top:16px;
+
+      max-width:690px;
+
+      color:var(--gray);
+
+      font-size:15px;
+
+      line-height:1.6;
+    }
+
+
+    .back-market{
+      min-height:44px;
+
+      padding:0 17px;
+
+      flex:0 0 auto;
+
+      border:
+        1px solid
+        var(--border);
+
+      border-radius:12px;
+
+      background:white;
+
+      color:var(--dark);
+
+      font-weight:700;
+    }
+
+
+    .market-loader{
+      display:none;
+
+      margin-top:45px;
+
+      padding:40px;
+
+      text-align:center;
+
+      color:var(--gray);
+    }
+
+
+    .market-loader.visible{
+      display:block;
+    }
+
+
+    .loader-circle{
+      width:30px;
+      height:30px;
+
+      margin:
+        0 auto
+        13px;
+
+      border:
+        3px solid
+        #F0DFD7;
+
+      border-top-color:
+        var(--orange);
+
+      border-radius:50%;
+
+      animation:
+        spin .8s linear infinite;
+    }
+
+
+    @keyframes spin{
+      to{
+        transform:rotate(360deg);
+      }
+    }
+
+
+    .subcategories-wrap{
+      margin-top:50px;
+    }
+
+
+    .subcategories-heading{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+
+      gap:20px;
+
+      margin-bottom:20px;
+    }
+
+
+    .subcategories-heading h3{
+      font-family:"Playfair Display",serif;
+
+      font-size:30px;
+    }
+
+
+    .subcategories-count{
+      color:var(--gray);
+
+      font-size:11px;
+    }
+
+
+    .subcategory-grid{
+      display:grid;
+
+      grid-template-columns:
+        repeat(4,1fr);
+
+      gap:13px;
+    }
+
+
+    .subcategory-card{
+      min-height:145px;
+
+      padding:20px;
+
+      display:flex;
+      flex-direction:column;
+
+      border:
+        1px solid
+        #E8DFDA;
+
+      border-radius:18px;
+
+      background:white;
+
+      cursor:pointer;
+
+      transition:.2s;
+    }
+
+
+    .subcategory-card:hover{
+      transform:translateY(-3px);
+
+      border-color:
+        rgba(235,104,65,.45);
+
+      box-shadow:
+        0 15px 35px
+        rgba(70,35,20,.06);
+    }
+
+
+    .subcategory-card small{
+      color:var(--orange);
+
+      font-size:10px;
+      font-weight:800;
+
+      text-transform:uppercase;
+
+      letter-spacing:.07em;
+    }
+
+
+    .subcategory-card strong{
+      margin-top:auto;
+
+      font-size:17px;
+
+      line-height:1.2;
+    }
+
+
+    .subcategory-arrow{
+      margin-top:8px;
+
+      color:var(--gray);
+
+      font-size:11px;
+    }
+
+
+    .empty-state{
+      display:none;
+
+      margin-top:40px;
+
+      padding:45px 25px;
+
+      border:
+        1px dashed
+        #DFCFC7;
+
+      border-radius:20px;
+
+      background:white;
+
+      text-align:center;
+    }
+
+
+    .empty-state.visible{
+      display:block;
+    }
+
+
+    .empty-state strong{
+      display:block;
+
+      font-family:"Playfair Display",serif;
+
+      font-size:25px;
+    }
+
+
+    .empty-state p{
+      max-width:520px;
+
+      margin:
+        10px auto
+        0;
+
+      color:var(--gray);
+
+      font-size:13px;
+
+      line-height:1.5;
+    }
+
+
+    /* SUBCATEGORY PAGE */
+
+    .subcategory-results{
+      display:none;
+
+      margin-top:48px;
+    }
+
+
+    .subcategory-results.visible{
+      display:block;
+    }
+
+
+    .result-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+
+      gap:20px;
+
+      margin-bottom:25px;
+    }
+
+
+    .result-top h3{
+      font-family:"Playfair Display",serif;
+
+      font-size:32px;
+    }
+
+
+    .filter-bar{
+      display:flex;
+      flex-wrap:wrap;
+
+      gap:8px;
+
+      margin-bottom:25px;
+    }
+
+
+    .filter-chip{
+      min-height:37px;
+
+      padding:0 13px;
+
+      border:
+        1px solid
+        var(--border);
+
+      border-radius:100px;
+
+      background:white;
+
+      color:var(--gray);
+
+      font-size:11px;
+      font-weight:700;
+    }
+
+
+    .filter-chip.active{
+      color:white;
+
+      border-color:var(--orange);
+
+      background:var(--orange);
+    }
+
+
+    .coming-box{
+      padding:45px 28px;
+
+      border-radius:20px;
+
+      background:var(--cream);
+
+      border:
+        1px solid
+        var(--border);
+    }
+
+
+    .coming-box strong{
+      display:block;
+
+      font-size:18px;
+    }
+
+
+    .coming-box p{
+      margin-top:8px;
+
+      max-width:670px;
+
+      color:var(--gray);
+
+      font-size:13px;
+
+      line-height:1.55;
+    }
+
+
+    /* =====================================================
        ABOUT
     ===================================================== */
 
@@ -596,6 +1136,7 @@
 
       background:var(--cream);
     }
+
 
     .about-layout{
       display:grid;
@@ -612,10 +1153,9 @@
       margin:auto;
     }
 
+
     .about-number{
-      font-family:
-        "Playfair Display",
-        serif;
+      font-family:"Playfair Display",serif;
 
       font-size:
         clamp(100px,15vw,220px);
@@ -626,10 +1166,9 @@
         rgba(235,104,65,.12);
     }
 
+
     .about h3{
-      font-family:
-        "Playfair Display",
-        serif;
+      font-family:"Playfair Display",serif;
 
       font-size:
         clamp(38px,4vw,62px);
@@ -638,6 +1177,7 @@
 
       letter-spacing:-.04em;
     }
+
 
     .about p{
       max-width:680px;
@@ -666,12 +1206,14 @@
       background:var(--dark);
     }
 
+
     .footer-logo{
       color:var(--orange);
 
       font-size:29px;
       font-weight:800;
     }
+
 
     .footer-copy{
       margin-top:7px;
@@ -680,6 +1222,7 @@
 
       font-size:13px;
     }
+
 
     .footer-bottom{
       margin-top:48px;
@@ -699,18 +1242,20 @@
       font-size:11px;
     }
 
+
     .footer-links{
       display:flex;
+
       gap:20px;
     }
+
 
     .admin-access{
       color:#6D6561;
 
       cursor:pointer;
-
-      transition:.2s;
     }
+
 
     .admin-access:hover{
       color:#C4B9B4;
@@ -718,7 +1263,7 @@
 
 
     /* =====================================================
-       MODALES GENERALES
+       MODALES
     ===================================================== */
 
     .modal-overlay{
@@ -743,10 +1288,11 @@
 
       pointer-events:none;
 
-      transition:.2s;
-
       overflow-y:auto;
+
+      transition:.2s;
     }
+
 
     .modal-overlay.open{
       opacity:1;
@@ -754,13 +1300,14 @@
       pointer-events:auto;
     }
 
+
     .modal-box{
       width:min(460px,100%);
 
       max-height:
         calc(100vh - 40px);
 
-      overflow-y:auto;
+      overflow:auto;
 
       padding:31px;
 
@@ -773,14 +1320,13 @@
         rgba(0,0,0,.22);
     }
 
+
     .modal-top{
       display:flex;
-
-      justify-content:space-between;
       align-items:center;
-
-      gap:20px;
+      justify-content:space-between;
     }
+
 
     .modal-logo{
       color:var(--orange);
@@ -788,6 +1334,7 @@
       font-size:25px;
       font-weight:800;
     }
+
 
     .modal-close{
       width:36px;
@@ -802,22 +1349,20 @@
 
       background:#F8F4F2;
 
-      color:var(--dark);
-
       font-size:23px;
     }
+
 
     .modal-title{
       margin-top:24px;
 
-      font-family:
-        "Playfair Display",
-        serif;
+      font-family:"Playfair Display",serif;
 
       font-size:35px;
 
       line-height:1.05;
     }
+
 
     .modal-description{
       margin-top:8px;
@@ -830,9 +1375,7 @@
     }
 
 
-    /* =====================================================
-       LOGIN / REGISTRO
-    ===================================================== */
+    /* AUTH */
 
     .auth-intent{
       display:none;
@@ -848,20 +1391,22 @@
       color:var(--gray);
 
       font-size:12px;
-
-      line-height:1.45;
     }
+
 
     .auth-intent.visible{
       display:block;
     }
 
+
     .auth-intent strong{
       color:var(--orange-dark);
     }
 
+
     .auth-tabs{
       display:grid;
+
       grid-template-columns:1fr 1fr;
 
       gap:5px;
@@ -875,6 +1420,7 @@
       background:#F7F3F1;
     }
 
+
     .auth-tab{
       padding:10px 8px;
 
@@ -882,31 +1428,35 @@
 
       border-radius:10px;
 
-      color:var(--gray);
-
       background:transparent;
+
+      color:var(--gray);
 
       font-size:12px;
       font-weight:800;
     }
 
-    .auth-tab.active{
-      color:var(--dark);
 
+    .auth-tab.active{
       background:white;
+
+      color:var(--dark);
 
       box-shadow:
         0 3px 12px
         rgba(50,30,20,.07);
     }
 
+
     .auth-panel{
       display:none;
     }
 
+
     .auth-panel.active{
       display:block;
     }
+
 
     .field-row{
       display:grid;
@@ -916,20 +1466,21 @@
       gap:11px;
     }
 
+
     .form-group{
       margin-top:17px;
     }
+
 
     .form-group label{
       display:block;
 
       margin-bottom:7px;
 
-      color:var(--dark);
-
       font-size:11px;
       font-weight:800;
     }
+
 
     .form-group input{
       width:100%;
@@ -942,14 +1493,9 @@
 
       border-radius:12px;
 
-      background:white;
-
-      color:var(--dark);
-
       outline:none;
-
-      transition:.18s;
     }
+
 
     .form-group input:focus{
       border-color:var(--orange);
@@ -959,13 +1505,16 @@
         rgba(235,104,65,.08);
     }
 
+
     .password-wrap{
       position:relative;
     }
 
+
     .password-wrap input{
-      padding-right:72px;
+      padding-right:70px;
     }
+
 
     .show-password{
       position:absolute;
@@ -985,6 +1534,7 @@
       font-weight:800;
     }
 
+
     .submit-btn{
       width:100%;
 
@@ -1003,14 +1553,13 @@
       font-weight:800;
     }
 
-    .submit-btn:hover{
-      background:var(--orange-dark);
-    }
 
     .submit-btn:disabled{
-      opacity:.65;
+      opacity:.55;
+
       cursor:not-allowed;
     }
+
 
     .auth-message{
       display:none;
@@ -1026,44 +1575,27 @@
       line-height:1.45;
     }
 
+
     .auth-message.visible{
       display:block;
     }
+
 
     .auth-message.error{
       color:#963B2F;
 
       background:#FFF0ED;
-
-      border:
-        1px solid #F5D0C8;
     }
+
 
     .auth-message.success{
       color:#276A4E;
 
       background:#ECF8F2;
-
-      border:
-        1px solid #CDEADB;
-    }
-
-    .auth-note{
-      margin-top:17px;
-
-      color:#9B928D;
-
-      text-align:center;
-
-      font-size:10px;
-
-      line-height:1.5;
     }
 
 
-    /* =====================================================
-       MI CUENTA
-    ===================================================== */
+    /* CUENTA */
 
     .account-card{
       margin-top:23px;
@@ -1079,6 +1611,7 @@
       background:var(--cream);
     }
 
+
     .account-avatar{
       width:54px;
       height:54px;
@@ -1092,12 +1625,11 @@
 
       color:white;
 
-      font-family:
-        "Playfair Display",
-        serif;
+      font-family:"Playfair Display",serif;
 
       font-size:23px;
     }
+
 
     .account-name{
       margin-top:13px;
@@ -1105,6 +1637,7 @@
       font-size:19px;
       font-weight:800;
     }
+
 
     .account-email{
       margin-top:3px;
@@ -1115,6 +1648,7 @@
 
       overflow-wrap:anywhere;
     }
+
 
     .account-type{
       display:inline-flex;
@@ -1133,9 +1667,8 @@
       font-weight:800;
 
       text-transform:uppercase;
-
-      letter-spacing:.05em;
     }
+
 
     .account-actions{
       display:grid;
@@ -1144,6 +1677,7 @@
 
       margin-top:17px;
     }
+
 
     .account-action{
       min-height:45px;
@@ -1156,10 +1690,9 @@
 
       background:white;
 
-      color:var(--dark);
-
       font-weight:700;
     }
+
 
     .account-action.primary{
       color:white;
@@ -1169,34 +1702,15 @@
       background:var(--orange);
     }
 
+
     .account-action.logout{
       color:var(--red);
     }
 
 
     /* =====================================================
-       ADMIN LOGIN
+       ADMIN
     ===================================================== */
-
-    .admin-login h3{
-      margin-top:28px;
-
-      font-family:
-        "Playfair Display",
-        serif;
-
-      font-size:34px;
-    }
-
-    .admin-login > p{
-      margin-top:8px;
-
-      color:var(--gray);
-
-      font-size:13px;
-
-      line-height:1.5;
-    }
 
     .admin-error{
       display:none;
@@ -1214,14 +1728,11 @@
       font-size:12px;
     }
 
+
     .admin-error.visible{
       display:block;
     }
 
-
-    /* =====================================================
-       ADMIN
-    ===================================================== */
 
     .admin-app{
       position:fixed;
@@ -1235,9 +1746,11 @@
       background:#F5F2F0;
     }
 
+
     .admin-app.visible{
       display:flex;
     }
+
 
     .admin-sidebar{
       width:260px;
@@ -1253,6 +1766,7 @@
       color:white;
     }
 
+
     .admin-brand{
       padding:
         0 10px
@@ -1264,6 +1778,7 @@
       font-weight:800;
     }
 
+
     .admin-brand small{
       display:block;
 
@@ -1272,20 +1787,18 @@
       color:#8F8580;
 
       font-size:10px;
-      font-weight:500;
-
-      letter-spacing:.08em;
 
       text-transform:uppercase;
     }
 
+
     .admin-menu{
       display:flex;
-
       flex-direction:column;
 
       gap:3px;
     }
+
 
     .admin-nav{
       width:100%;
@@ -1311,6 +1824,7 @@
       font-weight:600;
     }
 
+
     .admin-nav:hover{
       color:white;
 
@@ -1318,12 +1832,14 @@
         rgba(255,255,255,.06);
     }
 
+
     .admin-nav.active{
       color:white;
 
       background:
         rgba(235,104,65,.16);
     }
+
 
     .admin-logout{
       margin-top:auto;
@@ -1341,6 +1857,7 @@
       color:#AAA09B;
     }
 
+
     .admin-main{
       flex:1;
 
@@ -1348,6 +1865,7 @@
 
       overflow:auto;
     }
+
 
     .admin-header{
       min-height:80px;
@@ -1364,19 +1882,20 @@
         1px solid #E5E0DD;
     }
 
+
     .admin-header h2{
-      font-family:
-        "Playfair Display",
-        serif;
+      font-family:"Playfair Display",serif;
 
       font-size:28px;
     }
+
 
     .admin-user{
       text-align:right;
 
       font-size:12px;
     }
+
 
     .admin-user span{
       display:block;
@@ -1386,9 +1905,11 @@
       font-size:10px;
     }
 
+
     .admin-content{
       padding:32px;
     }
+
 
     .dashboard-grid{
       display:grid;
@@ -1398,6 +1919,7 @@
 
       gap:15px;
     }
+
 
     .stat-card{
       min-height:145px;
@@ -1412,6 +1934,7 @@
       background:white;
     }
 
+
     .stat-card small{
       color:var(--gray);
 
@@ -1419,21 +1942,19 @@
       font-weight:700;
 
       text-transform:uppercase;
-
-      letter-spacing:.06em;
     }
+
 
     .stat-card strong{
       display:block;
 
       margin-top:17px;
 
-      font-family:
-        "Playfair Display",
-        serif;
+      font-family:"Playfair Display",serif;
 
       font-size:38px;
     }
+
 
     .stat-card p{
       margin-top:4px;
@@ -1443,13 +1964,16 @@
       font-size:11px;
     }
 
+
     .admin-section{
       display:none;
     }
 
+
     .admin-section.active{
       display:block;
     }
+
 
     .empty-panel{
       min-height:360px;
@@ -1464,9 +1988,6 @@
       background:white;
     }
 
-    .empty-panel h3{
-      font-size:20px;
-    }
 
     .empty-panel p{
       margin-top:9px;
@@ -1478,12 +1999,17 @@
 
 
     /* =====================================================
-       TABLET
+       RESPONSIVE
     ===================================================== */
 
     @media(max-width:1050px){
 
       .category-grid{
+        grid-template-columns:
+          repeat(3,1fr);
+      }
+
+      .subcategory-grid{
         grid-template-columns:
           repeat(3,1fr);
       }
@@ -1496,15 +2022,12 @@
     }
 
 
-    /* =====================================================
-       CELULAR
-    ===================================================== */
-
     @media(max-width:850px){
 
       .home-screen{
         display:block;
       }
+
 
       .hero-left{
         min-height:auto;
@@ -1514,18 +2037,22 @@
           55px;
       }
 
+
       .hero-content{
         padding-top:55px;
       }
+
 
       h1{
         font-size:
           clamp(50px,13vw,74px);
       }
 
+
       .hero-actions{
         flex-direction:column;
       }
+
 
       .map-side{
         min-height:auto;
@@ -1534,6 +2061,7 @@
 
         padding-top:30px;
       }
+
 
       .map-title{
         position:relative;
@@ -1546,21 +2074,23 @@
         padding:
           0 22px
           10px;
-
-        text-align:left;
       }
+
 
       .map-title strong{
         font-size:27px;
       }
 
+
       .chart-holder{
         min-height:650px;
       }
 
+
       #chartdiv{
         height:650px;
       }
+
 
       .province-card{
         right:auto;
@@ -1571,10 +2101,12 @@
           calc(100% - 34px);
       }
 
+
       .category-grid{
         grid-template-columns:
           repeat(2,1fr);
       }
+
 
       .about-layout{
         grid-template-columns:1fr;
@@ -1582,12 +2114,39 @@
         gap:25px;
       }
 
+
+      .marketplace-header{
+        padding:0 18px;
+      }
+
+
+      .marketplace-content{
+        width:
+          calc(100% - 36px);
+
+        padding-top:35px;
+      }
+
+
+      .market-hero{
+        align-items:flex-start;
+        flex-direction:column;
+      }
+
+
+      .subcategory-grid{
+        grid-template-columns:
+          repeat(2,1fr);
+      }
+
+
       .admin-sidebar{
         width:72px;
 
         padding:
           20px 10px;
       }
+
 
       .admin-brand{
         padding:
@@ -1599,29 +2158,22 @@
         font-size:0;
       }
 
+
       .admin-brand::before{
         content:"A";
 
         font-size:28px;
       }
 
+
       .admin-brand small,
       .admin-nav strong{
         display:none;
       }
 
+
       .admin-nav{
         justify-content:center;
-
-        padding:12px 6px;
-      }
-
-      .admin-header{
-        padding:0 18px;
-      }
-
-      .admin-content{
-        padding:18px;
       }
 
     }
@@ -1633,21 +2185,13 @@
         font-size:29px;
       }
 
-      .session-chip{
-        max-width:145px;
-      }
-
-      .session-chip span:last-child{
-        overflow:hidden;
-        white-space:nowrap;
-        text-overflow:ellipsis;
-      }
 
       .explore-section,
       .about{
         padding:
           70px 18px;
       }
+
 
       .category-grid{
         grid-template-columns:
@@ -1656,19 +2200,23 @@
         gap:10px;
       }
 
+
       .category{
         min-height:170px;
 
         padding:17px;
       }
 
+
       .chart-holder{
         min-height:610px;
       }
 
+
       #chartdiv{
         height:610px;
       }
+
 
       .footer-bottom{
         flex-direction:column;
@@ -1678,9 +2226,6 @@
         gap:20px;
       }
 
-      .dashboard-grid{
-        grid-template-columns:1fr;
-      }
 
       .field-row{
         grid-template-columns:1fr;
@@ -1688,10 +2233,40 @@
         gap:0;
       }
 
+
       .modal-box{
         padding:23px 19px;
+      }
 
-        border-radius:21px;
+
+      .subcategory-grid{
+        grid-template-columns:1fr;
+      }
+
+
+      .subcategory-card{
+        min-height:120px;
+      }
+
+
+      .marketplace-brand{
+        font-size:23px;
+      }
+
+
+      .province-pill{
+        max-width:135px;
+
+        overflow:hidden;
+
+        text-overflow:ellipsis;
+
+        white-space:nowrap;
+      }
+
+
+      .dashboard-grid{
+        grid-template-columns:1fr;
       }
 
     }
@@ -1703,277 +2278,596 @@
 
 
 <!-- =====================================================
-     HOME
+     WEB PÚBLICA
 ===================================================== -->
 
-<section class="home-screen">
+<div id="publicSite">
 
-  <div class="hero-left">
+  <section class="home-screen">
 
-    <div class="top-row">
+    <div class="hero-left">
 
-      <div class="logo">
-        Amigate
-      </div>
+      <div class="top-row">
 
-      <div
-        class="session-chip"
-        id="sessionChip"
-      >
-        <span class="session-dot"></span>
+        <div class="logo">
+          Amigate
+        </div>
 
-        <span id="sessionChipText">
-          Sesión iniciada
-        </span>
-      </div>
-
-    </div>
-
-
-    <div class="hero-content">
-
-      <div class="eyebrow">
-        Argentina está llena de oportunidades
-      </div>
-
-      <h1>
-        Todo lo que buscás,
-        más cerca
-        <span>
-          de lo que pensás.
-        </span>
-      </h1>
-
-      <div class="accent-line"></div>
-
-      <p class="hero-description">
-        Amigate conecta personas con marcas,
-        emprendimientos, profesionales, oficios
-        y oportunidades de toda Argentina.
-        Elegí tu provincia y descubrí todo lo
-        que tiene para ofrecer.
-      </p>
-
-      <div class="hero-actions">
-
-        <button
-          class="btn btn-primary"
-          id="sellerButton"
-        >
-          Publicar mi marca
-        </button>
-
-        <button
-          class="btn btn-secondary"
-          id="userLoginButton"
-        >
-          Iniciar sesión
-        </button>
-
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <div class="map-side">
-
-    <div class="map-title">
-
-      <span>
-        Explorá Argentina
-      </span>
-
-      <strong>
-        Elegí tu provincia
-      </strong>
-
-    </div>
-
-
-    <div class="chart-holder">
-
-      <div id="chartdiv"></div>
-
-
-      <div
-        class="province-card"
-        id="provinceCard"
-      >
-
-        <small>
-          Provincia seleccionada
-        </small>
-
-        <strong id="provinceName"></strong>
-
-        <p>
-          Descubrí marcas y oportunidades
-          disponibles para vos.
-        </p>
-
-        <button id="exploreButton">
-          Explorar
-        </button>
 
         <div
-          class="clear-province"
-          id="clearProvince"
+          class="session-chip"
+          id="sessionChip"
         >
-          Quitar selección
+
+          <span class="session-dot"></span>
+
+          <span id="sessionChipText"></span>
+
+        </div>
+
+      </div>
+
+
+      <div class="hero-content">
+
+        <div class="eyebrow">
+          Argentina está llena de oportunidades
+        </div>
+
+
+        <h1>
+          Todo lo que buscás,
+          más cerca
+          <span>
+            de lo que pensás.
+          </span>
+        </h1>
+
+
+        <div class="accent-line"></div>
+
+
+        <p class="hero-description">
+
+          Amigate conecta personas con marcas,
+          emprendimientos, profesionales, oficios
+          y oportunidades de toda Argentina.
+
+          Elegí tu provincia y descubrí todo lo
+          que tiene para ofrecer.
+
+        </p>
+
+
+        <div class="hero-actions">
+
+          <button
+            class="btn btn-primary"
+            id="sellerButton"
+          >
+            Publicar mi marca
+          </button>
+
+
+          <button
+            class="btn btn-secondary"
+            id="userLoginButton"
+          >
+            Iniciar sesión
+          </button>
+
         </div>
 
       </div>
 
     </div>
 
-  </div>
 
-</section>
+    <div class="map-side">
 
+      <div class="map-title">
 
+        <span>
+          Explorá Argentina
+        </span>
 
-<!-- =====================================================
-     CATEGORÍAS
-===================================================== -->
+        <strong>
+          Elegí tu provincia
+        </strong>
 
-<section
-  class="explore-section"
-  id="exploreSection"
->
-
-  <div class="section-heading">
-
-    <span class="section-label">
-      Explorá Amigate
-    </span>
-
-    <h2 id="exploreTitle">
-      ¿Qué estás buscando?
-    </h2>
-
-    <p id="exploreSubtitle">
-      Elegí una provincia para personalizar los resultados.
-    </p>
-
-  </div>
+      </div>
 
 
-  <div class="category-grid">
+      <div class="chart-holder">
 
-    <article class="category">
-      <div class="category-icon">🛍️</div>
-      <strong>Productos</strong>
-      <p>Descubrí marcas y emprendimientos.</p>
-    </article>
-
-    <article class="category">
-      <div class="category-icon">✨</div>
-      <strong>Servicios</strong>
-      <p>Profesionales y empresas para lo que necesitás.</p>
-    </article>
-
-    <article class="category">
-      <div class="category-icon">🛠️</div>
-      <strong>Oficios</strong>
-      <p>Encontrá especialistas cerca tuyo.</p>
-    </article>
-
-    <article class="category">
-      <div class="category-icon">💼</div>
-      <strong>Empleos</strong>
-      <p>Encontrá nuevas oportunidades laborales.</p>
-    </article>
-
-    <article class="category">
-      <div class="category-icon">📣</div>
-      <strong>Necesito</strong>
-      <p>Publicá exactamente lo que estás buscando.</p>
-    </article>
-
-  </div>
-
-</section>
+        <div id="chartdiv"></div>
 
 
+        <div
+          class="province-card"
+          id="provinceCard"
+        >
 
-<!-- =====================================================
-     PRESENTACIÓN
-===================================================== -->
+          <small>
+            Provincia seleccionada
+          </small>
 
-<section class="about">
+          <strong
+            id="provinceName"
+          ></strong>
 
-  <div class="about-layout">
 
-    <div class="about-number">
-      AR
+          <p>
+            Descubrí marcas y oportunidades
+            disponibles para vos.
+          </p>
+
+
+          <button id="exploreButton">
+            Explorar
+          </button>
+
+
+          <div
+            class="clear-province"
+            id="clearProvince"
+          >
+            Quitar selección
+          </div>
+
+        </div>
+
+      </div>
+
     </div>
 
-    <div>
+  </section>
+
+
+
+  <!-- CATEGORÍAS -->
+
+  <section
+    class="explore-section"
+    id="exploreSection"
+  >
+
+    <div class="section-heading">
 
       <span class="section-label">
-        Una plataforma, todo el país
+        Explorá Amigate
       </span>
 
-      <h3>
-        Lo que existe cerca tuyo
-        merece ser más fácil de encontrar.
-      </h3>
 
-      <p>
-        Desde una marca que recién empieza hasta
-        un profesional, un oficio, una oportunidad
-        laboral o una necesidad concreta.
-        Amigate conecta todo eso en un mismo lugar.
+      <h2 id="exploreTitle">
+        ¿Qué estás buscando?
+      </h2>
+
+
+      <p id="exploreSubtitle">
+        Elegí una provincia para personalizar los resultados.
       </p>
 
     </div>
 
-  </div>
+
+    <div class="category-grid">
+
+      <article
+        class="category"
+        data-market-category="Productos"
+      >
+
+        <div class="category-icon">
+          🛍️
+        </div>
+
+        <strong>
+          Productos
+        </strong>
+
+        <p>
+          Descubrí marcas y emprendimientos.
+        </p>
+
+      </article>
+
+
+      <article
+        class="category"
+        data-market-category="Servicios"
+      >
+
+        <div class="category-icon">
+          ✨
+        </div>
+
+        <strong>
+          Servicios
+        </strong>
+
+        <p>
+          Profesionales y empresas para lo que necesitás.
+        </p>
+
+      </article>
+
+
+      <article
+        class="category"
+        data-market-category="Oficios"
+      >
+
+        <div class="category-icon">
+          🛠️
+        </div>
+
+        <strong>
+          Oficios
+        </strong>
+
+        <p>
+          Encontrá especialistas cerca tuyo.
+        </p>
+
+      </article>
+
+
+      <article
+        class="category"
+        data-market-category="Empleos"
+      >
+
+        <div class="category-icon">
+          💼
+        </div>
+
+        <strong>
+          Empleos
+        </strong>
+
+        <p>
+          Encontrá oportunidades laborales.
+        </p>
+
+      </article>
+
+
+      <article
+        class="category"
+        data-market-category="Necesito"
+      >
+
+        <div class="category-icon">
+          📣
+        </div>
+
+        <strong>
+          Necesito
+        </strong>
+
+        <p>
+          Publicá exactamente lo que estás buscando.
+        </p>
+
+      </article>
+
+    </div>
+
+  </section>
+
+
+
+  <section class="about">
+
+    <div class="about-layout">
+
+      <div class="about-number">
+        AR
+      </div>
+
+
+      <div>
+
+        <span class="section-label">
+          Una plataforma, todo el país
+        </span>
+
+
+        <h3>
+          Lo que existe cerca tuyo
+          merece ser más fácil de encontrar.
+        </h3>
+
+
+        <p>
+
+          Desde una marca que recién empieza hasta
+          un profesional, un oficio, una oportunidad
+          laboral o una necesidad concreta.
+
+          Amigate conecta todo eso en un mismo lugar.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <footer>
+
+    <div class="footer-logo">
+      Amigate
+    </div>
+
+
+    <div class="footer-copy">
+      Hecho acá. Encontralo en Amigate.
+    </div>
+
+
+    <div class="footer-bottom">
+
+      <div class="footer-links">
+
+        <span>Términos</span>
+
+        <span>Privacidad</span>
+
+        <span>Ayuda</span>
+
+      </div>
+
+
+      <span
+        class="admin-access"
+        id="adminAccess"
+      >
+        Administración
+      </span>
+
+    </div>
+
+  </footer>
+
+</div>
+
+
+
+<!-- =====================================================
+     NUEVO EXPLORADOR
+===================================================== -->
+
+<section
+  class="marketplace-view"
+  id="marketplaceView"
+>
+
+  <header class="marketplace-header">
+
+    <div
+      class="marketplace-brand"
+      id="marketplaceHome"
+    >
+      Amigate
+    </div>
+
+
+    <div class="marketplace-header-right">
+
+      <div
+        class="province-pill"
+        id="marketProvince"
+      >
+        Argentina
+      </div>
+
+
+      <button
+        class="header-account"
+        id="marketAccountButton"
+      >
+        Iniciar sesión
+      </button>
+
+    </div>
+
+  </header>
+
+
+  <main class="marketplace-content">
+
+
+    <div class="breadcrumb">
+
+      <button id="breadcrumbHome">
+        Inicio
+      </button>
+
+      <span>›</span>
+
+      <span id="breadcrumbProvince">
+        Argentina
+      </span>
+
+      <span>›</span>
+
+      <span id="breadcrumbCategory"></span>
+
+      <span
+        id="breadcrumbSubSeparator"
+        class="hidden"
+      >
+        ›
+      </span>
+
+      <span
+        id="breadcrumbSubcategory"
+        class="hidden"
+      ></span>
+
+    </div>
+
+
+    <div class="market-hero">
+
+      <div class="market-hero-copy">
+
+        <span
+          class="section-label"
+          id="marketEyebrow"
+        >
+          Amigate
+        </span>
+
+
+        <h2 id="marketTitle">
+          Productos
+        </h2>
+
+
+        <p id="marketDescription"></p>
+
+      </div>
+
+
+      <button
+        class="back-market"
+        id="backToHome"
+      >
+        ← Volver
+      </button>
+
+    </div>
+
+
+    <div
+      class="market-loader"
+      id="marketLoader"
+    >
+
+      <div class="loader-circle"></div>
+
+      Cargando categorías...
+
+    </div>
+
+
+    <section
+      class="subcategories-wrap"
+      id="subcategoriesSection"
+    >
+
+      <div class="subcategories-heading">
+
+        <h3>
+          Categorías
+        </h3>
+
+        <span
+          class="subcategories-count"
+          id="subcategoriesCount"
+        ></span>
+
+      </div>
+
+
+      <div
+        class="subcategory-grid"
+        id="subcategoryGrid"
+      ></div>
+
+    </section>
+
+
+    <div
+      class="empty-state"
+      id="categoryEmptyState"
+    >
+
+      <strong>
+        Todavía no encontramos categorías
+      </strong>
+
+      <p>
+
+        Esta sección existe en Amigate,
+        pero todavía no hay subcategorías cargadas
+        en la base para mostrar.
+
+      </p>
+
+    </div>
+
+
+    <section
+      class="subcategory-results"
+      id="subcategoryResults"
+    >
+
+      <div class="result-top">
+
+        <h3 id="selectedSubcategoryTitle"></h3>
+
+      </div>
+
+
+      <div class="filter-bar">
+
+        <button class="filter-chip active">
+          Relevantes
+        </button>
+
+        <button class="filter-chip">
+          Más vendidos
+        </button>
+
+        <button class="filter-chip">
+          Mejor valorados
+        </button>
+
+        <button class="filter-chip">
+          Más nuevos
+        </button>
+
+        <button class="filter-chip">
+          Promociones
+        </button>
+
+      </div>
+
+
+      <div class="coming-box">
+
+        <strong id="nextResultsTitle">
+          Resultados
+        </strong>
+
+        <p id="nextResultsDescription">
+
+          La categoría y subcategoría ya están funcionando.
+          En el próximo avance vamos a cargar aquí
+          las marcas y publicaciones reales de Supabase.
+
+        </p>
+
+      </div>
+
+    </section>
+
+
+  </main>
 
 </section>
 
 
 
 <!-- =====================================================
-     FOOTER
-===================================================== -->
-
-<footer>
-
-  <div class="footer-logo">
-    Amigate
-  </div>
-
-  <div class="footer-copy">
-    Hecho acá. Encontralo en Amigate.
-  </div>
-
-
-  <div class="footer-bottom">
-
-    <div class="footer-links">
-      <span>Términos</span>
-      <span>Privacidad</span>
-      <span>Ayuda</span>
-    </div>
-
-    <span
-      class="admin-access"
-      id="adminAccess"
-    >
-      Administración
-    </span>
-
-  </div>
-
-</footer>
-
-
-
-<!-- =====================================================
-     LOGIN / REGISTRO USUARIO
+     LOGIN / REGISTRO
 ===================================================== -->
 
 <div
@@ -1989,10 +2883,10 @@
         Amigate
       </span>
 
+
       <button
         class="modal-close"
         id="closeAuthModal"
-        type="button"
       >
         ×
       </button>
@@ -2000,18 +2894,13 @@
     </div>
 
 
-    <h2
-      class="modal-title"
-      id="authModalTitle"
-    >
+    <h2 class="modal-title">
       Bienvenido
     </h2>
 
-    <p
-      class="modal-description"
-      id="authModalDescription"
-    >
-      Iniciá sesión o creá tu cuenta para continuar.
+
+    <p class="modal-description">
+      Iniciá sesión o creá tu cuenta.
     </p>
 
 
@@ -2019,12 +2908,14 @@
       class="auth-intent"
       id="sellerIntentMessage"
     >
+
       <strong>
         ¿Querés publicar tu marca?
       </strong>
 
-      Creá tu cuenta o iniciá sesión.
-      Después vamos a continuar con el alta de tu marca.
+      Creá tu cuenta o iniciá sesión y continuamos
+      con el alta de tu marca.
+
     </div>
 
 
@@ -2033,20 +2924,20 @@
       <button
         class="auth-tab active"
         data-auth-tab="login"
-        type="button"
       >
         Iniciar sesión
       </button>
 
+
       <button
         class="auth-tab"
         data-auth-tab="register"
-        type="button"
       >
         Registrarme
       </button>
 
     </div>
+
 
 
     <!-- LOGIN -->
@@ -2089,6 +2980,7 @@
               required
             >
 
+
             <button
               class="show-password"
               type="button"
@@ -2105,7 +2997,6 @@
         <button
           class="submit-btn"
           id="loginSubmit"
-          type="submit"
         >
           Iniciar sesión
         </button>
@@ -2119,6 +3010,7 @@
       </form>
 
     </div>
+
 
 
     <!-- REGISTRO -->
@@ -2139,9 +3031,7 @@
             </label>
 
             <input
-              type="text"
               id="registerName"
-              autocomplete="given-name"
               required
             >
 
@@ -2155,9 +3045,7 @@
             </label>
 
             <input
-              type="text"
               id="registerSurname"
-              autocomplete="family-name"
               required
             >
 
@@ -2175,10 +3063,8 @@
             </label>
 
             <input
-              type="text"
               id="registerDni"
               inputmode="numeric"
-              autocomplete="off"
               required
             >
 
@@ -2192,9 +3078,8 @@
             </label>
 
             <input
-              type="tel"
               id="registerPhone"
-              autocomplete="tel"
+              type="tel"
               required
             >
 
@@ -2210,9 +3095,8 @@
           </label>
 
           <input
-            type="email"
             id="registerEmail"
-            autocomplete="email"
+            type="email"
             required
           >
 
@@ -2225,15 +3109,16 @@
             Contraseña
           </label>
 
+
           <div class="password-wrap">
 
             <input
-              type="password"
               id="registerPassword"
+              type="password"
               minlength="6"
-              autocomplete="new-password"
               required
             >
+
 
             <button
               class="show-password"
@@ -2251,7 +3136,6 @@
         <button
           class="submit-btn"
           id="registerSubmit"
-          type="submit"
         >
           Crear mi cuenta
         </button>
@@ -2261,12 +3145,6 @@
           class="auth-message"
           id="registerMessage"
         ></div>
-
-
-        <div class="auth-note">
-          Al crear tu cuenta aceptás los términos
-          y políticas de Amigate.
-        </div>
 
       </form>
 
@@ -2295,10 +3173,10 @@
         Amigate
       </span>
 
+
       <button
         class="modal-close"
         id="closeAccountModal"
-        type="button"
       >
         ×
       </button>
@@ -2310,10 +3188,6 @@
       Mi cuenta
     </h2>
 
-    <p class="modal-description">
-      Tu cuenta de Amigate.
-    </p>
-
 
     <div class="account-card">
 
@@ -2324,6 +3198,7 @@
         A
       </div>
 
+
       <div
         class="account-name"
         id="accountName"
@@ -2331,10 +3206,12 @@
         Usuario
       </div>
 
+
       <div
         class="account-email"
         id="accountEmail"
       ></div>
+
 
       <span
         class="account-type"
@@ -2349,23 +3226,22 @@
         <button
           class="account-action primary"
           id="goToPortalButton"
-          type="button"
         >
           Ir a mi portal
         </button>
 
+
         <button
           class="account-action"
           id="publishFromAccountButton"
-          type="button"
         >
           Publicar mi marca
         </button>
 
+
         <button
           class="account-action logout"
           id="logoutButton"
-          type="button"
         >
           Cerrar sesión
         </button>
@@ -2381,7 +3257,7 @@
 
 
 <!-- =====================================================
-     LOGIN ADMIN
+     ADMIN LOGIN
 ===================================================== -->
 
 <div
@@ -2389,7 +3265,7 @@
   id="adminModal"
 >
 
-  <div class="modal-box admin-login">
+  <div class="modal-box">
 
     <div class="modal-top">
 
@@ -2397,10 +3273,10 @@
         Amigate
       </span>
 
+
       <button
         class="modal-close"
         id="closeAdminModal"
-        type="button"
       >
         ×
       </button>
@@ -2408,11 +3284,12 @@
     </div>
 
 
-    <h3>
+    <h2 class="modal-title">
       Administración
-    </h3>
+    </h2>
 
-    <p>
+
+    <p class="modal-description">
       Acceso restringido al administrador general.
     </p>
 
@@ -2428,7 +3305,6 @@
         <input
           type="email"
           id="adminEmail"
-          autocomplete="email"
           required
         >
 
@@ -2444,7 +3320,6 @@
         <input
           type="password"
           id="adminPassword"
-          autocomplete="current-password"
           required
         >
 
@@ -2452,7 +3327,6 @@
 
 
       <button
-        type="submit"
         class="submit-btn"
       >
         Entrar
@@ -2484,72 +3358,121 @@
   <aside class="admin-sidebar">
 
     <div class="admin-brand">
+
       Amigate
 
       <small>
         Administración general
       </small>
+
     </div>
 
 
     <div class="admin-menu">
 
-      <button class="admin-nav active" data-admin-page="dashboard">
+      <button
+        class="admin-nav active"
+        data-admin-page="dashboard"
+      >
         <span>◫</span>
         <strong>Dashboard</strong>
       </button>
 
-      <button class="admin-nav" data-admin-page="clientes">
+
+      <button
+        class="admin-nav"
+        data-admin-page="clientes"
+      >
         <span>♙</span>
         <strong>Clientes</strong>
       </button>
 
-      <button class="admin-nav" data-admin-page="vendedores">
+
+      <button
+        class="admin-nav"
+        data-admin-page="vendedores"
+      >
         <span>◇</span>
         <strong>Vendedores</strong>
       </button>
 
-      <button class="admin-nav" data-admin-page="marcas">
+
+      <button
+        class="admin-nav"
+        data-admin-page="marcas"
+      >
         <span>▣</span>
         <strong>Marcas</strong>
       </button>
 
-      <button class="admin-nav" data-admin-page="categorias">
+
+      <button
+        class="admin-nav"
+        data-admin-page="categorias"
+      >
         <span>▦</span>
         <strong>Categorías</strong>
       </button>
 
-      <button class="admin-nav" data-admin-page="operaciones">
+
+      <button
+        class="admin-nav"
+        data-admin-page="operaciones"
+      >
         <span>↔</span>
         <strong>Operaciones</strong>
       </button>
 
-      <button class="admin-nav" data-admin-page="finanzas">
+
+      <button
+        class="admin-nav"
+        data-admin-page="finanzas"
+      >
         <span>$</span>
         <strong>Finanzas</strong>
       </button>
 
-      <button class="admin-nav" data-admin-page="publicidad">
+
+      <button
+        class="admin-nav"
+        data-admin-page="publicidad"
+      >
         <span>◎</span>
         <strong>Publicidad</strong>
       </button>
 
-      <button class="admin-nav" data-admin-page="suscripciones">
+
+      <button
+        class="admin-nav"
+        data-admin-page="suscripciones"
+      >
         <span>◷</span>
         <strong>Suscripciones</strong>
       </button>
 
-      <button class="admin-nav" data-admin-page="reclamos">
+
+      <button
+        class="admin-nav"
+        data-admin-page="reclamos"
+      >
         <span>!</span>
         <strong>Reclamos</strong>
       </button>
 
-      <button class="admin-nav" data-admin-page="moderacion">
+
+      <button
+        class="admin-nav"
+        data-admin-page="moderacion"
+      >
         <span>✓</span>
         <strong>Moderación</strong>
       </button>
 
-      <button class="admin-nav" data-admin-page="configuracion">
+
+      <button
+        class="admin-nav"
+        data-admin-page="configuracion"
+      >
         <span>⚙</span>
         <strong>Configuración</strong>
       </button>
@@ -2575,6 +3498,7 @@
         Dashboard
       </h2>
 
+
       <div class="admin-user">
 
         Administrador
@@ -2596,51 +3520,118 @@
         <div class="dashboard-grid">
 
           <article class="stat-card">
-            <small>Clientes registrados</small>
-            <strong id="countClients">—</strong>
-            <p>Compradores de Amigate</p>
+
+            <small>
+              Clientes registrados
+            </small>
+
+            <strong id="countClients">
+              —
+            </strong>
+
+            <p>
+              Compradores de Amigate
+            </p>
+
           </article>
 
-          <article class="stat-card">
-            <small>Marcas registradas</small>
-            <strong id="countBrands">—</strong>
-            <p>Total de marcas</p>
-          </article>
 
           <article class="stat-card">
-            <small>Marcas activas</small>
-            <strong id="countActiveBrands">—</strong>
-            <p>Actualmente publicadas</p>
+
+            <small>
+              Marcas
+            </small>
+
+            <strong id="countBrands">
+              —
+            </strong>
+
+            <p>
+              Total registradas
+            </p>
+
           </article>
 
-          <article class="stat-card">
-            <small>Vendedores</small>
-            <strong id="countSellers">—</strong>
-            <p>Cuentas registradas</p>
-          </article>
 
           <article class="stat-card">
-            <small>Pedidos</small>
-            <strong id="countOrders">—</strong>
-            <p>Operaciones registradas</p>
+
+            <small>
+              Marcas activas
+            </small>
+
+            <strong id="countActiveBrands">
+              —
+            </strong>
+
+            <p>
+              Actualmente visibles
+            </p>
+
           </article>
 
-          <article class="stat-card">
-            <small>Reclamos</small>
-            <strong id="countClaims">—</strong>
-            <p>Total registrados</p>
-          </article>
 
           <article class="stat-card">
-            <small>Suscripciones</small>
-            <strong id="countSubscriptions">—</strong>
-            <p>Historial</p>
+
+            <small>
+              Vendedores
+            </small>
+
+            <strong id="countSellers">
+              —
+            </strong>
+
           </article>
 
+
           <article class="stat-card">
-            <small>Provincias</small>
-            <strong>24</strong>
-            <p>Cobertura nacional</p>
+
+            <small>
+              Pedidos
+            </small>
+
+            <strong id="countOrders">
+              —
+            </strong>
+
+          </article>
+
+
+          <article class="stat-card">
+
+            <small>
+              Reclamos
+            </small>
+
+            <strong id="countClaims">
+              —
+            </strong>
+
+          </article>
+
+
+          <article class="stat-card">
+
+            <small>
+              Suscripciones
+            </small>
+
+            <strong id="countSubscriptions">
+              —
+            </strong>
+
+          </article>
+
+
+          <article class="stat-card">
+
+            <small>
+              Provincias
+            </small>
+
+            <strong>
+              24
+            </strong>
+
           </article>
 
         </div>
@@ -2648,7 +3639,10 @@
       </section>
 
 
-      <section class="admin-section" id="admin-clientes">
+      <section
+        class="admin-section"
+        id="admin-clientes"
+      >
         <div class="empty-panel">
           <h3>Clientes</h3>
           <p>Gestión de compradores registrados.</p>
@@ -2656,71 +3650,98 @@
       </section>
 
 
-      <section class="admin-section" id="admin-vendedores">
+      <section
+        class="admin-section"
+        id="admin-vendedores"
+      >
         <div class="empty-panel">
           <h3>Vendedores</h3>
-          <p>Gestión de cuentas vendedoras.</p>
+          <p>Gestión de vendedores.</p>
         </div>
       </section>
 
 
-      <section class="admin-section" id="admin-marcas">
+      <section
+        class="admin-section"
+        id="admin-marcas"
+      >
         <div class="empty-panel">
           <h3>Marcas</h3>
-          <p>Alta, suspensión, bonificaciones y administración.</p>
+          <p>Gestión general de marcas.</p>
         </div>
       </section>
 
 
-      <section class="admin-section" id="admin-categorias">
+      <section
+        class="admin-section"
+        id="admin-categorias"
+      >
         <div class="empty-panel">
           <h3>Categorías</h3>
-          <p>Administración de categorías y subcategorías.</p>
+          <p>Administración de taxonomías.</p>
         </div>
       </section>
 
 
-      <section class="admin-section" id="admin-operaciones">
+      <section
+        class="admin-section"
+        id="admin-operaciones"
+      >
         <div class="empty-panel">
           <h3>Operaciones</h3>
-          <p>Pedidos y actividad de la plataforma.</p>
+          <p>Pedidos y movimientos.</p>
         </div>
       </section>
 
 
-      <section class="admin-section" id="admin-finanzas">
+      <section
+        class="admin-section"
+        id="admin-finanzas"
+      >
         <div class="empty-panel">
           <h3>Finanzas</h3>
-          <p>Suscripciones, comisiones y publicidad.</p>
+          <p>Ingresos, comisiones y movimientos.</p>
         </div>
       </section>
 
 
-      <section class="admin-section" id="admin-publicidad">
+      <section
+        class="admin-section"
+        id="admin-publicidad"
+      >
         <div class="empty-panel">
           <h3>Publicidad</h3>
-          <p>Campañas y publicaciones patrocinadas.</p>
+          <p>Campañas patrocinadas.</p>
         </div>
       </section>
 
 
-      <section class="admin-section" id="admin-suscripciones">
+      <section
+        class="admin-section"
+        id="admin-suscripciones"
+      >
         <div class="empty-panel">
           <h3>Suscripciones</h3>
-          <p>Planes, vencimientos y bonificaciones.</p>
+          <p>Planes y vencimientos.</p>
         </div>
       </section>
 
 
-      <section class="admin-section" id="admin-reclamos">
+      <section
+        class="admin-section"
+        id="admin-reclamos"
+      >
         <div class="empty-panel">
           <h3>Reclamos</h3>
-          <p>Intervenciones y resolución de conflictos.</p>
+          <p>Resolución de conflictos.</p>
         </div>
       </section>
 
 
-      <section class="admin-section" id="admin-moderacion">
+      <section
+        class="admin-section"
+        id="admin-moderacion"
+      >
         <div class="empty-panel">
           <h3>Moderación</h3>
           <p>Reportes y contenido denunciado.</p>
@@ -2728,7 +3749,10 @@
       </section>
 
 
-      <section class="admin-section" id="admin-configuracion">
+      <section
+        class="admin-section"
+        id="admin-configuracion"
+      >
         <div class="empty-panel">
           <h3>Configuración general</h3>
           <p>Parámetros generales de Amigate.</p>
@@ -2744,12 +3768,14 @@
 
 
 <script>
+
 /* =========================================================
    SUPABASE
 ========================================================= */
 
 const SUPABASE_URL =
   "https://jqdyaafwixnjasszsvkt.supabase.co";
+
 
 const SUPABASE_KEY =
   "sb_publishable_KHbLlwbhlkyaiz-7KXW6Mw_nAnTVsLa";
@@ -2763,31 +3789,41 @@ const db =
 
 
 let currentUser = null;
+
 let currentProfile = null;
+
 let authIntent = "buyer";
 
 
 /* =========================================================
-   HELPERS MODAL
+   MODALES
 ========================================================= */
 
 function openModal(element){
-  element.classList.add("open");
+
+  element.classList.add(
+    "open"
+  );
 
   document.body.style.overflow =
     "hidden";
+
 }
 
 
 function closeModal(element){
-  element.classList.remove("open");
+
+  element.classList.remove(
+    "open"
+  );
 
   document.body.style.overflow =
     "";
+
 }
 
 
-function closeModalOnBackground(
+function backgroundClose(
   element
 ){
 
@@ -2796,10 +3832,13 @@ function closeModalOnBackground(
     function(event){
 
       if(
-        event.target ===
-        element
+        event.target === element
       ){
-        closeModal(element);
+
+        closeModal(
+          element
+        );
+
       }
 
     }
@@ -2813,6 +3852,7 @@ function closeModalOnBackground(
 ========================================================= */
 
 let selectedProvince = null;
+
 let selectedPolygon = null;
 
 
@@ -2821,20 +3861,24 @@ const provinceCard =
     "provinceCard"
   );
 
+
 const provinceName =
   document.getElementById(
     "provinceName"
   );
+
 
 const exploreButton =
   document.getElementById(
     "exploreButton"
   );
 
+
 const exploreTitle =
   document.getElementById(
     "exploreTitle"
   );
+
 
 const exploreSubtitle =
   document.getElementById(
@@ -2849,10 +3893,13 @@ function updateProvinceContent(){
     exploreTitle.textContent =
       "¿Qué estás buscando?";
 
+
     exploreSubtitle.textContent =
       "Elegí una provincia para personalizar los resultados.";
 
+
     return;
+
   }
 
 
@@ -2870,370 +3917,1375 @@ function updateProvinceContent(){
 }
 
 
-am5.ready(function(){
+am5.ready(
+  function(){
 
-  const root =
-    am5.Root.new(
-      "chartdiv"
-    );
-
-
-  if(root._logo){
-    root._logo.dispose();
-  }
-
-
-  const chart =
-    root.container.children.push(
-
-      am5map.MapChart.new(
-        root,
-        {
-          panX:"none",
-          panY:"none",
-
-          wheelX:"none",
-          wheelY:"none",
-
-          pinchZoom:false,
-
-          projection:
-            am5map.geoMercator()
-        }
-      )
-
-    );
-
-
-  const polygonSeries =
-    chart.series.push(
-
-      am5map.MapPolygonSeries.new(
-        root,
-        {
-          geoJSON:
-            am5geodata_argentinaHigh
-        }
-      )
-
-    );
-
-
-  polygonSeries
-    .mapPolygons
-    .template
-    .setAll({
-
-      fill:
-        am5.color(
-          0xF4C0AE
-        ),
-
-      stroke:
-        am5.color(
-          0xFFF8F2
-        ),
-
-      strokeWidth:1.6,
-
-      interactive:true,
-
-      cursorOverStyle:
-        "pointer",
-
-      tooltipText:
-        "{name}"
-
-    });
-
-
-  polygonSeries
-    .mapPolygons
-    .template
-    .states
-    .create(
-      "hover",
-      {
-        fill:
-          am5.color(
-            0xF08B65
-          )
-      }
-    );
-
-
-  polygonSeries
-    .mapPolygons
-    .template
-    .states
-    .create(
-      "active",
-      {
-        fill:
-          am5.color(
-            0xEB6841
-          )
-      }
-    );
-
-
-  function clearSelection(){
-
-    if(selectedPolygon){
-
-      selectedPolygon.set(
-        "active",
-        false
+    const root =
+      am5.Root.new(
+        "chartdiv"
       );
+
+
+    if(root._logo){
+
+      root._logo.dispose();
 
     }
 
 
-    selectedPolygon = null;
-    selectedProvince = null;
+    const chart =
+      root.container.children.push(
+
+        am5map.MapChart.new(
+          root,
+          {
+
+            panX:"none",
+
+            panY:"none",
+
+            wheelX:"none",
+
+            wheelY:"none",
+
+            pinchZoom:false,
+
+            projection:
+              am5map.geoMercator()
+
+          }
+        )
+
+      );
 
 
-    provinceCard.classList.remove(
-      "visible"
-    );
+    const polygonSeries =
+      chart.series.push(
+
+        am5map.MapPolygonSeries.new(
+          root,
+          {
+
+            geoJSON:
+              am5geodata_argentinaHigh
+
+          }
+        )
+
+      );
 
 
-    localStorage.removeItem(
-      "amigate_province"
-    );
+    polygonSeries
+      .mapPolygons
+      .template
+      .setAll(
+        {
 
+          fill:
+            am5.color(
+              0xF4C0AE
+            ),
 
-    updateProvinceContent();
+          stroke:
+            am5.color(
+              0xFFF8F2
+            ),
 
-  }
+          strokeWidth:1.6,
 
+          interactive:true,
 
-  polygonSeries
-    .mapPolygons
-    .template
-    .events
-    .on(
-      "click",
-      function(event){
+          cursorOverStyle:
+            "pointer",
 
-        const polygon =
-          event.target;
+          tooltipText:
+            "{name}"
 
-
-        const dataItem =
-          polygon.dataItem;
-
-
-        if(!dataItem){
-          return;
         }
+      );
 
 
-        if(
-          selectedPolygon ===
-          polygon
-        ){
+    polygonSeries
+      .mapPolygons
+      .template
+      .states
+      .create(
+        "hover",
+        {
 
-          clearSelection();
-
-          return;
-        }
-
-
-        if(selectedPolygon){
-
-          selectedPolygon.set(
-            "active",
-            false
-          );
+          fill:
+            am5.color(
+              0xF08B65
+            )
 
         }
+      );
 
 
-        selectedPolygon =
-          polygon;
+    polygonSeries
+      .mapPolygons
+      .template
+      .states
+      .create(
+        "active",
+        {
+
+          fill:
+            am5.color(
+              0xEB6841
+            )
+
+        }
+      );
 
 
-        polygon.set(
+    function clearSelection(){
+
+      if(selectedPolygon){
+
+        selectedPolygon.set(
           "active",
-          true
+          false
         );
 
-
-        selectedProvince = {
-
-          name:
-            dataItem
-              .dataContext
-              .name,
-
-          id:
-            dataItem
-              .dataContext
-              .id
-
-        };
+      }
 
 
-        provinceName.textContent =
-          selectedProvince.name;
+      selectedPolygon = null;
+
+      selectedProvince = null;
 
 
-        exploreButton.textContent =
-          "Explorar " +
-          selectedProvince.name;
-
-
-        provinceCard.classList.add(
+      provinceCard
+        .classList
+        .remove(
           "visible"
         );
 
 
-        localStorage.setItem(
-          "amigate_province",
-          JSON.stringify(
-            selectedProvince
-          )
+      localStorage
+        .removeItem(
+          "amigate_province"
         );
 
 
-        updateProvinceContent();
+      updateProvinceContent();
 
-      }
-    );
-
-
-  document
-    .getElementById(
-      "clearProvince"
-    )
-    .addEventListener(
-      "click",
-      clearSelection
-    );
+    }
 
 
-  polygonSeries
-    .events
-    .on(
-      "datavalidated",
-      function(){
+    polygonSeries
+      .mapPolygons
+      .template
+      .events
+      .on(
+        "click",
+        function(event){
 
-        const stored =
-          localStorage.getItem(
-            "amigate_province"
+          const polygon =
+            event.target;
+
+
+          const dataItem =
+            polygon.dataItem;
+
+
+          if(!dataItem){
+
+            return;
+
+          }
+
+
+          if(
+            selectedPolygon ===
+            polygon
+          ){
+
+            clearSelection();
+
+            return;
+
+          }
+
+
+          if(selectedPolygon){
+
+            selectedPolygon.set(
+              "active",
+              false
+            );
+
+          }
+
+
+          selectedPolygon =
+            polygon;
+
+
+          polygon.set(
+            "active",
+            true
           );
 
 
-        if(!stored){
-          return;
-        }
+          selectedProvince =
+            {
+
+              name:
+                dataItem
+                  .dataContext
+                  .name,
+
+              id:
+                dataItem
+                  .dataContext
+                  .id
+
+            };
 
 
-        try{
+          provinceName.textContent =
+            selectedProvince.name;
 
-          const saved =
-            JSON.parse(
-              stored
+
+          exploreButton.textContent =
+            "Explorar " +
+            selectedProvince.name;
+
+
+          provinceCard
+            .classList
+            .add(
+              "visible"
             );
 
 
-          polygonSeries
-            .dataItems
-            .forEach(
-              function(dataItem){
-
-                if(
-                  dataItem
-                    .dataContext
-                    .id ===
-                  saved.id
-                ){
-
-                  const polygon =
-                    dataItem.get(
-                      "mapPolygon"
-                    );
-
-
-                  if(!polygon){
-                    return;
-                  }
-
-
-                  selectedPolygon =
-                    polygon;
-
-
-                  selectedProvince =
-                    saved;
-
-
-                  polygon.set(
-                    "active",
-                    true
-                  );
-
-
-                  provinceName.textContent =
-                    saved.name;
-
-
-                  exploreButton.textContent =
-                    "Explorar " +
-                    saved.name;
-
-
-                  provinceCard.classList.add(
-                    "visible"
-                  );
-
-
-                  updateProvinceContent();
-
-                }
-
-              }
+          localStorage
+            .setItem(
+              "amigate_province",
+              JSON.stringify(
+                selectedProvince
+              )
             );
 
-        }
-        catch(error){
 
-          localStorage.removeItem(
-            "amigate_province"
-          );
+          updateProvinceContent();
 
         }
+      );
 
-      }
-    );
-
-
-  polygonSeries.appear(
-    600
-  );
-
-});
-
-
-exploreButton.addEventListener(
-  "click",
-  function(){
 
     document
       .getElementById(
-        "exploreSection"
+        "clearProvince"
       )
-      .scrollIntoView({
-        behavior:"smooth"
-      });
+      .addEventListener(
+        "click",
+        clearSelection
+      );
+
+
+    polygonSeries
+      .events
+      .on(
+        "datavalidated",
+        function(){
+
+          const stored =
+            localStorage
+              .getItem(
+                "amigate_province"
+              );
+
+
+          if(!stored){
+
+            return;
+
+          }
+
+
+          try{
+
+            const saved =
+              JSON.parse(
+                stored
+              );
+
+
+            polygonSeries
+              .dataItems
+              .forEach(
+                function(
+                  dataItem
+                ){
+
+                  if(
+                    dataItem
+                      .dataContext
+                      .id ===
+                    saved.id
+                  ){
+
+                    const polygon =
+                      dataItem.get(
+                        "mapPolygon"
+                      );
+
+
+                    if(!polygon){
+
+                      return;
+
+                    }
+
+
+                    selectedPolygon =
+                      polygon;
+
+
+                    selectedProvince =
+                      saved;
+
+
+                    polygon.set(
+                      "active",
+                      true
+                    );
+
+
+                    provinceName.textContent =
+                      saved.name;
+
+
+                    exploreButton.textContent =
+                      "Explorar " +
+                      saved.name;
+
+
+                    provinceCard
+                      .classList
+                      .add(
+                        "visible"
+                      );
+
+
+                    updateProvinceContent();
+
+                  }
+
+                }
+              );
+
+          }
+          catch(error){
+
+            localStorage
+              .removeItem(
+                "amigate_province"
+              );
+
+          }
+
+        }
+      );
+
+
+    polygonSeries.appear(
+      600
+    );
 
   }
 );
 
 
 /* =========================================================
-   AUTH MODAL
+   EXPLORAR PROVINCIA
+========================================================= */
+
+exploreButton
+  .addEventListener(
+    "click",
+    function(){
+
+      document
+        .getElementById(
+          "exploreSection"
+        )
+        .scrollIntoView(
+          {
+            behavior:"smooth"
+          }
+        );
+
+    }
+  );
+
+
+/* =========================================================
+   CATEGORÍAS SUPABASE
+========================================================= */
+
+const categoryDescriptions =
+  {
+
+    Productos:
+      "Descubrí marcas, emprendimientos y productos disponibles cerca tuyo.",
+
+    Servicios:
+      "Encontrá empresas y profesionales que ofrecen servicios en tu provincia.",
+
+    Oficios:
+      "Conectate con especialistas y trabajadores de distintos oficios.",
+
+    Empleos:
+      "Explorá oportunidades laborales y búsquedas de personal.",
+
+    Necesito:
+      "Publicá lo que necesitás y conectate con personas o marcas que puedan ayudarte."
+
+  };
+
+
+let currentMarketCategory =
+  null;
+
+
+let currentDatabaseCategory =
+  null;
+
+
+let currentSubcategory =
+  null;
+
+
+function normalizeText(
+  value
+){
+
+  return String(
+    value || ""
+  )
+    .normalize(
+      "NFD"
+    )
+    .replace(
+      /[\u0300-\u036f]/g,
+      ""
+    )
+    .trim()
+    .toLowerCase();
+
+}
+
+
+/*
+  Como tu base ya existe, hacemos esta
+  función tolerante a distintos nombres
+  posibles de columnas.
+*/
+
+function getRowName(
+  row
+){
+
+  return (
+    row.nombre ||
+    row.name ||
+    row.titulo ||
+    row.title ||
+    row.descripcion_corta ||
+    "Sin nombre"
+  );
+
+}
+
+
+function getParentCategoryId(
+  row
+){
+
+  return (
+    row.category_id ||
+    row.categoria_id ||
+    row.parent_category_id ||
+    row.parent_id ||
+    null
+  );
+
+}
+
+
+/* =========================================================
+   ABRIR CATEGORÍA
+========================================================= */
+
+document
+  .querySelectorAll(
+    "[data-market-category]"
+  )
+  .forEach(
+    function(card){
+
+      card.addEventListener(
+        "click",
+        function(){
+
+          const category =
+            card.dataset
+              .marketCategory;
+
+
+          openMarketplace(
+            category
+          );
+
+        }
+      );
+
+    }
+  );
+
+
+async function openMarketplace(
+  category
+){
+
+  currentMarketCategory =
+    category;
+
+
+  currentDatabaseCategory =
+    null;
+
+
+  currentSubcategory =
+    null;
+
+
+  document
+    .getElementById(
+      "publicSite"
+    )
+    .classList
+    .add(
+      "hidden"
+    );
+
+
+  document
+    .getElementById(
+      "marketplaceView"
+    )
+    .classList
+    .add(
+      "visible"
+    );
+
+
+  window.scrollTo(
+    {
+      top:0,
+      behavior:"instant"
+    }
+  );
+
+
+  const province =
+    selectedProvince
+      ?.name ||
+    "Argentina";
+
+
+  document
+    .getElementById(
+      "marketProvince"
+    )
+    .textContent =
+      province;
+
+
+  document
+    .getElementById(
+      "breadcrumbProvince"
+    )
+    .textContent =
+      province;
+
+
+  document
+    .getElementById(
+      "breadcrumbCategory"
+    )
+    .textContent =
+      category;
+
+
+  document
+    .getElementById(
+      "marketEyebrow"
+    )
+    .textContent =
+      province;
+
+
+  document
+    .getElementById(
+      "marketTitle"
+    )
+    .textContent =
+      category;
+
+
+  document
+    .getElementById(
+      "marketDescription"
+    )
+    .textContent =
+      categoryDescriptions[
+        category
+      ] || "";
+
+
+  hideSubcategoryResult();
+
+
+  await loadSubcategories(
+    category
+  );
+
+}
+
+
+/* =========================================================
+   BUSCAR CATEGORÍA RAÍZ
+========================================================= */
+
+async function loadSubcategories(
+  categoryName
+){
+
+  const loader =
+    document.getElementById(
+      "marketLoader"
+    );
+
+
+  const grid =
+    document.getElementById(
+      "subcategoryGrid"
+    );
+
+
+  const empty =
+    document.getElementById(
+      "categoryEmptyState"
+    );
+
+
+  const section =
+    document.getElementById(
+      "subcategoriesSection"
+    );
+
+
+  loader
+    .classList
+    .add(
+      "visible"
+    );
+
+
+  empty
+    .classList
+    .remove(
+      "visible"
+    );
+
+
+  section
+    .classList
+    .remove(
+      "hidden"
+    );
+
+
+  grid.innerHTML =
+    "";
+
+
+  try{
+
+    /*
+      Primero traemos las categorías raíz.
+      Ya tenemos RLS pública configurada.
+    */
+
+    const {
+      data:categories,
+      error:categoriesError
+    } =
+      await db
+        .from(
+          "categories"
+        )
+        .select(
+          "*"
+        );
+
+
+    if(categoriesError){
+
+      throw categoriesError;
+
+    }
+
+
+    const root =
+      (
+        categories || []
+      )
+      .find(
+        function(item){
+
+          return (
+            normalizeText(
+              getRowName(
+                item
+              )
+            ) ===
+            normalizeText(
+              categoryName
+            )
+          );
+
+        }
+      );
+
+
+    if(!root){
+
+      loader
+        .classList
+        .remove(
+          "visible"
+        );
+
+
+      section
+        .classList
+        .add(
+          "hidden"
+        );
+
+
+      empty
+        .classList
+        .add(
+          "visible"
+        );
+
+
+      console.warn(
+        "No encontré categoría raíz:",
+        categoryName,
+        categories
+      );
+
+
+      return;
+
+    }
+
+
+    currentDatabaseCategory =
+      root;
+
+
+    /*
+      Traemos todas las subcategorías y
+      filtramos por el ID de la categoría raíz.
+    */
+
+    const {
+      data:subcategories,
+      error:subcategoriesError
+    } =
+      await db
+        .from(
+          "subcategories"
+        )
+        .select(
+          "*"
+        );
+
+
+    if(subcategoriesError){
+
+      throw subcategoriesError;
+
+    }
+
+
+    const filtered =
+      (
+        subcategories || []
+      )
+      .filter(
+        function(item){
+
+          const parent =
+            getParentCategoryId(
+              item
+            );
+
+
+          return (
+            String(parent) ===
+            String(root.id)
+          );
+
+        }
+      )
+      .sort(
+        function(a,b){
+
+          return getRowName(a)
+            .localeCompare(
+              getRowName(b),
+              "es"
+            );
+
+        }
+      );
+
+
+    renderSubcategories(
+      filtered
+    );
+
+  }
+  catch(error){
+
+    console.error(
+      "Error cargando categorías:",
+      error
+    );
+
+
+    section
+      .classList
+      .add(
+        "hidden"
+      );
+
+
+    empty
+      .classList
+      .add(
+        "visible"
+      );
+
+
+    empty
+      .querySelector(
+        "strong"
+      )
+      .textContent =
+        "No pudimos cargar las categorías";
+
+
+    empty
+      .querySelector(
+        "p"
+      )
+      .textContent =
+        "Revisá la conexión con Supabase o las políticas de lectura de categories y subcategories.";
+
+  }
+  finally{
+
+    loader
+      .classList
+      .remove(
+        "visible"
+      );
+
+  }
+
+}
+
+
+/* =========================================================
+   RENDER SUBCATEGORÍAS
+========================================================= */
+
+function renderSubcategories(
+  rows
+){
+
+  const grid =
+    document.getElementById(
+      "subcategoryGrid"
+    );
+
+
+  const empty =
+    document.getElementById(
+      "categoryEmptyState"
+    );
+
+
+  const section =
+    document.getElementById(
+      "subcategoriesSection"
+    );
+
+
+  document
+    .getElementById(
+      "subcategoriesCount"
+    )
+    .textContent =
+      rows.length === 1
+        ? "1 categoría"
+        : rows.length +
+          " categorías";
+
+
+  grid.innerHTML =
+    "";
+
+
+  if(!rows.length){
+
+    section
+      .classList
+      .add(
+        "hidden"
+      );
+
+
+    empty
+      .classList
+      .add(
+        "visible"
+      );
+
+
+    return;
+
+  }
+
+
+  section
+    .classList
+    .remove(
+      "hidden"
+    );
+
+
+  empty
+    .classList
+    .remove(
+      "visible"
+    );
+
+
+  rows.forEach(
+    function(row){
+
+      const card =
+        document.createElement(
+          "article"
+        );
+
+
+      card.className =
+        "subcategory-card";
+
+
+      const name =
+        getRowName(
+          row
+        );
+
+
+      card.innerHTML =
+        `
+          <small>
+            ${escapeHtml(
+              currentMarketCategory
+            )}
+          </small>
+
+          <strong>
+            ${escapeHtml(
+              name
+            )}
+          </strong>
+
+          <div class="subcategory-arrow">
+            Explorar →
+          </div>
+        `;
+
+
+      card.addEventListener(
+        "click",
+        function(){
+
+          selectSubcategory(
+            row
+          );
+
+        }
+      );
+
+
+      grid.appendChild(
+        card
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   ABRIR SUBCATEGORÍA
+========================================================= */
+
+function selectSubcategory(
+  row
+){
+
+  currentSubcategory =
+    row;
+
+
+  const name =
+    getRowName(
+      row
+    );
+
+
+  document
+    .getElementById(
+      "breadcrumbSubSeparator"
+    )
+    .classList
+    .remove(
+      "hidden"
+    );
+
+
+  const crumb =
+    document
+      .getElementById(
+        "breadcrumbSubcategory"
+      );
+
+
+  crumb.textContent =
+    name;
+
+
+  crumb
+    .classList
+    .remove(
+      "hidden"
+    );
+
+
+  document
+    .getElementById(
+      "subcategoriesSection"
+    )
+    .classList
+    .add(
+      "hidden"
+    );
+
+
+  document
+    .getElementById(
+      "selectedSubcategoryTitle"
+    )
+    .textContent =
+      name;
+
+
+  const province =
+    selectedProvince
+      ?.name ||
+    "Argentina";
+
+
+  document
+    .getElementById(
+      "nextResultsTitle"
+    )
+    .textContent =
+      "Resultados de " +
+      name;
+
+
+  document
+    .getElementById(
+      "nextResultsDescription"
+    )
+    .textContent =
+      currentMarketCategory ===
+        "Productos"
+
+        ? "En el siguiente avance vamos a mostrar acá las marcas que venden " +
+          name +
+          " en " +
+          province +
+          ", respetando la regla de Amigate de mostrar primero marcas y no llenar la pantalla de productos repetidos."
+
+        : "En el siguiente avance vamos a conectar esta sección con las publicaciones reales de " +
+          currentMarketCategory +
+          " disponibles en " +
+          province +
+          ".";
+
+
+  document
+    .getElementById(
+      "subcategoryResults"
+    )
+    .classList
+    .add(
+      "visible"
+    );
+
+
+  window.scrollTo(
+    {
+      top:0,
+      behavior:"smooth"
+    }
+  );
+
+}
+
+
+function hideSubcategoryResult(){
+
+  currentSubcategory =
+    null;
+
+
+  document
+    .getElementById(
+      "breadcrumbSubSeparator"
+    )
+    .classList
+    .add(
+      "hidden"
+    );
+
+
+  document
+    .getElementById(
+      "breadcrumbSubcategory"
+    )
+    .classList
+    .add(
+      "hidden"
+    );
+
+
+  document
+    .getElementById(
+      "subcategoryResults"
+    )
+    .classList
+    .remove(
+      "visible"
+    );
+
+}
+
+
+/* =========================================================
+   VOLVER
+========================================================= */
+
+function closeMarketplace(){
+
+  document
+    .getElementById(
+      "marketplaceView"
+    )
+    .classList
+    .remove(
+      "visible"
+    );
+
+
+  document
+    .getElementById(
+      "publicSite"
+    )
+    .classList
+    .remove(
+      "hidden"
+    );
+
+
+  window.scrollTo(
+    {
+      top:
+        document
+          .getElementById(
+            "exploreSection"
+          )
+          .offsetTop,
+
+      behavior:"instant"
+    }
+  );
+
+}
+
+
+document
+  .getElementById(
+    "marketplaceHome"
+  )
+  .addEventListener(
+    "click",
+    closeMarketplace
+  );
+
+
+document
+  .getElementById(
+    "breadcrumbHome"
+  )
+  .addEventListener(
+    "click",
+    closeMarketplace
+  );
+
+
+document
+  .getElementById(
+    "backToHome"
+  )
+  .addEventListener(
+    "click",
+    function(){
+
+      if(currentSubcategory){
+
+        hideSubcategoryResult();
+
+
+        document
+          .getElementById(
+            "subcategoriesSection"
+          )
+          .classList
+          .remove(
+            "hidden"
+          );
+
+
+        return;
+
+      }
+
+
+      closeMarketplace();
+
+    }
+  );
+
+
+/* =========================================================
+   FILTROS VISUALES
+========================================================= */
+
+document
+  .querySelectorAll(
+    ".filter-chip"
+  )
+  .forEach(
+    function(button){
+
+      button.addEventListener(
+        "click",
+        function(){
+
+          document
+            .querySelectorAll(
+              ".filter-chip"
+            )
+            .forEach(
+              item =>
+                item.classList
+                  .remove(
+                    "active"
+                  )
+            );
+
+
+          button
+            .classList
+            .add(
+              "active"
+            );
+
+        }
+      );
+
+    }
+  );
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHtml(
+  value
+){
+
+  return String(
+    value ?? ""
+  )
+    .replaceAll(
+      "&",
+      "&amp;"
+    )
+    .replaceAll(
+      "<",
+      "&lt;"
+    )
+    .replaceAll(
+      ">",
+      "&gt;"
+    )
+    .replaceAll(
+      '"',
+      "&quot;"
+    )
+    .replaceAll(
+      "'",
+      "&#039;"
+    );
+
+}
+
+
+/* =========================================================
+   AUTH
 ========================================================= */
 
 const authModal =
@@ -3241,10 +5293,12 @@ const authModal =
     "authModal"
   );
 
+
 const accountModal =
   document.getElementById(
     "accountModal"
   );
+
 
 const sellerIntentMessage =
   document.getElementById(
@@ -3254,34 +5308,23 @@ const sellerIntentMessage =
 
 function openAuth(
   intent = "buyer",
-  initialTab = "login"
+  tab = "login"
 ){
 
-  authIntent = intent;
+  authIntent =
+    intent;
 
 
-  if(intent === "seller"){
-
-    sellerIntentMessage
-      .classList
-      .add(
-        "visible"
-      );
-
-  }
-  else{
-
-    sellerIntentMessage
-      .classList
-      .remove(
-        "visible"
-      );
-
-  }
+  sellerIntentMessage
+    .classList
+    .toggle(
+      "visible",
+      intent === "seller"
+    );
 
 
   switchAuthTab(
-    initialTab
+    tab
   );
 
 
@@ -3292,20 +5335,25 @@ function openAuth(
 }
 
 
-function switchAuthTab(tab){
+function switchAuthTab(
+  tab
+){
 
   document
     .querySelectorAll(
       ".auth-tab"
     )
     .forEach(
-      button => {
+      function(button){
 
-        button.classList.toggle(
-          "active",
-          button.dataset.authTab ===
+        button
+          .classList
+          .toggle(
+            "active",
+            button.dataset
+              .authTab ===
             tab
-        );
+          );
 
       }
     );
@@ -3316,11 +5364,13 @@ function switchAuthTab(tab){
       ".auth-panel"
     )
     .forEach(
-      panel => {
+      function(panel){
 
-        panel.classList.remove(
-          "active"
-        );
+        panel
+          .classList
+          .remove(
+            "active"
+          );
 
       }
     );
@@ -3330,7 +5380,8 @@ function switchAuthTab(tab){
     .getElementById(
       "auth-" + tab
     )
-    .classList.add(
+    .classList
+    .add(
       "active"
     );
 
@@ -3345,14 +5396,15 @@ document
     ".auth-tab"
   )
   .forEach(
-    button => {
+    function(button){
 
       button.addEventListener(
         "click",
         function(){
 
           switchAuthTab(
-            button.dataset.authTab
+            button.dataset
+              .authTab
           );
 
         }
@@ -3368,21 +5420,25 @@ function clearAuthMessages(){
     "loginMessage",
     "registerMessage"
   ]
-  .forEach(
-    id => {
+    .forEach(
+      function(id){
 
-      const element =
-        document.getElementById(
-          id
-        );
+        const element =
+          document
+            .getElementById(
+              id
+            );
 
-      element.textContent = "";
 
-      element.className =
-        "auth-message";
+        element.className =
+          "auth-message";
 
-    }
-  );
+
+        element.textContent =
+          "";
+
+      }
+    );
 
 }
 
@@ -3394,18 +5450,19 @@ function showAuthMessage(
 ){
 
   const element =
-    document.getElementById(
-      id
-    );
-
-
-  element.textContent =
-    message;
+    document
+      .getElementById(
+        id
+      );
 
 
   element.className =
     "auth-message visible " +
     type;
+
+
+  element.textContent =
+    message;
 
 }
 
@@ -3419,33 +5476,33 @@ document
     ".show-password"
   )
   .forEach(
-    button => {
+    function(button){
 
       button.addEventListener(
         "click",
         function(){
 
-          const target =
-            document.getElementById(
-              button
-                .dataset
-                .passwordTarget
-            );
+          const input =
+            document
+              .getElementById(
+                button.dataset
+                  .passwordTarget
+              );
 
 
-          const showing =
-            target.type ===
+          const visible =
+            input.type ===
             "text";
 
 
-          target.type =
-            showing
+          input.type =
+            visible
               ? "password"
               : "text";
 
 
           button.textContent =
-            showing
+            visible
               ? "Ver"
               : "Ocultar";
 
@@ -3457,7 +5514,7 @@ document
 
 
 /* =========================================================
-   REGISTRO REAL
+   REGISTRO CORREGIDO
 ========================================================= */
 
 document
@@ -3472,9 +5529,10 @@ document
 
 
       const submit =
-        document.getElementById(
-          "registerSubmit"
-        );
+        document
+          .getElementById(
+            "registerSubmit"
+          );
 
 
       const nombre =
@@ -3549,22 +5607,9 @@ document
           "error"
         );
 
-        return;
-      }
-
-
-      if(
-        dni.length < 7 ||
-        dni.length > 9
-      ){
-
-        showAuthMessage(
-          "registerMessage",
-          "Revisá el DNI ingresado.",
-          "error"
-        );
 
         return;
+
       }
 
 
@@ -3578,11 +5623,15 @@ document
           "error"
         );
 
+
         return;
+
       }
 
 
-      submit.disabled = true;
+      submit.disabled =
+        true;
+
 
       submit.textContent =
         "Creando cuenta...";
@@ -3594,24 +5643,14 @@ document
       try{
 
         /*
-          IMPORTANTE:
-
-          NO insertamos directamente en profiles.
-
-          El trigger handle_new_user()
-          que ya configuramos en Supabase
-          crea el perfil automáticamente.
-
-          Únicamente enviamos metadata.
+          PROTECCIÓN:
+          Si Supabase no responde,
+          no dejamos cargando eternamente.
         */
 
-        const {
-          data,
-          error
-        } =
-          await db
-            .auth
-            .signUp({
+        const signupPromise =
+          db.auth.signUp(
+            {
 
               email:
                 email,
@@ -3619,72 +5658,98 @@ document
               password:
                 password,
 
-              options:{
-                data:{
-                  nombre:
-                    nombre,
+              options:
+                {
 
-                  apellido:
-                    apellido,
+                  data:
+                    {
 
-                  dni:
-                    dni,
+                      nombre:
+                        nombre,
 
-                  telefono:
-                    telefono,
+                      apellido:
+                        apellido,
 
-                  nombre_completo:
-                    nombre +
-                    " " +
-                    apellido,
+                      dni:
+                        dni,
 
-                  origen_registro:
-                    authIntent,
+                      telefono:
+                        telefono,
 
-                  tipo_usuario:
-                    authIntent ===
-                      "seller"
-                      ? "vendedor"
-                      : "comprador"
+                      nombre_completo:
+                        nombre +
+                        " " +
+                        apellido,
+
+                      origen_registro:
+                        authIntent,
+
+                      tipo_usuario:
+                        authIntent ===
+                        "seller"
+                          ? "vendedor"
+                          : "comprador"
+
+                    }
+
                 }
-              }
 
-            });
+            }
+          );
+
+
+        const timeoutPromise =
+          new Promise(
+            function(
+              _,
+              reject
+            ){
+
+              setTimeout(
+                function(){
+
+                  reject(
+                    new Error(
+                      "TIMEOUT_REGISTRO"
+                    )
+                  );
+
+                },
+                15000
+              );
+
+            }
+          );
+
+
+        const {
+          data,
+          error
+        } =
+          await Promise.race(
+            [
+              signupPromise,
+              timeoutPromise
+            ]
+          );
 
 
         if(error){
 
-          console.error(
-            "Error registro:",
-            error
-          );
+          throw error;
 
-
-          showAuthMessage(
-            "registerMessage",
-            friendlyAuthError(
-              error.message
-            ),
-            "error"
-          );
-
-          return;
         }
 
 
         /*
-          Si Supabase devuelve sesión,
-          la confirmación de email está
-          desactivada y podemos entrar ya.
+          Si Supabase tiene Confirm Email
+          apagado, tendremos sesión.
         */
 
-        if(data.session){
+        if(data?.session){
 
           currentUser =
             data.user;
-
-
-          await loadCurrentProfile();
 
 
           showAuthMessage(
@@ -3692,6 +5757,33 @@ document
             "Cuenta creada correctamente.",
             "success"
           );
+
+
+          updatePublicSessionUI();
+
+
+          /*
+            IMPORTANTE:
+            NO esperamos profile para cerrar
+            el registro.
+
+            Esto corrige el freeze anterior.
+          */
+
+          loadCurrentProfile()
+            .then(
+              updatePublicSessionUI
+            )
+            .catch(
+              function(error){
+
+                console.warn(
+                  "Perfil todavía no disponible:",
+                  error
+                );
+
+              }
+            );
 
 
           setTimeout(
@@ -3702,46 +5794,26 @@ document
               );
 
 
-              updatePublicSessionUI();
-
-
-              /*
-                Si venía por Publicar mi marca,
-                dejamos preparada la siguiente
-                etapa.
-              */
-
-              if(
-                authIntent ===
-                "seller"
-              ){
-
-                openSellerNextStep();
-
-              }
-              else{
-
-                openAccountModal();
-
-              }
+              openAccountModal();
 
             },
-            650
+            350
           );
 
 
           return;
+
         }
 
 
         /*
-          Si no hay sesión, Supabase tiene
-          confirmación de email activada.
+          Si todavía quedó Confirm Email
+          activado en Supabase.
         */
 
         showAuthMessage(
           "registerMessage",
-          "La cuenta fue creada. Supabase está solicitando confirmar el email antes de iniciar sesión.",
+          "La cuenta se creó, pero Supabase está esperando confirmación por email. Si no vas a usar mails todavía, desactivá Confirm Email.",
           "success"
         );
 
@@ -3749,15 +5821,34 @@ document
       catch(error){
 
         console.error(
+          "Error registro:",
           error
         );
 
 
-        showAuthMessage(
-          "registerMessage",
-          "No pudimos crear la cuenta. Probá nuevamente.",
-          "error"
-        );
+        if(
+          error.message ===
+          "TIMEOUT_REGISTRO"
+        ){
+
+          showAuthMessage(
+            "registerMessage",
+            "Supabase tardó demasiado en responder. Revisá Authentication → Users para verificar si la cuenta llegó a crearse.",
+            "error"
+          );
+
+        }
+        else{
+
+          showAuthMessage(
+            "registerMessage",
+            friendlyAuthError(
+              error.message
+            ),
+            "error"
+          );
+
+        }
 
       }
       finally{
@@ -3776,7 +5867,7 @@ document
 
 
 /* =========================================================
-   LOGIN REAL
+   LOGIN
 ========================================================= */
 
 document
@@ -3791,9 +5882,10 @@ document
 
 
       const submit =
-        document.getElementById(
-          "loginSubmit"
-        );
+        document
+          .getElementById(
+            "loginSubmit"
+          );
 
 
       const email =
@@ -3814,30 +5906,12 @@ document
           .value;
 
 
-      if(
-        !email ||
-        !password
-      ){
-
-        showAuthMessage(
-          "loginMessage",
-          "Ingresá tu email y contraseña.",
-          "error"
-        );
-
-        return;
-      }
-
-
       submit.disabled =
         true;
 
 
       submit.textContent =
         "Ingresando...";
-
-
-      clearAuthMessages();
 
 
       try{
@@ -3848,23 +5922,18 @@ document
         } =
           await db
             .auth
-            .signInWithPassword({
-              email,
-              password
-            });
+            .signInWithPassword(
+              {
+                email,
+                password
+              }
+            );
 
 
         if(error){
 
-          showAuthMessage(
-            "loginMessage",
-            friendlyAuthError(
-              error.message
-            ),
-            "error"
-          );
+          throw error;
 
-          return;
         }
 
 
@@ -3872,14 +5941,36 @@ document
           data.user;
 
 
-        await loadCurrentProfile();
+        /*
+          Acá podemos esperar perfil porque
+          el usuario ya está autenticado.
+        */
+
+        await Promise.race(
+          [
+
+            loadCurrentProfile(),
+
+            new Promise(
+              resolve =>
+                setTimeout(
+                  resolve,
+                  5000
+                )
+            )
+
+          ]
+        );
 
 
         showAuthMessage(
           "loginMessage",
-          "Sesión iniciada correctamente.",
+          "Sesión iniciada.",
           "success"
         );
+
+
+        updatePublicSessionUI();
 
 
         setTimeout(
@@ -3890,38 +5981,20 @@ document
             );
 
 
-            updatePublicSessionUI();
-
-
-            if(
-              authIntent ===
-              "seller"
-            ){
-
-              openSellerNextStep();
-
-            }
-            else{
-
-              openAccountModal();
-
-            }
+            openAccountModal();
 
           },
-          450
+          250
         );
 
       }
       catch(error){
 
-        console.error(
-          error
-        );
-
-
         showAuthMessage(
           "loginMessage",
-          "No pudimos iniciar sesión.",
+          friendlyAuthError(
+            error.message
+          ),
           "error"
         );
 
@@ -3941,16 +6014,13 @@ document
   );
 
 
-/* =========================================================
-   ERRORES AMIGABLES
-========================================================= */
-
 function friendlyAuthError(
   message = ""
 ){
 
   const value =
-    message.toLowerCase();
+    message
+      .toLowerCase();
 
 
   if(
@@ -3958,7 +6028,9 @@ function friendlyAuthError(
       "invalid login credentials"
     )
   ){
+
     return "Email o contraseña incorrectos.";
+
   }
 
 
@@ -3967,28 +6039,20 @@ function friendlyAuthError(
       "email not confirmed"
     )
   ){
-    return "Primero tenés que confirmar tu email.";
+
+    return "La cuenta todavía está esperando confirmación del email.";
+
   }
 
 
   if(
     value.includes(
-      "user already registered"
+      "already registered"
     )
   ){
+
     return "Ya existe una cuenta con ese email.";
-  }
 
-
-  if(
-    value.includes(
-      "password"
-    ) &&
-    value.includes(
-      "characters"
-    )
-  ){
-    return "La contraseña es demasiado corta.";
   }
 
 
@@ -3997,18 +6061,22 @@ function friendlyAuthError(
       "rate limit"
     )
   ){
-    return "Se hicieron demasiados intentos. Esperá un momento y volvé a probar.";
+
+    return "Se hicieron demasiados intentos. Esperá un momento.";
+
   }
 
 
-  return message ||
-    "Ocurrió un error. Probá nuevamente.";
+  return (
+    message ||
+    "Ocurrió un error."
+  );
 
 }
 
 
 /* =========================================================
-   LEER PERFIL
+   PERFIL
 ========================================================= */
 
 async function loadCurrentProfile(){
@@ -4018,86 +6086,62 @@ async function loadCurrentProfile(){
     currentProfile =
       null;
 
+
     return null;
-  }
-
-
-  try{
-
-    const {
-      data,
-      error
-    } =
-      await db
-        .from(
-          "profiles"
-        )
-        .select(
-          "*"
-        )
-        .eq(
-          "id",
-          currentUser.id
-        )
-        .maybeSingle();
-
-
-    if(error){
-
-      console.warn(
-        "No se pudo leer profile:",
-        error
-      );
-
-
-      currentProfile =
-        null;
-
-
-      return null;
-    }
-
-
-    currentProfile =
-      data || null;
-
-
-    return currentProfile;
 
   }
-  catch(error){
+
+
+  const {
+    data,
+    error
+  } =
+    await db
+      .from(
+        "profiles"
+      )
+      .select(
+        "*"
+      )
+      .eq(
+        "id",
+        currentUser.id
+      )
+      .maybeSingle();
+
+
+  if(error){
 
     console.warn(
       error
     );
 
 
-    currentProfile =
-      null;
-
-
     return null;
+
   }
+
+
+  currentProfile =
+    data;
+
+
+  return data;
 
 }
 
 
 /* =========================================================
-   SESIÓN PÚBLICA
+   UI SESIÓN
 ========================================================= */
 
-function getDisplayName(){
-
-  const metadata =
-    currentUser
-      ?.user_metadata ||
-    {};
-
+function displayName(){
 
   return (
     currentProfile?.nombre ||
-    metadata.nombre ||
-    metadata.first_name ||
+    currentUser
+      ?.user_metadata
+      ?.nombre ||
     currentUser
       ?.email
       ?.split("@")[0] ||
@@ -4107,46 +6151,43 @@ function getDisplayName(){
 }
 
 
-function getFullName(){
-
-  const metadata =
-    currentUser
-      ?.user_metadata ||
-    {};
-
+function fullName(){
 
   const nombre =
     currentProfile?.nombre ||
-    metadata.nombre ||
+    currentUser
+      ?.user_metadata
+      ?.nombre ||
     "";
 
 
   const apellido =
     currentProfile?.apellido ||
-    metadata.apellido ||
+    currentUser
+      ?.user_metadata
+      ?.apellido ||
     "";
 
 
-  const combined =
+  return (
     (
       nombre +
       " " +
       apellido
     )
-    .trim();
-
-
-  return combined ||
+      .trim() ||
     currentUser?.email ||
-    "Usuario";
+    "Usuario"
+  );
 
 }
 
 
-function getUserType(){
+function userType(){
 
   return (
-    currentProfile?.tipo_usuario ||
+    currentProfile
+      ?.tipo_usuario ||
     currentUser
       ?.user_metadata
       ?.tipo_usuario ||
@@ -4158,52 +6199,64 @@ function getUserType(){
 
 function updatePublicSessionUI(){
 
-  const loginButton =
+  const button =
     document.getElementById(
       "userLoginButton"
     );
 
 
-  const sessionChip =
+  const marketButton =
+    document.getElementById(
+      "marketAccountButton"
+    );
+
+
+  const chip =
     document.getElementById(
       "sessionChip"
     );
 
 
-  const chipText =
-    document.getElementById(
-      "sessionChipText"
-    );
-
-
   if(currentUser){
 
-    loginButton.textContent =
+    button.textContent =
       "Mi cuenta";
 
 
-    sessionChip.classList.add(
-      "visible"
-    );
+    marketButton.textContent =
+      "Mi cuenta";
 
 
-    chipText.textContent =
-      getDisplayName();
+    chip
+      .classList
+      .add(
+        "visible"
+      );
+
+
+    document
+      .getElementById(
+        "sessionChipText"
+      )
+      .textContent =
+        displayName();
 
   }
   else{
 
-    loginButton.textContent =
+    button.textContent =
       "Iniciar sesión";
 
 
-    sessionChip.classList.remove(
-      "visible"
-    );
+    marketButton.textContent =
+      "Iniciar sesión";
 
 
-    chipText.textContent =
-      "";
+    chip
+      .classList
+      .remove(
+        "visible"
+      );
 
   }
 
@@ -4211,7 +6264,7 @@ function updatePublicSessionUI(){
 
 
 /* =========================================================
-   MI CUENTA
+   CUENTA
 ========================================================= */
 
 function openAccountModal(){
@@ -4223,12 +6276,14 @@ function openAccountModal(){
       "login"
     );
 
+
     return;
+
   }
 
 
   const name =
-    getFullName();
+    fullName();
 
 
   const initials =
@@ -4237,10 +6292,9 @@ function openAccountModal(){
       .filter(Boolean)
       .slice(0,2)
       .map(
-        part =>
-          part
-            .charAt(0)
-            .toUpperCase()
+        item =>
+          item[0]
+            ?.toUpperCase()
       )
       .join("");
 
@@ -4269,52 +6323,17 @@ function openAccountModal(){
       currentUser.email || "";
 
 
-  const type =
-    getUserType();
-
-
   document
     .getElementById(
       "accountType"
     )
     .textContent =
-      type === "admin"
-        ? "Administrador"
-        : type === "vendedor"
-          ? "Vendedor"
-          : "Comprador";
+      userType();
 
 
   openModal(
     accountModal
   );
-
-}
-
-
-/* =========================================================
-   SIGUIENTE PASO VENDEDOR
-========================================================= */
-
-function openSellerNextStep(){
-
-  /*
-    En el próximo paso esto va a abrir
-    el alta real de vendedor/marca.
-
-    Por ahora ya dejamos correctamente
-    resuelto el acceso y la sesión.
-  */
-
-  openAccountModal();
-
-
-  document
-    .getElementById(
-      "publishFromAccountButton"
-    )
-    .textContent =
-      "Continuar con mi marca";
 
 }
 
@@ -4331,19 +6350,31 @@ document
     "click",
     function(){
 
-      if(currentUser){
+      currentUser
+        ? openAccountModal()
+        : openAuth(
+            "buyer",
+            "login"
+          );
 
-        openAccountModal();
+    }
+  );
 
-      }
-      else{
 
-        openAuth(
-          "buyer",
-          "login"
-        );
+document
+  .getElementById(
+    "marketAccountButton"
+  )
+  .addEventListener(
+    "click",
+    function(){
 
-      }
+      currentUser
+        ? openAccountModal()
+        : openAuth(
+            "buyer",
+            "login"
+          );
 
     }
   );
@@ -4359,7 +6390,7 @@ document
 
       if(currentUser){
 
-        openSellerNextStep();
+        openAccountModal();
 
       }
       else{
@@ -4375,95 +6406,11 @@ document
   );
 
 
-document
-  .getElementById(
-    "publishFromAccountButton"
-  )
-  .addEventListener(
-    "click",
-    function(){
-
-      closeModal(
-        accountModal
-      );
-
-
-      /*
-        Próxima etapa:
-        alta real de vendedor/marca.
-      */
-
-      alert(
-        "La cuenta ya está lista. El siguiente paso será completar el alta de tu marca."
-      );
-
-    }
-  );
-
-
-document
-  .getElementById(
-    "goToPortalButton"
-  )
-  .addEventListener(
-    "click",
-    function(){
-
-      const type =
-        getUserType();
-
-
-      if(type === "admin"){
-
-        closeModal(
-          accountModal
-        );
-
-
-        document
-          .getElementById(
-            "adminUserEmail"
-          )
-          .textContent =
-            currentUser.email || "";
-
-
-        document
-          .getElementById(
-            "adminApp"
-          )
-          .classList
-          .add(
-            "visible"
-          );
-
-
-        loadDashboard();
-
-        return;
-      }
-
-
-      /*
-        Los portales comprador/vendedor
-        los construimos en el siguiente paso.
-      */
-
-      alert(
-        type === "vendedor"
-          ? "Ahora vamos a construir tu Portal Vendedor."
-          : "Ahora vamos a construir tu Portal Comprador."
-      );
-
-    }
-  );
-
-
 /* =========================================================
-   LOGOUT
+   CERRAR SESIÓN
 ========================================================= */
 
-async function logoutUser(){
+async function logout(){
 
   try{
 
@@ -4474,15 +6421,24 @@ async function logoutUser(){
   }
   catch(error){
 
-    console.error(
+    console.warn(
       error
     );
 
   }
 
 
-  currentUser = null;
-  currentProfile = null;
+  currentUser =
+    null;
+
+
+  currentProfile =
+    null;
+
+
+  closeModal(
+    accountModal
+  );
 
 
   document
@@ -4493,11 +6449,6 @@ async function logoutUser(){
     .remove(
       "visible"
     );
-
-
-  closeModal(
-    accountModal
-  );
 
 
   updatePublicSessionUI();
@@ -4511,7 +6462,64 @@ document
   )
   .addEventListener(
     "click",
-    logoutUser
+    logout
+  );
+
+
+/* =========================================================
+   PORTALES PRÓXIMA ETAPA
+========================================================= */
+
+document
+  .getElementById(
+    "goToPortalButton"
+  )
+  .addEventListener(
+    "click",
+    function(){
+
+      const type =
+        userType();
+
+
+      if(type === "admin"){
+
+        closeModal(
+          accountModal
+        );
+
+
+        openAdminPanel();
+
+
+        return;
+
+      }
+
+
+      alert(
+        type === "vendedor"
+          ? "En el próximo avance conectamos el Portal Vendedor."
+          : "En el próximo avance conectamos el Portal Comprador."
+      );
+
+    }
+  );
+
+
+document
+  .getElementById(
+    "publishFromAccountButton"
+  )
+  .addEventListener(
+    "click",
+    function(){
+
+      alert(
+        "El próximo avance será el alta real de tu marca y el Portal Vendedor."
+      );
+
+    }
   );
 
 
@@ -4525,13 +6533,10 @@ document
   )
   .addEventListener(
     "click",
-    function(){
-
+    () =>
       closeModal(
         authModal
-      );
-
-    }
+      )
   );
 
 
@@ -4541,28 +6546,25 @@ document
   )
   .addEventListener(
     "click",
-    function(){
-
+    () =>
       closeModal(
         accountModal
-      );
-
-    }
+      )
   );
 
 
-closeModalOnBackground(
+backgroundClose(
   authModal
 );
 
 
-closeModalOnBackground(
+backgroundClose(
   accountModal
 );
 
 
 /* =========================================================
-   RESTAURAR SESIÓN AL ABRIR WEB
+   RESTAURAR SESIÓN
 ========================================================= */
 
 async function initializeSession(){
@@ -4570,22 +6572,11 @@ async function initializeSession(){
   try{
 
     const {
-      data,
-      error
+      data
     } =
       await db
         .auth
         .getSession();
-
-
-    if(error){
-
-      console.warn(
-        error
-      );
-
-      return;
-    }
 
 
     currentUser =
@@ -4597,7 +6588,21 @@ async function initializeSession(){
 
     if(currentUser){
 
-      await loadCurrentProfile();
+      await Promise.race(
+        [
+
+          loadCurrentProfile(),
+
+          new Promise(
+            resolve =>
+              setTimeout(
+                resolve,
+                3000
+              )
+          )
+
+        ]
+      );
 
     }
 
@@ -4616,48 +6621,11 @@ async function initializeSession(){
 }
 
 
-db
-  .auth
-  .onAuthStateChange(
-    function(
-      event,
-      session
-    ){
-
-      /*
-        Dejamos esta función liviana.
-        Supabase recomienda usar
-        onAuthStateChange para reaccionar
-        a los cambios de autenticación.
-      */
-
-      currentUser =
-        session?.user ||
-        null;
-
-
-      if(
-        event ===
-        "SIGNED_OUT"
-      ){
-
-        currentProfile =
-          null;
-
-
-        updatePublicSessionUI();
-
-      }
-
-    }
-  );
-
-
 initializeSession();
 
 
 /* =========================================================
-   ADMIN LOGIN
+   ADMIN
 ========================================================= */
 
 const adminModal =
@@ -4672,6 +6640,31 @@ const adminError =
   );
 
 
+function openAdminPanel(){
+
+  document
+    .getElementById(
+      "adminUserEmail"
+    )
+    .textContent =
+      currentUser?.email || "";
+
+
+  document
+    .getElementById(
+      "adminApp"
+    )
+    .classList
+    .add(
+      "visible"
+    );
+
+
+  loadDashboard();
+
+}
+
+
 document
   .getElementById(
     "adminAccess"
@@ -4679,11 +6672,6 @@ document
   .addEventListener(
     "click",
     async function(){
-
-      /*
-        Si ya hay un admin logueado,
-        no pedimos contraseña otra vez.
-      */
 
       if(currentUser){
 
@@ -4699,28 +6687,10 @@ document
             true
         ){
 
-          document
-            .getElementById(
-              "adminUserEmail"
-            )
-            .textContent =
-              currentUser.email ||
-              "";
-
-
-          document
-            .getElementById(
-              "adminApp"
-            )
-            .classList
-            .add(
-              "visible"
-            );
-
-
-          loadDashboard();
+          openAdminPanel();
 
           return;
+
         }
 
       }
@@ -4740,17 +6710,14 @@ document
   )
   .addEventListener(
     "click",
-    function(){
-
+    () =>
       closeModal(
         adminModal
-      );
-
-    }
+      )
   );
 
 
-closeModalOnBackground(
+backgroundClose(
   adminModal
 );
 
@@ -4766,9 +6733,11 @@ document
       event.preventDefault();
 
 
-      adminError.classList.remove(
-        "visible"
-      );
+      adminError
+        .classList
+        .remove(
+          "visible"
+        );
 
 
       const email =
@@ -4794,10 +6763,12 @@ document
       } =
         await db
           .auth
-          .signInWithPassword({
-            email,
-            password
-          });
+          .signInWithPassword(
+            {
+              email,
+              password
+            }
+          );
 
 
       if(error){
@@ -4806,12 +6777,10 @@ document
           "Email o contraseña incorrectos."
         );
 
+
         return;
+
       }
-
-
-      const user =
-        data.user;
 
 
       const {
@@ -4827,7 +6796,7 @@ document
           )
           .eq(
             "id",
-            user.id
+            data.user.id
           )
           .single();
 
@@ -4846,32 +6815,25 @@ document
           .signOut();
 
 
-        currentUser =
-          null;
-
-
-        currentProfile =
-          null;
-
-
-        updatePublicSessionUI();
-
-
         showAdminError(
           "Esta cuenta no tiene permisos de administrador."
         );
 
 
         return;
+
       }
 
 
       currentUser =
-        user;
+        data.user;
 
 
       currentProfile =
         profile;
+
+
+      updatePublicSessionUI();
 
 
       closeModal(
@@ -4879,28 +6841,7 @@ document
       );
 
 
-      updatePublicSessionUI();
-
-
-      document
-        .getElementById(
-          "adminUserEmail"
-        )
-        .textContent =
-          email;
-
-
-      document
-        .getElementById(
-          "adminApp"
-        )
-        .classList
-        .add(
-          "visible"
-        );
-
-
-      loadDashboard();
+      openAdminPanel();
 
     }
   );
@@ -4914,9 +6855,11 @@ function showAdminError(
     message;
 
 
-  adminError.classList.add(
-    "visible"
-  );
+  adminError
+    .classList
+    .add(
+      "visible"
+    );
 
 }
 
@@ -4927,13 +6870,15 @@ function showAdminError(
 
 async function getCount(
   table,
-  filterColumn = null,
-  filterValue = null
+  column = null,
+  value = null
 ){
 
   let query =
     db
-      .from(table)
+      .from(
+        table
+      )
       .select(
         "*",
         {
@@ -4944,14 +6889,14 @@ async function getCount(
 
 
   if(
-    filterColumn &&
-    filterValue !== null
+    column &&
+    value !== null
   ){
 
     query =
       query.eq(
-        filterColumn,
-        filterValue
+        column,
+        value
       );
 
   }
@@ -4967,13 +6912,13 @@ async function getCount(
   if(error){
 
     console.warn(
-      "Contador " +
       table,
       error.message
     );
 
 
     return "—";
+
   }
 
 
@@ -4987,47 +6932,42 @@ async function loadDashboard(){
   const [
     clients,
     brands,
-    activeBrands,
     sellers,
     orders,
     claims,
     subscriptions
   ] =
-    await Promise.all([
+    await Promise.all(
+      [
 
-      getCount(
-        "profiles",
-        "tipo_usuario",
-        "comprador"
-      ),
+        getCount(
+          "profiles",
+          "tipo_usuario",
+          "comprador"
+        ),
 
-      getCount(
-        "brands"
-      ),
+        getCount(
+          "brands"
+        ),
 
-      getCount(
-        "brands",
-        "estado",
-        "activa"
-      ),
+        getCount(
+          "seller_profiles"
+        ),
 
-      getCount(
-        "seller_profiles"
-      ),
+        getCount(
+          "orders"
+        ),
 
-      getCount(
-        "orders"
-      ),
+        getCount(
+          "claims"
+        ),
 
-      getCount(
-        "claims"
-      ),
+        getCount(
+          "brand_subscriptions"
+        )
 
-      getCount(
-        "brand_subscriptions"
-      )
-
-    ]);
+      ]
+    );
 
 
   document
@@ -5046,12 +6986,19 @@ async function loadDashboard(){
       brands;
 
 
+  /*
+    Como todavía tenemos que confirmar
+    exactamente cómo se llama tu campo
+    de estado de brands, no inventamos
+    un contador incorrecto.
+  */
+
   document
     .getElementById(
       "countActiveBrands"
     )
     .textContent =
-      activeBrands;
+      "—";
 
 
   document
@@ -5089,7 +7036,7 @@ async function loadDashboard(){
 
 
 /* =========================================================
-   NAVEGACIÓN ADMIN
+   ADMIN NAV
 ========================================================= */
 
 document
@@ -5102,10 +7049,6 @@ document
       button.addEventListener(
         "click",
         function(){
-
-          const page =
-            button.dataset.adminPage;
-
 
           document
             .querySelectorAll(
@@ -5142,31 +7085,20 @@ document
             );
 
 
-          const section =
-            document.getElementById(
+          const page =
+            button.dataset
+              .adminPage;
+
+
+          document
+            .getElementById(
               "admin-" +
               page
+            )
+            ?.classList
+            .add(
+              "active"
             );
-
-
-          if(section){
-
-            section
-              .classList
-              .add(
-                "active"
-              );
-
-          }
-
-
-          const label =
-            button
-              .querySelector(
-                "strong"
-              )
-              ?.textContent ||
-            "Administración";
 
 
           document
@@ -5174,7 +7106,12 @@ document
               "adminPageTitle"
             )
             .textContent =
-              label;
+              button
+                .querySelector(
+                  "strong"
+                )
+                ?.textContent ||
+              "Administración";
 
         }
       );
@@ -5183,21 +7120,13 @@ document
   );
 
 
-/* =========================================================
-   LOGOUT ADMIN
-========================================================= */
-
 document
   .getElementById(
     "adminLogout"
   )
   .addEventListener(
     "click",
-    async function(){
-
-      await logoutUser();
-
-    }
+    logout
   );
 
 </script>
