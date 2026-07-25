@@ -29,6 +29,7 @@
 
       --cream:#FFF8F2;
       --cream-2:#FFF2E9;
+      --cream-3:#FBF3EE;
 
       --dark:#211D1B;
       --gray:#706762;
@@ -75,9 +76,45 @@
       display:none !important;
     }
 
-    /* =========================
+    /* ======================================================
+       GENERAL
+    ====================================================== */
+
+    .section-label{
+      color:var(--orange);
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.13em;
+      text-transform:uppercase;
+    }
+
+    .soft-button{
+      min-height:42px;
+      padding:0 15px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:white;
+      color:var(--dark);
+      font-weight:700;
+    }
+
+    .primary-button{
+      min-height:44px;
+      padding:0 17px;
+      border:none;
+      border-radius:12px;
+      background:var(--orange);
+      color:white;
+      font-weight:800;
+    }
+
+    .primary-button:hover{
+      background:var(--orange-dark);
+    }
+
+    /* ======================================================
        HOME
-    ========================= */
+    ====================================================== */
 
     .home-screen{
       min-height:100vh;
@@ -106,8 +143,8 @@
 
     .top-row{
       display:flex;
-      align-items:center;
       justify-content:space-between;
+      align-items:center;
       gap:20px;
     }
 
@@ -122,11 +159,16 @@
       display:none;
       align-items:center;
       gap:8px;
+
       max-width:190px;
+
       padding:7px 11px;
+
       border:1px solid rgba(235,104,65,.18);
       border-radius:100px;
+
       background:rgba(255,255,255,.65);
+
       color:var(--gray);
       font-size:11px;
     }
@@ -145,25 +187,33 @@
 
     .hero-content{
       flex:1;
+
       display:flex;
       flex-direction:column;
       justify-content:center;
+
       max-width:680px;
+
       padding-bottom:20px;
     }
 
     .eyebrow{
       margin-bottom:19px;
+
       color:var(--orange);
+
       font-size:12px;
       font-weight:800;
+
       letter-spacing:.14em;
       text-transform:uppercase;
     }
 
     h1{
       font-family:"Playfair Display",serif;
+
       font-size:clamp(54px,5.4vw,92px);
+
       line-height:.95;
       letter-spacing:-.055em;
       font-weight:600;
@@ -176,14 +226,19 @@
     .accent-line{
       width:70px;
       height:4px;
+
       margin:27px 0 23px;
+
       border-radius:100px;
+
       background:var(--orange);
     }
 
     .hero-description{
       max-width:600px;
+
       color:var(--gray);
+
       font-size:clamp(16px,1.15vw,18px);
       line-height:1.6;
     }
@@ -197,16 +252,22 @@
     .btn{
       min-height:56px;
       padding:0 23px;
-      border-radius:15px;
+
       border:none;
+      border-radius:15px;
+
       font-weight:700;
+
       transition:.2s;
     }
 
     .btn-primary{
       color:white;
       background:var(--orange);
-      box-shadow:0 14px 32px rgba(235,104,65,.19);
+
+      box-shadow:
+        0 14px 32px
+        rgba(235,104,65,.19);
     }
 
     .btn-primary:hover{
@@ -216,49 +277,66 @@
 
     .btn-secondary{
       color:var(--dark);
+
       background:rgba(255,255,255,.62);
-      border:1px solid rgba(235,104,65,.22);
+
+      border:
+        1px solid
+        rgba(235,104,65,.22);
     }
 
     .btn-secondary:hover{
       background:white;
     }
 
-    /* =========================
+    /* ======================================================
        MAPA
-    ========================= */
+    ====================================================== */
 
     .map-side{
       min-height:100vh;
+
       position:relative;
+
       display:flex;
       flex-direction:column;
+
       overflow:hidden;
     }
 
     .map-title{
       position:absolute;
+
       top:36px;
       left:30px;
+
       z-index:20;
+
       pointer-events:none;
     }
 
     .map-title span{
       display:block;
+
       color:var(--orange);
+
       font-size:11px;
       font-weight:800;
+
       letter-spacing:.13em;
       text-transform:uppercase;
     }
 
     .map-title strong{
       display:block;
+
       margin-top:4px;
+
       font-family:"Playfair Display",serif;
+
       font-size:25px;
       font-weight:600;
+
       line-height:1.1;
     }
 
@@ -266,6 +344,7 @@
       width:100%;
       min-height:100vh;
       flex:1;
+
       position:relative;
     }
 
@@ -276,10 +355,14 @@
 
     .province-card{
       position:absolute;
+
       right:3vw;
       bottom:4vh;
+
       width:260px;
+
       padding:18px;
+
       z-index:30;
 
       background:rgba(255,255,255,.94);
@@ -288,11 +371,15 @@
       border:1px solid rgba(235,104,65,.10);
       border-radius:19px;
 
-      box-shadow:0 20px 50px rgba(60,30,15,.10);
+      box-shadow:
+        0 20px 50px
+        rgba(60,30,15,.10);
 
       opacity:0;
       transform:translateY(15px);
+
       pointer-events:none;
+
       transition:.22s;
     }
 
@@ -305,49 +392,63 @@
     .province-card small{
       display:block;
       margin-bottom:4px;
+
       color:var(--gray);
+
       font-size:10px;
       font-weight:800;
+
       text-transform:uppercase;
       letter-spacing:.09em;
     }
 
     .province-card strong{
       display:block;
+
       font-family:"Playfair Display",serif;
+
       font-size:27px;
       line-height:1.1;
     }
 
     .province-card p{
       margin-top:6px;
+
       color:var(--gray);
+
       font-size:12px;
       line-height:1.45;
     }
 
     .province-card button{
       width:100%;
+
       margin-top:13px;
       padding:13px;
+
       border:none;
       border-radius:12px;
+
       background:var(--orange);
+
       color:white;
       font-weight:800;
     }
 
     .clear-province{
       margin-top:10px;
+
       color:var(--gray);
+
       text-align:center;
       font-size:11px;
+
       cursor:pointer;
     }
 
-    /* =========================
-       EXPLORAR
-    ========================= */
+    /* ======================================================
+       HOME CATEGORÍAS
+    ====================================================== */
 
     .explore-section{
       padding:105px 6% 115px;
@@ -359,18 +460,13 @@
       margin-bottom:50px;
     }
 
-    .section-label{
-      color:var(--orange);
-      font-size:12px;
-      font-weight:800;
-      letter-spacing:.13em;
-      text-transform:uppercase;
-    }
-
     .section-heading h2{
       margin-top:10px;
+
       font-family:"Playfair Display",serif;
+
       font-size:clamp(42px,5vw,70px);
+
       letter-spacing:-.045em;
       line-height:1;
     }
@@ -400,22 +496,31 @@
       background:var(--cream);
 
       cursor:pointer;
+
       transition:.2s;
     }
 
     .category:hover{
       transform:translateY(-5px);
+
       border-color:rgba(235,104,65,.5);
-      box-shadow:0 18px 45px rgba(60,30,15,.08);
+
+      box-shadow:
+        0 18px 45px
+        rgba(60,30,15,.08);
     }
 
     .category-icon{
       width:46px;
       height:46px;
+
       display:grid;
       place-items:center;
+
       border-radius:14px;
+
       background:var(--cream-2);
+
       font-size:24px;
     }
 
@@ -426,18 +531,22 @@
 
     .category p{
       margin-top:5px;
+
       color:var(--gray);
+
       font-size:13px;
       line-height:1.4;
     }
 
-    /* =========================
+    /* ======================================================
        MARKETPLACE
-    ========================= */
+    ====================================================== */
 
     .marketplace-view{
       display:none;
+
       min-height:100vh;
+
       background:#FBF8F6;
     }
 
@@ -448,27 +557,35 @@
     .marketplace-header{
       position:sticky;
       top:0;
+
       z-index:100;
 
       min-height:77px;
+
       padding:0 5%;
 
       display:flex;
       align-items:center;
       justify-content:space-between;
+
       gap:25px;
 
-      background:rgba(255,255,255,.94);
+      background:rgba(255,255,255,.95);
       backdrop-filter:blur(18px);
 
-      border-bottom:1px solid #EFE7E2;
+      border-bottom:
+        1px solid
+        #EFE7E2;
     }
 
     .marketplace-brand{
       color:var(--orange);
+
       font-size:27px;
       font-weight:800;
+
       letter-spacing:-1.5px;
+
       cursor:pointer;
     }
 
@@ -480,10 +597,14 @@
 
     .province-pill{
       padding:9px 13px;
+
       border:1px solid var(--border);
       border-radius:100px;
+
       background:var(--cream);
+
       color:var(--dark);
+
       font-size:12px;
       font-weight:700;
     }
@@ -491,33 +612,45 @@
     .header-account{
       min-height:38px;
       padding:0 14px;
+
       border:1px solid var(--border);
       border-radius:100px;
+
       background:white;
+
       font-size:12px;
       font-weight:700;
     }
 
     .marketplace-content{
       width:min(1220px,90%);
+
       margin:auto;
+
       padding:55px 0 100px;
     }
 
     .breadcrumb{
       display:flex;
-      align-items:center;
       flex-wrap:wrap;
+      align-items:center;
+
       gap:7px;
+
       color:var(--gray);
+
       font-size:11px;
     }
 
     .breadcrumb button{
       padding:0;
+
       border:none;
+
       background:transparent;
+
       color:var(--gray);
+
       font-size:11px;
     }
 
@@ -527,9 +660,11 @@
 
     .market-hero{
       margin-top:25px;
+
       display:flex;
       align-items:flex-end;
       justify-content:space-between;
+
       gap:30px;
     }
 
@@ -539,15 +674,20 @@
 
     .market-hero h2{
       font-family:"Playfair Display",serif;
+
       font-size:clamp(43px,5.5vw,72px);
+
       line-height:.98;
       letter-spacing:-.045em;
     }
 
     .market-hero p{
-      margin-top:16px;
       max-width:690px;
+
+      margin-top:16px;
+
       color:var(--gray);
+
       font-size:15px;
       line-height:1.6;
     }
@@ -555,20 +695,30 @@
     .back-market{
       min-height:44px;
       padding:0 17px;
+
       flex:0 0 auto;
+
       border:1px solid var(--border);
       border-radius:12px;
+
       background:white;
+
       color:var(--dark);
+
       font-weight:700;
     }
 
+    /* LOAD */
+
     .market-loader{
       display:none;
+
       margin-top:45px;
       padding:40px;
-      text-align:center;
+
       color:var(--gray);
+
+      text-align:center;
     }
 
     .market-loader.visible{
@@ -578,6 +728,7 @@
     .loader-circle{
       width:30px;
       height:30px;
+
       margin:0 auto 13px;
 
       border:3px solid #F0DFD7;
@@ -593,16 +744,20 @@
       }
     }
 
+    /* CATEGORÍAS */
+
     .subcategories-wrap{
       margin-top:50px;
     }
 
     .subcategories-heading{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:20px;
       margin-bottom:20px;
+
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+
+      gap:20px;
     }
 
     .subcategories-heading h3{
@@ -617,55 +772,135 @@
 
     .subcategory-grid{
       display:grid;
-      grid-template-columns:repeat(4,1fr);
+
+      grid-template-columns:
+        repeat(4,1fr);
+
       gap:13px;
     }
 
     .subcategory-card{
       min-height:145px;
+
       padding:20px;
+
       display:flex;
       flex-direction:column;
+
       border:1px solid #E8DFDA;
       border-radius:18px;
+
       background:white;
+
       cursor:pointer;
+
       transition:.2s;
     }
 
     .subcategory-card:hover{
       transform:translateY(-3px);
+
       border-color:rgba(235,104,65,.45);
-      box-shadow:0 15px 35px rgba(70,35,20,.06);
+
+      box-shadow:
+        0 15px 35px
+        rgba(70,35,20,.06);
     }
 
     .subcategory-card small{
       color:var(--orange);
+
       font-size:10px;
       font-weight:800;
+
       text-transform:uppercase;
       letter-spacing:.07em;
     }
 
     .subcategory-card strong{
       margin-top:auto;
+
       font-size:17px;
       line-height:1.2;
     }
 
     .subcategory-arrow{
       margin-top:8px;
+
       color:var(--gray);
+
       font-size:11px;
     }
 
-    .empty-state{
+    /* TIPOS */
+
+    .types-section{
       display:none;
       margin-top:40px;
+    }
+
+    .types-section.visible{
+      display:block;
+    }
+
+    .types-title{
+      font-family:"Playfair Display",serif;
+      font-size:29px;
+    }
+
+    .types-subtitle{
+      margin-top:7px;
+
+      color:var(--gray);
+
+      font-size:13px;
+    }
+
+    .types-grid{
+      margin-top:20px;
+
+      display:flex;
+      flex-wrap:wrap;
+
+      gap:9px;
+    }
+
+    .type-card{
+      min-height:42px;
+
+      padding:0 16px;
+
+      border:1px solid var(--border);
+      border-radius:100px;
+
+      background:white;
+
+      font-size:12px;
+      font-weight:700;
+    }
+
+    .type-card:hover,
+    .type-card.active{
+      color:white;
+
+      border-color:var(--orange);
+
+      background:var(--orange);
+    }
+
+    /* ERROR */
+
+    .empty-state{
+      display:none;
+
+      margin-top:40px;
       padding:45px 25px;
+
       border:1px dashed #DFCFC7;
       border-radius:20px;
+
       background:white;
+
       text-align:center;
     }
 
@@ -675,98 +910,455 @@
 
     .empty-state strong{
       display:block;
+
       font-family:"Playfair Display",serif;
+
       font-size:25px;
     }
 
     .empty-state p{
-      max-width:520px;
+      max-width:530px;
+
       margin:10px auto 0;
+
       color:var(--gray);
+
       font-size:13px;
       line-height:1.5;
     }
 
     .retry-button{
-      margin-top:18px;
       min-height:42px;
+
+      margin-top:18px;
       padding:0 16px;
+
       border:none;
       border-radius:12px;
+
       background:var(--orange);
+
       color:white;
+
       font-weight:800;
     }
 
-    .subcategory-results{
+    /* RESULTADOS */
+
+    .results-section{
       display:none;
-      margin-top:48px;
+      margin-top:50px;
     }
 
-    .subcategory-results.visible{
+    .results-section.visible{
       display:block;
     }
 
-    .result-top{
+    .results-heading{
       display:flex;
-      align-items:center;
       justify-content:space-between;
+      align-items:end;
+
       gap:20px;
-      margin-bottom:25px;
+
+      margin-bottom:22px;
     }
 
-    .result-top h3{
+    .results-heading h3{
       font-family:"Playfair Display",serif;
-      font-size:32px;
+      font-size:31px;
+    }
+
+    .results-heading p{
+      margin-top:5px;
+
+      color:var(--gray);
+
+      font-size:12px;
     }
 
     .filter-bar{
       display:flex;
       flex-wrap:wrap;
+
       gap:8px;
+
       margin-bottom:25px;
     }
 
     .filter-chip{
       min-height:37px;
+
       padding:0 13px;
+
       border:1px solid var(--border);
       border-radius:100px;
+
       background:white;
+
       color:var(--gray);
+
       font-size:11px;
       font-weight:700;
     }
 
     .filter-chip.active{
       color:white;
+
       border-color:var(--orange);
+
       background:var(--orange);
     }
 
-    .coming-box{
-      padding:45px 28px;
-      border-radius:20px;
-      background:var(--cream);
-      border:1px solid var(--border);
+    .brands-grid{
+      display:grid;
+
+      grid-template-columns:
+        repeat(3,1fr);
+
+      gap:16px;
     }
 
-    .coming-box strong{
-      display:block;
+    .brand-card{
+      overflow:hidden;
+
+      border:1px solid #E8DFDA;
+      border-radius:21px;
+
+      background:white;
+
+      transition:.2s;
+    }
+
+    .brand-card:hover{
+      transform:translateY(-3px);
+
+      box-shadow:
+        0 17px 40px
+        rgba(60,30,15,.08);
+    }
+
+    .brand-cover{
+      height:120px;
+
+      display:flex;
+      align-items:center;
+      justify-content:center;
+
+      background:
+        linear-gradient(
+          135deg,
+          #FFF1EA,
+          #F9D7C9
+        );
+
+      color:var(--orange);
+
+      font-family:"Playfair Display",serif;
+
+      font-size:40px;
+    }
+
+    .brand-body{
+      padding:18px;
+    }
+
+    .brand-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+
+      gap:12px;
+    }
+
+    .brand-name{
       font-size:18px;
+      font-weight:800;
     }
 
-    .coming-box p{
-      margin-top:8px;
-      max-width:670px;
+    .brand-badge{
+      padding:5px 8px;
+
+      border-radius:100px;
+
+      background:var(--cream-2);
+
+      color:var(--orange-dark);
+
+      font-size:9px;
+      font-weight:800;
+    }
+
+    .brand-meta{
+      margin-top:5px;
+
       color:var(--gray);
-      font-size:13px;
-      line-height:1.55;
+
+      font-size:11px;
     }
 
-    /* =========================
-       ABOUT + FOOTER
-    ========================= */
+    .brand-products{
+      margin-top:15px;
+
+      display:grid;
+
+      gap:7px;
+    }
+
+    .mini-product{
+      padding:9px 10px;
+
+      display:flex;
+      justify-content:space-between;
+
+      gap:10px;
+
+      border-radius:10px;
+
+      background:#FBF8F6;
+
+      font-size:11px;
+    }
+
+    .mini-product strong{
+      font-weight:700;
+    }
+
+    .brand-open{
+      width:100%;
+
+      min-height:40px;
+
+      margin-top:14px;
+
+      border:none;
+      border-radius:11px;
+
+      background:var(--dark);
+
+      color:white;
+
+      font-size:11px;
+      font-weight:800;
+    }
+
+    .generic-results{
+      padding:40px 25px;
+
+      border:1px solid var(--border);
+      border-radius:20px;
+
+      background:white;
+
+      color:var(--gray);
+
+      font-size:13px;
+      line-height:1.6;
+    }
+
+    /* ======================================================
+       PORTAL COMPRADOR
+    ====================================================== */
+
+    .buyer-portal{
+      position:fixed;
+      inset:0;
+
+      z-index:5500;
+
+      display:none;
+
+      background:#F7F4F2;
+    }
+
+    .buyer-portal.visible{
+      display:flex;
+    }
+
+    .buyer-sidebar{
+      width:245px;
+
+      padding:25px 17px;
+
+      display:flex;
+      flex-direction:column;
+
+      background:var(--dark);
+
+      color:white;
+    }
+
+    .buyer-logo{
+      padding:0 10px 25px;
+
+      color:var(--orange);
+
+      font-size:27px;
+      font-weight:800;
+    }
+
+    .buyer-menu{
+      display:grid;
+      gap:4px;
+    }
+
+    .buyer-nav{
+      width:100%;
+
+      padding:11px 12px;
+
+      border:none;
+      border-radius:11px;
+
+      background:transparent;
+
+      color:#BDB3AE;
+
+      text-align:left;
+
+      font-size:12px;
+      font-weight:700;
+    }
+
+    .buyer-nav.active{
+      color:white;
+
+      background:
+        rgba(235,104,65,.15);
+    }
+
+    .buyer-exit{
+      margin-top:auto;
+
+      padding:11px;
+
+      border:
+        1px solid
+        rgba(255,255,255,.08);
+
+      border-radius:11px;
+
+      background:transparent;
+
+      color:#BDB3AE;
+    }
+
+    .buyer-main{
+      flex:1;
+
+      overflow:auto;
+    }
+
+    .buyer-header{
+      min-height:78px;
+
+      padding:0 30px;
+
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+
+      background:white;
+
+      border-bottom:
+        1px solid
+        #E7E0DC;
+    }
+
+    .buyer-header h2{
+      font-family:"Playfair Display",serif;
+      font-size:28px;
+    }
+
+    .buyer-content{
+      padding:30px;
+    }
+
+    .buyer-section{
+      display:none;
+    }
+
+    .buyer-section.active{
+      display:block;
+    }
+
+    .buyer-stats{
+      display:grid;
+
+      grid-template-columns:
+        repeat(4,1fr);
+
+      gap:14px;
+    }
+
+    .buyer-stat{
+      padding:20px;
+
+      border:1px solid #E8E2DF;
+      border-radius:17px;
+
+      background:white;
+    }
+
+    .buyer-stat small{
+      color:var(--gray);
+      font-size:10px;
+      font-weight:800;
+      text-transform:uppercase;
+    }
+
+    .buyer-stat strong{
+      display:block;
+
+      margin-top:12px;
+
+      font-family:"Playfair Display",serif;
+
+      font-size:34px;
+    }
+
+    .portal-panel{
+      margin-top:18px;
+      padding:25px;
+
+      border:1px solid #E8E2DF;
+      border-radius:18px;
+
+      background:white;
+    }
+
+    .portal-list{
+      margin-top:17px;
+
+      display:grid;
+
+      gap:10px;
+    }
+
+    .portal-row{
+      padding:14px;
+
+      border:1px solid #EEE7E3;
+      border-radius:12px;
+
+      background:#FCFAF9;
+    }
+
+    .portal-row strong{
+      font-size:13px;
+    }
+
+    .portal-row p{
+      margin-top:4px;
+
+      color:var(--gray);
+
+      font-size:11px;
+    }
+
+    /* ======================================================
+       ABOUT
+    ====================================================== */
 
     .about{
       padding:100px 6%;
@@ -774,62 +1366,91 @@
     }
 
     .about-layout{
-      display:grid;
-      grid-template-columns:.8fr 1.2fr;
-      gap:80px;
-      align-items:center;
       max-width:1300px;
+
       margin:auto;
+
+      display:grid;
+
+      grid-template-columns:
+        .8fr 1.2fr;
+
+      gap:80px;
+
+      align-items:center;
     }
 
     .about-number{
       font-family:"Playfair Display",serif;
+
       font-size:clamp(100px,15vw,220px);
+
       line-height:.7;
+
       color:rgba(235,104,65,.12);
     }
 
     .about h3{
       font-family:"Playfair Display",serif;
+
       font-size:clamp(38px,4vw,62px);
+
       line-height:1.02;
       letter-spacing:-.04em;
     }
 
     .about p{
       max-width:680px;
+
       margin-top:20px;
+
       color:var(--gray);
+
       font-size:17px;
       line-height:1.65;
     }
 
+    /* ======================================================
+       FOOTER
+    ====================================================== */
+
     footer{
       padding:55px 6% 32px;
+
       color:white;
+
       background:var(--dark);
     }
 
     .footer-logo{
       color:var(--orange);
+
       font-size:29px;
       font-weight:800;
     }
 
     .footer-copy{
       margin-top:7px;
+
       color:#BBB1AC;
+
       font-size:13px;
     }
 
     .footer-bottom{
       margin-top:48px;
       padding-top:20px;
+
       display:flex;
       align-items:center;
       justify-content:space-between;
-      border-top:1px solid rgba(255,255,255,.09);
+
+      border-top:
+        1px solid
+        rgba(255,255,255,.09);
+
       color:#817873;
+
       font-size:11px;
     }
 
@@ -847,13 +1468,14 @@
       color:#C4B9B4;
     }
 
-    /* =========================
+    /* ======================================================
        MODALES
-    ========================= */
+    ====================================================== */
 
     .modal-overlay{
       position:fixed;
       inset:0;
+
       z-index:5000;
 
       display:flex;
@@ -862,11 +1484,14 @@
 
       padding:20px;
 
-      background:rgba(20,15,13,.58);
+      background:
+        rgba(20,15,13,.58);
+
       backdrop-filter:blur(12px);
 
       opacity:0;
       pointer-events:none;
+
       overflow-y:auto;
 
       transition:.2s;
@@ -879,22 +1504,32 @@
 
     .modal-box{
       width:min(460px,100%);
-      max-height:calc(100vh - 40px);
+
+      max-height:
+        calc(100vh - 40px);
+
       overflow:auto;
+
       padding:31px;
+
       border-radius:25px;
+
       background:white;
-      box-shadow:0 30px 100px rgba(0,0,0,.22);
+
+      box-shadow:
+        0 30px 100px
+        rgba(0,0,0,.22);
     }
 
     .modal-top{
       display:flex;
-      align-items:center;
       justify-content:space-between;
+      align-items:center;
     }
 
     .modal-logo{
       color:var(--orange);
+
       font-size:25px;
       font-weight:800;
     }
@@ -902,35 +1537,48 @@
     .modal-close{
       width:36px;
       height:36px;
+
       display:grid;
       place-items:center;
+
       border:none;
       border-radius:50%;
+
       background:#F8F4F2;
+
       font-size:23px;
     }
 
     .modal-title{
       margin-top:24px;
+
       font-family:"Playfair Display",serif;
+
       font-size:35px;
       line-height:1.05;
     }
 
     .modal-description{
       margin-top:8px;
+
       color:var(--gray);
+
       font-size:13px;
       line-height:1.5;
     }
 
     .auth-intent{
       display:none;
+
       margin-top:18px;
       padding:12px 13px;
+
       border-radius:13px;
+
       background:var(--cream-2);
+
       color:var(--gray);
+
       font-size:12px;
     }
 
@@ -943,29 +1591,42 @@
     }
 
     .auth-tabs{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:5px;
       margin-top:23px;
       padding:4px;
+
+      display:grid;
+
+      grid-template-columns:1fr 1fr;
+
+      gap:5px;
+
       border-radius:13px;
+
       background:#F7F3F1;
     }
 
     .auth-tab{
       padding:10px 8px;
+
       border:none;
       border-radius:10px;
+
       background:transparent;
+
       color:var(--gray);
+
       font-size:12px;
       font-weight:800;
     }
 
     .auth-tab.active{
       background:white;
+
       color:var(--dark);
-      box-shadow:0 3px 12px rgba(50,30,20,.07);
+
+      box-shadow:
+        0 3px 12px
+        rgba(50,30,20,.07);
     }
 
     .auth-panel{
@@ -978,7 +1639,9 @@
 
     .field-row{
       display:grid;
+
       grid-template-columns:1fr 1fr;
+
       gap:11px;
     }
 
@@ -988,22 +1651,30 @@
 
     .form-group label{
       display:block;
+
       margin-bottom:7px;
+
       font-size:11px;
       font-weight:800;
     }
 
     .form-group input{
       width:100%;
+
       padding:13px 14px;
+
       border:1px solid var(--border);
       border-radius:12px;
+
       outline:none;
     }
 
     .form-group input:focus{
       border-color:var(--orange);
-      box-shadow:0 0 0 3px rgba(235,104,65,.08);
+
+      box-shadow:
+        0 0 0 3px
+        rgba(235,104,65,.08);
     }
 
     .password-wrap{
@@ -1016,24 +1687,36 @@
 
     .show-password{
       position:absolute;
+
       top:50%;
       right:10px;
+
       transform:translateY(-50%);
+
       border:none;
+
       background:transparent;
+
       color:var(--gray);
+
       font-size:10px;
       font-weight:800;
     }
 
     .submit-btn{
       width:100%;
+
       min-height:49px;
+
       margin-top:21px;
+
       border:none;
       border-radius:13px;
+
       background:var(--orange);
+
       color:white;
+
       font-weight:800;
     }
 
@@ -1044,9 +1727,12 @@
 
     .auth-message{
       display:none;
+
       margin-top:14px;
       padding:11px 12px;
+
       border-radius:11px;
+
       font-size:12px;
       line-height:1.45;
     }
@@ -1065,68 +1751,97 @@
       background:#ECF8F2;
     }
 
+    /* ======================================================
+       CUENTA
+    ====================================================== */
+
     .account-card{
       margin-top:23px;
+
       padding:18px;
+
       border:1px solid var(--border);
       border-radius:17px;
+
       background:var(--cream);
     }
 
     .account-avatar{
       width:54px;
       height:54px;
+
       display:grid;
       place-items:center;
+
       border-radius:50%;
+
       background:var(--orange);
+
       color:white;
+
       font-family:"Playfair Display",serif;
       font-size:23px;
     }
 
     .account-name{
       margin-top:13px;
+
       font-size:19px;
       font-weight:800;
     }
 
     .account-email{
       margin-top:3px;
+
       color:var(--gray);
+
       font-size:12px;
+
       overflow-wrap:anywhere;
     }
 
     .account-type{
       display:inline-flex;
+
       margin-top:12px;
       padding:6px 10px;
+
       border-radius:100px;
+
       background:var(--cream-2);
+
       color:var(--orange-dark);
+
       font-size:10px;
       font-weight:800;
+
       text-transform:uppercase;
     }
 
     .account-actions{
       display:grid;
+
       gap:9px;
+
       margin-top:17px;
     }
 
     .account-action{
       min-height:45px;
+
       border:1px solid var(--border);
       border-radius:12px;
+
       background:white;
+
       font-weight:700;
     }
 
     .account-action.primary{
       color:white;
+
       border-color:var(--orange);
+
       background:var(--orange);
     }
 
@@ -1134,17 +1849,22 @@
       color:var(--red);
     }
 
-    /* =========================
+    /* ======================================================
        ADMIN
-    ========================= */
+    ====================================================== */
 
     .admin-error{
       display:none;
+
       margin-top:13px;
       padding:11px;
+
       border-radius:10px;
+
       color:#9C3022;
+
       background:#FFF0ED;
+
       font-size:12px;
     }
 
@@ -1155,8 +1875,11 @@
     .admin-app{
       position:fixed;
       inset:0;
+
       z-index:6000;
+
       display:none;
+
       background:#F5F2F0;
     }
 
@@ -1166,25 +1889,35 @@
 
     .admin-sidebar{
       width:260px;
+
       padding:27px 18px;
+
       display:flex;
       flex-direction:column;
+
       background:var(--sidebar);
+
       color:white;
     }
 
     .admin-brand{
       padding:0 10px 28px;
+
       color:var(--orange);
+
       font-size:27px;
       font-weight:800;
     }
 
     .admin-brand small{
       display:block;
+
       margin-top:3px;
+
       color:#8F8580;
+
       font-size:10px;
+
       text-transform:uppercase;
     }
 
@@ -1196,15 +1929,23 @@
 
     .admin-nav{
       width:100%;
+
       padding:11px 13px;
+
       display:flex;
       align-items:center;
+
       gap:11px;
+
       border:none;
       border-radius:11px;
+
       background:transparent;
+
       color:#BDB3AE;
+
       text-align:left;
+
       font-size:13px;
       font-weight:600;
     }
@@ -1221,27 +1962,42 @@
 
     .admin-logout{
       margin-top:auto;
+
       padding:12px;
-      border:1px solid rgba(255,255,255,.08);
+
+      border:
+        1px solid
+        rgba(255,255,255,.08);
+
       border-radius:11px;
+
       background:transparent;
+
       color:#AAA09B;
     }
 
     .admin-main{
       flex:1;
+
       min-width:0;
+
       overflow:auto;
     }
 
     .admin-header{
       min-height:80px;
+
       padding:0 32px;
+
       display:flex;
       align-items:center;
       justify-content:space-between;
+
       background:white;
-      border-bottom:1px solid #E5E0DD;
+
+      border-bottom:
+        1px solid
+        #E5E0DD;
     }
 
     .admin-header h2{
@@ -1256,7 +2012,9 @@
 
     .admin-user span{
       display:block;
+
       color:var(--gray);
+
       font-size:10px;
     }
 
@@ -1266,35 +2024,50 @@
 
     .dashboard-grid{
       display:grid;
-      grid-template-columns:repeat(4,1fr);
+
+      grid-template-columns:
+        repeat(4,1fr);
+
       gap:15px;
     }
 
     .stat-card{
       min-height:145px;
+
       padding:20px;
-      border:1px solid #E8E2DF;
+
+      border:
+        1px solid
+        #E8E2DF;
+
       border-radius:17px;
+
       background:white;
     }
 
     .stat-card small{
       color:var(--gray);
+
       font-size:11px;
       font-weight:700;
+
       text-transform:uppercase;
     }
 
     .stat-card strong{
       display:block;
+
       margin-top:17px;
+
       font-family:"Playfair Display",serif;
       font-size:38px;
     }
 
     .stat-card p{
       margin-top:4px;
+
       color:#9B928D;
+
       font-size:11px;
     }
 
@@ -1308,44 +2081,107 @@
 
     .empty-panel{
       min-height:360px;
+
       padding:35px;
-      border:1px solid #E7E1DE;
+
+      border:
+        1px solid
+        #E7E1DE;
+
       border-radius:18px;
+
       background:white;
     }
 
     .empty-panel p{
       margin-top:9px;
+
       color:var(--gray);
+
       font-size:13px;
     }
 
-    /* =========================
+    .admin-taxonomy{
+      display:grid;
+      gap:12px;
+    }
+
+    .admin-taxonomy-group{
+      padding:18px;
+
+      border:1px solid #E7E1DE;
+      border-radius:16px;
+
+      background:white;
+    }
+
+    .admin-taxonomy-group > strong{
+      font-size:16px;
+    }
+
+    .admin-taxonomy-list{
+      margin-top:12px;
+
+      display:flex;
+      flex-wrap:wrap;
+
+      gap:7px;
+    }
+
+    .admin-taxonomy-pill{
+      padding:7px 10px;
+
+      border-radius:100px;
+
+      background:var(--cream);
+
+      color:var(--gray);
+
+      font-size:10px;
+      font-weight:700;
+    }
+
+    /* ======================================================
        RESPONSIVE
-    ========================= */
+    ====================================================== */
 
     @media(max-width:1050px){
+
       .category-grid{
-        grid-template-columns:repeat(3,1fr);
+        grid-template-columns:
+          repeat(3,1fr);
       }
 
       .subcategory-grid{
-        grid-template-columns:repeat(3,1fr);
+        grid-template-columns:
+          repeat(3,1fr);
       }
 
-      .dashboard-grid{
-        grid-template-columns:repeat(2,1fr);
+      .brands-grid{
+        grid-template-columns:
+          repeat(2,1fr);
       }
+
+      .dashboard-grid,
+      .buyer-stats{
+        grid-template-columns:
+          repeat(2,1fr);
+      }
+
     }
 
     @media(max-width:850px){
+
       .home-screen{
         display:block;
       }
 
       .hero-left{
         min-height:auto;
-        padding:28px 22px 55px;
+
+        padding:
+          28px 22px
+          55px;
       }
 
       .hero-content{
@@ -1353,7 +2189,8 @@
       }
 
       h1{
-        font-size:clamp(50px,13vw,74px);
+        font-size:
+          clamp(50px,13vw,74px);
       }
 
       .hero-actions{
@@ -1362,16 +2199,23 @@
 
       .map-side{
         min-height:auto;
+
         overflow:visible;
+
         padding-top:30px;
       }
 
       .map-title{
         position:relative;
+
         top:auto;
         left:auto;
+
         width:100%;
-        padding:0 22px 10px;
+
+        padding:
+          0 22px
+          10px;
       }
 
       .map-title strong{
@@ -1390,15 +2234,19 @@
         right:auto;
         left:17px;
         bottom:18px;
-        width:calc(100% - 34px);
+
+        width:
+          calc(100% - 34px);
       }
 
       .category-grid{
-        grid-template-columns:repeat(2,1fr);
+        grid-template-columns:
+          repeat(2,1fr);
       }
 
       .about-layout{
         grid-template-columns:1fr;
+
         gap:25px;
       }
 
@@ -1407,30 +2255,39 @@
       }
 
       .marketplace-content{
-        width:calc(100% - 36px);
+        width:
+          calc(100% - 36px);
+
         padding-top:35px;
       }
 
       .market-hero{
-        align-items:flex-start;
         flex-direction:column;
+        align-items:flex-start;
       }
 
       .subcategory-grid{
-        grid-template-columns:repeat(2,1fr);
+        grid-template-columns:
+          repeat(2,1fr);
       }
 
+      .buyer-sidebar,
       .admin-sidebar{
         width:72px;
+
         padding:20px 10px;
       }
 
+      .buyer-logo,
       .admin-brand{
         padding:0 0 20px;
+
         text-align:center;
+
         font-size:0;
       }
 
+      .buyer-logo::before,
       .admin-brand::before{
         content:"A";
         font-size:28px;
@@ -1441,28 +2298,50 @@
         display:none;
       }
 
+      .buyer-nav{
+        overflow:hidden;
+
+        text-overflow:clip;
+
+        white-space:nowrap;
+
+        text-align:center;
+
+        font-size:0;
+      }
+
+      .buyer-nav::first-letter{
+        font-size:15px;
+      }
+
       .admin-nav{
         justify-content:center;
       }
+
     }
 
     @media(max-width:520px){
+
       .logo{
         font-size:29px;
       }
 
       .explore-section,
       .about{
-        padding:70px 18px;
+        padding:
+          70px 18px;
       }
 
       .category-grid{
-        grid-template-columns:1fr 1fr;
+        grid-template-columns:
+          1fr 1fr;
+
         gap:10px;
       }
 
       .category{
         min-height:170px;
+
         padding:17px;
       }
 
@@ -1477,6 +2356,7 @@
       .footer-bottom{
         flex-direction:column;
         align-items:flex-start;
+
         gap:20px;
       }
 
@@ -1489,12 +2369,11 @@
         padding:23px 19px;
       }
 
-      .subcategory-grid{
+      .subcategory-grid,
+      .brands-grid,
+      .buyer-stats,
+      .dashboard-grid{
         grid-template-columns:1fr;
-      }
-
-      .subcategory-card{
-        min-height:120px;
       }
 
       .marketplace-brand{
@@ -1502,20 +2381,28 @@
       }
 
       .province-pill{
-        max-width:135px;
+        max-width:120px;
+
         overflow:hidden;
+
         text-overflow:ellipsis;
         white-space:nowrap;
       }
 
-      .dashboard-grid{
-        grid-template-columns:1fr;
+      .buyer-content,
+      .admin-content{
+        padding:17px;
       }
+
     }
   </style>
 </head>
 
 <body>
+
+<!-- ======================================================
+     WEB PÚBLICA
+====================================================== -->
 
 <div id="publicSite">
 
@@ -1548,9 +2435,7 @@
         <h1>
           Todo lo que buscás,
           más cerca
-          <span>
-            de lo que pensás.
-          </span>
+          <span>de lo que pensás.</span>
         </h1>
 
         <div class="accent-line"></div>
@@ -1600,7 +2485,6 @@
 
       </div>
 
-
       <div class="chart-holder">
 
         <div id="chartdiv"></div>
@@ -1617,8 +2501,7 @@
           <strong id="provinceName"></strong>
 
           <p>
-            Descubrí marcas y oportunidades
-            disponibles para vos.
+            Descubrí marcas y oportunidades disponibles para vos.
           </p>
 
           <button id="exploreButton">
@@ -1662,96 +2545,51 @@
 
     </div>
 
-
     <div class="category-grid">
 
       <article
         class="category"
         data-market-category="Productos"
       >
-        <div class="category-icon">
-          🛍️
-        </div>
-
-        <strong>
-          Productos
-        </strong>
-
-        <p>
-          Descubrí marcas y emprendimientos.
-        </p>
+        <div class="category-icon">🛍️</div>
+        <strong>Productos</strong>
+        <p>Descubrí marcas y emprendimientos.</p>
       </article>
-
 
       <article
         class="category"
         data-market-category="Servicios"
       >
-        <div class="category-icon">
-          ✨
-        </div>
-
-        <strong>
-          Servicios
-        </strong>
-
-        <p>
-          Profesionales y empresas para lo que necesitás.
-        </p>
+        <div class="category-icon">✨</div>
+        <strong>Servicios</strong>
+        <p>Profesionales y empresas para lo que necesitás.</p>
       </article>
-
 
       <article
         class="category"
         data-market-category="Oficios"
       >
-        <div class="category-icon">
-          🛠️
-        </div>
-
-        <strong>
-          Oficios
-        </strong>
-
-        <p>
-          Encontrá especialistas cerca tuyo.
-        </p>
+        <div class="category-icon">🛠️</div>
+        <strong>Oficios</strong>
+        <p>Encontrá especialistas cerca tuyo.</p>
       </article>
-
 
       <article
         class="category"
         data-market-category="Empleos"
       >
-        <div class="category-icon">
-          💼
-        </div>
-
-        <strong>
-          Empleos
-        </strong>
-
-        <p>
-          Encontrá oportunidades laborales.
-        </p>
+        <div class="category-icon">💼</div>
+        <strong>Empleos</strong>
+        <p>Encontrá nuevas oportunidades laborales.</p>
       </article>
-
 
       <article
         class="category"
         data-market-category="Necesito"
       >
-        <div class="category-icon">
-          📣
-        </div>
-
-        <strong>
-          Necesito
-        </strong>
-
-        <p>
-          Publicá exactamente lo que estás buscando.
-        </p>
+        <div class="category-icon">📣</div>
+        <strong>Necesito</strong>
+        <p>Publicá exactamente lo que estás buscando.</p>
       </article>
 
     </div>
@@ -1823,6 +2661,10 @@
 
 </div>
 
+
+<!-- ======================================================
+     MARKETPLACE
+====================================================== -->
 
 <section
   class="marketplace-view"
@@ -1899,13 +2741,9 @@
         <span
           class="section-label"
           id="marketEyebrow"
-        >
-          Amigate
-        </span>
+        ></span>
 
-        <h2 id="marketTitle">
-          Productos
-        </h2>
+        <h2 id="marketTitle"></h2>
 
         <p id="marketDescription"></p>
 
@@ -1926,7 +2764,7 @@
       id="marketLoader"
     >
       <div class="loader-circle"></div>
-      Cargando categorías...
+      Cargando Amigate...
     </div>
 
 
@@ -1956,22 +2794,43 @@
     </section>
 
 
-    <div
-      class="empty-state"
-      id="categoryEmptyState"
+    <section
+      class="types-section"
+      id="typesSection"
     >
 
-      <strong id="categoryEmptyTitle">
-        No pudimos cargar las categorías
+      <h3 class="types-title">
+        ¿Qué tipo buscás?
+      </h3>
+
+      <p class="types-subtitle">
+        Podés filtrar aún más los resultados.
+      </p>
+
+      <div
+        class="types-grid"
+        id="typesGrid"
+      ></div>
+
+    </section>
+
+
+    <div
+      class="empty-state"
+      id="marketError"
+    >
+
+      <strong id="marketErrorTitle">
+        No pudimos cargar esta sección
       </strong>
 
-      <p id="categoryEmptyText">
-        Volvé a intentar.
+      <p id="marketErrorText">
+        Probá nuevamente.
       </p>
 
       <button
         class="retry-button"
-        id="retryCategories"
+        id="retryMarket"
       >
         Reintentar
       </button>
@@ -1980,53 +2839,70 @@
 
 
     <section
-      class="subcategory-results"
-      id="subcategoryResults"
+      class="results-section"
+      id="resultsSection"
     >
 
-      <div class="result-top">
+      <div class="results-heading">
 
-        <h3 id="selectedSubcategoryTitle"></h3>
+        <div>
+          <h3 id="resultsTitle">
+            Resultados
+          </h3>
+
+          <p id="resultsSubtitle"></p>
+        </div>
 
       </div>
 
-
       <div class="filter-bar">
 
-        <button class="filter-chip active">
+        <button
+          class="filter-chip active"
+          data-sort="relevant"
+        >
           Relevantes
         </button>
 
-        <button class="filter-chip">
+        <button
+          class="filter-chip"
+          data-sort="sales"
+        >
           Más vendidos
         </button>
 
-        <button class="filter-chip">
+        <button
+          class="filter-chip"
+          data-sort="rating"
+        >
           Mejor valorados
         </button>
 
-        <button class="filter-chip">
+        <button
+          class="filter-chip"
+          data-sort="new"
+        >
           Más nuevos
         </button>
 
-        <button class="filter-chip">
+        <button
+          class="filter-chip"
+          data-sort="offers"
+        >
           Promociones
         </button>
 
       </div>
 
+      <div
+        class="brands-grid"
+        id="brandsGrid"
+      ></div>
 
-      <div class="coming-box">
-
-        <strong id="nextResultsTitle">
-          Resultados
-        </strong>
-
-        <p id="nextResultsDescription">
-          En el próximo avance conectamos los resultados reales.
-        </p>
-
-      </div>
+      <div
+        class="generic-results hidden"
+        id="genericResults"
+      ></div>
 
     </section>
 
@@ -2035,7 +2911,9 @@
 </section>
 
 
-<!-- AUTH -->
+<!-- ======================================================
+     AUTH
+====================================================== -->
 
 <div
   class="modal-overlay"
@@ -2051,6 +2929,7 @@
       </span>
 
       <button
+        type="button"
         class="modal-close"
         id="closeAuthModal"
       >
@@ -2067,6 +2946,7 @@
       Iniciá sesión o creá tu cuenta.
     </p>
 
+
     <div
       class="auth-intent"
       id="sellerIntentMessage"
@@ -2079,9 +2959,11 @@
       con el alta de tu marca.
     </div>
 
+
     <div class="auth-tabs">
 
       <button
+        type="button"
         class="auth-tab active"
         data-auth-tab="login"
       >
@@ -2089,6 +2971,7 @@
       </button>
 
       <button
+        type="button"
         class="auth-tab"
         data-auth-tab="register"
       >
@@ -2114,6 +2997,7 @@
           <input
             type="email"
             id="loginEmail"
+            autocomplete="email"
             required
           >
 
@@ -2130,12 +3014,13 @@
             <input
               type="password"
               id="loginPassword"
+              autocomplete="current-password"
               required
             >
 
             <button
-              class="show-password"
               type="button"
+              class="show-password"
               data-password-target="loginPassword"
             >
               Ver
@@ -2146,6 +3031,7 @@
         </div>
 
         <button
+          type="submit"
           class="submit-btn"
           id="loginSubmit"
         >
@@ -2173,16 +3059,23 @@
 
           <div class="form-group">
             <label>Nombre</label>
-            <input id="registerName" required>
+            <input
+              id="registerName"
+              autocomplete="given-name"
+              required
+            >
           </div>
 
           <div class="form-group">
             <label>Apellido</label>
-            <input id="registerSurname" required>
+            <input
+              id="registerSurname"
+              autocomplete="family-name"
+              required
+            >
           </div>
 
         </div>
-
 
         <div class="field-row">
 
@@ -2200,6 +3093,7 @@
             <input
               id="registerPhone"
               type="tel"
+              autocomplete="tel"
               required
             >
           </div>
@@ -2211,6 +3105,7 @@
           <input
             id="registerEmail"
             type="email"
+            autocomplete="email"
             required
           >
         </div>
@@ -2227,12 +3122,13 @@
               id="registerPassword"
               type="password"
               minlength="6"
+              autocomplete="new-password"
               required
             >
 
             <button
-              class="show-password"
               type="button"
+              class="show-password"
               data-password-target="registerPassword"
             >
               Ver
@@ -2243,6 +3139,7 @@
         </div>
 
         <button
+          type="submit"
           class="submit-btn"
           id="registerSubmit"
         >
@@ -2263,7 +3160,9 @@
 </div>
 
 
-<!-- MI CUENTA -->
+<!-- ======================================================
+     MI CUENTA
+====================================================== -->
 
 <div
   class="modal-overlay"
@@ -2279,6 +3178,7 @@
       </span>
 
       <button
+        type="button"
         class="modal-close"
         id="closeAccountModal"
       >
@@ -2303,9 +3203,7 @@
       <div
         class="account-name"
         id="accountName"
-      >
-        Usuario
-      </div>
+      ></div>
 
       <div
         class="account-email"
@@ -2315,9 +3213,7 @@
       <span
         class="account-type"
         id="accountType"
-      >
-        Comprador
-      </span>
+      ></span>
 
       <div class="account-actions">
 
@@ -2351,7 +3247,199 @@
 </div>
 
 
-<!-- ADMIN LOGIN -->
+<!-- ======================================================
+     PORTAL COMPRADOR
+====================================================== -->
+
+<div
+  class="buyer-portal"
+  id="buyerPortal"
+>
+
+  <aside class="buyer-sidebar">
+
+    <div class="buyer-logo">
+      Amigate
+    </div>
+
+    <div class="buyer-menu">
+
+      <button
+        class="buyer-nav active"
+        data-buyer-page="resumen"
+      >
+        Inicio
+      </button>
+
+      <button
+        class="buyer-nav"
+        data-buyer-page="compras"
+      >
+        Compras
+      </button>
+
+      <button
+        class="buyer-nav"
+        data-buyer-page="favoritos"
+      >
+        Favoritos
+      </button>
+
+      <button
+        class="buyer-nav"
+        data-buyer-page="direcciones"
+      >
+        Direcciones
+      </button>
+
+      <button
+        class="buyer-nav"
+        data-buyer-page="reclamos"
+      >
+        Reclamos
+      </button>
+
+    </div>
+
+    <button
+      class="buyer-exit"
+      id="buyerExit"
+    >
+      Volver
+    </button>
+
+  </aside>
+
+
+  <main class="buyer-main">
+
+    <header class="buyer-header">
+
+      <h2 id="buyerPageTitle">
+        Mi Amigate
+      </h2>
+
+      <button
+        class="soft-button"
+        id="buyerAccountButton"
+      >
+        Mi cuenta
+      </button>
+
+    </header>
+
+
+    <div class="buyer-content">
+
+      <section
+        class="buyer-section active"
+        id="buyer-resumen"
+      >
+
+        <div class="buyer-stats">
+
+          <div class="buyer-stat">
+            <small>Compras</small>
+            <strong id="buyerOrdersCount">—</strong>
+          </div>
+
+          <div class="buyer-stat">
+            <small>Productos favoritos</small>
+            <strong id="buyerFavoritesCount">—</strong>
+          </div>
+
+          <div class="buyer-stat">
+            <small>Marcas seguidas</small>
+            <strong id="buyerBrandsCount">—</strong>
+          </div>
+
+          <div class="buyer-stat">
+            <small>Reclamos</small>
+            <strong id="buyerClaimsCount">—</strong>
+          </div>
+
+        </div>
+
+        <div class="portal-panel">
+
+          <h3>
+            Hola, <span id="buyerWelcomeName">Usuario</span>
+          </h3>
+
+          <p style="margin-top:8px;color:var(--gray);font-size:13px;">
+            Desde acá vas a poder administrar toda tu actividad en Amigate.
+          </p>
+
+        </div>
+
+      </section>
+
+
+      <section
+        class="buyer-section"
+        id="buyer-compras"
+      >
+        <div class="portal-panel">
+          <h3>Mis compras</h3>
+          <div
+            class="portal-list"
+            id="buyerOrdersList"
+          ></div>
+        </div>
+      </section>
+
+
+      <section
+        class="buyer-section"
+        id="buyer-favoritos"
+      >
+        <div class="portal-panel">
+          <h3>Favoritos</h3>
+          <div
+            class="portal-list"
+            id="buyerFavoritesList"
+          ></div>
+        </div>
+      </section>
+
+
+      <section
+        class="buyer-section"
+        id="buyer-direcciones"
+      >
+        <div class="portal-panel">
+          <h3>Direcciones guardadas</h3>
+          <div
+            class="portal-list"
+            id="buyerAddressesList"
+          ></div>
+        </div>
+      </section>
+
+
+      <section
+        class="buyer-section"
+        id="buyer-reclamos"
+      >
+        <div class="portal-panel">
+          <h3>Mis reclamos</h3>
+          <div
+            class="portal-list"
+            id="buyerClaimsList"
+          ></div>
+        </div>
+      </section>
+
+    </div>
+
+  </main>
+
+</div>
+
+
+<!-- ======================================================
+     ADMIN LOGIN
+====================================================== -->
 
 <div
   class="modal-overlay"
@@ -2367,6 +3455,7 @@
       </span>
 
       <button
+        type="button"
         class="modal-close"
         id="closeAdminModal"
       >
@@ -2403,7 +3492,10 @@
         >
       </div>
 
-      <button class="submit-btn">
+      <button
+        type="submit"
+        class="submit-btn"
+      >
         Entrar
       </button>
 
@@ -2419,7 +3511,9 @@
 </div>
 
 
-<!-- ADMIN -->
+<!-- ======================================================
+     ADMIN
+====================================================== -->
 
 <div
   class="admin-app"
@@ -2429,11 +3523,13 @@
   <aside class="admin-sidebar">
 
     <div class="admin-brand">
+
       Amigate
 
       <small>
         Administración general
       </small>
+
     </div>
 
     <div class="admin-menu">
@@ -2587,9 +3683,9 @@
           </article>
 
           <article class="stat-card">
-            <small>Marcas activas</small>
-            <strong id="countActiveBrands">—</strong>
-            <p>Actualmente visibles</p>
+            <small>Productos</small>
+            <strong id="countProducts">—</strong>
+            <p>Publicaciones</p>
           </article>
 
           <article class="stat-card">
@@ -2632,15 +3728,17 @@
         </div>
       </section>
 
+
       <section
         class="admin-section"
         id="admin-vendedores"
       >
         <div class="empty-panel">
           <h3>Vendedores</h3>
-          <p>Gestión de vendedores.</p>
+          <p>Gestión de vendedores y cuentas comerciales.</p>
         </div>
       </section>
+
 
       <section
         class="admin-section"
@@ -2648,19 +3746,30 @@
       >
         <div class="empty-panel">
           <h3>Marcas</h3>
-          <p>Gestión general de marcas.</p>
+          <p>Gestión general de marcas de Amigate.</p>
         </div>
       </section>
+
 
       <section
         class="admin-section"
         id="admin-categorias"
       >
-        <div class="empty-panel">
-          <h3>Categorías</h3>
-          <p>Administración de taxonomías.</p>
+
+        <div id="adminTaxonomy">
+
+          <div class="market-loader visible">
+
+            <div class="loader-circle"></div>
+
+            Cargando taxonomía...
+
+          </div>
+
         </div>
+
       </section>
+
 
       <section
         class="admin-section"
@@ -2668,9 +3777,10 @@
       >
         <div class="empty-panel">
           <h3>Operaciones</h3>
-          <p>Pedidos y movimientos.</p>
+          <p>Pedidos y movimientos de Amigate.</p>
         </div>
       </section>
+
 
       <section
         class="admin-section"
@@ -2678,9 +3788,10 @@
       >
         <div class="empty-panel">
           <h3>Finanzas</h3>
-          <p>Ingresos, comisiones y movimientos.</p>
+          <p>Comisiones, suscripciones e ingresos.</p>
         </div>
       </section>
+
 
       <section
         class="admin-section"
@@ -2688,9 +3799,10 @@
       >
         <div class="empty-panel">
           <h3>Publicidad</h3>
-          <p>Campañas patrocinadas.</p>
+          <p>Campañas y publicaciones patrocinadas.</p>
         </div>
       </section>
+
 
       <section
         class="admin-section"
@@ -2698,9 +3810,10 @@
       >
         <div class="empty-panel">
           <h3>Suscripciones</h3>
-          <p>Planes y vencimientos.</p>
+          <p>Planes, vencimientos y bonificaciones.</p>
         </div>
       </section>
+
 
       <section
         class="admin-section"
@@ -2708,9 +3821,10 @@
       >
         <div class="empty-panel">
           <h3>Reclamos</h3>
-          <p>Resolución de conflictos.</p>
+          <p>Intervenciones y resolución de conflictos.</p>
         </div>
       </section>
+
 
       <section
         class="admin-section"
@@ -2722,12 +3836,13 @@
         </div>
       </section>
 
+
       <section
         class="admin-section"
         id="admin-configuracion"
       >
         <div class="empty-panel">
-          <h3>Configuración</h3>
+          <h3>Configuración general</h3>
           <p>Parámetros generales de Amigate.</p>
         </div>
       </section>
@@ -2740,9 +3855,10 @@
 
 
 <script>
-/* =========================
+
+/* ==========================================================
    SUPABASE
-========================= */
+========================================================== */
 
 const SUPABASE_URL =
   "https://jqdyaafwixnjasszsvkt.supabase.co";
@@ -2756,13 +3872,129 @@ const db =
     SUPABASE_KEY
   );
 
+
 let currentUser = null;
 let currentProfile = null;
 let authIntent = "buyer";
 
-/* =========================
+
+/* ==========================================================
+   HELPERS
+========================================================== */
+
+function normalizeText(value){
+
+  return String(
+    value || ""
+  )
+    .normalize("NFD")
+    .replace(
+      /[\u0300-\u036f]/g,
+      ""
+    )
+    .trim()
+    .toLowerCase();
+
+}
+
+
+function escapeHtml(value){
+
+  return String(
+    value ?? ""
+  )
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+
+}
+
+
+function firstValue(
+  object,
+  keys,
+  fallback = null
+){
+
+  if(!object){
+    return fallback;
+  }
+
+  for(const key of keys){
+
+    if(
+      object[key] !== undefined &&
+      object[key] !== null &&
+      object[key] !== ""
+    ){
+
+      return object[key];
+
+    }
+
+  }
+
+  return fallback;
+
+}
+
+
+function rowName(row){
+
+  return firstValue(
+    row,
+    [
+      "nombre",
+      "name",
+      "titulo",
+      "title"
+    ],
+    "Sin nombre"
+  );
+
+}
+
+
+function withTimeout(
+  promise,
+  ms,
+  code
+){
+
+  let timer;
+
+  const timeout =
+    new Promise(
+      (_, reject) => {
+
+        timer =
+          setTimeout(
+            () => reject(
+              new Error(code)
+            ),
+            ms
+          );
+
+      }
+    );
+
+  return Promise
+    .race([
+      promise,
+      timeout
+    ])
+    .finally(
+      () => clearTimeout(timer)
+    );
+
+}
+
+
+/* ==========================================================
    MODALES
-========================= */
+========================================================== */
 
 function openModal(element){
 
@@ -2773,6 +4005,7 @@ function openModal(element){
 
 }
 
+
 function closeModal(element){
 
   element.classList.remove("open");
@@ -2782,16 +4015,15 @@ function closeModal(element){
 
 }
 
+
 function backgroundClose(element){
 
   element.addEventListener(
     "click",
-    function(event){
+    event => {
 
       if(event.target === element){
-
         closeModal(element);
-
       }
 
     }
@@ -2799,12 +4031,14 @@ function backgroundClose(element){
 
 }
 
-/* =========================
+
+/* ==========================================================
    MAPA
-========================= */
+========================================================== */
 
 let selectedProvince = null;
 let selectedPolygon = null;
+
 
 const provinceCard =
   document.getElementById(
@@ -2846,10 +4080,12 @@ function updateProvinceContent(){
 
   }
 
+
   exploreTitle.textContent =
     "¿Qué estás buscando en " +
     selectedProvince.name +
     "?";
+
 
   exploreSubtitle.textContent =
     "Descubrí marcas, profesionales y oportunidades disponibles en " +
@@ -2866,9 +4102,11 @@ am5.ready(function(){
       "chartdiv"
     );
 
+
   if(root._logo){
     root._logo.dispose();
   }
+
 
   const chart =
     root.container.children.push(
@@ -2876,17 +4114,23 @@ am5.ready(function(){
       am5map.MapChart.new(
         root,
         {
+
           panX:"none",
           panY:"none",
+
           wheelX:"none",
           wheelY:"none",
+
           pinchZoom:false,
+
           projection:
             am5map.geoMercator()
+
         }
       )
 
     );
+
 
   const polygonSeries =
     chart.series.push(
@@ -2901,30 +4145,36 @@ am5.ready(function(){
 
     );
 
+
   polygonSeries
     .mapPolygons
     .template
-    .setAll({
-      fill:
-        am5.color(
-          0xF4C0AE
-        ),
+    .setAll(
+      {
 
-      stroke:
-        am5.color(
-          0xFFF8F2
-        ),
+        fill:
+          am5.color(
+            0xF4C0AE
+          ),
 
-      strokeWidth:1.6,
+        stroke:
+          am5.color(
+            0xFFF8F2
+          ),
 
-      interactive:true,
+        strokeWidth:1.6,
 
-      cursorOverStyle:
-        "pointer",
+        interactive:true,
 
-      tooltipText:
-        "{name}"
-    });
+        cursorOverStyle:
+          "pointer",
+
+        tooltipText:
+          "{name}"
+
+      }
+    );
+
 
   polygonSeries
     .mapPolygons
@@ -2939,6 +4189,7 @@ am5.ready(function(){
           )
       }
     );
+
 
   polygonSeries
     .mapPolygons
@@ -2966,8 +4217,10 @@ am5.ready(function(){
 
     }
 
+
     selectedPolygon = null;
     selectedProvince = null;
+
 
     provinceCard
       .classList
@@ -2975,10 +4228,12 @@ am5.ready(function(){
         "visible"
       );
 
+
     localStorage
       .removeItem(
         "amigate_province"
       );
+
 
     updateProvinceContent();
 
@@ -2991,7 +4246,7 @@ am5.ready(function(){
     .events
     .on(
       "click",
-      function(event){
+      event => {
 
         const polygon =
           event.target;
@@ -2999,9 +4254,11 @@ am5.ready(function(){
         const dataItem =
           polygon.dataItem;
 
+
         if(!dataItem){
           return;
         }
+
 
         if(
           selectedPolygon ===
@@ -3014,6 +4271,7 @@ am5.ready(function(){
 
         }
 
+
         if(selectedPolygon){
 
           selectedPolygon.set(
@@ -3023,34 +4281,43 @@ am5.ready(function(){
 
         }
 
+
         selectedPolygon =
           polygon;
+
 
         polygon.set(
           "active",
           true
         );
 
+
         selectedProvince = {
+
           name:
             dataItem.dataContext.name,
 
           id:
             dataItem.dataContext.id
+
         };
+
 
         provinceName.textContent =
           selectedProvince.name;
 
+
         exploreButton.textContent =
           "Explorar " +
           selectedProvince.name;
+
 
         provinceCard
           .classList
           .add(
             "visible"
           );
+
 
         localStorage
           .setItem(
@@ -3059,6 +4326,7 @@ am5.ready(function(){
               selectedProvince
             )
           );
+
 
         updateProvinceContent();
 
@@ -3080,7 +4348,7 @@ am5.ready(function(){
     .events
     .on(
       "datavalidated",
-      function(){
+      () => {
 
         const stored =
           localStorage
@@ -3088,26 +4356,25 @@ am5.ready(function(){
               "amigate_province"
             );
 
+
         if(!stored){
           return;
         }
 
+
         try{
 
           const saved =
-            JSON.parse(
-              stored
-            );
+            JSON.parse(stored);
+
 
           polygonSeries
             .dataItems
             .forEach(
-              function(dataItem){
+              dataItem => {
 
                 if(
-                  dataItem
-                    .dataContext
-                    .id ===
+                  dataItem.dataContext.id ===
                   saved.id
                 ){
 
@@ -3116,9 +4383,11 @@ am5.ready(function(){
                       "mapPolygon"
                     );
 
+
                   if(!polygon){
                     return;
                   }
+
 
                   selectedPolygon =
                     polygon;
@@ -3126,23 +4395,28 @@ am5.ready(function(){
                   selectedProvince =
                     saved;
 
+
                   polygon.set(
                     "active",
                     true
                   );
 
+
                   provinceName.textContent =
                     saved.name;
+
 
                   exploreButton.textContent =
                     "Explorar " +
                     saved.name;
+
 
                   provinceCard
                     .classList
                     .add(
                       "visible"
                     );
+
 
                   updateProvinceContent();
 
@@ -3164,6 +4438,7 @@ am5.ready(function(){
       }
     );
 
+
   polygonSeries.appear(600);
 
 });
@@ -3172,7 +4447,7 @@ am5.ready(function(){
 exploreButton
   .addEventListener(
     "click",
-    function(){
+    () => {
 
       document
         .getElementById(
@@ -3185,11 +4460,239 @@ exploreButton
     }
   );
 
-/* =========================
-   HELPERS CATEGORÍAS
-========================= */
+
+/* ==========================================================
+   CACHÉ GLOBAL DE AMIGATE
+========================================================== */
+
+/*
+  ESTA ES LA CORRECCIÓN GRANDE.
+
+  Las categorías NO se consultan nuevamente
+  cada vez que entramos a Productos / Servicios.
+
+  Se descargan una sola vez y permanecen en memoria.
+*/
+
+const taxonomyCache = {
+
+  loaded:false,
+
+  loadingPromise:null,
+
+  categories:[],
+
+  subcategories:[],
+
+  types:[],
+
+  provinces:[],
+
+  loadedAt:null
+
+};
+
+
+async function loadTaxonomy(
+  force = false
+){
+
+  /*
+    Ya tenemos los datos.
+  */
+
+  if(
+    taxonomyCache.loaded &&
+    !force
+  ){
+
+    return taxonomyCache;
+
+  }
+
+
+  /*
+    Ya existe una descarga en curso.
+
+    Todos esperan ESA misma promesa.
+
+    Nunca hacemos 5 consultas simultáneas.
+  */
+
+  if(
+    taxonomyCache.loadingPromise &&
+    !force
+  ){
+
+    return taxonomyCache.loadingPromise;
+
+  }
+
+
+  if(force){
+
+    taxonomyCache.loaded =
+      false;
+
+    taxonomyCache.loadingPromise =
+      null;
+
+  }
+
+
+  taxonomyCache.loadingPromise =
+    (async () => {
+
+      try{
+
+        const requests =
+          [
+
+            db
+              .from("categories")
+              .select("*"),
+
+            db
+              .from("subcategories")
+              .select("*"),
+
+            db
+              .from("category_types")
+              .select("*"),
+
+            db
+              .from("provinces")
+              .select("*")
+
+          ];
+
+
+        const results =
+          await withTimeout(
+            Promise.all(
+              requests
+            ),
+            10000,
+            "TIMEOUT_TAXONOMY"
+          );
+
+
+        const [
+          categoriesResult,
+          subcategoriesResult,
+          typesResult,
+          provincesResult
+        ] =
+          results;
+
+
+        if(categoriesResult.error){
+          throw categoriesResult.error;
+        }
+
+        if(subcategoriesResult.error){
+          throw subcategoriesResult.error;
+        }
+
+        if(typesResult.error){
+          throw typesResult.error;
+        }
+
+        if(provincesResult.error){
+          throw provincesResult.error;
+        }
+
+
+        taxonomyCache.categories =
+          categoriesResult.data || [];
+
+
+        taxonomyCache.subcategories =
+          subcategoriesResult.data || [];
+
+
+        taxonomyCache.types =
+          typesResult.data || [];
+
+
+        taxonomyCache.provinces =
+          provincesResult.data || [];
+
+
+        taxonomyCache.loaded =
+          true;
+
+
+        taxonomyCache.loadedAt =
+          Date.now();
+
+
+        console.log(
+          "Taxonomía Amigate cargada:",
+          taxonomyCache
+        );
+
+
+        return taxonomyCache;
+
+      }
+      catch(error){
+
+        taxonomyCache.loaded =
+          false;
+
+
+        throw error;
+
+      }
+      finally{
+
+        taxonomyCache.loadingPromise =
+          null;
+
+      }
+
+    })();
+
+
+  return taxonomyCache.loadingPromise;
+
+}
+
+
+/*
+  Precarga silenciosa.
+
+  Cuando el usuario llegue a Productos,
+  normalmente ya está todo descargado.
+*/
+
+setTimeout(
+  () => {
+
+    loadTaxonomy()
+      .catch(
+        error => {
+
+          console.warn(
+            "Precarga taxonomía:",
+            error
+          );
+
+        }
+      );
+
+  },
+  1000
+);
+
+
+/* ==========================================================
+   MARKETPLACE
+========================================================== */
 
 const categoryDescriptions = {
+
   Productos:
     "Descubrí marcas, emprendimientos y productos disponibles cerca tuyo.",
 
@@ -3204,95 +4707,44 @@ const categoryDescriptions = {
 
   Necesito:
     "Publicá lo que necesitás y conectate con personas o marcas que puedan ayudarte."
+
 };
 
-let currentMarketCategory = null;
-let currentDatabaseCategory = null;
-let currentSubcategory = null;
 
-function normalizeText(value){
+let currentMarketCategory =
+  null;
 
-  return String(
-    value || ""
-  )
-    .normalize("NFD")
-    .replace(
-      /[\u0300-\u036f]/g,
-      ""
-    )
-    .trim()
-    .toLowerCase();
+let currentDatabaseCategory =
+  null;
 
-}
+let currentSubcategory =
+  null;
 
-function getRowName(row){
+let currentType =
+  null;
 
-  return (
-    row.nombre ||
-    row.name ||
-    row.titulo ||
-    row.title ||
-    "Sin nombre"
-  );
 
-}
+/*
+  Cada navegación tiene número propio.
 
-function getParentCategoryId(row){
+  Si Productos está cargando y el usuario
+  ya entró a Servicios, la respuesta vieja
+  de Productos es ignorada.
+*/
 
-  return (
-    row.category_id ??
-    row.categoria_id ??
-    row.parent_category_id ??
-    row.parent_id ??
-    row.category ??
-    row.categoria ??
-    null
-  );
+let navigationVersion = 0;
 
-}
-
-function queryTimeout(
-  ms = 8000
-){
-
-  return new Promise(
-    function(
-      _,
-      reject
-    ){
-
-      setTimeout(
-        function(){
-
-          reject(
-            new Error(
-              "TIMEOUT_CATEGORIAS"
-            )
-          );
-
-        },
-        ms
-      );
-
-    }
-  );
-
-}
-
-/* =========================
-   ABRIR MARKETPLACE
-========================= */
 
 document
   .querySelectorAll(
     "[data-market-category]"
   )
   .forEach(
-    function(card){
+    card => {
 
       card.addEventListener(
         "click",
-        function(){
+        () => {
 
           openMarketplace(
             card.dataset.marketCategory
@@ -3309,6 +4761,10 @@ async function openMarketplace(
   category
 ){
 
+  const myNavigation =
+    ++navigationVersion;
+
+
   currentMarketCategory =
     category;
 
@@ -3317,6 +4773,10 @@ async function openMarketplace(
 
   currentSubcategory =
     null;
+
+  currentType =
+    null;
+
 
   document
     .getElementById(
@@ -3327,6 +4787,7 @@ async function openMarketplace(
       "hidden"
     );
 
+
   document
     .getElementById(
       "marketplaceView"
@@ -3336,15 +4797,17 @@ async function openMarketplace(
       "visible"
     );
 
+
   window.scrollTo(
     0,
     0
   );
 
+
   const province =
-    selectedProvince
-      ?.name ||
+    selectedProvince?.name ||
     "Argentina";
+
 
   document
     .getElementById(
@@ -3353,12 +4816,14 @@ async function openMarketplace(
     .textContent =
       province;
 
+
   document
     .getElementById(
       "breadcrumbProvince"
     )
     .textContent =
       province;
+
 
   document
     .getElementById(
@@ -3367,6 +4832,7 @@ async function openMarketplace(
     .textContent =
       category;
 
+
   document
     .getElementById(
       "marketEyebrow"
@@ -3374,12 +4840,14 @@ async function openMarketplace(
     .textContent =
       province;
 
+
   document
     .getElementById(
       "marketTitle"
     )
     .textContent =
       category;
+
 
   document
     .getElementById(
@@ -3390,404 +4858,325 @@ async function openMarketplace(
         category
       ] || "";
 
-  hideSubcategoryResult();
 
-  await loadSubcategories(
-    category
-  );
+  resetMarketplaceUI();
 
-}
-
-/* =========================
-   CARGAR SUBCATEGORÍAS
-========================= */
-
-async function loadSubcategories(
-  categoryName
-){
 
   const loader =
     document.getElementById(
       "marketLoader"
     );
 
-  const grid =
-    document.getElementById(
-      "subcategoryGrid"
-    );
 
-  const empty =
-    document.getElementById(
-      "categoryEmptyState"
-    );
+  loader.classList.add(
+    "visible"
+  );
 
-  const section =
-    document.getElementById(
-      "subcategoriesSection"
-    );
-
-  const emptyTitle =
-    document.getElementById(
-      "categoryEmptyTitle"
-    );
-
-  const emptyText =
-    document.getElementById(
-      "categoryEmptyText"
-    );
-
-  loader
-    .classList
-    .add(
-      "visible"
-    );
-
-  empty
-    .classList
-    .remove(
-      "visible"
-    );
-
-  section
-    .classList
-    .remove(
-      "hidden"
-    );
-
-  grid.innerHTML =
-    "";
 
   try{
 
-    const categoriesPromise =
-      db
-        .from(
-          "categories"
-        )
-        .select(
-          "*"
-        );
+    const taxonomy =
+      await loadTaxonomy();
 
-    const categoryResult =
-      await Promise.race([
-        categoriesPromise,
-        queryTimeout(8000)
-      ]);
 
-    const {
-      data:categories,
-      error:categoriesError
-    } =
-      categoryResult;
+    /*
+      El usuario ya cambió de sección.
 
-    if(categoriesError){
+      No tocamos la pantalla.
+    */
 
-      throw categoriesError;
+    if(
+      myNavigation !==
+      navigationVersion
+    ){
+
+      return;
 
     }
 
-    console.log(
-      "Categories:",
-      categories
-    );
 
     const root =
-      (
-        categories || []
-      )
-      .find(
-        function(item){
+      taxonomy.categories
+        .find(
+          item => {
 
-          return (
-            normalizeText(
-              getRowName(
-                item
+            return (
+              normalizeText(
+                rowName(item)
+              ) ===
+              normalizeText(
+                category
               )
-            ) ===
-            normalizeText(
-              categoryName
-            )
-          );
+            );
 
-        }
-      );
+          }
+        );
+
 
     if(!root){
 
       throw new Error(
-        "NO_ROOT_CATEGORY"
+        "ROOT_NOT_FOUND"
       );
 
     }
+
 
     currentDatabaseCategory =
       root;
 
-    console.log(
-      "Categoría raíz:",
-      root
-    );
+
+    const subcategories =
+      taxonomy.subcategories
+        .filter(
+          item => {
+
+            const parent =
+              firstValue(
+                item,
+                [
+                  "category_id",
+                  "categoria_id",
+                  "parent_category_id",
+                  "parent_id"
+                ]
+              );
 
 
-    const subcategoriesPromise =
-      db
-        .from(
-          "subcategories"
+            return (
+              String(parent) ===
+              String(root.id)
+            );
+
+          }
         )
-        .select(
-          "*"
+        .sort(
+          (a,b) =>
+            rowName(a)
+              .localeCompare(
+                rowName(b),
+                "es"
+              )
         );
 
-    const subcategoryResult =
-      await Promise.race([
-        subcategoriesPromise,
-        queryTimeout(8000)
-      ]);
-
-    const {
-      data:subcategories,
-      error:subcategoriesError
-    } =
-      subcategoryResult;
-
-    if(subcategoriesError){
-
-      throw subcategoriesError;
-
-    }
-
-    console.log(
-      "Subcategories:",
-      subcategories
-    );
-
-    const filtered =
-      (
-        subcategories || []
-      )
-      .filter(
-        function(item){
-
-          const parent =
-            getParentCategoryId(
-              item
-            );
-
-          return (
-            String(parent) ===
-            String(root.id)
-          );
-
-        }
-      )
-      .sort(
-        function(a,b){
-
-          return getRowName(a)
-            .localeCompare(
-              getRowName(b),
-              "es"
-            );
-
-        }
-      );
-
-    console.log(
-      "Filtradas:",
-      filtered
-    );
 
     renderSubcategories(
-      filtered
+      subcategories
     );
 
   }
   catch(error){
 
     console.error(
-      "ERROR CATEGORÍAS:",
+      "Marketplace:",
       error
     );
 
-    section
-      .classList
-      .add(
-        "hidden"
-      );
-
-    empty
-      .classList
-      .add(
-        "visible"
-      );
 
     if(
-      error.message ===
-      "TIMEOUT_CATEGORIAS"
+      myNavigation !==
+      navigationVersion
     ){
 
-      emptyTitle.textContent =
-        "Supabase está tardando demasiado";
-
-      emptyText.textContent =
-        "No pudimos obtener las categorías. Tocá Reintentar. Si sigue fallando, vamos a revisar las políticas RLS de categories y subcategories.";
+      return;
 
     }
-    else if(
-      error.message ===
-      "NO_ROOT_CATEGORY"
-    ){
 
-      emptyTitle.textContent =
-        "No encontramos esta categoría";
 
-      emptyText.textContent =
-        'La categoría "' +
-        categoryName +
-        '" no apareció en la tabla categories.';
-
-    }
-    else{
-
-      emptyTitle.textContent =
-        "No pudimos cargar las categorías";
-
-      emptyText.textContent =
-        error.message ||
-        "Supabase devolvió un error.";
-
-    }
+    showMarketError(
+      error
+    );
 
   }
   finally{
 
-    loader
-      .classList
-      .remove(
+    if(
+      myNavigation ===
+      navigationVersion
+    ){
+
+      loader.classList.remove(
         "visible"
       );
+
+    }
 
   }
 
 }
 
-/* =========================
-   REINTENTAR
-========================= */
 
-document
-  .getElementById(
-    "retryCategories"
-  )
-  .addEventListener(
-    "click",
-    function(){
+/* ==========================================================
+   RESET MARKETPLACE
+========================================================== */
 
-      if(currentMarketCategory){
+function resetMarketplaceUI(){
 
-        loadSubcategories(
-          currentMarketCategory
-        );
+  document
+    .getElementById(
+      "marketError"
+    )
+    .classList
+    .remove(
+      "visible"
+    );
 
-      }
 
-    }
-  );
+  document
+    .getElementById(
+      "subcategoriesSection"
+    )
+    .classList
+    .remove(
+      "hidden"
+    );
 
-/* =========================
-   RENDER
-========================= */
 
-function renderSubcategories(
-  rows
-){
-
-  const grid =
-    document.getElementById(
+  document
+    .getElementById(
       "subcategoryGrid"
+    )
+    .innerHTML =
+      "";
+
+
+  document
+    .getElementById(
+      "typesSection"
+    )
+    .classList
+    .remove(
+      "visible"
     );
 
-  const empty =
-    document.getElementById(
-      "categoryEmptyState"
+
+  document
+    .getElementById(
+      "typesGrid"
+    )
+    .innerHTML =
+      "";
+
+
+  document
+    .getElementById(
+      "resultsSection"
+    )
+    .classList
+    .remove(
+      "visible"
     );
+
+
+  document
+    .getElementById(
+      "brandsGrid"
+    )
+    .innerHTML =
+      "";
+
+
+  document
+    .getElementById(
+      "genericResults"
+    )
+    .classList
+    .add(
+      "hidden"
+    );
+
+
+  document
+    .getElementById(
+      "breadcrumbSubSeparator"
+    )
+    .classList
+    .add(
+      "hidden"
+    );
+
+
+  document
+    .getElementById(
+      "breadcrumbSubcategory"
+    )
+    .classList
+    .add(
+      "hidden"
+    );
+
+}
+
+
+/* ==========================================================
+   RENDER SUBCATEGORÍAS
+========================================================== */
+
+function renderSubcategories(rows){
 
   const section =
     document.getElementById(
       "subcategoriesSection"
     );
 
-  document
-    .getElementById(
-      "subcategoriesCount"
-    )
-    .textContent =
-      rows.length === 1
-        ? "1 categoría"
-        : rows.length +
-          " categorías";
 
-  grid.innerHTML = "";
+  const grid =
+    document.getElementById(
+      "subcategoryGrid"
+    );
+
+
+  const count =
+    document.getElementById(
+      "subcategoriesCount"
+    );
+
+
+  grid.innerHTML =
+    "";
+
+
+  count.textContent =
+    rows.length === 1
+      ? "1 categoría"
+      : rows.length +
+        " categorías";
+
 
   if(!rows.length){
 
-    section
-      .classList
-      .add(
-        "hidden"
-      );
-
-    empty
-      .classList
-      .add(
-        "visible"
-      );
-
-    document
-      .getElementById(
-        "categoryEmptyTitle"
+    showMarketError(
+      new Error(
+        "NO_SUBCATEGORIES"
       )
-      .textContent =
-        "No hay subcategorías cargadas";
-
-    document
-      .getElementById(
-        "categoryEmptyText"
-      )
-      .textContent =
-        "La categoría principal existe, pero todavía no encontramos subcategorías asociadas.";
+    );
 
     return;
 
   }
 
-  section
-    .classList
-    .remove(
-      "hidden"
-    );
 
-  empty
-    .classList
-    .remove(
-      "visible"
-    );
+  section.classList.remove(
+    "hidden"
+  );
+
 
   rows.forEach(
-    function(row){
+    row => {
+
+      const name =
+        rowName(row);
+
 
       const card =
         document.createElement(
           "article"
         );
 
+
       card.className =
         "subcategory-card";
 
-      const name =
-        getRowName(
-          row
-        );
 
       card.innerHTML =
         `
@@ -3798,9 +5187,7 @@ function renderSubcategories(
           </small>
 
           <strong>
-            ${escapeHtml(
-              name
-            )}
+            ${escapeHtml(name)}
           </strong>
 
           <div class="subcategory-arrow">
@@ -3808,9 +5195,10 @@ function renderSubcategories(
           </div>
         `;
 
+
       card.addEventListener(
         "click",
-        function(){
+        () => {
 
           selectSubcategory(
             row
@@ -3818,6 +5206,7 @@ function renderSubcategories(
 
         }
       );
+
 
       grid.appendChild(
         card
@@ -3828,44 +5217,23 @@ function renderSubcategories(
 
 }
 
-/* =========================
-   SUBCATEGORÍA
-========================= */
 
-function selectSubcategory(
-  row
-){
+/* ==========================================================
+   SUBCATEGORÍA
+========================================================== */
+
+function selectSubcategory(row){
 
   currentSubcategory =
     row;
 
+  currentType =
+    null;
+
+
   const name =
-    getRowName(
-      row
-    );
+    rowName(row);
 
-  document
-    .getElementById(
-      "breadcrumbSubSeparator"
-    )
-    .classList
-    .remove(
-      "hidden"
-    );
-
-  const crumb =
-    document.getElementById(
-      "breadcrumbSubcategory"
-    );
-
-  crumb.textContent =
-    name;
-
-  crumb
-    .classList
-    .remove(
-      "hidden"
-    );
 
   document
     .getElementById(
@@ -3876,102 +5244,1082 @@ function selectSubcategory(
       "hidden"
     );
 
-  document
-    .getElementById(
-      "selectedSubcategoryTitle"
-    )
-    .textContent =
-      name;
-
-  const province =
-    selectedProvince
-      ?.name ||
-    "Argentina";
-
-  document
-    .getElementById(
-      "nextResultsTitle"
-    )
-    .textContent =
-      "Resultados de " +
-      name;
-
-  document
-    .getElementById(
-      "nextResultsDescription"
-    )
-    .textContent =
-      currentMarketCategory ===
-        "Productos"
-        ?
-        "El siguiente paso es cargar acá las marcas reales que ofrecen " +
-        name +
-        " en " +
-        province +
-        "."
-        :
-        "El siguiente paso es conectar las publicaciones reales de " +
-        currentMarketCategory +
-        " en " +
-        province +
-        ".";
-
-  document
-    .getElementById(
-      "subcategoryResults"
-    )
-    .classList
-    .add(
-      "visible"
-    );
-
-  window.scrollTo(
-    0,
-    0
-  );
-
-}
-
-
-function hideSubcategoryResult(){
-
-  currentSubcategory =
-    null;
 
   document
     .getElementById(
       "breadcrumbSubSeparator"
     )
     .classList
-    .add(
-      "hidden"
-    );
-
-  document
-    .getElementById(
-      "breadcrumbSubcategory"
-    )
-    .classList
-    .add(
-      "hidden"
-    );
-
-  document
-    .getElementById(
-      "subcategoryResults"
-    )
-    .classList
     .remove(
-      "visible"
+      "hidden"
     );
+
+
+  const crumb =
+    document
+      .getElementById(
+        "breadcrumbSubcategory"
+      );
+
+
+  crumb.textContent =
+    name;
+
+
+  crumb.classList.remove(
+    "hidden"
+  );
+
+
+  /*
+    Buscar TYPES en caché.
+  */
+
+  const types =
+    taxonomyCache.types
+      .filter(
+        item => {
+
+          const parent =
+            firstValue(
+              item,
+              [
+                "subcategory_id",
+                "subcategoria_id",
+                "parent_subcategory_id",
+                "parent_id"
+              ]
+            );
+
+
+          return (
+            String(parent) ===
+            String(row.id)
+          );
+
+        }
+      )
+      .sort(
+        (a,b) =>
+          rowName(a)
+            .localeCompare(
+              rowName(b),
+              "es"
+            )
+      );
+
+
+  renderTypes(types);
+
+
+  /*
+    Ya buscamos resultados generales
+    de esa subcategoría aunque no elija tipo.
+  */
+
+  loadResults();
 
 }
 
-/* =========================
-   VOLVER
-========================= */
+
+/* ==========================================================
+   TIPOS
+========================================================== */
+
+function renderTypes(types){
+
+  const section =
+    document.getElementById(
+      "typesSection"
+    );
+
+
+  const grid =
+    document.getElementById(
+      "typesGrid"
+    );
+
+
+  grid.innerHTML =
+    "";
+
+
+  if(!types.length){
+
+    section.classList.remove(
+      "visible"
+    );
+
+    return;
+
+  }
+
+
+  section.classList.add(
+    "visible"
+  );
+
+
+  types.forEach(
+    type => {
+
+      const button =
+        document.createElement(
+          "button"
+        );
+
+
+      button.className =
+        "type-card";
+
+
+      button.textContent =
+        rowName(type);
+
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          document
+            .querySelectorAll(
+              ".type-card"
+            )
+            .forEach(
+              element =>
+                element.classList.remove(
+                  "active"
+                )
+            );
+
+
+          button.classList.add(
+            "active"
+          );
+
+
+          currentType =
+            type;
+
+
+          loadResults();
+
+        }
+      );
+
+
+      grid.appendChild(
+        button
+      );
+
+    }
+  );
+
+}
+
+
+/* ==========================================================
+   RESULTADOS
+========================================================== */
+
+async function loadResults(){
+
+  if(!currentSubcategory){
+    return;
+  }
+
+
+  const myNavigation =
+    ++navigationVersion;
+
+
+  const section =
+    document.getElementById(
+      "resultsSection"
+    );
+
+
+  const loader =
+    document.getElementById(
+      "marketLoader"
+    );
+
+
+  section.classList.remove(
+    "visible"
+  );
+
+
+  loader.classList.add(
+    "visible"
+  );
+
+
+  try{
+
+    if(
+      currentMarketCategory ===
+      "Productos"
+    ){
+
+      await loadProductResults(
+        myNavigation
+      );
+
+    }
+    else{
+
+      renderGenericResults();
+
+    }
+
+  }
+  catch(error){
+
+    console.error(
+      "Resultados:",
+      error
+    );
+
+
+    if(
+      myNavigation ===
+      navigationVersion
+    ){
+
+      renderGenericResults(
+        "Todavía no encontramos publicaciones para esta búsqueda."
+      );
+
+    }
+
+  }
+  finally{
+
+    if(
+      myNavigation ===
+      navigationVersion
+    ){
+
+      loader.classList.remove(
+        "visible"
+      );
+
+    }
+
+  }
+
+}
+
+
+/* ==========================================================
+   PRODUCTOS REALES
+========================================================== */
+
+async function loadProductResults(
+  myNavigation
+){
+
+  /*
+    Traemos tablas por separado.
+
+    No dependemos de joins complejos,
+    así el código tolera mejor el esquema actual.
+  */
+
+  const [
+    productResult,
+    brandResult
+  ] =
+    await withTimeout(
+
+      Promise.all([
+
+        db
+          .from("products")
+          .select("*"),
+
+        db
+          .from("brands")
+          .select("*")
+
+      ]),
+
+      10000,
+
+      "TIMEOUT_PRODUCTS"
+
+    );
+
+
+  if(productResult.error){
+    throw productResult.error;
+  }
+
+  if(brandResult.error){
+    throw brandResult.error;
+  }
+
+
+  if(
+    myNavigation !==
+    navigationVersion
+  ){
+
+    return;
+
+  }
+
+
+  const products =
+    productResult.data || [];
+
+
+  const brands =
+    brandResult.data || [];
+
+
+  const selectedSubcategoryId =
+    currentSubcategory.id;
+
+
+  const selectedTypeId =
+    currentType?.id ||
+    null;
+
+
+  /*
+    Filtrar producto.
+  */
+
+  let filteredProducts =
+    products.filter(
+      product => {
+
+        const subcategoryId =
+          firstValue(
+            product,
+            [
+              "subcategory_id",
+              "subcategoria_id"
+            ]
+          );
+
+
+        if(
+          String(subcategoryId) !==
+          String(selectedSubcategoryId)
+        ){
+
+          return false;
+
+        }
+
+
+        if(selectedTypeId){
+
+          const typeId =
+            firstValue(
+              product,
+              [
+                "category_type_id",
+                "type_id",
+                "tipo_id"
+              ]
+            );
+
+
+          if(
+            typeId &&
+            String(typeId) !==
+            String(selectedTypeId)
+          ){
+
+            return false;
+
+          }
+
+        }
+
+
+        const active =
+          firstValue(
+            product,
+            [
+              "activo",
+              "active",
+              "is_active"
+            ],
+            true
+          );
+
+
+        if(
+          active === false
+        ){
+
+          return false;
+
+        }
+
+
+        return true;
+
+      }
+    );
+
+
+  /*
+    Provincia elegida.
+
+    Buscamos el UUID de la provincia
+    de Supabase por nombre.
+  */
+
+  let databaseProvince =
+    null;
+
+
+  if(selectedProvince){
+
+    databaseProvince =
+      taxonomyCache.provinces.find(
+        province => {
+
+          return (
+            normalizeText(
+              rowName(province)
+            ) ===
+            normalizeText(
+              selectedProvince.name
+            )
+          );
+
+        }
+      );
+
+  }
+
+
+  let filteredBrands =
+    brands;
+
+
+  if(databaseProvince){
+
+    filteredBrands =
+      brands.filter(
+        brand => {
+
+          const provinceId =
+            firstValue(
+              brand,
+              [
+                "province_id",
+                "provincia_id"
+              ]
+            );
+
+
+          /*
+            Si la marca no tiene provincia definida,
+            no la descartamos todavía.
+          */
+
+          if(!provinceId){
+            return true;
+          }
+
+
+          return (
+            String(provinceId) ===
+            String(databaseProvince.id)
+          );
+
+        }
+      );
+
+  }
+
+
+  const allowedBrandIds =
+    new Set(
+      filteredBrands.map(
+        brand =>
+          String(brand.id)
+      )
+    );
+
+
+  filteredProducts =
+    filteredProducts.filter(
+      product => {
+
+        const brandId =
+          firstValue(
+            product,
+            [
+              "brand_id",
+              "marca_id"
+            ]
+          );
+
+
+        if(!brandId){
+          return false;
+        }
+
+
+        return allowedBrandIds.has(
+          String(brandId)
+        );
+
+      }
+    );
+
+
+  /*
+    AGRUPAR POR MARCA.
+
+    Regla Amigate:
+    máximo 5 productos por marca.
+  */
+
+  const grouped =
+    new Map();
+
+
+  filteredProducts.forEach(
+    product => {
+
+      const brandId =
+        firstValue(
+          product,
+          [
+            "brand_id",
+            "marca_id"
+          ]
+        );
+
+
+      if(!grouped.has(
+        String(brandId)
+      )){
+
+        grouped.set(
+          String(brandId),
+          []
+        );
+
+      }
+
+
+      const list =
+        grouped.get(
+          String(brandId)
+        );
+
+
+      if(list.length < 5){
+
+        list.push(
+          product
+        );
+
+      }
+
+    }
+  );
+
+
+  const resultBrands =
+    filteredBrands.filter(
+      brand =>
+        grouped.has(
+          String(brand.id)
+        )
+    );
+
+
+  renderBrandResults(
+    resultBrands,
+    grouped
+  );
+
+}
+
+
+/* ==========================================================
+   RENDER MARCAS
+========================================================== */
+
+function renderBrandResults(
+  brands,
+  groupedProducts
+){
+
+  const section =
+    document.getElementById(
+      "resultsSection"
+    );
+
+
+  const grid =
+    document.getElementById(
+      "brandsGrid"
+    );
+
+
+  const generic =
+    document.getElementById(
+      "genericResults"
+    );
+
+
+  grid.innerHTML =
+    "";
+
+
+  generic.classList.add(
+    "hidden"
+  );
+
+
+  document
+    .getElementById(
+      "resultsTitle"
+    )
+    .textContent =
+      rowName(
+        currentSubcategory
+      );
+
+
+  const location =
+    selectedProvince?.name ||
+    "Argentina";
+
+
+  document
+    .getElementById(
+      "resultsSubtitle"
+    )
+    .textContent =
+      brands.length +
+      (
+        brands.length === 1
+          ? " marca encontrada en "
+          : " marcas encontradas en "
+      ) +
+      location;
+
+
+  if(!brands.length){
+
+    generic.classList.remove(
+      "hidden"
+    );
+
+
+    generic.textContent =
+      "Todavía no hay marcas con publicaciones disponibles para esta búsqueda. Cuando se carguen marcas y productos, van a aparecer automáticamente acá.";
+
+
+    section.classList.add(
+      "visible"
+    );
+
+
+    return;
+
+  }
+
+
+  brands.forEach(
+    brand => {
+
+      const products =
+        groupedProducts.get(
+          String(brand.id)
+        ) || [];
+
+
+      const name =
+        rowName(brand);
+
+
+      const initials =
+        name
+          .slice(0,2)
+          .toUpperCase();
+
+
+      const locality =
+        firstValue(
+          brand,
+          [
+            "localidad",
+            "city",
+            "ciudad"
+          ],
+          ""
+        );
+
+
+      const card =
+        document.createElement(
+          "article"
+        );
+
+
+      card.className =
+        "brand-card";
+
+
+      const productHtml =
+        products
+          .map(
+            product => {
+
+              const productName =
+                rowName(product);
+
+
+              const price =
+                firstValue(
+                  product,
+                  [
+                    "precio",
+                    "price",
+                    "precio_actual"
+                  ],
+                  null
+                );
+
+
+              return `
+                <div class="mini-product">
+
+                  <strong>
+                    ${escapeHtml(productName)}
+                  </strong>
+
+                  ${
+                    price !== null
+                      ? `<span>$${escapeHtml(price)}</span>`
+                      : ""
+                  }
+
+                </div>
+              `;
+
+            }
+          )
+          .join("");
+
+
+      card.innerHTML =
+        `
+          <div class="brand-cover">
+            ${escapeHtml(initials)}
+          </div>
+
+          <div class="brand-body">
+
+            <div class="brand-top">
+
+              <div>
+
+                <div class="brand-name">
+                  ${escapeHtml(name)}
+                </div>
+
+                <div class="brand-meta">
+                  ${
+                    locality
+                      ? escapeHtml(locality)
+                      : "Marca en Amigate"
+                  }
+                </div>
+
+              </div>
+
+              <span class="brand-badge">
+                Amigate
+              </span>
+
+            </div>
+
+            <div class="brand-products">
+              ${productHtml}
+            </div>
+
+            <button class="brand-open">
+              Ver marca
+            </button>
+
+          </div>
+        `;
+
+
+      card
+        .querySelector(
+          ".brand-open"
+        )
+        .addEventListener(
+          "click",
+          () => {
+
+            alert(
+              "El siguiente avance será el portal completo de " +
+              name +
+              "."
+            );
+
+          }
+        );
+
+
+      grid.appendChild(
+        card
+      );
+
+    }
+  );
+
+
+  section.classList.add(
+    "visible"
+  );
+
+}
+
+
+/* ==========================================================
+   OTROS VERTICALES
+========================================================== */
+
+function renderGenericResults(
+  message = null
+){
+
+  const section =
+    document.getElementById(
+      "resultsSection"
+    );
+
+
+  const grid =
+    document.getElementById(
+      "brandsGrid"
+    );
+
+
+  const generic =
+    document.getElementById(
+      "genericResults"
+    );
+
+
+  grid.innerHTML =
+    "";
+
+
+  generic.classList.remove(
+    "hidden"
+  );
+
+
+  document
+    .getElementById(
+      "resultsTitle"
+    )
+    .textContent =
+      rowName(
+        currentSubcategory
+      );
+
+
+  document
+    .getElementById(
+      "resultsSubtitle"
+    )
+    .textContent =
+      selectedProvince?.name ||
+      "Argentina";
+
+
+  generic.textContent =
+    message ||
+    (
+      "La navegación de " +
+      currentMarketCategory +
+      " ya está funcionando con las categorías reales de Supabase. " +
+      "En la próxima etapa conectaremos sus publicaciones reales."
+    );
+
+
+  section.classList.add(
+    "visible"
+  );
+
+}
+
+
+/* ==========================================================
+   ERROR MARKETPLACE
+========================================================== */
+
+function showMarketError(error){
+
+  const state =
+    document.getElementById(
+      "marketError"
+    );
+
+
+  const title =
+    document.getElementById(
+      "marketErrorTitle"
+    );
+
+
+  const text =
+    document.getElementById(
+      "marketErrorText"
+    );
+
+
+  state.classList.add(
+    "visible"
+  );
+
+
+  document
+    .getElementById(
+      "subcategoriesSection"
+    )
+    .classList
+    .add(
+      "hidden"
+    );
+
+
+  if(
+    error.message ===
+    "TIMEOUT_TAXONOMY"
+  ){
+
+    title.textContent =
+      "Supabase tardó demasiado";
+
+
+    text.textContent =
+      "No pudimos descargar las categorías. Tocá Reintentar para limpiar la caché y volver a conectarnos.";
+
+    return;
+
+  }
+
+
+  if(
+    error.message ===
+    "ROOT_NOT_FOUND"
+  ){
+
+    title.textContent =
+      "No encontramos esta sección";
+
+
+    text.textContent =
+      "La categoría principal no apareció en la tabla categories.";
+
+    return;
+
+  }
+
+
+  if(
+    error.message ===
+    "NO_SUBCATEGORIES"
+  ){
+
+    title.textContent =
+      "Todavía no hay categorías";
+
+
+    text.textContent =
+      "La sección existe, pero no encontramos subcategorías asociadas.";
+
+    return;
+
+  }
+
+
+  title.textContent =
+    "No pudimos cargar Amigate";
+
+
+  text.textContent =
+    error.message ||
+    "Ocurrió un error al consultar Supabase.";
+
+}
+
+
+/* ==========================================================
+   REINTENTAR
+========================================================== */
+
+document
+  .getElementById(
+    "retryMarket"
+  )
+  .addEventListener(
+    "click",
+    async () => {
+
+      taxonomyCache.loaded =
+        false;
+
+      taxonomyCache.loadingPromise =
+        null;
+
+
+      try{
+
+        await loadTaxonomy(true);
+
+
+        if(currentMarketCategory){
+
+          openMarketplace(
+            currentMarketCategory
+          );
+
+        }
+
+      }
+      catch(error){
+
+        showMarketError(
+          error
+        );
+
+      }
+
+    }
+  );
+
+
+/* ==========================================================
+   VOLVER MARKETPLACE
+========================================================== */
 
 function closeMarketplace(){
+
+  ++navigationVersion;
+
 
   document
     .getElementById(
@@ -3982,6 +6330,7 @@ function closeMarketplace(){
       "visible"
     );
 
+
   document
     .getElementById(
       "publicSite"
@@ -3991,8 +6340,9 @@ function closeMarketplace(){
       "hidden"
     );
 
+
   setTimeout(
-    function(){
+    () => {
 
       document
         .getElementById(
@@ -4033,11 +6383,59 @@ document
   )
   .addEventListener(
     "click",
-    function(){
+    () => {
 
       if(currentSubcategory){
 
-        hideSubcategoryResult();
+        currentSubcategory =
+          null;
+
+        currentType =
+          null;
+
+
+        ++navigationVersion;
+
+
+        document
+          .getElementById(
+            "typesSection"
+          )
+          .classList
+          .remove(
+            "visible"
+          );
+
+
+        document
+          .getElementById(
+            "resultsSection"
+          )
+          .classList
+          .remove(
+            "visible"
+          );
+
+
+        document
+          .getElementById(
+            "breadcrumbSubSeparator"
+          )
+          .classList
+          .add(
+            "hidden"
+          );
+
+
+        document
+          .getElementById(
+            "breadcrumbSubcategory"
+          )
+          .classList
+          .add(
+            "hidden"
+          );
+
 
         document
           .getElementById(
@@ -4048,46 +6446,48 @@ document
             "hidden"
           );
 
+
         return;
 
       }
+
 
       closeMarketplace();
 
     }
   );
 
-/* =========================
+
+/* ==========================================================
    FILTROS
-========================= */
+========================================================== */
 
 document
   .querySelectorAll(
     ".filter-chip"
   )
   .forEach(
-    function(button){
+    button => {
 
       button.addEventListener(
         "click",
-        function(){
+        () => {
 
           document
             .querySelectorAll(
               ".filter-chip"
             )
             .forEach(
-              item =>
-                item.classList.remove(
+              element =>
+                element.classList.remove(
                   "active"
                 )
             );
 
-          button
-            .classList
-            .add(
-              "active"
-            );
+
+          button.classList.add(
+            "active"
+          );
 
         }
       );
@@ -4095,51 +6495,22 @@ document
     }
   );
 
-/* =========================
-   ESCAPE
-========================= */
 
-function escapeHtml(value){
-
-  return String(
-    value ?? ""
-  )
-    .replaceAll(
-      "&",
-      "&amp;"
-    )
-    .replaceAll(
-      "<",
-      "&lt;"
-    )
-    .replaceAll(
-      ">",
-      "&gt;"
-    )
-    .replaceAll(
-      '"',
-      "&quot;"
-    )
-    .replaceAll(
-      "'",
-      "&#039;"
-    );
-
-}
-
-/* =========================
+/* ==========================================================
    AUTH
-========================= */
+========================================================== */
 
 const authModal =
   document.getElementById(
     "authModal"
   );
 
+
 const accountModal =
   document.getElementById(
     "accountModal"
   );
+
 
 const sellerIntentMessage =
   document.getElementById(
@@ -4155,6 +6526,7 @@ function openAuth(
   authIntent =
     intent;
 
+
   sellerIntentMessage
     .classList
     .toggle(
@@ -4162,9 +6534,11 @@ function openAuth(
       intent === "seller"
     );
 
+
   switchAuthTab(
     tab
   );
+
 
   openModal(
     authModal
@@ -4180,35 +6554,29 @@ function switchAuthTab(tab){
       ".auth-tab"
     )
     .forEach(
-      function(button){
+      button => {
 
-        button
-          .classList
-          .toggle(
-            "active",
-            button.dataset
-              .authTab ===
-            tab
-          );
+        button.classList.toggle(
+          "active",
+          button.dataset.authTab ===
+          tab
+        );
 
       }
     );
+
 
   document
     .querySelectorAll(
       ".auth-panel"
     )
     .forEach(
-      function(panel){
-
-        panel
-          .classList
-          .remove(
-            "active"
-          );
-
-      }
+      panel =>
+        panel.classList.remove(
+          "active"
+        )
     );
+
 
   document
     .getElementById(
@@ -4218,6 +6586,7 @@ function switchAuthTab(tab){
     .add(
       "active"
     );
+
 
   clearAuthMessages();
 
@@ -4229,11 +6598,11 @@ document
     ".auth-tab"
   )
   .forEach(
-    function(button){
+    button => {
 
       button.addEventListener(
         "click",
-        function(){
+        () => {
 
           switchAuthTab(
             button.dataset.authTab
@@ -4253,15 +6622,15 @@ function clearAuthMessages(){
     "registerMessage"
   ]
   .forEach(
-    function(id){
+    id => {
 
       const element =
-        document.getElementById(
-          id
-        );
+        document.getElementById(id);
+
 
       element.className =
         "auth-message";
+
 
       element.textContent =
         "";
@@ -4279,13 +6648,13 @@ function showAuthMessage(
 ){
 
   const element =
-    document.getElementById(
-      id
-    );
+    document.getElementById(id);
+
 
   element.className =
     "auth-message visible " +
     type;
+
 
   element.textContent =
     message;
@@ -4293,30 +6662,35 @@ function showAuthMessage(
 }
 
 
+/* PASSWORD */
+
 document
   .querySelectorAll(
     ".show-password"
   )
   .forEach(
-    function(button){
+    button => {
 
       button.addEventListener(
         "click",
-        function(){
+        () => {
 
           const input =
             document.getElementById(
               button.dataset.passwordTarget
             );
 
+
           const visible =
             input.type ===
             "text";
+
 
           input.type =
             visible
               ? "password"
               : "text";
+
 
           button.textContent =
             visible
@@ -4329,9 +6703,10 @@ document
     }
   );
 
-/* =========================
-   REGISTRO
-========================= */
+
+/* ==========================================================
+   REGISTRO CORREGIDO
+========================================================== */
 
 document
   .getElementById(
@@ -4339,52 +6714,70 @@ document
   )
   .addEventListener(
     "submit",
-    async function(event){
+    async event => {
 
       event.preventDefault();
+
 
       const submit =
         document.getElementById(
           "registerSubmit"
         );
 
+
       const nombre =
-        document.getElementById(
-          "registerName"
-        ).value.trim();
+        document
+          .getElementById(
+            "registerName"
+          )
+          .value
+          .trim();
+
 
       const apellido =
-        document.getElementById(
-          "registerSurname"
-        ).value.trim();
+        document
+          .getElementById(
+            "registerSurname"
+          )
+          .value
+          .trim();
+
 
       const dni =
-        document.getElementById(
-          "registerDni"
-        )
-        .value
-        .replace(
-          /\D/g,
-          ""
-        );
+        document
+          .getElementById(
+            "registerDni"
+          )
+          .value
+          .replace(/\D/g,"");
+
 
       const telefono =
-        document.getElementById(
-          "registerPhone"
-        ).value.trim();
+        document
+          .getElementById(
+            "registerPhone"
+          )
+          .value
+          .trim();
+
 
       const email =
-        document.getElementById(
-          "registerEmail"
-        )
-        .value
-        .trim()
-        .toLowerCase();
+        document
+          .getElementById(
+            "registerEmail"
+          )
+          .value
+          .trim()
+          .toLowerCase();
+
 
       const password =
-        document.getElementById(
-          "registerPassword"
-        ).value;
+        document
+          .getElementById(
+            "registerPassword"
+          )
+          .value;
+
 
       if(
         !nombre ||
@@ -4405,9 +6798,8 @@ document
 
       }
 
-      if(
-        password.length < 6
-      ){
+
+      if(password.length < 6){
 
         showAuthMessage(
           "registerMessage",
@@ -4419,85 +6811,81 @@ document
 
       }
 
+
       submit.disabled =
         true;
+
 
       submit.textContent =
         "Creando cuenta...";
 
+
       clearAuthMessages();
+
 
       try{
 
-        const signupPromise =
-          db.auth.signUp({
-            email,
-            password,
+        const result =
+          await withTimeout(
 
-            options:{
-              data:{
-                nombre,
-                apellido,
-                dni,
-                telefono,
+            db.auth.signUp(
+              {
 
-                nombre_completo:
-                  nombre +
-                  " " +
-                  apellido,
+                email,
+                password,
 
-                origen_registro:
-                  authIntent,
+                options:{
+                  data:{
 
-                tipo_usuario:
-                  authIntent ===
-                    "seller"
-                    ? "vendedor"
-                    : "comprador"
+                    nombre,
+                    apellido,
+                    dni,
+                    telefono,
+
+                    nombre_completo:
+                      nombre +
+                      " " +
+                      apellido,
+
+                    origen_registro:
+                      authIntent,
+
+                    tipo_usuario:
+                      authIntent ===
+                        "seller"
+                        ? "vendedor"
+                        : "comprador"
+
+                  }
+                }
+
               }
-            }
-          });
+            ),
 
-        const timeoutPromise =
-          new Promise(
-            function(
-              _,
-              reject
-            ){
+            15000,
 
-              setTimeout(
-                function(){
+            "TIMEOUT_REGISTRO"
 
-                  reject(
-                    new Error(
-                      "TIMEOUT_REGISTRO"
-                    )
-                  );
-
-                },
-                15000
-              );
-
-            }
           );
+
 
         const {
           data,
           error
         } =
-          await Promise.race([
-            signupPromise,
-            timeoutPromise
-          ]);
+          result;
+
 
         if(error){
           throw error;
         }
 
+
         if(data?.session){
 
           currentUser =
             data.user;
+
 
           showAuthMessage(
             "registerMessage",
@@ -4505,7 +6893,13 @@ document
             "success"
           );
 
+
           updatePublicSessionUI();
+
+
+          /*
+            No bloqueamos esperando profiles.
+          */
 
           loadCurrentProfile()
             .then(
@@ -4515,12 +6909,14 @@ document
               console.warn
             );
 
+
           setTimeout(
-            function(){
+            () => {
 
               closeModal(
                 authModal
               );
+
 
               openAccountModal();
 
@@ -4528,9 +6924,11 @@ document
             350
           );
 
+
           return;
 
         }
+
 
         showAuthMessage(
           "registerMessage",
@@ -4542,9 +6940,10 @@ document
       catch(error){
 
         console.error(
-          "Error registro:",
+          "Registro:",
           error
         );
+
 
         if(
           error.message ===
@@ -4553,7 +6952,7 @@ document
 
           showAuthMessage(
             "registerMessage",
-            "Supabase tardó demasiado en responder. Revisá Authentication → Users para ver si la cuenta llegó a crearse.",
+            "Supabase tardó demasiado. Revisá Authentication → Users para comprobar si la cuenta llegó a crearse.",
             "error"
           );
 
@@ -4576,6 +6975,7 @@ document
         submit.disabled =
           false;
 
+
         submit.textContent =
           "Crear mi cuenta";
 
@@ -4584,9 +6984,10 @@ document
     }
   );
 
-/* =========================
+
+/* ==========================================================
    LOGIN
-========================= */
+========================================================== */
 
 document
   .getElementById(
@@ -4594,33 +6995,42 @@ document
   )
   .addEventListener(
     "submit",
-    async function(event){
+    async event => {
 
       event.preventDefault();
+
 
       const submit =
         document.getElementById(
           "loginSubmit"
         );
 
+
       const email =
-        document.getElementById(
-          "loginEmail"
-        )
-        .value
-        .trim()
-        .toLowerCase();
+        document
+          .getElementById(
+            "loginEmail"
+          )
+          .value
+          .trim()
+          .toLowerCase();
+
 
       const password =
-        document.getElementById(
-          "loginPassword"
-        ).value;
+        document
+          .getElementById(
+            "loginPassword"
+          )
+          .value;
+
 
       submit.disabled =
         true;
 
+
       submit.textContent =
         "Ingresando...";
+
 
       try{
 
@@ -4628,31 +7038,51 @@ document
           data,
           error
         } =
-          await db
-            .auth
-            .signInWithPassword({
-              email,
-              password
-            });
+          await withTimeout(
+
+            db.auth
+              .signInWithPassword(
+                {
+                  email,
+                  password
+                }
+              ),
+
+            12000,
+
+            "TIMEOUT_LOGIN"
+
+          );
+
 
         if(error){
           throw error;
         }
 
+
         currentUser =
           data.user;
 
-        await Promise.race([
-          loadCurrentProfile(),
 
-          new Promise(
-            resolve =>
-              setTimeout(
-                resolve,
-                5000
-              )
-          )
-        ]);
+        await Promise.race(
+          [
+
+            loadCurrentProfile(),
+
+            new Promise(
+              resolve =>
+                setTimeout(
+                  resolve,
+                  4000
+                )
+            )
+
+          ]
+        );
+
+
+        updatePublicSessionUI();
+
 
         showAuthMessage(
           "loginMessage",
@@ -4660,14 +7090,14 @@ document
           "success"
         );
 
-        updatePublicSessionUI();
 
         setTimeout(
-          function(){
+          () => {
 
             closeModal(
               authModal
             );
+
 
             openAccountModal();
 
@@ -4692,6 +7122,7 @@ document
         submit.disabled =
           false;
 
+
         submit.textContent =
           "Iniciar sesión";
 
@@ -4708,37 +7139,61 @@ function friendlyAuthError(
   const value =
     message.toLowerCase();
 
+
   if(
     value.includes(
       "invalid login credentials"
     )
   ){
+
     return "Email o contraseña incorrectos.";
+
   }
+
 
   if(
     value.includes(
       "email not confirmed"
     )
   ){
+
     return "La cuenta todavía está esperando confirmación del email.";
+
   }
+
 
   if(
     value.includes(
       "already registered"
     )
   ){
+
     return "Ya existe una cuenta con ese email.";
+
   }
+
 
   if(
     value.includes(
       "rate limit"
     )
   ){
+
     return "Se hicieron demasiados intentos. Esperá un momento.";
+
   }
+
+
+  if(
+    value.includes(
+      "timeout"
+    )
+  ){
+
+    return "Supabase tardó demasiado en responder.";
+
+  }
+
 
   return (
     message ||
@@ -4747,9 +7202,10 @@ function friendlyAuthError(
 
 }
 
-/* =========================
+
+/* ==========================================================
    PERFIL
-========================= */
+========================================================== */
 
 async function loadCurrentProfile(){
 
@@ -4762,14 +7218,13 @@ async function loadCurrentProfile(){
 
   }
 
+
   const {
     data,
     error
   } =
     await db
-      .from(
-        "profiles"
-      )
+      .from("profiles")
       .select("*")
       .eq(
         "id",
@@ -4777,18 +7232,23 @@ async function loadCurrentProfile(){
       )
       .maybeSingle();
 
+
   if(error){
 
     console.warn(
+      "Profile:",
       error
     );
+
 
     return null;
 
   }
 
+
   currentProfile =
     data;
+
 
   return data;
 
@@ -4820,6 +7280,7 @@ function fullName(){
       ?.nombre ||
     "";
 
+
   const apellido =
     currentProfile?.apellido ||
     currentUser
@@ -4827,15 +7288,15 @@ function fullName(){
       ?.apellido ||
     "";
 
+
   return (
     (
       nombre +
       " " +
       apellido
-    ).trim()
-    ||
-    currentUser?.email
-    ||
+    )
+      .trim() ||
+    currentUser?.email ||
     "Usuario"
   );
 
@@ -4845,8 +7306,7 @@ function fullName(){
 function userType(){
 
   return (
-    currentProfile
-      ?.tipo_usuario ||
+    currentProfile?.tipo_usuario ||
     currentUser
       ?.user_metadata
       ?.tipo_usuario ||
@@ -4858,34 +7318,38 @@ function userType(){
 
 function updatePublicSessionUI(){
 
-  const button =
+  const loginButton =
     document.getElementById(
       "userLoginButton"
     );
+
 
   const marketButton =
     document.getElementById(
       "marketAccountButton"
     );
 
+
   const chip =
     document.getElementById(
       "sessionChip"
     );
 
+
   if(currentUser){
 
-    button.textContent =
+    loginButton.textContent =
       "Mi cuenta";
+
 
     marketButton.textContent =
       "Mi cuenta";
 
-    chip
-      .classList
-      .add(
-        "visible"
-      );
+
+    chip.classList.add(
+      "visible"
+    );
+
 
     document
       .getElementById(
@@ -4897,25 +7361,26 @@ function updatePublicSessionUI(){
   }
   else{
 
-    button.textContent =
+    loginButton.textContent =
       "Iniciar sesión";
+
 
     marketButton.textContent =
       "Iniciar sesión";
 
-    chip
-      .classList
-      .remove(
-        "visible"
-      );
+
+    chip.classList.remove(
+      "visible"
+    );
 
   }
 
 }
 
-/* =========================
+
+/* ==========================================================
    CUENTA
-========================= */
+========================================================== */
 
 function openAccountModal(){
 
@@ -4930,8 +7395,10 @@ function openAccountModal(){
 
   }
 
+
   const name =
     fullName();
+
 
   const initials =
     name
@@ -4939,11 +7406,13 @@ function openAccountModal(){
       .filter(Boolean)
       .slice(0,2)
       .map(
-        item =>
-          item[0]
-            ?.toUpperCase()
+        part =>
+          part
+            .charAt(0)
+            .toUpperCase()
       )
       .join("");
+
 
   document
     .getElementById(
@@ -4952,12 +7421,14 @@ function openAccountModal(){
     .textContent =
       initials || "A";
 
+
   document
     .getElementById(
       "accountName"
     )
     .textContent =
       name;
+
 
   document
     .getElementById(
@@ -4966,6 +7437,7 @@ function openAccountModal(){
     .textContent =
       currentUser.email || "";
 
+
   document
     .getElementById(
       "accountType"
@@ -4973,15 +7445,17 @@ function openAccountModal(){
     .textContent =
       userType();
 
+
   openModal(
     accountModal
   );
 
 }
 
-/* =========================
-   BOTONES AUTH
-========================= */
+
+/* ==========================================================
+   BOTONES CUENTA
+========================================================== */
 
 document
   .getElementById(
@@ -4989,7 +7463,7 @@ document
   )
   .addEventListener(
     "click",
-    function(){
+    () => {
 
       currentUser
         ? openAccountModal()
@@ -5008,7 +7482,7 @@ document
   )
   .addEventListener(
     "click",
-    function(){
+    () => {
 
       currentUser
         ? openAccountModal()
@@ -5027,7 +7501,7 @@ document
   )
   .addEventListener(
     "click",
-    function(){
+    () => {
 
       currentUser
         ? openAccountModal()
@@ -5039,36 +7513,111 @@ document
     }
   );
 
-/* =========================
+
+document
+  .getElementById(
+    "goToPortalButton"
+  )
+  .addEventListener(
+    "click",
+    async () => {
+
+      const type =
+        userType();
+
+
+      if(type === "admin"){
+
+        closeModal(
+          accountModal
+        );
+
+
+        openAdminPanel();
+
+        return;
+
+      }
+
+
+      if(type === "vendedor"){
+
+        alert(
+          "La próxima actualización será el Portal Vendedor completo."
+        );
+
+        return;
+
+      }
+
+
+      closeModal(
+        accountModal
+      );
+
+
+      openBuyerPortal();
+
+    }
+  );
+
+
+document
+  .getElementById(
+    "publishFromAccountButton"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      alert(
+        "La próxima actualización será el alta completa de marca y Portal Vendedor."
+      );
+
+    }
+  );
+
+
+/* ==========================================================
    LOGOUT
-========================= */
+========================================================== */
 
 async function logout(){
 
   try{
 
-    await db
-      .auth
-      .signOut();
+    await db.auth.signOut();
 
   }
   catch(error){
 
-    console.warn(
-      error
-    );
+    console.warn(error);
 
   }
+
 
   currentUser =
     null;
 
+
   currentProfile =
     null;
+
 
   closeModal(
     accountModal
   );
+
+
+  document
+    .getElementById(
+      "buyerPortal"
+    )
+    .classList
+    .remove(
+      "visible"
+    );
+
 
   document
     .getElementById(
@@ -5078,6 +7627,7 @@ async function logout(){
     .remove(
       "visible"
     );
+
 
   updatePublicSessionUI();
 
@@ -5094,59 +7644,9 @@ document
   );
 
 
-document
-  .getElementById(
-    "goToPortalButton"
-  )
-  .addEventListener(
-    "click",
-    function(){
-
-      const type =
-        userType();
-
-      if(
-        type === "admin"
-      ){
-
-        closeModal(
-          accountModal
-        );
-
-        openAdminPanel();
-
-        return;
-
-      }
-
-      alert(
-        type === "vendedor"
-          ? "Próximo paso: Portal Vendedor."
-          : "Próximo paso: Portal Comprador."
-      );
-
-    }
-  );
-
-
-document
-  .getElementById(
-    "publishFromAccountButton"
-  )
-  .addEventListener(
-    "click",
-    function(){
-
-      alert(
-        "Próximo paso: alta real de marca."
-      );
-
-    }
-  );
-
-/* =========================
-   CERRAR MODALES
-========================= */
+/* ==========================================================
+   MODAL CLOSE
+========================================================== */
 
 document
   .getElementById(
@@ -5178,13 +7678,15 @@ backgroundClose(
   authModal
 );
 
+
 backgroundClose(
   accountModal
 );
 
-/* =========================
-   SESIÓN
-========================= */
+
+/* ==========================================================
+   RESTAURAR SESIÓN
+========================================================== */
 
 async function initializeSession(){
 
@@ -5193,55 +7695,411 @@ async function initializeSession(){
     const {
       data
     } =
-      await db
-        .auth
-        .getSession();
+      await db.auth.getSession();
+
 
     currentUser =
-      data
-        ?.session
-        ?.user ||
+      data?.session?.user ||
       null;
+
 
     if(currentUser){
 
-      await Promise.race([
-        loadCurrentProfile(),
+      await Promise.race(
+        [
 
-        new Promise(
-          resolve =>
-            setTimeout(
-              resolve,
-              3000
-            )
-        )
-      ]);
+          loadCurrentProfile(),
+
+          new Promise(
+            resolve =>
+              setTimeout(
+                resolve,
+                3000
+              )
+          )
+
+        ]
+      );
 
     }
+
 
     updatePublicSessionUI();
 
   }
   catch(error){
 
-    console.warn(
-      error
-    );
+    console.warn(error);
 
   }
 
 }
 
+
 initializeSession();
 
-/* =========================
+
+/* ==========================================================
+   PORTAL COMPRADOR
+========================================================== */
+
+async function openBuyerPortal(){
+
+  if(!currentUser){
+    return;
+  }
+
+
+  document
+    .getElementById(
+      "buyerPortal"
+    )
+    .classList
+    .add(
+      "visible"
+    );
+
+
+  document
+    .getElementById(
+      "buyerWelcomeName"
+    )
+    .textContent =
+      displayName();
+
+
+  loadBuyerData();
+
+}
+
+
+document
+  .getElementById(
+    "buyerExit"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      document
+        .getElementById(
+          "buyerPortal"
+        )
+        .classList
+        .remove(
+          "visible"
+        );
+
+    }
+  );
+
+
+document
+  .getElementById(
+    "buyerAccountButton"
+  )
+  .addEventListener(
+    "click",
+    openAccountModal
+  );
+
+
+document
+  .querySelectorAll(
+    ".buyer-nav"
+  )
+  .forEach(
+    button => {
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          document
+            .querySelectorAll(
+              ".buyer-nav"
+            )
+            .forEach(
+              item =>
+                item.classList.remove(
+                  "active"
+                )
+            );
+
+
+          button.classList.add(
+            "active"
+          );
+
+
+          document
+            .querySelectorAll(
+              ".buyer-section"
+            )
+            .forEach(
+              section =>
+                section.classList.remove(
+                  "active"
+                )
+            );
+
+
+          const page =
+            button.dataset.buyerPage;
+
+
+          document
+            .getElementById(
+              "buyer-" + page
+            )
+            ?.classList.add(
+              "active"
+            );
+
+
+          document
+            .getElementById(
+              "buyerPageTitle"
+            )
+            .textContent =
+              button.textContent.trim();
+
+        }
+      );
+
+    }
+  );
+
+
+async function safeUserRows(
+  table
+){
+
+  try{
+
+    const {
+      data,
+      error
+    } =
+      await db
+        .from(table)
+        .select("*");
+
+
+    if(error){
+      throw error;
+    }
+
+
+    return data || [];
+
+  }
+  catch(error){
+
+    console.warn(
+      table,
+      error
+    );
+
+
+    return [];
+
+  }
+
+}
+
+
+async function loadBuyerData(){
+
+  const [
+    orders,
+    favorites,
+    favoriteBrands,
+    addresses,
+    claims
+  ] =
+    await Promise.all(
+      [
+
+        safeUserRows(
+          "orders"
+        ),
+
+        safeUserRows(
+          "favorite_products"
+        ),
+
+        safeUserRows(
+          "favorite_brands"
+        ),
+
+        safeUserRows(
+          "user_addresses"
+        ),
+
+        safeUserRows(
+          "claims"
+        )
+
+      ]
+    );
+
+
+  document
+    .getElementById(
+      "buyerOrdersCount"
+    )
+    .textContent =
+      orders.length;
+
+
+  document
+    .getElementById(
+      "buyerFavoritesCount"
+    )
+    .textContent =
+      favorites.length;
+
+
+  document
+    .getElementById(
+      "buyerBrandsCount"
+    )
+    .textContent =
+      favoriteBrands.length;
+
+
+  document
+    .getElementById(
+      "buyerClaimsCount"
+    )
+    .textContent =
+      claims.length;
+
+
+  renderSimpleList(
+    "buyerOrdersList",
+    orders,
+    "Todavía no realizaste compras."
+  );
+
+
+  renderSimpleList(
+    "buyerFavoritesList",
+    favorites,
+    "Todavía no guardaste productos favoritos."
+  );
+
+
+  renderSimpleList(
+    "buyerAddressesList",
+    addresses,
+    "Todavía no guardaste direcciones."
+  );
+
+
+  renderSimpleList(
+    "buyerClaimsList",
+    claims,
+    "No tenés reclamos."
+  );
+
+}
+
+
+function renderSimpleList(
+  elementId,
+  rows,
+  emptyText
+){
+
+  const container =
+    document.getElementById(
+      elementId
+    );
+
+
+  container.innerHTML =
+    "";
+
+
+  if(!rows.length){
+
+    container.innerHTML =
+      `
+        <div class="portal-row">
+          <p>${escapeHtml(emptyText)}</p>
+        </div>
+      `;
+
+
+    return;
+
+  }
+
+
+  rows
+    .slice(0,20)
+    .forEach(
+      (row,index) => {
+
+        const title =
+          firstValue(
+            row,
+            [
+              "nombre",
+              "titulo",
+              "estado",
+              "status",
+              "direccion",
+              "address"
+            ],
+            "Registro " +
+            (index + 1)
+          );
+
+
+        const item =
+          document.createElement(
+            "div"
+          );
+
+
+        item.className =
+          "portal-row";
+
+
+        item.innerHTML =
+          `
+            <strong>
+              ${escapeHtml(title)}
+            </strong>
+
+            <p>
+              Información guardada en Amigate.
+            </p>
+          `;
+
+
+        container.appendChild(
+          item
+        );
+
+      }
+    );
+
+}
+
+
+/* ==========================================================
    ADMIN
-========================= */
+========================================================== */
 
 const adminModal =
   document.getElementById(
     "adminModal"
   );
+
 
 const adminError =
   document.getElementById(
@@ -5259,6 +8117,7 @@ function openAdminPanel(){
       currentUser?.email ||
       "";
 
+
   document
     .getElementById(
       "adminApp"
@@ -5268,7 +8127,17 @@ function openAdminPanel(){
       "visible"
     );
 
+
   loadDashboard();
+
+
+  loadTaxonomy()
+    .then(
+      renderAdminTaxonomy
+    )
+    .catch(
+      console.warn
+    );
 
 }
 
@@ -5279,18 +8148,17 @@ document
   )
   .addEventListener(
     "click",
-    async function(){
+    async () => {
 
       if(currentUser){
 
         await loadCurrentProfile();
 
+
         if(
-          currentProfile
-            ?.tipo_usuario ===
+          currentProfile?.tipo_usuario ===
             "admin" &&
-          currentProfile
-            ?.activo ===
+          currentProfile?.activo ===
             true
         ){
 
@@ -5301,6 +8169,7 @@ document
         }
 
       }
+
 
       openModal(
         adminModal
@@ -5334,15 +8203,15 @@ document
   )
   .addEventListener(
     "submit",
-    async function(event){
+    async event => {
 
       event.preventDefault();
 
-      adminError
-        .classList
-        .remove(
-          "visible"
-        );
+
+      adminError.classList.remove(
+        "visible"
+      );
+
 
       const email =
         document
@@ -5352,6 +8221,7 @@ document
           .value
           .trim();
 
+
       const password =
         document
           .getElementById(
@@ -5359,16 +8229,19 @@ document
           )
           .value;
 
+
       const {
         data,
         error
       } =
-        await db
-          .auth
-          .signInWithPassword({
-            email,
-            password
-          });
+        await db.auth
+          .signInWithPassword(
+            {
+              email,
+              password
+            }
+          );
+
 
       if(error){
 
@@ -5380,20 +8253,20 @@ document
 
       }
 
+
       const {
         data:profile,
         error:profileError
       } =
         await db
-          .from(
-            "profiles"
-          )
+          .from("profiles")
           .select("*")
           .eq(
             "id",
             data.user.id
           )
           .single();
+
 
       if(
         profileError ||
@@ -5404,29 +8277,34 @@ document
           true
       ){
 
-        await db
-          .auth
-          .signOut();
+        await db.auth.signOut();
+
 
         showAdminError(
           "Esta cuenta no tiene permisos de administrador."
         );
 
+
         return;
 
       }
 
+
       currentUser =
         data.user;
+
 
       currentProfile =
         profile;
 
+
       updatePublicSessionUI();
+
 
       closeModal(
         adminModal
       );
+
 
       openAdminPanel();
 
@@ -5434,24 +8312,22 @@ document
   );
 
 
-function showAdminError(
-  message
-){
+function showAdminError(message){
 
   adminError.textContent =
     message;
 
-  adminError
-    .classList
-    .add(
-      "visible"
-    );
+
+  adminError.classList.add(
+    "visible"
+  );
 
 }
 
-/* =========================
-   DASHBOARD
-========================= */
+
+/* ==========================================================
+   ADMIN DASHBOARD
+========================================================== */
 
 async function getCount(
   table,
@@ -5459,50 +8335,60 @@ async function getCount(
   value = null
 ){
 
-  let query =
-    db
-      .from(
-        table
-      )
-      .select(
-        "*",
-        {
-          count:"exact",
-          head:true
-        }
-      );
+  try{
 
-  if(
-    column &&
-    value !== null
-  ){
+    let query =
+      db
+        .from(table)
+        .select(
+          "*",
+          {
+            count:"exact",
+            head:true
+          }
+        );
 
-    query =
-      query.eq(
-        column,
-        value
-      );
+
+    if(
+      column &&
+      value !== null
+    ){
+
+      query =
+        query.eq(
+          column,
+          value
+        );
+
+    }
+
+
+    const {
+      count,
+      error
+    } =
+      await query;
+
+
+    if(error){
+      throw error;
+    }
+
+
+    return count ?? 0;
 
   }
-
-  const {
-    count,
-    error
-  } =
-    await query;
-
-  if(error){
+  catch(error){
 
     console.warn(
       table,
-      error.message
+      error
     );
+
 
     return "—";
 
   }
-
-  return count ?? 0;
 
 }
 
@@ -5512,38 +8398,48 @@ async function loadDashboard(){
   const [
     clients,
     brands,
+    products,
     sellers,
     orders,
     claims,
     subscriptions
   ] =
-    await Promise.all([
-      getCount(
-        "profiles",
-        "tipo_usuario",
-        "comprador"
-      ),
+    await Promise.all(
+      [
 
-      getCount(
-        "brands"
-      ),
+        getCount(
+          "profiles",
+          "tipo_usuario",
+          "comprador"
+        ),
 
-      getCount(
-        "seller_profiles"
-      ),
+        getCount(
+          "brands"
+        ),
 
-      getCount(
-        "orders"
-      ),
+        getCount(
+          "products"
+        ),
 
-      getCount(
-        "claims"
-      ),
+        getCount(
+          "seller_profiles"
+        ),
 
-      getCount(
-        "brand_subscriptions"
-      )
-    ]);
+        getCount(
+          "orders"
+        ),
+
+        getCount(
+          "claims"
+        ),
+
+        getCount(
+          "brand_subscriptions"
+        )
+
+      ]
+    );
+
 
   document
     .getElementById(
@@ -5552,6 +8448,7 @@ async function loadDashboard(){
     .textContent =
       clients;
 
+
   document
     .getElementById(
       "countBrands"
@@ -5559,12 +8456,14 @@ async function loadDashboard(){
     .textContent =
       brands;
 
+
   document
     .getElementById(
-      "countActiveBrands"
+      "countProducts"
     )
     .textContent =
-      "—";
+      products;
+
 
   document
     .getElementById(
@@ -5573,6 +8472,7 @@ async function loadDashboard(){
     .textContent =
       sellers;
 
+
   document
     .getElementById(
       "countOrders"
@@ -5580,12 +8480,14 @@ async function loadDashboard(){
     .textContent =
       orders;
 
+
   document
     .getElementById(
       "countClaims"
     )
     .textContent =
       claims;
+
 
   document
     .getElementById(
@@ -5596,20 +8498,144 @@ async function loadDashboard(){
 
 }
 
-/* =========================
+
+/* ==========================================================
+   TAXONOMÍA ADMIN
+========================================================== */
+
+function renderAdminTaxonomy(){
+
+  const container =
+    document.getElementById(
+      "adminTaxonomy"
+    );
+
+
+  container.innerHTML =
+    "";
+
+
+  const wrapper =
+    document.createElement(
+      "div"
+    );
+
+
+  wrapper.className =
+    "admin-taxonomy";
+
+
+  taxonomyCache.categories
+    .sort(
+      (a,b) =>
+        rowName(a)
+          .localeCompare(
+            rowName(b),
+            "es"
+          )
+    )
+    .forEach(
+      category => {
+
+        const subs =
+          taxonomyCache.subcategories
+            .filter(
+              sub => {
+
+                const parent =
+                  firstValue(
+                    sub,
+                    [
+                      "category_id",
+                      "categoria_id",
+                      "parent_category_id"
+                    ]
+                  );
+
+
+                return (
+                  String(parent) ===
+                  String(category.id)
+                );
+
+              }
+            );
+
+
+        const group =
+          document.createElement(
+            "div"
+          );
+
+
+        group.className =
+          "admin-taxonomy-group";
+
+
+        group.innerHTML =
+          `
+            <strong>
+              ${escapeHtml(
+                rowName(category)
+              )}
+            </strong>
+
+            <div class="admin-taxonomy-list">
+
+              ${
+                subs.length
+                  ? subs
+                      .map(
+                        sub =>
+                          `
+                            <span class="admin-taxonomy-pill">
+                              ${escapeHtml(
+                                rowName(sub)
+                              )}
+                            </span>
+                          `
+                      )
+                      .join("")
+                  : `
+                      <span class="admin-taxonomy-pill">
+                        Sin subcategorías
+                      </span>
+                    `
+              }
+
+            </div>
+          `;
+
+
+        wrapper.appendChild(
+          group
+        );
+
+      }
+    );
+
+
+  container.appendChild(
+    wrapper
+  );
+
+}
+
+
+/* ==========================================================
    ADMIN NAV
-========================= */
+========================================================== */
 
 document
   .querySelectorAll(
     ".admin-nav"
   )
   .forEach(
-    function(button){
+    button => {
 
       button.addEventListener(
         "click",
-        function(){
+        () => {
 
           document
             .querySelectorAll(
@@ -5622,11 +8648,11 @@ document
                 )
             );
 
-          button
-            .classList
-            .add(
-              "active"
-            );
+
+          button.classList.add(
+            "active"
+          );
+
 
           document
             .querySelectorAll(
@@ -5639,18 +8665,19 @@ document
                 )
             );
 
+
           const page =
             button.dataset.adminPage;
 
+
           document
             .getElementById(
-              "admin-" +
-              page
+              "admin-" + page
             )
-            ?.classList
-            .add(
+            ?.classList.add(
               "active"
             );
+
 
           document
             .getElementById(
@@ -5658,9 +8685,7 @@ document
             )
             .textContent =
               button
-                .querySelector(
-                  "strong"
-                )
+                .querySelector("strong")
                 ?.textContent ||
               "Administración";
 
