@@ -38,6 +38,8 @@
       --border:#EEDFD7;
 
       --sidebar:#211D1B;
+      --green:#2D8A62;
+      --red:#B64839;
     }
 
     *{
@@ -72,7 +74,7 @@
 
 
     /* =====================================================
-       PORTADA
+       HOME
     ===================================================== */
 
     .home-screen{
@@ -91,10 +93,6 @@
     }
 
 
-    /* =====================================================
-       IZQUIERDA
-    ===================================================== */
-
     .hero-left{
       min-height:100vh;
 
@@ -109,6 +107,14 @@
       z-index:10;
     }
 
+    .top-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+
+      gap:20px;
+    }
+
     .logo{
       color:var(--orange);
 
@@ -116,6 +122,41 @@
       font-weight:800;
 
       letter-spacing:-2px;
+    }
+
+    .session-chip{
+      display:none;
+
+      align-items:center;
+      gap:9px;
+
+      padding:7px 11px;
+
+      border:
+        1px solid
+        rgba(235,104,65,.18);
+
+      border-radius:100px;
+
+      background:
+        rgba(255,255,255,.6);
+
+      font-size:11px;
+
+      color:var(--gray);
+    }
+
+    .session-chip.visible{
+      display:flex;
+    }
+
+    .session-dot{
+      width:7px;
+      height:7px;
+
+      border-radius:50%;
+
+      background:#42A87C;
     }
 
     .hero-content{
@@ -307,10 +348,6 @@
     }
 
 
-    /* =====================================================
-       PROVINCIA SELECCIONADA
-    ===================================================== */
-
     .province-card{
       position:absolute;
 
@@ -424,10 +461,6 @@
       cursor:pointer;
     }
 
-    .clear-province:hover{
-      color:var(--dark);
-    }
-
 
     /* =====================================================
        EXPLORAR
@@ -480,11 +513,6 @@
 
       font-size:17px;
     }
-
-
-    /* =====================================================
-       CATEGORÍAS
-    ===================================================== */
 
     .category-grid{
       display:grid;
@@ -559,7 +587,7 @@
 
 
     /* =====================================================
-       PRESENTACIÓN
+       ABOUT
     ===================================================== */
 
     .about{
@@ -673,7 +701,6 @@
 
     .footer-links{
       display:flex;
-
       gap:20px;
     }
 
@@ -691,7 +718,7 @@
 
 
     /* =====================================================
-       LOGIN ADMIN
+       MODALES GENERALES
     ===================================================== */
 
     .modal-overlay{
@@ -717,6 +744,8 @@
       pointer-events:none;
 
       transition:.2s;
+
+      overflow-y:auto;
     }
 
     .modal-overlay.open{
@@ -725,8 +754,13 @@
       pointer-events:auto;
     }
 
-    .admin-login{
-      width:min(430px,100%);
+    .modal-box{
+      width:min(460px,100%);
+
+      max-height:
+        calc(100vh - 40px);
+
+      overflow-y:auto;
 
       padding:31px;
 
@@ -744,9 +778,11 @@
 
       justify-content:space-between;
       align-items:center;
+
+      gap:20px;
     }
 
-    .modal-top span{
+    .modal-logo{
       color:var(--orange);
 
       font-size:25px;
@@ -754,12 +790,393 @@
     }
 
     .modal-close{
+      width:36px;
+      height:36px;
+
+      display:grid;
+      place-items:center;
+
+      border:none;
+
+      border-radius:50%;
+
+      background:#F8F4F2;
+
+      color:var(--dark);
+
+      font-size:23px;
+    }
+
+    .modal-title{
+      margin-top:24px;
+
+      font-family:
+        "Playfair Display",
+        serif;
+
+      font-size:35px;
+
+      line-height:1.05;
+    }
+
+    .modal-description{
+      margin-top:8px;
+
+      color:var(--gray);
+
+      font-size:13px;
+
+      line-height:1.5;
+    }
+
+
+    /* =====================================================
+       LOGIN / REGISTRO
+    ===================================================== */
+
+    .auth-intent{
+      display:none;
+
+      margin-top:18px;
+
+      padding:12px 13px;
+
+      border-radius:13px;
+
+      background:var(--cream-2);
+
+      color:var(--gray);
+
+      font-size:12px;
+
+      line-height:1.45;
+    }
+
+    .auth-intent.visible{
+      display:block;
+    }
+
+    .auth-intent strong{
+      color:var(--orange-dark);
+    }
+
+    .auth-tabs{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+
+      gap:5px;
+
+      margin-top:23px;
+
+      padding:4px;
+
+      border-radius:13px;
+
+      background:#F7F3F1;
+    }
+
+    .auth-tab{
+      padding:10px 8px;
+
+      border:none;
+
+      border-radius:10px;
+
+      color:var(--gray);
+
+      background:transparent;
+
+      font-size:12px;
+      font-weight:800;
+    }
+
+    .auth-tab.active{
+      color:var(--dark);
+
+      background:white;
+
+      box-shadow:
+        0 3px 12px
+        rgba(50,30,20,.07);
+    }
+
+    .auth-panel{
+      display:none;
+    }
+
+    .auth-panel.active{
+      display:block;
+    }
+
+    .field-row{
+      display:grid;
+
+      grid-template-columns:1fr 1fr;
+
+      gap:11px;
+    }
+
+    .form-group{
+      margin-top:17px;
+    }
+
+    .form-group label{
+      display:block;
+
+      margin-bottom:7px;
+
+      color:var(--dark);
+
+      font-size:11px;
+      font-weight:800;
+    }
+
+    .form-group input{
+      width:100%;
+
+      padding:13px 14px;
+
+      border:
+        1px solid
+        var(--border);
+
+      border-radius:12px;
+
+      background:white;
+
+      color:var(--dark);
+
+      outline:none;
+
+      transition:.18s;
+    }
+
+    .form-group input:focus{
+      border-color:var(--orange);
+
+      box-shadow:
+        0 0 0 3px
+        rgba(235,104,65,.08);
+    }
+
+    .password-wrap{
+      position:relative;
+    }
+
+    .password-wrap input{
+      padding-right:72px;
+    }
+
+    .show-password{
+      position:absolute;
+
+      top:50%;
+      right:10px;
+
+      transform:translateY(-50%);
+
       border:none;
 
       background:transparent;
 
-      font-size:24px;
+      color:var(--gray);
+
+      font-size:10px;
+      font-weight:800;
     }
+
+    .submit-btn{
+      width:100%;
+
+      min-height:49px;
+
+      margin-top:21px;
+
+      border:none;
+
+      border-radius:13px;
+
+      background:var(--orange);
+
+      color:white;
+
+      font-weight:800;
+    }
+
+    .submit-btn:hover{
+      background:var(--orange-dark);
+    }
+
+    .submit-btn:disabled{
+      opacity:.65;
+      cursor:not-allowed;
+    }
+
+    .auth-message{
+      display:none;
+
+      margin-top:14px;
+
+      padding:11px 12px;
+
+      border-radius:11px;
+
+      font-size:12px;
+
+      line-height:1.45;
+    }
+
+    .auth-message.visible{
+      display:block;
+    }
+
+    .auth-message.error{
+      color:#963B2F;
+
+      background:#FFF0ED;
+
+      border:
+        1px solid #F5D0C8;
+    }
+
+    .auth-message.success{
+      color:#276A4E;
+
+      background:#ECF8F2;
+
+      border:
+        1px solid #CDEADB;
+    }
+
+    .auth-note{
+      margin-top:17px;
+
+      color:#9B928D;
+
+      text-align:center;
+
+      font-size:10px;
+
+      line-height:1.5;
+    }
+
+
+    /* =====================================================
+       MI CUENTA
+    ===================================================== */
+
+    .account-card{
+      margin-top:23px;
+
+      padding:18px;
+
+      border:
+        1px solid
+        var(--border);
+
+      border-radius:17px;
+
+      background:var(--cream);
+    }
+
+    .account-avatar{
+      width:54px;
+      height:54px;
+
+      display:grid;
+      place-items:center;
+
+      border-radius:50%;
+
+      background:var(--orange);
+
+      color:white;
+
+      font-family:
+        "Playfair Display",
+        serif;
+
+      font-size:23px;
+    }
+
+    .account-name{
+      margin-top:13px;
+
+      font-size:19px;
+      font-weight:800;
+    }
+
+    .account-email{
+      margin-top:3px;
+
+      color:var(--gray);
+
+      font-size:12px;
+
+      overflow-wrap:anywhere;
+    }
+
+    .account-type{
+      display:inline-flex;
+
+      margin-top:12px;
+
+      padding:6px 10px;
+
+      border-radius:100px;
+
+      background:var(--cream-2);
+
+      color:var(--orange-dark);
+
+      font-size:10px;
+      font-weight:800;
+
+      text-transform:uppercase;
+
+      letter-spacing:.05em;
+    }
+
+    .account-actions{
+      display:grid;
+
+      gap:9px;
+
+      margin-top:17px;
+    }
+
+    .account-action{
+      min-height:45px;
+
+      border:
+        1px solid
+        var(--border);
+
+      border-radius:12px;
+
+      background:white;
+
+      color:var(--dark);
+
+      font-weight:700;
+    }
+
+    .account-action.primary{
+      color:white;
+
+      border-color:var(--orange);
+
+      background:var(--orange);
+    }
+
+    .account-action.logout{
+      color:var(--red);
+    }
+
+
+    /* =====================================================
+       ADMIN LOGIN
+    ===================================================== */
 
     .admin-login h3{
       margin-top:28px;
@@ -779,55 +1196,6 @@
       font-size:13px;
 
       line-height:1.5;
-    }
-
-    .form-group{
-      margin-top:20px;
-    }
-
-    .form-group label{
-      display:block;
-
-      margin-bottom:7px;
-
-      font-size:12px;
-      font-weight:700;
-    }
-
-    .form-group input{
-      width:100%;
-
-      padding:14px 15px;
-
-      border:
-        1px solid
-        var(--border);
-
-      border-radius:13px;
-
-      outline:none;
-    }
-
-    .form-group input:focus{
-      border-color:var(--orange);
-    }
-
-    .admin-submit{
-      width:100%;
-
-      margin-top:22px;
-
-      padding:14px;
-
-      border:none;
-
-      border-radius:13px;
-
-      color:white;
-
-      background:var(--orange);
-
-      font-weight:800;
     }
 
     .admin-error{
@@ -852,7 +1220,7 @@
 
 
     /* =====================================================
-       ADMIN GENERAL
+       ADMIN
     ===================================================== */
 
     .admin-app{
@@ -1159,11 +1527,6 @@
         flex-direction:column;
       }
 
-      /*
-        IMPORTANTE:
-        EL TÍTULO YA NO FLOTA ENCIMA DEL MAPA.
-      */
-
       .map-side{
         min-height:auto;
 
@@ -1198,10 +1561,6 @@
       #chartdiv{
         height:650px;
       }
-
-      /*
-        TARJETA TAMBIÉN FUERA DE MISIONES
-      */
 
       .province-card{
         right:auto;
@@ -1258,8 +1617,7 @@
       }
 
       .admin-header{
-        padding:
-          0 18px;
+        padding:0 18px;
       }
 
       .admin-content{
@@ -1273,6 +1631,16 @@
 
       .logo{
         font-size:29px;
+      }
+
+      .session-chip{
+        max-width:145px;
+      }
+
+      .session-chip span:last-child{
+        overflow:hidden;
+        white-space:nowrap;
+        text-overflow:ellipsis;
       }
 
       .explore-section,
@@ -1314,6 +1682,18 @@
         grid-template-columns:1fr;
       }
 
+      .field-row{
+        grid-template-columns:1fr;
+
+        gap:0;
+      }
+
+      .modal-box{
+        padding:23px 19px;
+
+        border-radius:21px;
+      }
+
     }
 
   </style>
@@ -1330,9 +1710,25 @@
 
   <div class="hero-left">
 
-    <div class="logo">
-      Amigate
+    <div class="top-row">
+
+      <div class="logo">
+        Amigate
+      </div>
+
+      <div
+        class="session-chip"
+        id="sessionChip"
+      >
+        <span class="session-dot"></span>
+
+        <span id="sessionChipText">
+          Sesión iniciada
+        </span>
+      </div>
+
     </div>
+
 
     <div class="hero-content">
 
@@ -1467,77 +1863,33 @@
   <div class="category-grid">
 
     <article class="category">
-      <div class="category-icon">
-        🛍️
-      </div>
-
-      <strong>
-        Productos
-      </strong>
-
-      <p>
-        Descubrí marcas y emprendimientos.
-      </p>
+      <div class="category-icon">🛍️</div>
+      <strong>Productos</strong>
+      <p>Descubrí marcas y emprendimientos.</p>
     </article>
 
-
     <article class="category">
-      <div class="category-icon">
-        ✨
-      </div>
-
-      <strong>
-        Servicios
-      </strong>
-
-      <p>
-        Profesionales y empresas para lo que necesitás.
-      </p>
+      <div class="category-icon">✨</div>
+      <strong>Servicios</strong>
+      <p>Profesionales y empresas para lo que necesitás.</p>
     </article>
 
-
     <article class="category">
-      <div class="category-icon">
-        🛠️
-      </div>
-
-      <strong>
-        Oficios
-      </strong>
-
-      <p>
-        Encontrá especialistas cerca tuyo.
-      </p>
+      <div class="category-icon">🛠️</div>
+      <strong>Oficios</strong>
+      <p>Encontrá especialistas cerca tuyo.</p>
     </article>
 
-
     <article class="category">
-      <div class="category-icon">
-        💼
-      </div>
-
-      <strong>
-        Empleos
-      </strong>
-
-      <p>
-        Encontrá nuevas oportunidades laborales.
-      </p>
+      <div class="category-icon">💼</div>
+      <strong>Empleos</strong>
+      <p>Encontrá nuevas oportunidades laborales.</p>
     </article>
 
-
     <article class="category">
-      <div class="category-icon">
-        📣
-      </div>
-
-      <strong>
-        Necesito
-      </strong>
-
-      <p>
-        Publicá exactamente lo que estás buscando.
-      </p>
+      <div class="category-icon">📣</div>
+      <strong>Necesito</strong>
+      <p>Publicá exactamente lo que estás buscando.</p>
     </article>
 
   </div>
@@ -1621,6 +1973,414 @@
 
 
 <!-- =====================================================
+     LOGIN / REGISTRO USUARIO
+===================================================== -->
+
+<div
+  class="modal-overlay"
+  id="authModal"
+>
+
+  <div class="modal-box">
+
+    <div class="modal-top">
+
+      <span class="modal-logo">
+        Amigate
+      </span>
+
+      <button
+        class="modal-close"
+        id="closeAuthModal"
+        type="button"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <h2
+      class="modal-title"
+      id="authModalTitle"
+    >
+      Bienvenido
+    </h2>
+
+    <p
+      class="modal-description"
+      id="authModalDescription"
+    >
+      Iniciá sesión o creá tu cuenta para continuar.
+    </p>
+
+
+    <div
+      class="auth-intent"
+      id="sellerIntentMessage"
+    >
+      <strong>
+        ¿Querés publicar tu marca?
+      </strong>
+
+      Creá tu cuenta o iniciá sesión.
+      Después vamos a continuar con el alta de tu marca.
+    </div>
+
+
+    <div class="auth-tabs">
+
+      <button
+        class="auth-tab active"
+        data-auth-tab="login"
+        type="button"
+      >
+        Iniciar sesión
+      </button>
+
+      <button
+        class="auth-tab"
+        data-auth-tab="register"
+        type="button"
+      >
+        Registrarme
+      </button>
+
+    </div>
+
+
+    <!-- LOGIN -->
+
+    <div
+      class="auth-panel active"
+      id="auth-login"
+    >
+
+      <form id="loginForm">
+
+        <div class="form-group">
+
+          <label>
+            Email
+          </label>
+
+          <input
+            type="email"
+            id="loginEmail"
+            autocomplete="email"
+            required
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Contraseña
+          </label>
+
+          <div class="password-wrap">
+
+            <input
+              type="password"
+              id="loginPassword"
+              autocomplete="current-password"
+              required
+            >
+
+            <button
+              class="show-password"
+              type="button"
+              data-password-target="loginPassword"
+            >
+              Ver
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <button
+          class="submit-btn"
+          id="loginSubmit"
+          type="submit"
+        >
+          Iniciar sesión
+        </button>
+
+
+        <div
+          class="auth-message"
+          id="loginMessage"
+        ></div>
+
+      </form>
+
+    </div>
+
+
+    <!-- REGISTRO -->
+
+    <div
+      class="auth-panel"
+      id="auth-register"
+    >
+
+      <form id="registerForm">
+
+        <div class="field-row">
+
+          <div class="form-group">
+
+            <label>
+              Nombre
+            </label>
+
+            <input
+              type="text"
+              id="registerName"
+              autocomplete="given-name"
+              required
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Apellido
+            </label>
+
+            <input
+              type="text"
+              id="registerSurname"
+              autocomplete="family-name"
+              required
+            >
+
+          </div>
+
+        </div>
+
+
+        <div class="field-row">
+
+          <div class="form-group">
+
+            <label>
+              DNI
+            </label>
+
+            <input
+              type="text"
+              id="registerDni"
+              inputmode="numeric"
+              autocomplete="off"
+              required
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Teléfono
+            </label>
+
+            <input
+              type="tel"
+              id="registerPhone"
+              autocomplete="tel"
+              required
+            >
+
+          </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Email
+          </label>
+
+          <input
+            type="email"
+            id="registerEmail"
+            autocomplete="email"
+            required
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Contraseña
+          </label>
+
+          <div class="password-wrap">
+
+            <input
+              type="password"
+              id="registerPassword"
+              minlength="6"
+              autocomplete="new-password"
+              required
+            >
+
+            <button
+              class="show-password"
+              type="button"
+              data-password-target="registerPassword"
+            >
+              Ver
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <button
+          class="submit-btn"
+          id="registerSubmit"
+          type="submit"
+        >
+          Crear mi cuenta
+        </button>
+
+
+        <div
+          class="auth-message"
+          id="registerMessage"
+        ></div>
+
+
+        <div class="auth-note">
+          Al crear tu cuenta aceptás los términos
+          y políticas de Amigate.
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     MI CUENTA
+===================================================== -->
+
+<div
+  class="modal-overlay"
+  id="accountModal"
+>
+
+  <div class="modal-box">
+
+    <div class="modal-top">
+
+      <span class="modal-logo">
+        Amigate
+      </span>
+
+      <button
+        class="modal-close"
+        id="closeAccountModal"
+        type="button"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <h2 class="modal-title">
+      Mi cuenta
+    </h2>
+
+    <p class="modal-description">
+      Tu cuenta de Amigate.
+    </p>
+
+
+    <div class="account-card">
+
+      <div
+        class="account-avatar"
+        id="accountAvatar"
+      >
+        A
+      </div>
+
+      <div
+        class="account-name"
+        id="accountName"
+      >
+        Usuario
+      </div>
+
+      <div
+        class="account-email"
+        id="accountEmail"
+      ></div>
+
+      <span
+        class="account-type"
+        id="accountType"
+      >
+        Comprador
+      </span>
+
+
+      <div class="account-actions">
+
+        <button
+          class="account-action primary"
+          id="goToPortalButton"
+          type="button"
+        >
+          Ir a mi portal
+        </button>
+
+        <button
+          class="account-action"
+          id="publishFromAccountButton"
+          type="button"
+        >
+          Publicar mi marca
+        </button>
+
+        <button
+          class="account-action logout"
+          id="logoutButton"
+          type="button"
+        >
+          Cerrar sesión
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!-- =====================================================
      LOGIN ADMIN
 ===================================================== -->
 
@@ -1629,17 +2389,18 @@
   id="adminModal"
 >
 
-  <div class="admin-login">
+  <div class="modal-box admin-login">
 
     <div class="modal-top">
 
-      <span>
+      <span class="modal-logo">
         Amigate
       </span>
 
       <button
         class="modal-close"
         id="closeAdminModal"
+        type="button"
       >
         ×
       </button>
@@ -1692,7 +2453,7 @@
 
       <button
         type="submit"
-        class="admin-submit"
+        class="submit-btn"
       >
         Entrar
       </button>
@@ -1733,98 +2494,62 @@
 
     <div class="admin-menu">
 
-      <button
-        class="admin-nav active"
-        data-admin-page="dashboard"
-      >
+      <button class="admin-nav active" data-admin-page="dashboard">
         <span>◫</span>
         <strong>Dashboard</strong>
       </button>
 
-      <button
-        class="admin-nav"
-        data-admin-page="clientes"
-      >
+      <button class="admin-nav" data-admin-page="clientes">
         <span>♙</span>
         <strong>Clientes</strong>
       </button>
 
-      <button
-        class="admin-nav"
-        data-admin-page="vendedores"
-      >
+      <button class="admin-nav" data-admin-page="vendedores">
         <span>◇</span>
         <strong>Vendedores</strong>
       </button>
 
-      <button
-        class="admin-nav"
-        data-admin-page="marcas"
-      >
+      <button class="admin-nav" data-admin-page="marcas">
         <span>▣</span>
         <strong>Marcas</strong>
       </button>
 
-      <button
-        class="admin-nav"
-        data-admin-page="categorias"
-      >
+      <button class="admin-nav" data-admin-page="categorias">
         <span>▦</span>
         <strong>Categorías</strong>
       </button>
 
-      <button
-        class="admin-nav"
-        data-admin-page="operaciones"
-      >
+      <button class="admin-nav" data-admin-page="operaciones">
         <span>↔</span>
         <strong>Operaciones</strong>
       </button>
 
-      <button
-        class="admin-nav"
-        data-admin-page="finanzas"
-      >
+      <button class="admin-nav" data-admin-page="finanzas">
         <span>$</span>
         <strong>Finanzas</strong>
       </button>
 
-      <button
-        class="admin-nav"
-        data-admin-page="publicidad"
-      >
+      <button class="admin-nav" data-admin-page="publicidad">
         <span>◎</span>
         <strong>Publicidad</strong>
       </button>
 
-      <button
-        class="admin-nav"
-        data-admin-page="suscripciones"
-      >
+      <button class="admin-nav" data-admin-page="suscripciones">
         <span>◷</span>
         <strong>Suscripciones</strong>
       </button>
 
-      <button
-        class="admin-nav"
-        data-admin-page="reclamos"
-      >
+      <button class="admin-nav" data-admin-page="reclamos">
         <span>!</span>
         <strong>Reclamos</strong>
       </button>
 
-      <button
-        class="admin-nav"
-        data-admin-page="moderacion"
-      >
+      <button class="admin-nav" data-admin-page="moderacion">
         <span>✓</span>
         <strong>Moderación</strong>
       </button>
 
-      <button
-        class="admin-nav"
-        data-admin-page="configuracion"
-      >
+      <button class="admin-nav" data-admin-page="configuracion">
         <span>⚙</span>
         <strong>Configuración</strong>
       </button>
@@ -2029,11 +2754,58 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
   "sb_publishable_KHbLlwbhlkyaiz-7KXW6Mw_nAnTVsLa";
 
+
 const db =
   window.supabase.createClient(
     SUPABASE_URL,
     SUPABASE_KEY
   );
+
+
+let currentUser = null;
+let currentProfile = null;
+let authIntent = "buyer";
+
+
+/* =========================================================
+   HELPERS MODAL
+========================================================= */
+
+function openModal(element){
+  element.classList.add("open");
+
+  document.body.style.overflow =
+    "hidden";
+}
+
+
+function closeModal(element){
+  element.classList.remove("open");
+
+  document.body.style.overflow =
+    "";
+}
+
+
+function closeModalOnBackground(
+  element
+){
+
+  element.addEventListener(
+    "click",
+    function(event){
+
+      if(
+        event.target ===
+        element
+      ){
+        closeModal(element);
+      }
+
+    }
+  );
+
+}
 
 
 /* =========================================================
@@ -2042,6 +2814,7 @@ const db =
 
 let selectedProvince = null;
 let selectedPolygon = null;
+
 
 const provinceCard =
   document.getElementById(
@@ -2093,6 +2866,7 @@ function updateProvinceContent(){
     "Descubrí marcas, profesionales y oportunidades disponibles en " +
     selectedProvince.name +
     ".";
+
 }
 
 
@@ -2203,17 +2977,6 @@ am5.ready(function(){
     );
 
 
-  /*
-    IMPORTANTE:
-    YA NO HACEMOS ZOOM AL SELECCIONAR.
-
-    TAMPOCO HACEMOS chart.goHome()
-    CUANDO SE DESELECCIONA.
-
-    ESTO EVITA EL FREEZE EN MÓVIL.
-  */
-
-
   function clearSelection(){
 
     if(selectedPolygon){
@@ -2226,12 +2989,8 @@ am5.ready(function(){
     }
 
 
-    selectedPolygon =
-      null;
-
-
-    selectedProvince =
-      null;
+    selectedPolygon = null;
+    selectedProvince = null;
 
 
     provinceCard.classList.remove(
@@ -2245,6 +3004,7 @@ am5.ready(function(){
 
 
     updateProvinceContent();
+
   }
 
 
@@ -2269,11 +3029,6 @@ am5.ready(function(){
         }
 
 
-        /*
-          MISMA PROVINCIA:
-          DESELECCIONA.
-        */
-
         if(
           selectedPolygon ===
           polygon
@@ -2284,10 +3039,6 @@ am5.ready(function(){
           return;
         }
 
-
-        /*
-          APAGAR ANTERIOR
-        */
 
         if(selectedPolygon){
 
@@ -2358,19 +3109,9 @@ am5.ready(function(){
     )
     .addEventListener(
       "click",
-      function(){
-
-        clearSelection();
-
-      }
+      clearSelection
     );
 
-
-  /*
-    RESTAURAR SELECCIÓN
-
-    SIN ZOOM.
-  */
 
   polygonSeries
     .events
@@ -2475,10 +3216,6 @@ am5.ready(function(){
 });
 
 
-/* =========================================================
-   EXPLORAR PROVINCIA
-========================================================= */
-
 exploreButton.addEventListener(
   "click",
   function(){
@@ -2496,6 +3233,1430 @@ exploreButton.addEventListener(
 
 
 /* =========================================================
+   AUTH MODAL
+========================================================= */
+
+const authModal =
+  document.getElementById(
+    "authModal"
+  );
+
+const accountModal =
+  document.getElementById(
+    "accountModal"
+  );
+
+const sellerIntentMessage =
+  document.getElementById(
+    "sellerIntentMessage"
+  );
+
+
+function openAuth(
+  intent = "buyer",
+  initialTab = "login"
+){
+
+  authIntent = intent;
+
+
+  if(intent === "seller"){
+
+    sellerIntentMessage
+      .classList
+      .add(
+        "visible"
+      );
+
+  }
+  else{
+
+    sellerIntentMessage
+      .classList
+      .remove(
+        "visible"
+      );
+
+  }
+
+
+  switchAuthTab(
+    initialTab
+  );
+
+
+  openModal(
+    authModal
+  );
+
+}
+
+
+function switchAuthTab(tab){
+
+  document
+    .querySelectorAll(
+      ".auth-tab"
+    )
+    .forEach(
+      button => {
+
+        button.classList.toggle(
+          "active",
+          button.dataset.authTab ===
+            tab
+        );
+
+      }
+    );
+
+
+  document
+    .querySelectorAll(
+      ".auth-panel"
+    )
+    .forEach(
+      panel => {
+
+        panel.classList.remove(
+          "active"
+        );
+
+      }
+    );
+
+
+  document
+    .getElementById(
+      "auth-" + tab
+    )
+    .classList.add(
+      "active"
+    );
+
+
+  clearAuthMessages();
+
+}
+
+
+document
+  .querySelectorAll(
+    ".auth-tab"
+  )
+  .forEach(
+    button => {
+
+      button.addEventListener(
+        "click",
+        function(){
+
+          switchAuthTab(
+            button.dataset.authTab
+          );
+
+        }
+      );
+
+    }
+  );
+
+
+function clearAuthMessages(){
+
+  [
+    "loginMessage",
+    "registerMessage"
+  ]
+  .forEach(
+    id => {
+
+      const element =
+        document.getElementById(
+          id
+        );
+
+      element.textContent = "";
+
+      element.className =
+        "auth-message";
+
+    }
+  );
+
+}
+
+
+function showAuthMessage(
+  id,
+  message,
+  type
+){
+
+  const element =
+    document.getElementById(
+      id
+    );
+
+
+  element.textContent =
+    message;
+
+
+  element.className =
+    "auth-message visible " +
+    type;
+
+}
+
+
+/* =========================================================
+   VER CONTRASEÑA
+========================================================= */
+
+document
+  .querySelectorAll(
+    ".show-password"
+  )
+  .forEach(
+    button => {
+
+      button.addEventListener(
+        "click",
+        function(){
+
+          const target =
+            document.getElementById(
+              button
+                .dataset
+                .passwordTarget
+            );
+
+
+          const showing =
+            target.type ===
+            "text";
+
+
+          target.type =
+            showing
+              ? "password"
+              : "text";
+
+
+          button.textContent =
+            showing
+              ? "Ver"
+              : "Ocultar";
+
+        }
+      );
+
+    }
+  );
+
+
+/* =========================================================
+   REGISTRO REAL
+========================================================= */
+
+document
+  .getElementById(
+    "registerForm"
+  )
+  .addEventListener(
+    "submit",
+    async function(event){
+
+      event.preventDefault();
+
+
+      const submit =
+        document.getElementById(
+          "registerSubmit"
+        );
+
+
+      const nombre =
+        document
+          .getElementById(
+            "registerName"
+          )
+          .value
+          .trim();
+
+
+      const apellido =
+        document
+          .getElementById(
+            "registerSurname"
+          )
+          .value
+          .trim();
+
+
+      const dni =
+        document
+          .getElementById(
+            "registerDni"
+          )
+          .value
+          .replace(
+            /\D/g,
+            ""
+          );
+
+
+      const telefono =
+        document
+          .getElementById(
+            "registerPhone"
+          )
+          .value
+          .trim();
+
+
+      const email =
+        document
+          .getElementById(
+            "registerEmail"
+          )
+          .value
+          .trim()
+          .toLowerCase();
+
+
+      const password =
+        document
+          .getElementById(
+            "registerPassword"
+          )
+          .value;
+
+
+      if(
+        !nombre ||
+        !apellido ||
+        !dni ||
+        !telefono ||
+        !email ||
+        !password
+      ){
+
+        showAuthMessage(
+          "registerMessage",
+          "Completá todos los campos.",
+          "error"
+        );
+
+        return;
+      }
+
+
+      if(
+        dni.length < 7 ||
+        dni.length > 9
+      ){
+
+        showAuthMessage(
+          "registerMessage",
+          "Revisá el DNI ingresado.",
+          "error"
+        );
+
+        return;
+      }
+
+
+      if(
+        password.length < 6
+      ){
+
+        showAuthMessage(
+          "registerMessage",
+          "La contraseña debe tener al menos 6 caracteres.",
+          "error"
+        );
+
+        return;
+      }
+
+
+      submit.disabled = true;
+
+      submit.textContent =
+        "Creando cuenta...";
+
+
+      clearAuthMessages();
+
+
+      try{
+
+        /*
+          IMPORTANTE:
+
+          NO insertamos directamente en profiles.
+
+          El trigger handle_new_user()
+          que ya configuramos en Supabase
+          crea el perfil automáticamente.
+
+          Únicamente enviamos metadata.
+        */
+
+        const {
+          data,
+          error
+        } =
+          await db
+            .auth
+            .signUp({
+
+              email:
+                email,
+
+              password:
+                password,
+
+              options:{
+                data:{
+                  nombre:
+                    nombre,
+
+                  apellido:
+                    apellido,
+
+                  dni:
+                    dni,
+
+                  telefono:
+                    telefono,
+
+                  nombre_completo:
+                    nombre +
+                    " " +
+                    apellido,
+
+                  origen_registro:
+                    authIntent,
+
+                  tipo_usuario:
+                    authIntent ===
+                      "seller"
+                      ? "vendedor"
+                      : "comprador"
+                }
+              }
+
+            });
+
+
+        if(error){
+
+          console.error(
+            "Error registro:",
+            error
+          );
+
+
+          showAuthMessage(
+            "registerMessage",
+            friendlyAuthError(
+              error.message
+            ),
+            "error"
+          );
+
+          return;
+        }
+
+
+        /*
+          Si Supabase devuelve sesión,
+          la confirmación de email está
+          desactivada y podemos entrar ya.
+        */
+
+        if(data.session){
+
+          currentUser =
+            data.user;
+
+
+          await loadCurrentProfile();
+
+
+          showAuthMessage(
+            "registerMessage",
+            "Cuenta creada correctamente.",
+            "success"
+          );
+
+
+          setTimeout(
+            function(){
+
+              closeModal(
+                authModal
+              );
+
+
+              updatePublicSessionUI();
+
+
+              /*
+                Si venía por Publicar mi marca,
+                dejamos preparada la siguiente
+                etapa.
+              */
+
+              if(
+                authIntent ===
+                "seller"
+              ){
+
+                openSellerNextStep();
+
+              }
+              else{
+
+                openAccountModal();
+
+              }
+
+            },
+            650
+          );
+
+
+          return;
+        }
+
+
+        /*
+          Si no hay sesión, Supabase tiene
+          confirmación de email activada.
+        */
+
+        showAuthMessage(
+          "registerMessage",
+          "La cuenta fue creada. Supabase está solicitando confirmar el email antes de iniciar sesión.",
+          "success"
+        );
+
+      }
+      catch(error){
+
+        console.error(
+          error
+        );
+
+
+        showAuthMessage(
+          "registerMessage",
+          "No pudimos crear la cuenta. Probá nuevamente.",
+          "error"
+        );
+
+      }
+      finally{
+
+        submit.disabled =
+          false;
+
+
+        submit.textContent =
+          "Crear mi cuenta";
+
+      }
+
+    }
+  );
+
+
+/* =========================================================
+   LOGIN REAL
+========================================================= */
+
+document
+  .getElementById(
+    "loginForm"
+  )
+  .addEventListener(
+    "submit",
+    async function(event){
+
+      event.preventDefault();
+
+
+      const submit =
+        document.getElementById(
+          "loginSubmit"
+        );
+
+
+      const email =
+        document
+          .getElementById(
+            "loginEmail"
+          )
+          .value
+          .trim()
+          .toLowerCase();
+
+
+      const password =
+        document
+          .getElementById(
+            "loginPassword"
+          )
+          .value;
+
+
+      if(
+        !email ||
+        !password
+      ){
+
+        showAuthMessage(
+          "loginMessage",
+          "Ingresá tu email y contraseña.",
+          "error"
+        );
+
+        return;
+      }
+
+
+      submit.disabled =
+        true;
+
+
+      submit.textContent =
+        "Ingresando...";
+
+
+      clearAuthMessages();
+
+
+      try{
+
+        const {
+          data,
+          error
+        } =
+          await db
+            .auth
+            .signInWithPassword({
+              email,
+              password
+            });
+
+
+        if(error){
+
+          showAuthMessage(
+            "loginMessage",
+            friendlyAuthError(
+              error.message
+            ),
+            "error"
+          );
+
+          return;
+        }
+
+
+        currentUser =
+          data.user;
+
+
+        await loadCurrentProfile();
+
+
+        showAuthMessage(
+          "loginMessage",
+          "Sesión iniciada correctamente.",
+          "success"
+        );
+
+
+        setTimeout(
+          function(){
+
+            closeModal(
+              authModal
+            );
+
+
+            updatePublicSessionUI();
+
+
+            if(
+              authIntent ===
+              "seller"
+            ){
+
+              openSellerNextStep();
+
+            }
+            else{
+
+              openAccountModal();
+
+            }
+
+          },
+          450
+        );
+
+      }
+      catch(error){
+
+        console.error(
+          error
+        );
+
+
+        showAuthMessage(
+          "loginMessage",
+          "No pudimos iniciar sesión.",
+          "error"
+        );
+
+      }
+      finally{
+
+        submit.disabled =
+          false;
+
+
+        submit.textContent =
+          "Iniciar sesión";
+
+      }
+
+    }
+  );
+
+
+/* =========================================================
+   ERRORES AMIGABLES
+========================================================= */
+
+function friendlyAuthError(
+  message = ""
+){
+
+  const value =
+    message.toLowerCase();
+
+
+  if(
+    value.includes(
+      "invalid login credentials"
+    )
+  ){
+    return "Email o contraseña incorrectos.";
+  }
+
+
+  if(
+    value.includes(
+      "email not confirmed"
+    )
+  ){
+    return "Primero tenés que confirmar tu email.";
+  }
+
+
+  if(
+    value.includes(
+      "user already registered"
+    )
+  ){
+    return "Ya existe una cuenta con ese email.";
+  }
+
+
+  if(
+    value.includes(
+      "password"
+    ) &&
+    value.includes(
+      "characters"
+    )
+  ){
+    return "La contraseña es demasiado corta.";
+  }
+
+
+  if(
+    value.includes(
+      "rate limit"
+    )
+  ){
+    return "Se hicieron demasiados intentos. Esperá un momento y volvé a probar.";
+  }
+
+
+  return message ||
+    "Ocurrió un error. Probá nuevamente.";
+
+}
+
+
+/* =========================================================
+   LEER PERFIL
+========================================================= */
+
+async function loadCurrentProfile(){
+
+  if(!currentUser){
+
+    currentProfile =
+      null;
+
+    return null;
+  }
+
+
+  try{
+
+    const {
+      data,
+      error
+    } =
+      await db
+        .from(
+          "profiles"
+        )
+        .select(
+          "*"
+        )
+        .eq(
+          "id",
+          currentUser.id
+        )
+        .maybeSingle();
+
+
+    if(error){
+
+      console.warn(
+        "No se pudo leer profile:",
+        error
+      );
+
+
+      currentProfile =
+        null;
+
+
+      return null;
+    }
+
+
+    currentProfile =
+      data || null;
+
+
+    return currentProfile;
+
+  }
+  catch(error){
+
+    console.warn(
+      error
+    );
+
+
+    currentProfile =
+      null;
+
+
+    return null;
+  }
+
+}
+
+
+/* =========================================================
+   SESIÓN PÚBLICA
+========================================================= */
+
+function getDisplayName(){
+
+  const metadata =
+    currentUser
+      ?.user_metadata ||
+    {};
+
+
+  return (
+    currentProfile?.nombre ||
+    metadata.nombre ||
+    metadata.first_name ||
+    currentUser
+      ?.email
+      ?.split("@")[0] ||
+    "Usuario"
+  );
+
+}
+
+
+function getFullName(){
+
+  const metadata =
+    currentUser
+      ?.user_metadata ||
+    {};
+
+
+  const nombre =
+    currentProfile?.nombre ||
+    metadata.nombre ||
+    "";
+
+
+  const apellido =
+    currentProfile?.apellido ||
+    metadata.apellido ||
+    "";
+
+
+  const combined =
+    (
+      nombre +
+      " " +
+      apellido
+    )
+    .trim();
+
+
+  return combined ||
+    currentUser?.email ||
+    "Usuario";
+
+}
+
+
+function getUserType(){
+
+  return (
+    currentProfile?.tipo_usuario ||
+    currentUser
+      ?.user_metadata
+      ?.tipo_usuario ||
+    "comprador"
+  );
+
+}
+
+
+function updatePublicSessionUI(){
+
+  const loginButton =
+    document.getElementById(
+      "userLoginButton"
+    );
+
+
+  const sessionChip =
+    document.getElementById(
+      "sessionChip"
+    );
+
+
+  const chipText =
+    document.getElementById(
+      "sessionChipText"
+    );
+
+
+  if(currentUser){
+
+    loginButton.textContent =
+      "Mi cuenta";
+
+
+    sessionChip.classList.add(
+      "visible"
+    );
+
+
+    chipText.textContent =
+      getDisplayName();
+
+  }
+  else{
+
+    loginButton.textContent =
+      "Iniciar sesión";
+
+
+    sessionChip.classList.remove(
+      "visible"
+    );
+
+
+    chipText.textContent =
+      "";
+
+  }
+
+}
+
+
+/* =========================================================
+   MI CUENTA
+========================================================= */
+
+function openAccountModal(){
+
+  if(!currentUser){
+
+    openAuth(
+      "buyer",
+      "login"
+    );
+
+    return;
+  }
+
+
+  const name =
+    getFullName();
+
+
+  const initials =
+    name
+      .split(" ")
+      .filter(Boolean)
+      .slice(0,2)
+      .map(
+        part =>
+          part
+            .charAt(0)
+            .toUpperCase()
+      )
+      .join("");
+
+
+  document
+    .getElementById(
+      "accountAvatar"
+    )
+    .textContent =
+      initials || "A";
+
+
+  document
+    .getElementById(
+      "accountName"
+    )
+    .textContent =
+      name;
+
+
+  document
+    .getElementById(
+      "accountEmail"
+    )
+    .textContent =
+      currentUser.email || "";
+
+
+  const type =
+    getUserType();
+
+
+  document
+    .getElementById(
+      "accountType"
+    )
+    .textContent =
+      type === "admin"
+        ? "Administrador"
+        : type === "vendedor"
+          ? "Vendedor"
+          : "Comprador";
+
+
+  openModal(
+    accountModal
+  );
+
+}
+
+
+/* =========================================================
+   SIGUIENTE PASO VENDEDOR
+========================================================= */
+
+function openSellerNextStep(){
+
+  /*
+    En el próximo paso esto va a abrir
+    el alta real de vendedor/marca.
+
+    Por ahora ya dejamos correctamente
+    resuelto el acceso y la sesión.
+  */
+
+  openAccountModal();
+
+
+  document
+    .getElementById(
+      "publishFromAccountButton"
+    )
+    .textContent =
+      "Continuar con mi marca";
+
+}
+
+
+/* =========================================================
+   BOTONES LOGIN
+========================================================= */
+
+document
+  .getElementById(
+    "userLoginButton"
+  )
+  .addEventListener(
+    "click",
+    function(){
+
+      if(currentUser){
+
+        openAccountModal();
+
+      }
+      else{
+
+        openAuth(
+          "buyer",
+          "login"
+        );
+
+      }
+
+    }
+  );
+
+
+document
+  .getElementById(
+    "sellerButton"
+  )
+  .addEventListener(
+    "click",
+    function(){
+
+      if(currentUser){
+
+        openSellerNextStep();
+
+      }
+      else{
+
+        openAuth(
+          "seller",
+          "register"
+        );
+
+      }
+
+    }
+  );
+
+
+document
+  .getElementById(
+    "publishFromAccountButton"
+  )
+  .addEventListener(
+    "click",
+    function(){
+
+      closeModal(
+        accountModal
+      );
+
+
+      /*
+        Próxima etapa:
+        alta real de vendedor/marca.
+      */
+
+      alert(
+        "La cuenta ya está lista. El siguiente paso será completar el alta de tu marca."
+      );
+
+    }
+  );
+
+
+document
+  .getElementById(
+    "goToPortalButton"
+  )
+  .addEventListener(
+    "click",
+    function(){
+
+      const type =
+        getUserType();
+
+
+      if(type === "admin"){
+
+        closeModal(
+          accountModal
+        );
+
+
+        document
+          .getElementById(
+            "adminUserEmail"
+          )
+          .textContent =
+            currentUser.email || "";
+
+
+        document
+          .getElementById(
+            "adminApp"
+          )
+          .classList
+          .add(
+            "visible"
+          );
+
+
+        loadDashboard();
+
+        return;
+      }
+
+
+      /*
+        Los portales comprador/vendedor
+        los construimos en el siguiente paso.
+      */
+
+      alert(
+        type === "vendedor"
+          ? "Ahora vamos a construir tu Portal Vendedor."
+          : "Ahora vamos a construir tu Portal Comprador."
+      );
+
+    }
+  );
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+async function logoutUser(){
+
+  try{
+
+    await db
+      .auth
+      .signOut();
+
+  }
+  catch(error){
+
+    console.error(
+      error
+    );
+
+  }
+
+
+  currentUser = null;
+  currentProfile = null;
+
+
+  document
+    .getElementById(
+      "adminApp"
+    )
+    .classList
+    .remove(
+      "visible"
+    );
+
+
+  closeModal(
+    accountModal
+  );
+
+
+  updatePublicSessionUI();
+
+}
+
+
+document
+  .getElementById(
+    "logoutButton"
+  )
+  .addEventListener(
+    "click",
+    logoutUser
+  );
+
+
+/* =========================================================
+   CERRAR MODALES
+========================================================= */
+
+document
+  .getElementById(
+    "closeAuthModal"
+  )
+  .addEventListener(
+    "click",
+    function(){
+
+      closeModal(
+        authModal
+      );
+
+    }
+  );
+
+
+document
+  .getElementById(
+    "closeAccountModal"
+  )
+  .addEventListener(
+    "click",
+    function(){
+
+      closeModal(
+        accountModal
+      );
+
+    }
+  );
+
+
+closeModalOnBackground(
+  authModal
+);
+
+
+closeModalOnBackground(
+  accountModal
+);
+
+
+/* =========================================================
+   RESTAURAR SESIÓN AL ABRIR WEB
+========================================================= */
+
+async function initializeSession(){
+
+  try{
+
+    const {
+      data,
+      error
+    } =
+      await db
+        .auth
+        .getSession();
+
+
+    if(error){
+
+      console.warn(
+        error
+      );
+
+      return;
+    }
+
+
+    currentUser =
+      data
+        ?.session
+        ?.user ||
+      null;
+
+
+    if(currentUser){
+
+      await loadCurrentProfile();
+
+    }
+
+
+    updatePublicSessionUI();
+
+  }
+  catch(error){
+
+    console.warn(
+      error
+    );
+
+  }
+
+}
+
+
+db
+  .auth
+  .onAuthStateChange(
+    function(
+      event,
+      session
+    ){
+
+      /*
+        Dejamos esta función liviana.
+        Supabase recomienda usar
+        onAuthStateChange para reaccionar
+        a los cambios de autenticación.
+      */
+
+      currentUser =
+        session?.user ||
+        null;
+
+
+      if(
+        event ===
+        "SIGNED_OUT"
+      ){
+
+        currentProfile =
+          null;
+
+
+        updatePublicSessionUI();
+
+      }
+
+    }
+  );
+
+
+initializeSession();
+
+
+/* =========================================================
    ADMIN LOGIN
 ========================================================= */
 
@@ -2503,6 +4664,7 @@ const adminModal =
   document.getElementById(
     "adminModal"
   );
+
 
 const adminError =
   document.getElementById(
@@ -2516,10 +4678,56 @@ document
   )
   .addEventListener(
     "click",
-    function(){
+    async function(){
 
-      adminModal.classList.add(
-        "open"
+      /*
+        Si ya hay un admin logueado,
+        no pedimos contraseña otra vez.
+      */
+
+      if(currentUser){
+
+        await loadCurrentProfile();
+
+
+        if(
+          currentProfile
+            ?.tipo_usuario ===
+            "admin" &&
+          currentProfile
+            ?.activo ===
+            true
+        ){
+
+          document
+            .getElementById(
+              "adminUserEmail"
+            )
+            .textContent =
+              currentUser.email ||
+              "";
+
+
+          document
+            .getElementById(
+              "adminApp"
+            )
+            .classList
+            .add(
+              "visible"
+            );
+
+
+          loadDashboard();
+
+          return;
+        }
+
+      }
+
+
+      openModal(
+        adminModal
       );
 
     }
@@ -2534,30 +4742,16 @@ document
     "click",
     function(){
 
-      adminModal.classList.remove(
-        "open"
+      closeModal(
+        adminModal
       );
 
     }
   );
 
 
-adminModal.addEventListener(
-  "click",
-  function(event){
-
-    if(
-      event.target ===
-      adminModal
-    ){
-
-      adminModal.classList.remove(
-        "open"
-      );
-
-    }
-
-  }
+closeModalOnBackground(
+  adminModal
 );
 
 
@@ -2629,7 +4823,7 @@ document
             "profiles"
           )
           .select(
-            "id, tipo_usuario, activo"
+            "*"
           )
           .eq(
             "id",
@@ -2652,6 +4846,17 @@ document
           .signOut();
 
 
+        currentUser =
+          null;
+
+
+        currentProfile =
+          null;
+
+
+        updatePublicSessionUI();
+
+
         showAdminError(
           "Esta cuenta no tiene permisos de administrador."
         );
@@ -2661,9 +4866,20 @@ document
       }
 
 
-      adminModal.classList.remove(
-        "open"
+      currentUser =
+        user;
+
+
+      currentProfile =
+        profile;
+
+
+      closeModal(
+        adminModal
       );
+
+
+      updatePublicSessionUI();
 
 
       document
@@ -2678,7 +4894,8 @@ document
         .getElementById(
           "adminApp"
         )
-        .classList.add(
+        .classList
+        .add(
           "visible"
         );
 
@@ -2689,7 +4906,9 @@ document
   );
 
 
-function showAdminError(message){
+function showAdminError(
+  message
+){
 
   adminError.textContent =
     message;
@@ -2703,7 +4922,7 @@ function showAdminError(message){
 
 
 /* =========================================================
-   DASHBOARD
+   DASHBOARD ADMIN
 ========================================================= */
 
 async function getCount(
@@ -2747,16 +4966,19 @@ async function getCount(
 
   if(error){
 
-    console.error(
+    console.warn(
+      "Contador " +
       table,
-      error
+      error.message
     );
 
-    return 0;
+
+    return "—";
   }
 
 
-  return count || 0;
+  return count ?? 0;
+
 }
 
 
@@ -2891,15 +5113,19 @@ document
             )
             .forEach(
               item =>
-                item.classList.remove(
-                  "active"
-                )
+                item
+                  .classList
+                  .remove(
+                    "active"
+                  )
             );
 
 
-          button.classList.add(
-            "active"
-          );
+          button
+            .classList
+            .add(
+              "active"
+            );
 
 
           document
@@ -2908,23 +5134,28 @@ document
             )
             .forEach(
               section =>
-                section.classList.remove(
-                  "active"
-                )
+                section
+                  .classList
+                  .remove(
+                    "active"
+                  )
             );
 
 
           const section =
             document.getElementById(
-              "admin-" + page
+              "admin-" +
+              page
             );
 
 
           if(section){
 
-            section.classList.add(
-              "active"
-            );
+            section
+              .classList
+              .add(
+                "active"
+              );
 
           }
 
@@ -2964,54 +5195,7 @@ document
     "click",
     async function(){
 
-      await db
-        .auth
-        .signOut();
-
-
-      document
-        .getElementById(
-          "adminApp"
-        )
-        .classList.remove(
-          "visible"
-        );
-
-    }
-  );
-
-
-/* =========================================================
-   BOTONES PÚBLICOS
-========================================================= */
-
-document
-  .getElementById(
-    "sellerButton"
-  )
-  .addEventListener(
-    "click",
-    function(){
-
-      alert(
-        "Próximo paso: registro de vendedores."
-      );
-
-    }
-  );
-
-
-document
-  .getElementById(
-    "userLoginButton"
-  )
-  .addEventListener(
-    "click",
-    function(){
-
-      alert(
-        "Próximo paso: acceso de compradores."
-      );
+      await logoutUser();
 
     }
   );
