@@ -15,80 +15,106 @@
     content="Descubrí marcas, productos, servicios, oficios y oportunidades de toda Argentina."
   >
 
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  >
+
   <link rel="stylesheet" href="styles.css">
+
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 
 <body>
 
-  <header class="header">
+<header class="header">
 
-    <a href="#" class="logo">
-      Amigate
-    </a>
+  <a href="#" class="logo">
+    Amigate
+  </a>
 
-    <nav class="nav-desktop">
-      <a href="#">Explorar</a>
-      <a href="#">Necesito</a>
-      <a href="#">Empleos</a>
-    </nav>
+  <nav class="nav-desktop">
+    <a href="#explorar">Explorar</a>
+    <a href="#categorias">Categorías</a>
+    <a href="#">Necesito</a>
+    <a href="#">Empleos</a>
+  </nav>
 
-    <div class="header-actions">
-      <button class="btn-login">
-        Iniciar sesión
-      </button>
+  <div class="header-actions">
 
-      <button class="btn-seller">
-        Publicar mi marca
-      </button>
-    </div>
+    <button class="btn-login">
+      Iniciar sesión
+    </button>
 
-  </header>
+    <button class="btn-seller">
+      Publicar mi marca
+    </button>
+
+  </div>
+
+</header>
 
 
-  <main>
+<main>
 
-    <section class="hero">
+  <!-- HERO -->
 
-      <div class="hero-content">
+  <section class="hero">
 
-        <span class="hero-tag">
-          🇦🇷 Hecho acá
-        </span>
+    <div class="hero-content">
 
-        <h1>
-          Argentina tiene<br>
-          lo que buscás.
-        </h1>
+      <span class="hero-tag">
+        HECHO EN ARGENTINA
+      </span>
 
-        <p>
-          Encontrá marcas, productos, servicios,
-          profesionales y oportunidades cerca tuyo.
-        </p>
+      <h1>
+        Argentina tiene<br>
+        lo que buscás.
+      </h1>
 
-        <div class="search-box">
+      <p>
+        Descubrí marcas, productos, servicios,
+        profesionales y oportunidades disponibles
+        en tu provincia.
+      </p>
 
-          <input
-            type="search"
-            id="mainSearch"
-            placeholder="¿Qué estás buscando?"
-          >
+      <div class="search-box">
 
-          <button id="searchButton">
-            Buscar
-          </button>
+        <input
+          type="search"
+          id="mainSearch"
+          placeholder="¿Qué estás buscando?"
+        >
 
-        </div>
+        <button id="searchButton">
+          Buscar
+        </button>
 
       </div>
 
-    </section>
+    </div>
+
+  </section>
 
 
-    <section class="province-section">
+  <!-- MAPA -->
 
-      <div class="section-heading">
+  <section
+    class="map-section"
+    id="explorar"
+  >
+
+    <div class="map-layout">
+
+      <div class="map-copy">
 
         <span class="section-label">
           EXPLORÁ ARGENTINA
@@ -99,91 +125,222 @@
         </h2>
 
         <p>
-          Te mostraremos marcas y profesionales
-          disponibles en tu zona.
+          Seleccioná una provincia para descubrir
+          marcas y profesionales que trabajan o realizan
+          envíos hasta ahí.
         </p>
 
-      </div>
+
+        <div
+          class="province-selected-box"
+          id="provinceSelectedBox"
+        >
+
+          <span>
+            Provincia seleccionada
+          </span>
+
+          <strong id="selectedProvinceName">
+            Ninguna
+          </strong>
+
+        </div>
 
 
-      <div id="provinceGrid" class="province-grid">
+        <button
+          id="exploreProvinceButton"
+          class="explore-button"
+          disabled
+        >
+          Seleccioná una provincia
+        </button>
 
-        <div class="loading">
-          Cargando provincias...
+
+        <button
+          id="changeProvinceButton"
+          class="change-province-button hidden"
+        >
+          Cambiar provincia
+        </button>
+
+
+        <div class="province-search">
+
+          <label for="provinceSearch">
+            También podés buscarla
+          </label>
+
+          <input
+            id="provinceSearch"
+            type="search"
+            placeholder="Ej: Córdoba"
+          >
+
+          <div
+            id="provinceSuggestions"
+            class="province-suggestions"
+          ></div>
+
         </div>
 
       </div>
 
-    </section>
+
+      <div class="map-wrapper">
+
+        <div id="argentinaMap"></div>
+
+        <div
+          id="mapLoading"
+          class="map-loading"
+        >
+          Cargando mapa...
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
 
 
-    <section class="categories-section">
+  <!-- CATEGORÍAS -->
 
-      <div class="section-heading">
+  <section
+    class="categories-section"
+    id="categorias"
+  >
 
-        <span class="section-label">
-          TODO EN UN SOLO LUGAR
+    <div class="section-heading">
+
+      <span class="section-label">
+        AMIGATE
+      </span>
+
+      <h2 id="categoriesTitle">
+        ¿Qué estás buscando?
+      </h2>
+
+      <p id="categoriesSubtitle">
+        Primero elegí tu provincia.
+      </p>
+
+    </div>
+
+
+    <div class="category-grid">
+
+      <button
+        class="category-card"
+        data-category="productos"
+      >
+        <span class="category-icon">
+          🛍️
         </span>
 
-        <h2>
-          ¿Qué estás buscando?
-        </h2>
+        <strong>
+          Productos
+        </strong>
 
-      </div>
-
-
-      <div class="category-grid">
-
-        <button class="category-card">
-          <span>🛍️</span>
-          <strong>Productos</strong>
-          <small>Marcas y emprendimientos</small>
-        </button>
-
-        <button class="category-card">
-          <span>✨</span>
-          <strong>Servicios</strong>
-          <small>Profesionales y empresas</small>
-        </button>
-
-        <button class="category-card">
-          <span>🛠️</span>
-          <strong>Oficios</strong>
-          <small>Encontrá especialistas</small>
-        </button>
-
-        <button class="category-card">
-          <span>💼</span>
-          <strong>Empleos</strong>
-          <small>Encontrá oportunidades</small>
-        </button>
-
-        <button class="category-card">
-          <span>📣</span>
-          <strong>Necesito</strong>
-          <small>Publicá lo que estás buscando</small>
-        </button>
-
-      </div>
-
-    </section>
-
-  </main>
+        <small>
+          Marcas y emprendimientos
+        </small>
+      </button>
 
 
-  <footer>
+      <button
+        class="category-card"
+        data-category="servicios"
+      >
+        <span class="category-icon">
+          ✨
+        </span>
 
+        <strong>
+          Servicios
+        </strong>
+
+        <small>
+          Profesionales y empresas
+        </small>
+      </button>
+
+
+      <button
+        class="category-card"
+        data-category="oficios"
+      >
+        <span class="category-icon">
+          🛠️
+        </span>
+
+        <strong>
+          Oficios
+        </strong>
+
+        <small>
+          Especialistas cerca tuyo
+        </small>
+      </button>
+
+
+      <button
+        class="category-card"
+        data-category="empleos"
+      >
+        <span class="category-icon">
+          💼
+        </span>
+
+        <strong>
+          Empleos
+        </strong>
+
+        <small>
+          Oportunidades laborales
+        </small>
+      </button>
+
+
+      <button
+        class="category-card"
+        data-category="necesito"
+      >
+        <span class="category-icon">
+          📣
+        </span>
+
+        <strong>
+          Necesito
+        </strong>
+
+        <small>
+          Publicá lo que buscás
+        </small>
+      </button>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<footer>
+
+  <div>
     <strong>Amigate</strong>
 
     <p>
       Hecho acá. Encontralo en Amigate.
     </p>
+  </div>
 
-  </footer>
+</footer>
 
 
-  <script src="supabase.js"></script>
-  <script src="app.js"></script>
+<script src="supabase.js"></script>
+<script src="app.js"></script>
 
 </body>
 </html>
