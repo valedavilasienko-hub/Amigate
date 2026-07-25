@@ -1,22 +1,30 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Amigate</title>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap"
+    rel="stylesheet"
+  >
 
   <style>
+
     :root{
-      --orange:#ea6a45;
-      --orange-dark:#d65835;
-      --orange-soft:#f3b59e;
-      --cream:#fff8f2;
-      --white:#ffffff;
-      --dark:#211d1b;
-      --gray:#726a66;
-      --border:#eaded7;
+      --orange:#ee5a2a;
+      --orange-dark:#dc491c;
+      --cream:#fff8ef;
+      --cream-2:#fff3e7;
+      --dark:#1f1d1b;
+      --gray:#655f5b;
+      --line:#efded2;
+      --white:#fff;
     }
 
     *{
@@ -25,595 +33,628 @@
       padding:0;
     }
 
-    html{
-      scroll-behavior:smooth;
+    html,
+    body{
+      width:100%;
+      height:100%;
+      overflow:hidden;
     }
 
     body{
-      font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-      background:var(--cream);
+      font-family:"DM Sans",sans-serif;
       color:var(--dark);
+      background:var(--cream);
     }
 
     button{
       font:inherit;
-      cursor:pointer;
     }
 
-    /* HEADER */
+    /* =====================================================
+       MAIN
+    ===================================================== */
 
-    header{
-      position:absolute;
-      left:0;
-      top:0;
+    .page{
       width:100%;
-      height:80px;
-      padding:0 6%;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      z-index:50;
+      height:100vh;
+
+      display:grid;
+      grid-template-columns:48% 52%;
+
+      position:relative;
+      overflow:hidden;
+
+      background:
+        radial-gradient(
+          circle at 15% 78%,
+          rgba(238,90,42,.10),
+          transparent 23%
+        ),
+        linear-gradient(
+          90deg,
+          #fffaf3 0%,
+          #fff8ef 45%,
+          #edf3f4 100%
+        );
     }
 
-    .brand{
+    /* =====================================================
+       LEFT
+    ===================================================== */
+
+    .left{
+      padding:42px 30px 42px 4vw;
+
+      display:flex;
+      flex-direction:column;
+
+      position:relative;
+      z-index:5;
+    }
+
+    .logo{
       color:var(--orange);
-      text-decoration:none;
-      font-weight:900;
-      font-size:31px;
+
+      font-size:34px;
+      font-weight:800;
+
       letter-spacing:-1.8px;
     }
 
-    .header-actions{
+    .content{
+      flex:1;
+
       display:flex;
-      gap:10px;
-    }
+      flex-direction:column;
+      justify-content:center;
 
-    .btn{
-      border:none;
-      padding:12px 18px;
-      border-radius:14px;
-      font-weight:800;
-    }
+      padding-bottom:25px;
 
-    .btn-login{
-      background:rgba(255,255,255,.72);
-      border:1px solid var(--border);
-      color:var(--dark);
-    }
-
-    .btn-seller{
-      background:var(--orange);
-      color:white;
-    }
-
-    /* HERO */
-
-    .hero{
-      min-height:100vh;
-      display:grid;
-      grid-template-columns:minmax(0,1fr) minmax(430px,.9fr);
-      align-items:center;
-      gap:70px;
-      padding:125px 7% 70px;
-      overflow:hidden;
-
-      background:
-        radial-gradient(circle at 87% 27%,rgba(234,106,69,.20),transparent 25%),
-        radial-gradient(circle at 74% 82%,rgba(234,106,69,.10),transparent 30%),
-        var(--cream);
-    }
-
-    .hero-copy{
-      max-width:780px;
+      max-width:720px;
     }
 
     .eyebrow{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      color:var(--orange);
-      font-size:12px;
-      font-weight:900;
-      letter-spacing:.16em;
-      text-transform:uppercase;
       margin-bottom:20px;
-    }
 
-    .eyebrow:before{
-      content:"";
-      width:28px;
-      height:2px;
-      background:var(--orange);
+      font-size:12px;
+      font-weight:800;
+
+      color:var(--orange);
+
+      letter-spacing:.14em;
+      text-transform:uppercase;
     }
 
     h1{
-      font-size:clamp(63px,7vw,108px);
-      line-height:.91;
-      letter-spacing:-.07em;
-      max-width:900px;
+      font-family:"Playfair Display",serif;
+
+      font-size:clamp(58px,5.7vw,94px);
+
+      line-height:.98;
+
+      letter-spacing:-.055em;
+
+      font-weight:600;
     }
 
-    .accent{
+    h1 span{
+      display:block;
       color:var(--orange);
     }
 
-    .hero-copy p{
-      margin-top:28px;
-      max-width:650px;
-      font-size:20px;
-      line-height:1.55;
+    .accent-line{
+      width:72px;
+      height:4px;
+
+      margin:28px 0 25px;
+
+      border-radius:100px;
+
+      background:var(--orange);
+    }
+
+    .description{
+      max-width:620px;
+
       color:var(--gray);
+
+      font-size:clamp(16px,1.25vw,20px);
+
+      line-height:1.55;
     }
 
-    .hero-copy .secondary{
-      margin-top:14px;
-      font-size:16px;
-      max-width:590px;
+    .actions{
+      display:flex;
+      align-items:center;
+
+      gap:14px;
+
+      margin-top:34px;
     }
 
-    .scroll-link{
+    .button{
+      min-height:58px;
+
       display:inline-flex;
       align-items:center;
-      gap:9px;
-      margin-top:35px;
+      justify-content:center;
+
+      gap:11px;
+
+      padding:0 26px;
+
+      border-radius:16px;
+
+      border:1px solid transparent;
+
+      cursor:pointer;
+
+      font-weight:700;
+
+      font-size:16px;
+
+      transition:.2s ease;
+    }
+
+    .button-primary{
+      color:white;
+
+      background:var(--orange);
+
+      box-shadow:
+        0 15px 35px rgba(238,90,42,.23);
+    }
+
+    .button-primary:hover{
+      background:var(--orange-dark);
+      transform:translateY(-2px);
+    }
+
+    .button-secondary{
       color:var(--dark);
-      text-decoration:none;
-      font-weight:800;
+
+      background:rgba(255,255,255,.60);
+
+      border-color:#e8c8b5;
     }
 
-    .scroll-link span{
-      width:38px;
-      height:38px;
-      border-radius:50%;
-      border:1px solid var(--border);
-      display:grid;
-      place-items:center;
+    .button-secondary:hover{
       background:white;
     }
 
-    /* MAP PREVIEW HERO */
+    .icon{
+      width:22px;
+      height:22px;
 
-    .hero-map-preview{
-      min-height:650px;
       display:flex;
       align-items:center;
       justify-content:center;
+    }
+
+    /* =====================================================
+       MAP
+    ===================================================== */
+
+    .right{
       position:relative;
-    }
 
-    .hero-map-shape{
-      width:min(420px,100%);
-      filter:drop-shadow(0 30px 60px rgba(120,55,30,.12));
-    }
+      min-width:0;
+      min-height:0;
 
-    .hero-map-shape path{
-      fill:#f1c1ae;
-      stroke:white;
-      stroke-width:2;
-    }
-
-    /* MAP SECTION */
-
-    .map-section{
-      min-height:100vh;
-      padding:90px 5% 110px;
-      background:white;
-    }
-
-    .map-heading{
-      text-align:center;
-      max-width:850px;
-      margin:0 auto 40px;
-    }
-
-    .map-heading .eyebrow{
-      justify-content:center;
-    }
-
-    .map-heading h2{
-      font-size:clamp(44px,5.5vw,78px);
-      line-height:.96;
-      letter-spacing:-.055em;
-    }
-
-    .map-heading p{
-      color:var(--gray);
-      font-size:17px;
-      margin-top:17px;
-    }
-
-    .map-stage{
-      width:min(960px,100%);
-      margin:auto;
-      min-height:770px;
-      position:relative;
       display:flex;
       align-items:center;
       justify-content:center;
-      background:
-        radial-gradient(circle at center,#fff8f4 0%,#fff 66%);
-      border-radius:38px;
+
       overflow:hidden;
     }
 
-    #argentinaMap{
-      width:min(590px,74vw);
-      height:auto;
-      max-height:720px;
-      overflow:visible;
-    }
-
-    #argentinaMap path{
-      fill:var(--orange-soft);
-      stroke:white;
-      stroke-width:2.2;
-      cursor:pointer;
-      transition:
-        fill .18s ease,
-        transform .18s ease,
-        filter .18s ease;
-      transform-origin:center;
-    }
-
-    #argentinaMap path:hover{
-      fill:#f08a61;
-      filter:drop-shadow(0 4px 7px rgba(80,30,10,.18));
-    }
-
-    #argentinaMap path.selected{
-      fill:var(--orange);
-      filter:drop-shadow(0 8px 12px rgba(110,45,20,.24));
-    }
-
-    .province-label{
+    .map-glow{
       position:absolute;
-      left:50%;
-      bottom:28px;
-      transform:translateX(-50%);
-      min-width:290px;
-      padding:14px 18px;
-      background:rgba(255,255,255,.96);
-      border:1px solid var(--border);
-      border-radius:18px;
-      box-shadow:0 18px 50px rgba(45,20,10,.09);
-      text-align:center;
-      opacity:0;
+
+      width:700px;
+      height:700px;
+
+      border-radius:50%;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(238,90,42,.16),
+          rgba(238,90,42,.03) 52%,
+          transparent 70%
+        );
+
+      filter:blur(3px);
+    }
+
+    .map-wrap{
+      width:100%;
+      height:100%;
+
+      display:flex;
+      align-items:center;
+      justify-content:center;
+
+      position:relative;
+
+      padding:18px 120px 18px 35px;
+    }
+
+    .map-image{
+      height:min(94vh,920px);
+      width:auto;
+
+      max-width:78%;
+
+      object-fit:contain;
+
+      filter:
+        sepia(.45)
+        saturate(1.45)
+        hue-rotate(330deg)
+        brightness(1.04)
+        drop-shadow(0 25px 45px rgba(60,40,30,.13));
+
+      user-select:none;
       pointer-events:none;
-      transition:.2s;
     }
 
-    .province-label.visible{
-      opacity:1;
+    /* =====================================================
+       PROVINCE SELECTOR OVER MAP
+    ===================================================== */
+
+    .selector{
+      position:absolute;
+
+      right:2.3vw;
+      top:50%;
+
+      width:190px;
+
+      transform:translateY(-50%);
+
+      display:flex;
+      flex-direction:column;
+
+      gap:12px;
     }
 
-    .province-label small{
-      display:block;
-      color:var(--gray);
-      font-size:11px;
-      text-transform:uppercase;
-      letter-spacing:.09em;
-      font-weight:800;
+    .selector-title{
+      font-family:"Playfair Display",serif;
+
+      font-size:24px;
+      line-height:1.15;
+
       margin-bottom:4px;
     }
 
-    .province-label strong{
-      font-size:23px;
+    .selector p{
+      color:var(--gray);
+
+      font-size:13px;
+      line-height:1.45;
     }
 
-    .province-label button{
-      display:block;
+    select{
       width:100%;
-      margin-top:12px;
-      padding:13px;
-      border:none;
-      background:var(--orange);
-      color:white;
-      border-radius:12px;
-      font-weight:900;
+
+      padding:13px 14px;
+
+      border:1px solid #e5c9bb;
+
+      border-radius:13px;
+
+      background:rgba(255,255,255,.82);
+
+      color:var(--dark);
+
+      outline:none;
+
+      font-family:"DM Sans",sans-serif;
+
+      cursor:pointer;
     }
 
-    /* MOBILE */
+    .explore{
+      width:100%;
+
+      padding:13px;
+
+      border:0;
+
+      border-radius:13px;
+
+      background:var(--orange);
+
+      color:white;
+
+      font-weight:800;
+
+      cursor:pointer;
+
+      transition:.2s;
+    }
+
+    .explore:hover{
+      background:var(--orange-dark);
+    }
+
+    .explore:disabled{
+      opacity:.45;
+      cursor:not-allowed;
+    }
+
+    .arrow{
+      font-family:"Playfair Display",serif;
+
+      color:var(--orange);
+
+      font-size:38px;
+
+      transform:rotate(-12deg);
+    }
+
+    /* =====================================================
+       MOBILE
+    ===================================================== */
 
     @media(max-width:900px){
-      .hero{
-        min-height:auto;
+
+      html,
+      body{
+        height:auto;
+        overflow:auto;
+      }
+
+      .page{
+        min-height:100vh;
+        height:auto;
+
         grid-template-columns:1fr;
-        gap:25px;
-        padding-top:125px;
+
+        overflow:visible;
       }
 
-      .hero-map-preview{
-        min-height:420px;
+      .left{
+        min-height:55vh;
+
+        padding:
+          28px 22px
+          15px;
       }
 
-      .hero-map-shape{
-        width:290px;
-      }
-
-      .map-stage{
-        min-height:680px;
-      }
-    }
-
-    @media(max-width:600px){
-      header{
-        height:68px;
-        padding:0 17px;
-      }
-
-      .brand{
-        font-size:27px;
-      }
-
-      .btn-login{
-        display:none;
-      }
-
-      .btn-seller{
-        padding:10px 12px;
-        font-size:12px;
-      }
-
-      .hero{
-        padding:110px 19px 60px;
+      .content{
+        padding-top:60px;
       }
 
       h1{
-        font-size:57px;
+        font-size:clamp(52px,13vw,75px);
       }
 
-      .hero-copy p{
-        font-size:17px;
+      .description{
+        font-size:16px;
       }
 
-      .hero-map-preview{
-        min-height:370px;
+      .actions{
+        flex-direction:column;
+        align-items:stretch;
       }
 
-      .map-section{
-        padding:65px 12px 90px;
+      .button{
+        width:100%;
       }
 
-      .map-stage{
-        min-height:650px;
-        border-radius:24px;
+      .right{
+        min-height:700px;
+
+        overflow:hidden;
       }
 
-      #argentinaMap{
-        width:87vw;
+      .map-wrap{
+        padding:
+          15px 15px
+          140px;
       }
 
-      .province-label{
-        bottom:18px;
-        width:calc(100% - 28px);
-        min-width:0;
+      .map-image{
+        width:auto;
+        height:610px;
+        max-width:95%;
       }
+
+      .selector{
+        width:calc(100% - 36px);
+
+        left:18px;
+        right:auto;
+
+        top:auto;
+        bottom:20px;
+
+        transform:none;
+
+        padding:16px;
+
+        border-radius:18px;
+
+        background:rgba(255,255,255,.92);
+
+        box-shadow:
+          0 20px 50px rgba(40,30,20,.12);
+
+        backdrop-filter:blur(10px);
+      }
+
+      .selector-title{
+        font-size:20px;
+      }
+
+      .arrow{
+        display:none;
+      }
+
     }
+
+    @media(max-width:520px){
+
+      .logo{
+        font-size:28px;
+      }
+
+      .left{
+        min-height:auto;
+      }
+
+      .content{
+        padding-top:48px;
+      }
+
+      h1{
+        font-size:51px;
+      }
+
+      .right{
+        min-height:650px;
+      }
+
+      .map-image{
+        height:550px;
+      }
+
+    }
+
   </style>
+
 </head>
 
 <body>
 
-<header>
-  <a href="#" class="brand">Amigate</a>
+<div class="page">
 
-  <div class="header-actions">
-    <button class="btn btn-login">Iniciar sesión</button>
-    <button class="btn btn-seller">Publicar mi marca</button>
-  </div>
-</header>
+  <!-- IZQUIERDA -->
 
-<main>
+  <section class="left">
 
-  <section class="hero">
+    <div class="logo">
+      Amigate
+    </div>
 
-    <div class="hero-copy">
+    <div class="content">
+
       <div class="eyebrow">
-        Lo nuestro, más cerca
+        Argentina está llena de oportunidades
       </div>
 
       <h1>
-        Todo lo que buscás
-        puede estar
-        <span class="accent">más cerca de lo que pensás.</span>
+        Todo lo que buscás,
+        <br>
+        más cerca
+        <span>de lo que pensás.</span>
       </h1>
 
-      <p>
-        Amigate conecta a personas con marcas, emprendimientos,
+      <div class="accent-line"></div>
+
+      <p class="description">
+        Amigate conecta personas con marcas, emprendimientos,
         profesionales, oficios y oportunidades de toda Argentina.
+        Elegí tu provincia y descubrí todo lo que tiene para ofrecer.
       </p>
 
-      <p class="secondary">
-        Elegí dónde estás y descubrí todo lo que tu provincia tiene para ofrecer.
-      </p>
+      <div class="actions">
 
-      <a href="#mapa" class="scroll-link">
-        <span>↓</span>
-        Explorar Argentina
-      </a>
-    </div>
+        <button class="button button-primary" id="sellerButton">
 
-    <div class="hero-map-preview">
+          <span class="icon">
+            🏪
+          </span>
 
-      <svg
-        class="hero-map-shape"
-        viewBox="0 0 400 700"
-        aria-hidden="true"
-      >
-        <path d="
-          M210 20
-          L260 48
-          L275 88
-          L295 120
-          L282 155
-          L305 190
-          L292 225
-          L310 260
-          L295 300
-          L305 340
-          L283 375
-          L290 420
-          L270 465
-          L275 505
-          L250 550
-          L242 590
-          L220 625
-          L207 675
-          L180 645
-          L170 605
-          L150 570
-          L160 525
-          L140 485
-          L150 445
-          L125 405
-          L135 365
-          L112 325
-          L125 285
-          L115 245
-          L135 208
-          L125 170
-          L150 140
-          L155 100
-          L185 70
-          Z
-        "/>
-      </svg>
+          Publicar mi marca
+
+        </button>
+
+        <button class="button button-secondary" id="loginButton">
+
+          <span class="icon">
+            ♙
+          </span>
+
+          Iniciar sesión
+
+        </button>
+
+      </div>
 
     </div>
 
   </section>
 
 
-  <section class="map-section" id="mapa">
+  <!-- DERECHA -->
 
-    <div class="map-heading">
+  <section class="right">
 
-      <div class="eyebrow">
-        Argentina en Amigate
-      </div>
+    <div class="map-glow"></div>
 
-      <h2>
-        Elegí tu provincia
-      </h2>
+    <div class="map-wrap">
 
-      <p>
-        Cada provincia abre una experiencia distinta dentro de Amigate.
-      </p>
-
-    </div>
-
-
-    <div class="map-stage">
-
-      <svg
-        id="argentinaMap"
-        viewBox="0 0 500 900"
-        role="img"
-        aria-label="Mapa interactivo de Argentina"
+      <img
+        class="map-image"
+        src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Argentina_provincias_nombres.svg"
+        alt="Mapa de Argentina con sus provincias"
       >
 
-        <!-- NORTE -->
+      <div class="selector">
 
-        <path id="jujuy" data-name="Jujuy"
-          d="M208 45 L238 38 L251 57 L245 86 L221 97 L202 78 Z"/>
+        <div class="arrow">
+          ↙
+        </div>
 
-        <path id="salta" data-name="Salta"
-          d="M190 87 L220 93 L245 86 L278 101 L289 133 L260 151 L222 143 L192 125 Z"/>
+        <div class="selector-title">
+          Elegí tu provincia
+        </div>
 
-        <path id="formosa" data-name="Formosa"
-          d="M289 108 L363 109 L386 134 L369 158 L300 151 L278 130 Z"/>
+        <p>
+          Descubrí marcas, servicios y oportunidades disponibles para vos.
+        </p>
 
-        <path id="chaco" data-name="Chaco"
-          d="M284 151 L361 159 L372 193 L343 214 L286 204 L265 175 Z"/>
+        <select id="provinceSelect">
 
-        <path id="tucuman" data-name="Tucumán"
-          d="M209 145 L239 150 L248 179 L230 200 L200 188 L193 162 Z"/>
+          <option value="">
+            Seleccionar provincia
+          </option>
 
-        <path id="santiago" data-name="Santiago del Estero"
-          d="M242 144 L282 151 L286 206 L257 234 L224 205 L247 180 Z"/>
+          <option>Buenos Aires</option>
+          <option>Catamarca</option>
+          <option>Chaco</option>
+          <option>Chubut</option>
+          <option>Ciudad Autónoma de Buenos Aires</option>
+          <option>Córdoba</option>
+          <option>Corrientes</option>
+          <option>Entre Ríos</option>
+          <option>Formosa</option>
+          <option>Jujuy</option>
+          <option>La Pampa</option>
+          <option>La Rioja</option>
+          <option>Mendoza</option>
+          <option>Misiones</option>
+          <option>Neuquén</option>
+          <option>Río Negro</option>
+          <option>Salta</option>
+          <option>San Juan</option>
+          <option>San Luis</option>
+          <option>Santa Cruz</option>
+          <option>Santa Fe</option>
+          <option>Santiago del Estero</option>
+          <option>Tierra del Fuego</option>
+          <option>Tucumán</option>
 
-        <path id="misiones" data-name="Misiones"
-          d="M374 158 L414 149 L430 180 L417 216 L387 223 L370 195 Z"/>
+        </select>
 
-        <path id="corrientes" data-name="Corrientes"
-          d="M344 214 L387 222 L410 251 L393 286 L351 281 L326 247 Z"/>
-
-
-        <!-- CENTRO NORTE -->
-
-        <path id="catamarca" data-name="Catamarca"
-          d="M163 135 L195 126 L205 153 L199 191 L177 221 L148 206 L142 169 Z"/>
-
-        <path id="larioja" data-name="La Rioja"
-          d="M148 208 L177 220 L199 194 L216 220 L201 262 L163 271 L142 242 Z"/>
-
-        <path id="sanjuan" data-name="San Juan"
-          d="M128 244 L164 271 L171 308 L142 329 L112 305 L109 274 Z"/>
-
-        <path id="cordoba" data-name="Córdoba"
-          d="M203 263 L250 253 L273 285 L267 338 L226 356 L194 329 Z"/>
-
-        <path id="santafe" data-name="Santa Fe"
-          d="M274 212 L326 218 L344 254 L326 306 L294 340 L267 338 L273 286 L251 252 Z"/>
-
-        <path id="entreRios" data-name="Entre Ríos"
-          d="M326 274 L371 280 L390 317 L370 355 L328 347 L295 340 Z"/>
-
-
-        <!-- CUYO / CENTRO -->
-
-        <path id="sanluis" data-name="San Luis"
-          d="M171 308 L202 299 L224 356 L205 385 L167 379 L151 344 Z"/>
-
-        <path id="mendoza" data-name="Mendoza"
-          d="M111 306 L143 330 L166 378 L153 425 L117 440 L94 402 L99 351 Z"/>
-
-
-        <!-- BUENOS AIRES -->
-
-        <path id="caba" data-name="Ciudad Autónoma de Buenos Aires"
-          d="M351 369 L360 367 L364 376 L356 382 L348 377 Z"/>
-
-        <path id="buenosaires" data-name="Buenos Aires"
-          d="M207 385 L267 342 L328 348 L349 370 L350 392 L382 420 L368 463
-          L330 492 L277 482 L238 453 L198 431 Z"/>
-
-
-        <!-- PAMPA / PATAGONIA -->
-
-        <path id="lapampa" data-name="La Pampa"
-          d="M154 425 L202 385 L235 452 L223 493 L176 502 L145 471 Z"/>
-
-        <path id="neuquen" data-name="Neuquén"
-          d="M105 443 L146 471 L173 503 L153 543 L112 552 L82 521 L81 480 Z"/>
-
-        <path id="rionegro" data-name="Río Negro"
-          d="M111 553 L154 542 L176 503 L224 493 L278 482 L281 536 L246 566
-          L189 574 L143 577 Z"/>
-
-        <path id="chubut" data-name="Chubut"
-          d="M143 578 L190 574 L247 567 L281 536 L294 593 L271 634
-          L217 651 L161 642 L128 614 Z"/>
-
-        <path id="santacruz" data-name="Santa Cruz"
-          d="M161 643 L217 652 L271 635 L282 690 L263 744 L224 778
-          L180 769 L143 734 L139 684 Z"/>
-
-        <path id="tierradelfuego" data-name="Tierra del Fuego"
-          d="M181 797 L226 793 L247 812 L232 836 L193 841 L169 820 Z"/>
-
-      </svg>
-
-
-      <div class="province-label" id="provincePanel">
-
-        <small>
-          Provincia seleccionada
-        </small>
-
-        <strong id="provinceName"></strong>
-
-        <button id="exploreProvince">
+        <button
+          class="explore"
+          id="exploreButton"
+          disabled
+        >
           Explorar
         </button>
 
@@ -623,100 +664,72 @@
 
   </section>
 
-</main>
+</div>
 
 
 <script>
-  /* =========================================================
-     SUPABASE
-  ========================================================= */
 
-  const SUPABASE_URL =
-    "https://jqdyaafwixnjasszsvkt.supabase.co";
+  const provinceSelect =
+    document.getElementById("provinceSelect");
 
-  const SUPABASE_KEY =
-    "sb_publishable_KHbLlwbhlkyaiz-7KXW6Mw_nAnTVsLa";
-
-  const supabaseClient =
-    window.supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_KEY
-    );
+  const exploreButton =
+    document.getElementById("exploreButton");
 
 
-  /* =========================================================
-     MAPA
-  ========================================================= */
+  provinceSelect.addEventListener(
+    "change",
+    () => {
 
-  const provincePaths =
-    document.querySelectorAll(
-      "#argentinaMap path"
-    );
+      const province =
+        provinceSelect.value;
 
-  const provincePanel =
-    document.getElementById(
-      "provincePanel"
-    );
+      if(!province){
 
-  const provinceName =
-    document.getElementById(
-      "provinceName"
-    );
+        exploreButton.disabled = true;
+        exploreButton.textContent = "Explorar";
 
-  const exploreProvince =
-    document.getElementById(
-      "exploreProvince"
-    );
+        return;
 
-  let selectedProvince = null;
-
-
-  function selectProvince(path){
-
-    provincePaths.forEach(item => {
-      item.classList.remove("selected");
-    });
-
-    path.classList.add("selected");
-
-    selectedProvince = {
-      name: path.dataset.name,
-      slug: path.id
-    };
-
-    provinceName.textContent =
-      selectedProvince.name;
-
-    exploreProvince.textContent =
-      "Explorar " + selectedProvince.name;
-
-    provincePanel.classList.add(
-      "visible"
-    );
-
-    localStorage.setItem(
-      "amigate_province",
-      JSON.stringify(selectedProvince)
-    );
-
-  }
-
-
-  provincePaths.forEach(path => {
-
-    path.addEventListener(
-      "click",
-      () => {
-        selectProvince(path);
       }
-    );
 
-  });
+      exploreButton.disabled = false;
+
+      exploreButton.textContent =
+        "Explorar " + province;
+
+    }
+  );
 
 
-  /* =========================================================
-     RESTAURAR PROVINCIA
-  ========================================================= */
+  exploreButton.addEventListener(
+    "click",
+    () => {
+
+      const province =
+        provinceSelect.value;
+
+      if(!province){
+        return;
+      }
+
+      localStorage.setItem(
+        "amigate_province",
+        province
+      );
+
+      /*
+        Después vamos a reemplazar esto
+        por la pantalla real de Amigate.
+      */
+
+      alert(
+        "Provincia seleccionada: " +
+        province
+      );
+
+    }
+  );
+
 
   const savedProvince =
     localStorage.getItem(
@@ -725,72 +738,34 @@
 
   if(savedProvince){
 
-    try{
+    provinceSelect.value =
+      savedProvince;
 
-      const saved =
-        JSON.parse(savedProvince);
-
-      const path =
-        document.getElementById(
-          saved.slug
-        );
-
-      if(path){
-        selectProvince(path);
-      }
-
-    }
-    catch(error){
-      localStorage.removeItem(
-        "amigate_province"
-      );
-    }
+    provinceSelect.dispatchEvent(
+      new Event("change")
+    );
 
   }
 
 
-  /* =========================================================
-     EXPLORAR
-  ========================================================= */
-
-  exploreProvince.addEventListener(
-    "click",
-    () => {
-
-      if(!selectedProvince){
-        return;
+  document
+    .getElementById("sellerButton")
+    .addEventListener(
+      "click",
+      () => {
+        alert("Próximo paso: registro de vendedores");
       }
+    );
 
-      /*
-        Próximo paso:
-        vamos a abrir la pantalla de categorías
-        de esta provincia.
-      */
-
-      console.log(
-        "Provincia:",
-        selectedProvince.name
-      );
-
-    }
-  );
-
-
-  /* =========================================================
-     BOTONES PROVISORIOS
-  ========================================================= */
 
   document
-    .querySelector(".btn-login")
-    .addEventListener("click", () => {
-      alert("Próximamente: acceso a Amigate");
-    });
-
-  document
-    .querySelector(".btn-seller")
-    .addEventListener("click", () => {
-      alert("Próximamente: panel para marcas");
-    });
+    .getElementById("loginButton")
+    .addEventListener(
+      "click",
+      () => {
+        alert("Próximo paso: iniciar sesión");
+      }
+    );
 
 </script>
 
