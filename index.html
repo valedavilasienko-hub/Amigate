@@ -1,28 +1,29 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Amigate</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Playfair+Display:wght@600;700&display=swap"
     rel="stylesheet"
-  >
+  />
 
   <style>
     :root{
-      --orange:#EB6841;
-      --orange-dark:#D9542F;
-      --orange-soft:#F2B8A3;
-      --orange-hover:#F08B65;
-      --cream:#FFF8F2;
-      --dark:#221E1C;
-      --gray:#746B66;
-      --white:#FFFFFF;
+      --orange:#ea6a45;
+      --orange-dark:#d65734;
+      --orange-soft:#f3b9a3;
+      --orange-hover:#f08b64;
+      --cream:#fff8f2;
+      --cream-2:#fff3ea;
+      --dark:#221e1c;
+      --gray:#746b66;
+      --white:#ffffff;
+      --line:#f7ede7;
     }
 
     *{
@@ -31,8 +32,7 @@
       padding:0;
     }
 
-    html,
-    body{
+    html, body{
       width:100%;
       height:100%;
     }
@@ -54,15 +54,14 @@
       display:grid;
       grid-template-columns:46% 54%;
       background:
-        radial-gradient(
-          circle at 80% 45%,
-          rgba(235,104,65,.11),
-          transparent 34%
-        ),
+        radial-gradient(circle at 82% 44%, rgba(234,106,69,.11), transparent 30%),
+        radial-gradient(circle at 18% 78%, rgba(234,106,69,.07), transparent 25%),
         var(--cream);
     }
 
-    /* IZQUIERDA */
+    /* =====================
+       IZQUIERDA
+    ===================== */
 
     .left{
       padding:40px 4vw 40px 5vw;
@@ -84,7 +83,7 @@
       display:flex;
       flex-direction:column;
       justify-content:center;
-      max-width:720px;
+      max-width:730px;
     }
 
     .eyebrow{
@@ -113,11 +112,11 @@
       height:4px;
       margin:28px 0 24px;
       background:var(--orange);
-      border-radius:99px;
+      border-radius:999px;
     }
 
     .description{
-      max-width:610px;
+      max-width:620px;
       color:var(--gray);
       font-size:18px;
       line-height:1.55;
@@ -142,8 +141,7 @@
     .btn-main{
       color:white;
       background:var(--orange);
-      box-shadow:
-        0 16px 35px rgba(235,104,65,.20);
+      box-shadow:0 16px 35px rgba(234,106,69,.20);
     }
 
     .btn-main:hover{
@@ -153,15 +151,17 @@
 
     .btn-light{
       color:var(--dark);
-      background:rgba(255,255,255,.6);
-      border:1px solid rgba(235,104,65,.22);
+      background:rgba(255,255,255,.68);
+      border:1px solid rgba(234,106,69,.20);
     }
 
     .btn-light:hover{
       background:white;
     }
 
-    /* DERECHA */
+    /* =====================
+       DERECHA
+    ===================== */
 
     .right{
       position:relative;
@@ -180,75 +180,79 @@
       justify-content:center;
     }
 
+    .map-glow{
+      position:absolute;
+      width:540px;
+      height:540px;
+      border-radius:50%;
+      background:
+        radial-gradient(circle, rgba(234,106,69,.12), rgba(234,106,69,.02) 60%, transparent 76%);
+      filter:blur(6px);
+    }
+
     #argentinaMap{
-      height:min(92vh,920px);
-      width:auto;
+      width:min(530px, 74%);
+      height:auto;
       overflow:visible;
-      filter:
-        drop-shadow(
-          0 28px 35px
-          rgba(100,50,30,.08)
-        );
+      filter:drop-shadow(0 28px 34px rgba(110,55,30,.07));
+      position:relative;
+      z-index:2;
     }
 
     .province{
       fill:var(--orange-soft);
-      stroke:var(--cream);
-      stroke-width:3.2;
+      stroke:var(--line);
+      stroke-width:2.4;
       cursor:pointer;
-      transform-box:fill-box;
-      transform-origin:center;
       transition:
         fill .18s ease,
         transform .18s ease,
         opacity .18s ease,
         filter .18s ease;
+      transform-box:fill-box;
+      transform-origin:center;
     }
 
     .province:hover{
       fill:var(--orange-hover);
-      transform:scale(1.035);
-      filter:
-        drop-shadow(
-          0 6px 7px
-          rgba(100,40,20,.18)
-        );
+      transform:scale(1.03);
+      filter:drop-shadow(0 6px 8px rgba(90,45,25,.18));
     }
 
-    #argentinaMap.has-selection
-    .province:not(.selected){
-      opacity:.40;
+    #argentinaMap.has-selection .province:not(.selected){
+      opacity:.38;
     }
 
     .province.selected{
       fill:var(--orange);
       opacity:1 !important;
-      transform:scale(1.045);
-      filter:
-        drop-shadow(
-          0 8px 10px
-          rgba(100,40,20,.23)
-        );
+      transform:scale(1.04);
+      filter:drop-shadow(0 7px 10px rgba(90,45,25,.22));
     }
 
-    /* PANEL PROVINCIA */
+    .country-outline{
+      fill:none;
+      stroke:#e3cec3;
+      stroke-width:2.2;
+      pointer-events:none;
+      opacity:.9;
+    }
 
     .province-info{
       position:absolute;
       right:3vw;
       bottom:7vh;
-      width:245px;
+      width:255px;
       padding:18px;
       border-radius:18px;
-      background:rgba(255,255,255,.90);
+      background:rgba(255,255,255,.92);
       backdrop-filter:blur(12px);
-      box-shadow:
-        0 18px 45px
-        rgba(65,30,15,.10);
+      box-shadow:0 18px 45px rgba(65,30,15,.10);
       opacity:0;
       transform:translateY(12px);
       pointer-events:none;
       transition:.22s ease;
+      z-index:5;
     }
 
     .province-info.visible{
@@ -290,8 +294,6 @@
       background:var(--orange-dark);
     }
 
-    /* TOOLTIP */
-
     .tooltip{
       position:fixed;
       z-index:999;
@@ -311,7 +313,9 @@
       opacity:1;
     }
 
-    /* MOBILE */
+    /* =====================
+       MOBILE
+    ===================== */
 
     @media(max-width:900px){
       body{
@@ -325,16 +329,16 @@
       }
 
       .left{
-        min-height:52vh;
+        min-height:50vh;
         padding:28px 22px 20px;
       }
 
       .hero{
-        padding-top:50px;
+        padding-top:48px;
       }
 
       h1{
-        font-size:clamp(50px,13vw,75px);
+        font-size:clamp(50px,13vw,74px);
       }
 
       .description{
@@ -350,13 +354,11 @@
       }
 
       .right{
-        min-height:740px;
+        min-height:760px;
       }
 
       #argentinaMap{
-        width:90vw;
-        height:auto;
-        max-height:680px;
+        width:min(420px, 88vw);
       }
 
       .province-info{
@@ -372,10 +374,6 @@
         font-size:29px;
       }
 
-      .hero{
-        padding-top:40px;
-      }
-
       h1{
         font-size:50px;
       }
@@ -385,7 +383,7 @@
       }
 
       #argentinaMap{
-        width:94vw;
+        width:min(390px, 92vw);
       }
     }
   </style>
@@ -396,13 +394,9 @@
 <div class="page">
 
   <section class="left">
-
-    <div class="logo">
-      Amigate
-    </div>
+    <div class="logo">Amigate</div>
 
     <div class="hero">
-
       <div class="eyebrow">
         Argentina está llena de oportunidades
       </div>
@@ -416,544 +410,308 @@
       <div class="line"></div>
 
       <p class="description">
-        Amigate conecta personas con marcas,
-        emprendimientos, profesionales, oficios
-        y oportunidades de toda Argentina.
-        Elegí tu provincia y descubrí todo lo que
-        tiene para ofrecer.
+        Amigate conecta personas con marcas, emprendimientos,
+        profesionales, oficios y oportunidades de toda Argentina.
+        Elegí tu provincia y descubrí todo lo que tiene para ofrecer.
       </p>
 
       <div class="actions">
-
-        <button
-          class="btn btn-main"
-          id="sellerButton"
-        >
+        <button class="btn btn-main" id="sellerButton">
           Publicar mi marca
         </button>
 
-        <button
-          class="btn btn-light"
-          id="loginButton"
-        >
+        <button class="btn btn-light" id="loginButton">
           Iniciar sesión
         </button>
-
       </div>
-
     </div>
-
   </section>
 
 
   <section class="right">
-
     <div class="map-area" id="mapArea">
+      <div class="map-glow"></div>
 
       <svg
         id="argentinaMap"
-        viewBox="70 10 390 875"
+        viewBox="0 0 300 760"
         aria-label="Mapa interactivo de Argentina"
       >
+        <defs>
+          <clipPath id="countryClip">
+            <path d="
+              M118 16
+              L136 20 L149 34 L149 53 L157 63 L157 85
+              L168 96 L168 116 L179 127 L179 149
+              L193 162 L197 181 L206 199 L204 226
+              L219 246 L223 270 L217 294 L221 318
+              L214 341 L208 362 L215 384 L223 405
+              L221 426 L210 451 L206 472 L201 494
+              L194 520 L188 547 L184 575 L178 603
+              L170 632 L164 657 L159 681 L156 702
+              L147 722 L134 736 L125 741 L113 737
+              L102 724 L92 709 L84 690 L79 671
+              L71 648 L64 625 L58 598 L54 572
+              L49 545 L44 516 L43 490 L46 464
+              L53 437 L55 412 L59 386 L65 360
+              L70 334 L74 309 L77 283 L83 257
+              L86 233 L90 208 L97 185 L103 164
+              L111 146 L112 123 L120 102 L120 82
+              L126 64 L123 42 L117 29 Z
+            " />
+          </clipPath>
+        </defs>
 
-        <path class="province" data-name="Jujuy" data-slug="jujuy"
-          d="M196 25
-             L219 19 L236 30 L244 49
-             L237 68 L241 82 L226 94
-             L211 86 L204 73 L190 66
-             L193 47 Z"/>
+        <!-- PROVINCIAS -->
+        <g clip-path="url(#countryClip)">
 
-        <path class="province" data-name="Salta" data-slug="salta"
-          d="M189 67
-             L207 74 L214 89 L229 96
-             L242 81 L266 86 L278 99
-             L298 105 L299 127 L287 140
-             L262 145 L246 139 L226 147
-             L204 137 L183 141 L171 126
-             L177 106 L171 91 Z"/>
+          <!-- Jujuy -->
+          <path class="province" data-name="Jujuy" data-slug="jujuy"
+            d="M112 18 L129 18 L140 29 L140 49 L127 59 L113 54 L106 39 Z" />
 
-        <path class="province" data-name="Formosa" data-slug="formosa"
-          d="M298 105
-             L332 105 L365 107 L395 115
-             L420 130 L408 145 L381 151
-             L350 151 L324 147 L299 143
-             L287 139 L300 126 Z"/>
+          <!-- Salta -->
+          <path class="province" data-name="Salta" data-slug="salta"
+            d="M102 52 L128 58 L141 49 L152 62 L154 87 L145 106 L123 111 L103 102 L93 84 Z" />
 
-        <path class="province" data-name="Chaco" data-slug="chaco"
-          d="M286 142
-             L326 148 L353 152 L383 152
-             L390 176 L381 197 L360 208
-             L332 204 L304 203 L280 190
-             L269 170 Z"/>
+          <!-- Formosa -->
+          <path class="province" data-name="Formosa" data-slug="formosa"
+            d="M154 61 L185 67 L198 80 L198 103 L184 119 L160 116 L145 106 L154 87 Z" />
 
-        <path class="province" data-name="Misiones" data-slug="misiones"
-          d="M392 151
-             L412 140 L429 145 L442 161
-             L439 179 L429 191 L432 209
-             L420 224 L405 217 L397 198
-             L383 190 L390 175 Z"/>
+          <!-- Chaco -->
+          <path class="province" data-name="Chaco" data-slug="chaco"
+            d="M145 106 L160 116 L184 119 L186 145 L175 163 L150 161 L136 146 L136 123 Z" />
 
-        <path class="province" data-name="Corrientes" data-slug="corrientes"
-          d="M359 207
-             L383 194 L399 201 L407 219
-             L424 228 L428 247 L416 263
-             L410 284 L394 297 L371 292
-             L351 281 L336 261 L337 236 Z"/>
+          <!-- Misiones -->
+          <path class="province" data-name="Misiones" data-slug="misiones"
+            d="M187 118 L203 128 L210 145 L208 171 L197 183 L188 171 L184 151 L175 144 Z" />
 
-        <path class="province" data-name="Tucumán" data-slug="tucuman"
-          d="M211 145
-             L229 147 L244 157 L245 177
-             L235 189 L219 190 L209 180
-             L204 163 Z"/>
+          <!-- Corrientes -->
+          <path class="province" data-name="Corrientes" data-slug="corrientes"
+            d="M175 144 L185 152 L190 172 L198 184 L196 211 L185 230 L170 227 L159 211 L160 188 L171 168 Z" />
 
-        <path class="province" data-name="Santiago del Estero" data-slug="santiago-del-estero"
-          d="M246 140
-             L271 142 L282 157 L280 190
-             L292 207 L279 232 L259 245
-             L238 232 L224 207 L220 190
-             L236 188 L246 176 Z"/>
+          <!-- Tucumán -->
+          <path class="province" data-name="Tucumán" data-slug="tucuman"
+            d="M118 112 L131 116 L135 131 L127 144 L116 140 L113 125 Z" />
 
-        <path class="province" data-name="Catamarca" data-slug="catamarca"
-          d="M168 129
-             L183 140 L204 138 L212 150
-             L204 165 L210 181 L199 196
-             L187 215 L170 224 L151 213
-             L142 192 L147 171 L139 153
-             L151 140 Z"/>
+          <!-- Santiago del Estero -->
+          <path class="province" data-name="Santiago del Estero" data-slug="santiago-del-estero"
+            d="M130 115 L151 121 L160 140 L160 189 L148 205 L130 189 L126 166 L136 145 Z" />
 
-        <path class="province" data-name="La Rioja" data-slug="la-rioja"
-          d="M151 213
-             L171 225 L189 215 L201 229
-             L204 250 L192 273 L175 285
-             L155 277 L143 260 L135 239 Z"/>
+          <!-- Catamarca -->
+          <path class="province" data-name="Catamarca" data-slug="catamarca"
+            d="M101 103 L119 112 L113 125 L116 140 L108 158 L95 176 L80 169 L76 150 L82 127 Z" />
 
-        <path class="province" data-name="San Juan" data-slug="san-juan"
-          d="M134 239
-             L143 260 L157 279 L161 301
-             L150 319 L132 327 L113 317
-             L102 300 L99 277 L109 256 Z"/>
+          <!-- La Rioja -->
+          <path class="province" data-name="La Rioja" data-slug="la-rioja"
+            d="M80 169 L95 176 L108 158 L124 168 L126 191 L116 210 L100 223 L83 214 L76 192 Z" />
 
-        <path class="province" data-name="Córdoba" data-slug="cordoba"
-          d="M202 251
-             L225 245 L250 250 L271 265
-             L276 288 L270 315 L274 338
-             L259 355 L234 364 L212 354
-             L197 335 L190 311 L194 285 Z"/>
+          <!-- San Juan -->
+          <path class="province" data-name="San Juan" data-slug="san-juan"
+            d="M68 210 L84 214 L100 223 L106 245 L95 262 L78 267 L63 255 L60 233 Z" />
 
-        <path class="province" data-name="Santa Fe" data-slug="santa-fe"
-          d="M278 202
-             L306 202 L333 207 L345 222
-             L338 244 L342 265 L333 287
-             L326 312 L308 332 L291 346
-             L274 338 L270 315 L276 289
-             L270 264 L259 244 Z"/>
+          <!-- Córdoba -->
+          <path class="province" data-name="Córdoba" data-slug="cordoba"
+            d="M118 210 L141 205 L161 213 L170 231 L167 258 L171 279 L161 295 L141 301 L123 291 L114 273 L111 245 Z" />
 
-        <path class="province" data-name="Entre Ríos" data-slug="entre-rios"
-          d="M342 265
-             L367 273 L390 290 L399 313
-             L393 337 L380 358 L357 369
-             L333 357 L308 347 L309 331
-             L326 313 L333 288 Z"/>
+          <!-- Santa Fe -->
+          <path class="province" data-name="Santa Fe" data-slug="santa-fe"
+            d="M160 188 L174 194 L185 229 L177 248 L178 270 L171 293 L162 295 L168 258 L167 232 L161 214 L149 205 Z" />
 
-        <path class="province" data-name="San Luis" data-slug="san-luis"
-          d="M160 303
-             L181 294 L195 307 L198 334
-             L213 355 L204 379 L185 391
-             L164 384 L151 367 L148 341 Z"/>
+          <!-- Entre Ríos -->
+          <path class="province" data-name="Entre Ríos" data-slug="entre-rios"
+            d="M178 248 L191 258 L198 276 L198 301 L189 320 L176 328 L163 319 L160 296 L171 294 Z" />
 
-        <path class="province" data-name="Mendoza" data-slug="mendoza"
-          d="M104 315
-             L131 328 L149 343 L153 369
-             L165 386 L158 415 L144 439
-             L124 451 L105 439 L93 414
-             L91 382 L96 351 Z"/>
+          <!-- San Luis -->
+          <path class="province" data-name="San Luis" data-slug="san-luis"
+            d="M96 245 L111 245 L114 273 L123 292 L119 315 L105 326 L91 320 L83 301 L83 280 Z" />
 
-        <path class="province" data-name="Ciudad Autónoma de Buenos Aires" data-slug="caba"
-          d="M361 378
-             L369 374 L375 379
-             L371 388 L363 390
-             L357 384 Z"/>
+          <!-- Mendoza -->
+          <path class="province" data-name="Mendoza" data-slug="mendoza"
+            d="M63 255 L78 267 L83 280 L83 302 L91 320 L89 344 L79 366 L66 377 L53 370 L47 348 L49 320 L56 293 Z" />
 
-        <path class="province" data-name="Buenos Aires" data-slug="buenos-aires"
-          d="M207 379
-             L235 364 L259 356 L289 347
-             L310 349 L335 358 L357 370
-             L356 386 L375 396 L391 414
-             L405 430 L400 451 L388 469
-             L367 480 L348 497 L320 508
-             L294 501 L272 490 L248 477
-             L227 465 L208 448 L197 427
-             L197 404 Z"/>
+          <!-- CABA -->
+          <path class="province" data-name="Ciudad Autónoma de Buenos Aires" data-slug="caba"
+            d="M181 331 L186 332 L188 337 L185 342 L180 341 L178 336 Z" />
 
-        <path class="province" data-name="La Pampa" data-slug="la-pampa"
-          d="M158 416
-             L180 393 L205 379 L198 405
-             L198 429 L210 449 L228 466
-             L224 488 L205 503 L179 509
-             L155 501 L142 481 L143 451 Z"/>
+          <!-- Buenos Aires -->
+          <path class="province" data-name="Buenos Aires" data-slug="buenos-aires"
+            d="M120 314 L140 301 L162 319 L176 328 L180 341 L191 349 L201 363 L209 378 L208 397 L198 414 L182 428 L172 443 L153 452 L132 447 L114 435 L99 422 L93 404 L94 381 L106 356 L104 328 Z" />
 
-        <path class="province" data-name="Neuquén" data-slug="neuquen"
-          d="M104 449
-             L124 454 L144 451 L144 480
-             L158 502 L177 510 L170 531
-             L155 548 L134 556 L112 551
-             L96 538 L83 517 L84 491
-             L91 469 Z"/>
+          <!-- La Pampa -->
+          <path class="province" data-name="La Pampa" data-slug="la-pampa"
+            d="M88 344 L104 328 L120 314 L106 356 L94 381 L93 404 L80 414 L61 409 L51 393 L52 370 L66 377 L79 366 Z" />
 
-        <path class="province" data-name="Río Negro" data-slug="rio-negro"
-          d="M112 552
-             L136 557 L157 548 L177 510
-             L204 503 L227 488 L251 484
-             L278 490 L304 502 L302 527
-             L288 548 L266 562 L238 572
-             L208 578 L176 579 L145 573 Z"/>
+          <!-- Neuquén -->
+          <path class="province" data-name="Neuquén" data-slug="neuquen"
+            d="M52 410 L80 414 L93 404 L99 422 L95 444 L84 462 L67 468 L54 458 L45 440 L44 424 Z" />
 
-        <path class="province" data-name="Chubut" data-slug="chubut"
-          d="M144 574
-             L177 580 L208 579 L239 573
-             L267 562 L288 550 L301 528
-             L309 558 L314 588 L306 614
-             L287 635 L260 648 L230 655
-             L198 651 L167 641 L144 624
-             L132 602 Z"/>
+          <!-- Río Negro -->
+          <path class="province" data-name="Río Negro" data-slug="rio-negro"
+            d="M44 464 L67 468 L84 462 L95 444 L114 436 L133 448 L140 464 L138 482 L124 497 L106 506 L84 509 L62 504 L48 490 Z" />
 
-        <path class="province" data-name="Santa Cruz" data-slug="santa-cruz"
-          d="M145 624
-             L168 642 L198 653 L231 656
-             L260 649 L287 637 L305 618
-             L311 648 L310 680 L299 710
-             L286 741 L269 769 L250 793
-             L226 807 L201 803 L179 791
-             L160 770 L147 745 L138 715
-             L136 682 Z"/>
+          <!-- Chubut -->
+          <path class="province" data-name="Chubut" data-slug="chubut"
+            d="M48 490 L62 504 L84 509 L106 506 L124 497 L138 482 L145 502 L144 525 L136 545 L121 561 L99 569 L75 567 L58 556 L49 536 Z" />
 
-        <path class="province" data-name="Tierra del Fuego" data-slug="tierra-del-fuego"
-          d="M179 824
-             L201 814 L228 814 L250 826
-             L259 843 L245 858 L221 867
-             L197 866 L177 855 L166 840 Z"/>
+          <!-- Santa Cruz -->
+          <path class="province" data-name="Santa Cruz" data-slug="santa-cruz"
+            d="M49 536 L58 556 L75 567 L99 569 L121 561 L136 545 L139 570 L135 595 L128 620 L119 646 L107 670 L94 690 L80 696 L67 686 L57 669 L50 646 L45 619 L42 592 Z" />
 
+          <!-- Tierra del Fuego -->
+          <path class="province" data-name="Tierra del Fuego" data-slug="tierra-del-fuego"
+            d="M86 705 L101 702 L117 706 L124 715 L121 727 L108 734 L93 732 L82 724 L79 714 Z" />
+
+        </g>
+
+        <!-- contorno del país -->
+        <path class="country-outline" d="
+          M118 16
+          L136 20 L149 34 L149 53 L157 63 L157 85
+          L168 96 L168 116 L179 127 L179 149
+          L193 162 L197 181 L206 199 L204 226
+          L219 246 L223 270 L217 294 L221 318
+          L214 341 L208 362 L215 384 L223 405
+          L221 426 L210 451 L206 472 L201 494
+          L194 520 L188 547 L184 575 L178 603
+          L170 632 L164 657 L159 681 L156 702
+          L147 722 L134 736 L125 741 L113 737
+          L102 724 L92 709 L84 690 L79 671
+          L71 648 L64 625 L58 598 L54 572
+          L49 545 L44 516 L43 490 L46 464
+          L53 437 L55 412 L59 386 L65 360
+          L70 334 L74 309 L77 283 L83 257
+          L86 233 L90 208 L97 185 L103 164
+          L111 146 L112 123 L120 102 L120 82
+          L126 64 L123 42 L117 29 Z
+        " />
       </svg>
 
-      <div
-        class="province-info"
-        id="provinceInfo"
-      >
-
-        <small>
-          Provincia seleccionada
-        </small>
-
+      <div class="province-info" id="provinceInfo">
+        <small>Provincia seleccionada</small>
         <strong id="provinceName"></strong>
-
-        <button id="exploreProvince">
-          Explorar
-        </button>
-
+        <button id="exploreProvince">Explorar</button>
       </div>
-
     </div>
-
   </section>
-
 </div>
 
-
-<div
-  class="tooltip"
-  id="tooltip"
-></div>
-
+<div class="tooltip" id="tooltip"></div>
 
 <script>
-  const map =
-    document.getElementById(
-      "argentinaMap"
-    );
-
-  const mapArea =
-    document.getElementById(
-      "mapArea"
-    );
-
-  const provinces =
-    document.querySelectorAll(
-      ".province"
-    );
-
-  const info =
-    document.getElementById(
-      "provinceInfo"
-    );
-
-  const provinceName =
-    document.getElementById(
-      "provinceName"
-    );
-
-  const exploreButton =
-    document.getElementById(
-      "exploreProvince"
-    );
-
-  const tooltip =
-    document.getElementById(
-      "tooltip"
-    );
+  const map = document.getElementById("argentinaMap");
+  const mapArea = document.getElementById("mapArea");
+  const provinces = document.querySelectorAll(".province");
+  const info = document.getElementById("provinceInfo");
+  const provinceName = document.getElementById("provinceName");
+  const exploreButton = document.getElementById("exploreProvince");
+  const tooltip = document.getElementById("tooltip");
 
   let selected = null;
 
-
   function clearSelection(){
+    provinces.forEach(province => {
+      province.classList.remove("selected");
+    });
 
-    provinces.forEach(
-      province => {
-        province.classList.remove(
-          "selected"
-        );
-      }
-    );
-
-    map.classList.remove(
-      "has-selection"
-    );
-
-    info.classList.remove(
-      "visible"
-    );
-
+    map.classList.remove("has-selection");
+    info.classList.remove("visible");
     selected = null;
-
-    localStorage.removeItem(
-      "amigate_province"
-    );
+    localStorage.removeItem("amigate_province");
   }
 
-
   function selectProvince(path){
-
-    const alreadySelected =
-      path.classList.contains(
-        "selected"
-      );
+    const alreadySelected = path.classList.contains("selected");
 
     if(alreadySelected){
-
       clearSelection();
-
       return;
     }
 
-    provinces.forEach(
-      province => {
-        province.classList.remove(
-          "selected"
-        );
-      }
-    );
+    provinces.forEach(province => {
+      province.classList.remove("selected");
+    });
 
-    path.classList.add(
-      "selected"
-    );
-
-    map.classList.add(
-      "has-selection"
-    );
+    path.classList.add("selected");
+    map.classList.add("has-selection");
 
     selected = {
-      name:
-        path.dataset.name,
-
-      slug:
-        path.dataset.slug
+      name: path.dataset.name,
+      slug: path.dataset.slug
     };
 
-    provinceName.textContent =
-      selected.name;
-
-    exploreButton.textContent =
-      "Explorar " +
-      selected.name;
-
-    info.classList.add(
-      "visible"
-    );
+    provinceName.textContent = selected.name;
+    exploreButton.textContent = "Explorar " + selected.name;
+    info.classList.add("visible");
 
     localStorage.setItem(
       "amigate_province",
-      JSON.stringify(
-        selected
-      )
+      JSON.stringify(selected)
     );
   }
 
+  provinces.forEach(province => {
+    province.addEventListener("mouseenter", () => {
+      tooltip.textContent = province.dataset.name;
+      tooltip.classList.add("visible");
+    });
 
-  provinces.forEach(
-    province => {
+    province.addEventListener("mousemove", event => {
+      tooltip.style.left = event.clientX + "px";
+      tooltip.style.top = event.clientY + "px";
+    });
 
-      province.addEventListener(
-        "mouseenter",
-        () => {
+    province.addEventListener("mouseleave", () => {
+      tooltip.classList.remove("visible");
+    });
 
-          tooltip.textContent =
-            province.dataset.name;
-
-          tooltip.classList.add(
-            "visible"
-          );
-        }
-      );
-
-
-      province.addEventListener(
-        "mousemove",
-        event => {
-
-          tooltip.style.left =
-            event.clientX + "px";
-
-          tooltip.style.top =
-            event.clientY + "px";
-        }
-      );
-
-
-      province.addEventListener(
-        "mouseleave",
-        () => {
-
-          tooltip.classList.remove(
-            "visible"
-          );
-        }
-      );
-
-
-      province.addEventListener(
-        "click",
-        event => {
-
-          event.stopPropagation();
-
-          selectProvince(
-            province
-          );
-        }
-      );
-    }
-  );
-
-
-  info.addEventListener(
-    "click",
-    event => {
-
+    province.addEventListener("click", event => {
       event.stopPropagation();
+      selectProvince(province);
+    });
+  });
+
+  info.addEventListener("click", event => {
+    event.stopPropagation();
+  });
+
+  mapArea.addEventListener("click", event => {
+    if(event.target.classList.contains("province")){
+      return;
     }
-  );
 
-
-  mapArea.addEventListener(
-    "click",
-    event => {
-
-      if(
-        event.target.classList.contains(
-          "province"
-        )
-      ){
-        return;
-      }
-
-      if(selected){
-        clearSelection();
-      }
+    if(selected){
+      clearSelection();
     }
-  );
+  });
 
+  exploreButton.addEventListener("click", () => {
+    if(!selected) return;
 
-  exploreButton.addEventListener(
-    "click",
-    () => {
+    alert("Explorando " + selected.name);
+  });
 
-      if(!selected){
-        return;
-      }
-
-      alert(
-        "Explorando " +
-        selected.name
-      );
-    }
-  );
-
-
-  /* RESTAURAR PROVINCIA GUARDADA */
-
-  const stored =
-    localStorage.getItem(
-      "amigate_province"
-    );
+  const stored = localStorage.getItem("amigate_province");
 
   if(stored){
-
     try{
-
-      const saved =
-        JSON.parse(
-          stored
-        );
-
-      const path =
-        document.querySelector(
-          `[data-slug="${saved.slug}"]`
-        );
+      const saved = JSON.parse(stored);
+      const path = document.querySelector(`[data-slug="${saved.slug}"]`);
 
       if(path){
-
-        selectProvince(
-          path
-        );
+        selectProvince(path);
       }
-
-    }
-    catch(error){
-
-      localStorage.removeItem(
-        "amigate_province"
-      );
+    }catch(error){
+      localStorage.removeItem("amigate_province");
     }
   }
 
+  document.getElementById("sellerButton").addEventListener("click", () => {
+    alert("Próximo paso: registro de marcas");
+  });
 
-  document
-    .getElementById(
-      "sellerButton"
-    )
-    .addEventListener(
-      "click",
-      () => {
-
-        alert(
-          "Próximo paso: registro de marcas"
-        );
-      }
-    );
-
-
-  document
-    .getElementById(
-      "loginButton"
-    )
-    .addEventListener(
-      "click",
-      () => {
-
-        alert(
-          "Próximo paso: iniciar sesión"
-        );
-      }
-    );
+  document.getElementById("loginButton").addEventListener("click", () => {
+    alert("Próximo paso: iniciar sesión");
+  });
 </script>
 
 </body>
