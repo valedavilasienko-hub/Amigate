@@ -1,288 +1,202 @@
 const db = window.amigateSupabase;
 
-
-/* =========================================================
-   VARIABLES
-========================================================= */
-
 const mapLoading =
   document.getElementById("mapLoading");
+
+const selectedPanel =
+  document.getElementById("selectedPanel");
 
 const selectedProvinceName =
   document.getElementById("selectedProvinceName");
 
-const exploreProvinceButton =
-  document.getElementById("exploreProvinceButton");
-
-const changeProvinceButton =
-  document.getElementById("changeProvinceButton");
-
-const provinceSearch =
-  document.getElementById("provinceSearch");
-
-const provinceSuggestions =
-  document.getElementById("provinceSuggestions");
-
-const categoriesTitle =
-  document.getElementById("categoriesTitle");
-
-const categoriesSubtitle =
-  document.getElementById("categoriesSubtitle");
-
+const exploreButton =
+  document.getElementById("exploreButton");
 
 let selectedProvince = null;
 
-let provinceDatabase = [];
+let provinces = [];
 
-let geojsonLayer = null;
-
-let provinceLayers = new Map();
+let layersByProvince = new Map();
 
 
-/* =========================================================
+/* =====================================================
    MAPA
-========================================================= */
+===================================================== */
 
 const map = L.map(
   "argentinaMap",
   {
     zoomControl: false,
-    attributionControl: true,
+    attributionControl: false,
     scrollWheelZoom: false,
     doubleClickZoom: false,
-    dragging: true,
-    touchZoom: false
+    boxZoom: false,
+    keyboard: false
   }
 );
 
 
-/*
-   Ocultamos completamente el mapa base.
-   Queremos únicamente la silueta/provincias.
-*/
-
-map.setView(
-  [-38.4, -63.6],
-  4
-);
-
-
-/* =========================================================
-   NORMALIZAR TEXTO
-========================================================= */
+/* =====================================================
+   NORMALIZAR NOMBRES
+===================================================== */
 
 function normalizeText(text = "") {
 
   return text
     .normalize("NFD")
-    .replace(
-      /[\u0300-\u036f]/g,
-      ""
-    )
+    .replace(/[\u0300-\u036f]/g, "")
     .toLowerCase()
+    .replace(/\./g, "")
     .trim();
 
 }
 
 
-/* =========================================================
-   CARGAR PROVINCIAS DE SUPABASE
-========================================================= */
+/* =====================================================
+   SUPABASE
+===================================================== */
 
-async function loadProvinceDatabase() {
+async function loadProvincesFromDatabase() {
 
   const { data, error } =
     await db
       .from("provinces")
-      .select(
-        "id, nombre"
-      )
-      .eq(
-        "activa",
-        true
-      )
-      .order(
-        "nombre",
-        {
-          ascending: true
-        }
-      );
+      .select("id, nombre")
+      .eq("activa", true);
 
 
   if (error) {
 
-    console.error(
-      "Error Supabase:",
-      error
-    );
+    console.error(error);
 
-    return;
+    throw error;
 
   }
 
 
-  provinceDatabase =
-    data || [];
+  provinces = data || [];
 
 }
 
 
-/* =========================================================
-   BUSCAR PROVINCIA EN SUPABASE POR NOMBRE
-========================================================= */
+/* =====================================================
+   RELACIONAR GEOJSON CON SUPABASE
+===================================================== */
 
-function findDatabaseProvince(
-  geoProvinceName
-) {
+function findProvince(name) {
 
-  const geoName =
-    normalizeText(
-      geoProvinceName
-    );
+  const geoName = normalizeText(name);
 
 
-  return provinceDatabase.find(
-    province => {
+  return provinces.find(province => {
 
-      const dbName =
-        normalizeText(
-          province.nombre
-        );
+    const dbName =
+      normalizeText(province.nombre);
 
 
-      /*
-        CASOS ESPECIALES
-      */
+    /* CABA */
 
-      if (
-        geoName.includes(
-          "ciudad autonoma"
-        )
-        &&
-        (
-          dbName.includes(
-            "ciudad autonoma"
-          )
-          ||
-          dbName === "caba"
-        )
-      ) {
-
-        return true;
-
-      }
-
-
-      if (
-        geoName ===
-        "tierra del fuego, antartida e islas del atlantico sur"
-        &&
-        dbName.includes(
-          "tierra del fuego"
-        )
-      ) {
-
-        return true;
-
-      }
-
-
-      return (
-        geoName === dbName
+    if (
+      geoName.includes("ciudad autonoma")
+      &&
+      (
+        dbName.includes("ciudad autonoma")
         ||
-        geoName.includes(
-          dbName
-        )
-        ||
-        dbName.includes(
-          geoName
-        )
-      );
+        dbName === "caba"
+      )
+    ) {
+
+      return true;
 
     }
-  );
+
+
+    /* TIERRA DEL FUEGO */
+
+    if (
+      geoName.includes("tierra del fuego")
+      &&
+      dbName.includes("tierra del fuego")
+    ) {
+
+      return true;
+
+    }
+
+
+    return (
+      geoName === dbName
+      ||
+      geoName.includes(dbName)
+      ||
+      dbName.includes(geoName)
+    );
+
+  });
 
 }
 
 
-/* =========================================================
-   ESTILO NORMAL DEL MAPA
-========================================================= */
+/* =====================================================
+   ESTILOS
+===================================================== */
 
 function normalStyle() {
 
   return {
-
     color: "#ffffff",
-
     weight: 2,
-
-    fillColor: "#efc1ae",
-
+    fillColor: "#edbba7",
     fillOpacity: 1
-
   };
 
 }
 
 
-/* =========================================================
-   ESTILO SELECCIONADO
-========================================================= */
+function hoverStyle() {
+
+  return {
+    color: "#ffffff",
+    weight: 2,
+    fillColor: "#f08d65",
+    fillOpacity: 1
+  };
+
+}
+
 
 function selectedStyle() {
 
   return {
-
     color: "#ffffff",
-
     weight: 2.5,
-
     fillColor: "#e96b45",
-
     fillOpacity: 1
-
   };
 
 }
 
 
-/* =========================================================
-   SELECCIONAR PROVINCIA
-========================================================= */
+/* =====================================================
+   SELECCIONAR
+===================================================== */
 
-function selectProvince(
-  province,
-  layer
-) {
+function selectProvince(province, layer) {
 
-  if (!province) {
-    return;
-  }
+  if (!province) return;
 
 
-  selectedProvince =
-    province;
+  selectedProvince = province;
 
 
-  /*
-    RESETEAR TODAS
-  */
+  layersByProvince.forEach(currentLayer => {
 
-  provinceLayers.forEach(
-    itemLayer => {
+    currentLayer.setStyle(
+      normalStyle()
+    );
 
-      itemLayer.setStyle(
-        normalStyle()
-      );
+  });
 
-    }
-  );
-
-
-  /*
-    RESALTAR ELEGIDA
-  */
 
   if (layer) {
 
@@ -299,314 +213,214 @@ function selectProvince(
     province.nombre;
 
 
-  exploreProvinceButton.disabled =
-    false;
-
-
-  exploreProvinceButton.textContent =
-    `Explorar ${province.nombre}`;
-
-
-  changeProvinceButton.classList.remove(
+  selectedPanel.classList.remove(
     "hidden"
   );
 
 
-  provinceSearch.value =
-    province.nombre;
-
-
-  provinceSuggestions.innerHTML =
-    "";
+  exploreButton.textContent =
+    `Explorar ${province.nombre}`;
 
 
   localStorage.setItem(
     "amigate_province",
-    JSON.stringify(
-      province
-    )
+    JSON.stringify(province)
   );
 
-
-  updateCategorySection();
-
 }
 
 
-/* =========================================================
-   ACTUALIZAR CATEGORÍAS
-========================================================= */
+/* =====================================================
+   DESCARGAR GEOJSON
+===================================================== */
 
-function updateCategorySection() {
+async function fetchGeoJSON() {
 
-  if (!selectedProvince) {
+  const urls = [
 
-    categoriesTitle.textContent =
-      "¿Qué estás buscando?";
+    "https://apis.datos.gob.ar/georef/api/v2.0/provincias.geojson",
 
-    categoriesSubtitle.textContent =
-      "Primero elegí tu provincia.";
+    "https://apis.datos.gob.ar/georef/api/provincias.geojson"
 
-    return;
-
-  }
+  ];
 
 
-  categoriesTitle.textContent =
-    `¿Qué estás buscando en ${selectedProvince.nombre}?`;
+  for (const url of urls) {
+
+    try {
+
+      const response =
+        await fetch(url);
 
 
-  categoriesSubtitle.textContent =
-    `Explorá marcas, productos, servicios y oportunidades disponibles en ${selectedProvince.nombre}.`;
+      if (!response.ok) {
 
-}
+        continue;
 
-
-/* =========================================================
-   RESTAURAR PROVINCIA GUARDADA
-========================================================= */
-
-function restoreSavedProvince() {
-
-  const saved =
-    localStorage.getItem(
-      "amigate_province"
-    );
+      }
 
 
-  if (!saved) {
-    return;
-  }
+      const data =
+        await response.json();
 
 
-  try {
+      if (
+        data
+        &&
+        data.type === "FeatureCollection"
+      ) {
 
-    const parsed =
-      JSON.parse(saved);
+        return data;
 
+      }
 
-    const current =
-      provinceDatabase.find(
-        province =>
-          province.id ===
-          parsed.id
-      );
-
-
-    if (!current) {
-      return;
     }
+    catch (error) {
 
-
-    const layer =
-      provinceLayers.get(
-        current.id
-      );
-
-
-    selectProvince(
-      current,
-      layer
-    );
-
-  }
-
-  catch (error) {
-
-    localStorage.removeItem(
-      "amigate_province"
-    );
-
-  }
-
-}
-
-
-/* =========================================================
-   CARGAR GEOJSON OFICIAL
-========================================================= */
-
-async function loadArgentinaMap() {
-
-  try {
-
-    /*
-      GEOJSON OFICIAL
-      API GEOREF ARGENTINA
-    */
-
-    const response =
-      await fetch(
-        "https://apis.datos.gob.ar/georef/api/v2.0/provincias.geojson"
-      );
-
-
-    if (!response.ok) {
-
-      throw new Error(
-        "No fue posible obtener el mapa."
+      console.warn(
+        "Falló:",
+        url
       );
 
     }
+
+  }
+
+
+  throw new Error(
+    "No se pudo descargar el GeoJSON."
+  );
+
+}
+
+
+/* =====================================================
+   CARGAR MAPA
+===================================================== */
+
+async function loadMap() {
+
+  try {
+
+    await loadProvincesFromDatabase();
 
 
     const geoData =
-      await response.json();
+      await fetchGeoJSON();
 
 
-    geojsonLayer =
+    const geoLayer =
       L.geoJSON(
         geoData,
         {
 
-          style:
-            normalStyle,
+          style: normalStyle,
 
 
-          onEachFeature:
-            (
-              feature,
+          onEachFeature(
+            feature,
+            layer
+          ) {
+
+            const name =
+              feature.properties?.nombre
+              ||
+              feature.properties?.name
+              ||
+              "";
+
+
+            const province =
+              findProvince(name);
+
+
+            if (!province) {
+
+              console.warn(
+                "Provincia no encontrada:",
+                name
+              );
+
+              return;
+
+            }
+
+
+            layersByProvince.set(
+              province.id,
               layer
-            ) => {
+            );
 
 
-              /*
-                Dependiendo de la versión del
-                GeoJSON oficial, el nombre
-                puede venir directamente
-                o dentro de propiedades.
-              */
+            layer.on({
 
-              const geoName =
-                feature.properties?.nombre
-                ||
-                feature.properties?.name
-                ||
-                feature.nombre
-                ||
-                "";
+              mouseover() {
 
+                if (
+                  selectedProvince?.id
+                  !== province.id
+                ) {
 
-              const province =
-                findDatabaseProvince(
-                  geoName
-                );
+                  layer.setStyle(
+                    hoverStyle()
+                  );
+
+                }
+
+              },
 
 
-              if (province) {
+              mouseout() {
 
-                provinceLayers.set(
-                  province.id,
+                if (
+                  selectedProvince?.id
+                  === province.id
+                ) {
+
+                  layer.setStyle(
+                    selectedStyle()
+                  );
+
+                }
+                else {
+
+                  layer.setStyle(
+                    normalStyle()
+                  );
+
+                }
+
+              },
+
+
+              click() {
+
+                selectProvince(
+                  province,
                   layer
                 );
 
               }
 
-
-              /*
-                DESKTOP HOVER
-              */
-
-              layer.on(
-                "mouseover",
-                () => {
-
-                  if (
-                    !selectedProvince
-                    ||
-                    selectedProvince.id
-                    !== province?.id
-                  ) {
-
-                    layer.setStyle({
-                      fillColor:
-                        "#f49a73"
-                    });
-
-                  }
-
-                }
-              );
+            });
 
 
-              layer.on(
-                "mouseout",
-                () => {
-
-                  if (
-                    selectedProvince
-                    &&
-                    selectedProvince.id
-                    === province?.id
-                  ) {
-
-                    layer.setStyle(
-                      selectedStyle()
-                    );
-
-                  }
-                  else {
-
-                    layer.setStyle(
-                      normalStyle()
-                    );
-
-                  }
-
-                }
-              );
-
-
-              /*
-                CLICK / TOUCH
-              */
-
-              layer.on(
-                "click",
-                () => {
-
-                  if (!province) {
-                    return;
-                  }
-
-                  selectProvince(
-                    province,
-                    layer
-                  );
-
-                }
-              );
-
-
-              /*
-                TOOLTIP
-              */
-
-              if (province) {
-
-                layer.bindTooltip(
-                  province.nombre,
-                  {
-                    sticky: true,
-                    direction: "top"
-                  }
-                );
-
+            layer.bindTooltip(
+              province.nombre,
+              {
+                sticky: true
               }
+            );
 
-            }
+          }
 
         }
       )
       .addTo(map);
 
 
-    /*
-      AJUSTAR EL MAPA AL PAÍS
-    */
-
     map.fitBounds(
-      geojsonLayer.getBounds(),
+      geoLayer.getBounds(),
       {
         padding: [20, 20]
       }
@@ -618,16 +432,12 @@ async function loadArgentinaMap() {
     );
 
 
-    restoreSavedProvince();
+    restoreProvince();
 
   }
-
   catch (error) {
 
-    console.error(
-      "Error cargando mapa:",
-      error
-    );
+    console.error(error);
 
 
     mapLoading.textContent =
@@ -638,243 +448,88 @@ async function loadArgentinaMap() {
 }
 
 
-/* =========================================================
-   BUSCADOR DE PROVINCIAS
-========================================================= */
+/* =====================================================
+   RESTAURAR PROVINCIA
+===================================================== */
 
-provinceSearch.addEventListener(
-  "input",
-  () => {
+function restoreProvince() {
 
-    const value =
-      normalizeText(
-        provinceSearch.value
+  const stored =
+    localStorage.getItem(
+      "amigate_province"
+    );
+
+
+  if (!stored) return;
+
+
+  try {
+
+    const saved =
+      JSON.parse(stored);
+
+
+    const province =
+      provinces.find(
+        item =>
+          item.id === saved.id
       );
 
 
-    provinceSuggestions.innerHTML =
-      "";
+    if (!province) return;
 
 
-    if (!value) {
-      return;
-    }
+    const layer =
+      layersByProvince.get(
+        province.id
+      );
 
 
-    const matches =
-      provinceDatabase
-        .filter(
-          province =>
-            normalizeText(
-              province.nombre
-            )
-            .includes(
-              value
-            )
-        )
-        .slice(
-          0,
-          6
-        );
-
-
-    matches.forEach(
-      province => {
-
-        const button =
-          document.createElement(
-            "button"
-          );
-
-
-        button.className =
-          "province-suggestion";
-
-
-        button.textContent =
-          province.nombre;
-
-
-        button.addEventListener(
-          "click",
-          () => {
-
-            const layer =
-              provinceLayers.get(
-                province.id
-              );
-
-
-            selectProvince(
-              province,
-              layer
-            );
-
-          }
-        );
-
-
-        provinceSuggestions.appendChild(
-          button
-        );
-
-      }
+    selectProvince(
+      province,
+      layer
     );
 
   }
-);
-
-
-/* =========================================================
-   CAMBIAR PROVINCIA
-========================================================= */
-
-changeProvinceButton.addEventListener(
-  "click",
-  () => {
-
-    selectedProvince =
-      null;
-
+  catch {
 
     localStorage.removeItem(
       "amigate_province"
     );
 
-
-    provinceLayers.forEach(
-      layer => {
-
-        layer.setStyle(
-          normalStyle()
-        );
-
-      }
-    );
-
-
-    selectedProvinceName.textContent =
-      "Ninguna";
-
-
-    exploreProvinceButton.disabled =
-      true;
-
-
-    exploreProvinceButton.textContent =
-      "Seleccioná una provincia";
-
-
-    provinceSearch.value =
-      "";
-
-
-    changeProvinceButton.classList.add(
-      "hidden"
-    );
-
-
-    updateCategorySection();
-
   }
-);
-
-
-/* =========================================================
-   EXPLORAR PROVINCIA
-========================================================= */
-
-exploreProvinceButton.addEventListener(
-  "click",
-  () => {
-
-    if (!selectedProvince) {
-      return;
-    }
-
-
-    document
-      .getElementById(
-        "categorias"
-      )
-      .scrollIntoView({
-        behavior: "smooth"
-      });
-
-  }
-);
-
-
-/* =========================================================
-   CATEGORÍAS
-========================================================= */
-
-document
-  .querySelectorAll(
-    ".category-card"
-  )
-  .forEach(
-    card => {
-
-      card.addEventListener(
-        "click",
-        () => {
-
-          if (!selectedProvince) {
-
-            document
-              .getElementById(
-                "explorar"
-              )
-              .scrollIntoView({
-                behavior: "smooth"
-              });
-
-
-            return;
-
-          }
-
-
-          const category =
-            card.dataset.category;
-
-
-          console.log(
-            "Categoría:",
-            category
-          );
-
-
-          console.log(
-            "Provincia:",
-            selectedProvince
-          );
-
-
-          /*
-            EN EL PRÓXIMO PASO
-            ESTA ACCIÓN ABRIRÁ
-            LOS RESULTADOS REALES.
-          */
-
-        }
-      );
-
-    }
-  );
-
-
-/* =========================================================
-   INICIAR
-========================================================= */
-
-async function init() {
-
-  await loadProvinceDatabase();
-
-  await loadArgentinaMap();
 
 }
 
-init();
+
+/* =====================================================
+   EXPLORAR
+===================================================== */
+
+exploreButton.addEventListener(
+  "click",
+  () => {
+
+    if (!selectedProvince) return;
+
+
+    /*
+      En el próximo paso esto abrirá
+      la página correspondiente
+      a la provincia.
+    */
+
+    console.log(
+      "Explorar:",
+      selectedProvince.nombre
+    );
+
+  }
+);
+
+
+/* =====================================================
+   INICIAR
+===================================================== */
+
+loadMap();
