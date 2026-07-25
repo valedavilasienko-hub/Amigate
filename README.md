@@ -1,1 +1,1 @@
-# Amigate
+# AMIGATE
