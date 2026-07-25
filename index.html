@@ -10,26 +10,14 @@
 
   <title>Amigate</title>
 
-  <meta
-    name="description"
-    content="Descubrí marcas, productos, servicios, oficios y oportunidades de toda Argentina."
-  >
-
   <link
     rel="stylesheet"
     href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-    crossorigin=""
   >
 
   <link rel="stylesheet" href="styles.css">
 
-  <script
-    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-    crossorigin=""
-  ></script>
-
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 
@@ -40,13 +28,6 @@
   <a href="#" class="logo">
     Amigate
   </a>
-
-  <nav class="nav-desktop">
-    <a href="#explorar">Explorar</a>
-    <a href="#categorias">Categorías</a>
-    <a href="#">Necesito</a>
-    <a href="#">Empleos</a>
-  </nav>
 
   <div class="header-actions">
 
@@ -64,8 +45,6 @@
 
 
 <main>
-
-  <!-- HERO -->
 
   <section class="hero">
 
@@ -90,11 +69,10 @@
 
         <input
           type="search"
-          id="mainSearch"
           placeholder="¿Qué estás buscando?"
         >
 
-        <button id="searchButton">
+        <button>
           Buscar
         </button>
 
@@ -105,218 +83,54 @@
   </section>
 
 
-  <!-- MAPA -->
+  <section class="map-section">
 
-  <section
-    class="map-section"
-    id="explorar"
-  >
-
-    <div class="map-layout">
-
-      <div class="map-copy">
-
-        <span class="section-label">
-          EXPLORÁ ARGENTINA
-        </span>
-
-        <h2>
-          Elegí tu provincia
-        </h2>
-
-        <p>
-          Seleccioná una provincia para descubrir
-          marcas y profesionales que trabajan o realizan
-          envíos hasta ahí.
-        </p>
-
-
-        <div
-          class="province-selected-box"
-          id="provinceSelectedBox"
-        >
-
-          <span>
-            Provincia seleccionada
-          </span>
-
-          <strong id="selectedProvinceName">
-            Ninguna
-          </strong>
-
-        </div>
-
-
-        <button
-          id="exploreProvinceButton"
-          class="explore-button"
-          disabled
-        >
-          Seleccioná una provincia
-        </button>
-
-
-        <button
-          id="changeProvinceButton"
-          class="change-province-button hidden"
-        >
-          Cambiar provincia
-        </button>
-
-
-        <div class="province-search">
-
-          <label for="provinceSearch">
-            También podés buscarla
-          </label>
-
-          <input
-            id="provinceSearch"
-            type="search"
-            placeholder="Ej: Córdoba"
-          >
-
-          <div
-            id="provinceSuggestions"
-            class="province-suggestions"
-          ></div>
-
-        </div>
-
-      </div>
-
-
-      <div class="map-wrapper">
-
-        <div id="argentinaMap"></div>
-
-        <div
-          id="mapLoading"
-          class="map-loading"
-        >
-          Cargando mapa...
-        </div>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- CATEGORÍAS -->
-
-  <section
-    class="categories-section"
-    id="categorias"
-  >
-
-    <div class="section-heading">
+    <div class="map-header">
 
       <span class="section-label">
-        AMIGATE
+        EXPLORÁ ARGENTINA
       </span>
 
-      <h2 id="categoriesTitle">
-        ¿Qué estás buscando?
+      <h2>
+        Elegí tu provincia
       </h2>
 
-      <p id="categoriesSubtitle">
-        Primero elegí tu provincia.
+      <p>
+        Tocá una provincia para comenzar.
       </p>
 
     </div>
 
 
-    <div class="category-grid">
+    <div class="map-container">
 
-      <button
-        class="category-card"
-        data-category="productos"
+      <div id="argentinaMap"></div>
+
+      <div
+        id="mapLoading"
+        class="map-loading"
       >
-        <span class="category-icon">
-          🛍️
-        </span>
+        Cargando mapa...
+      </div>
 
-        <strong>
-          Productos
-        </strong>
+    </div>
 
+
+    <div
+      id="selectedPanel"
+      class="selected-panel hidden"
+    >
+
+      <div>
         <small>
-          Marcas y emprendimientos
+          Provincia seleccionada
         </small>
-      </button>
 
+        <strong id="selectedProvinceName"></strong>
+      </div>
 
-      <button
-        class="category-card"
-        data-category="servicios"
-      >
-        <span class="category-icon">
-          ✨
-        </span>
-
-        <strong>
-          Servicios
-        </strong>
-
-        <small>
-          Profesionales y empresas
-        </small>
-      </button>
-
-
-      <button
-        class="category-card"
-        data-category="oficios"
-      >
-        <span class="category-icon">
-          🛠️
-        </span>
-
-        <strong>
-          Oficios
-        </strong>
-
-        <small>
-          Especialistas cerca tuyo
-        </small>
-      </button>
-
-
-      <button
-        class="category-card"
-        data-category="empleos"
-      >
-        <span class="category-icon">
-          💼
-        </span>
-
-        <strong>
-          Empleos
-        </strong>
-
-        <small>
-          Oportunidades laborales
-        </small>
-      </button>
-
-
-      <button
-        class="category-card"
-        data-category="necesito"
-      >
-        <span class="category-icon">
-          📣
-        </span>
-
-        <strong>
-          Necesito
-        </strong>
-
-        <small>
-          Publicá lo que buscás
-        </small>
+      <button id="exploreButton">
+        Explorar
       </button>
 
     </div>
@@ -324,19 +138,6 @@
   </section>
 
 </main>
-
-
-<footer>
-
-  <div>
-    <strong>Amigate</strong>
-
-    <p>
-      Hecho acá. Encontralo en Amigate.
-    </p>
-  </div>
-
-</footer>
 
 
 <script src="supabase.js"></script>
