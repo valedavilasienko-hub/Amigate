@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Amigate</title>
+
+  <meta
+    name="description"
+    content="Descubrí marcas, productos, servicios, oficios y oportunidades de toda Argentina."
+  >
+
+  <link rel="stylesheet" href="styles.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+
+  <header class="header">
+
+    <a href="#" class="logo">
+      Amigate
+    </a>
+
+    <nav class="nav-desktop">
+      <a href="#">Explorar</a>
+      <a href="#">Necesito</a>
+      <a href="#">Empleos</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="btn-login">
+        Iniciar sesión
+      </button>
+
+      <button class="btn-seller">
+        Publicar mi marca
+      </button>
+    </div>
+
+  </header>
+
+
+  <main>
+
+    <section class="hero">
+
+      <div class="hero-content">
+
+        <span class="hero-tag">
+          🇦🇷 Hecho acá
+        </span>
+
+        <h1>
+          Argentina tiene<br>
+          lo que buscás.
+        </h1>
+
+        <p>
+          Encontrá marcas, productos, servicios,
+          profesionales y oportunidades cerca tuyo.
+        </p>
+
+        <div class="search-box">
+
+          <input
+            type="search"
+            id="mainSearch"
+            placeholder="¿Qué estás buscando?"
+          >
+
+          <button id="searchButton">
+            Buscar
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <section class="province-section">
+
+      <div class="section-heading">
+
+        <span class="section-label">
+          EXPLORÁ ARGENTINA
+        </span>
+
+        <h2>
+          Elegí tu provincia
+        </h2>
+
+        <p>
+          Te mostraremos marcas y profesionales
+          disponibles en tu zona.
+        </p>
+
+      </div>
+
+
+      <div id="provinceGrid" class="province-grid">
+
+        <div class="loading">
+          Cargando provincias...
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <section class="categories-section">
+
+      <div class="section-heading">
+
+        <span class="section-label">
+          TODO EN UN SOLO LUGAR
+        </span>
+
+        <h2>
+          ¿Qué estás buscando?
+        </h2>
+
+      </div>
+
+
+      <div class="category-grid">
+
+        <button class="category-card">
+          <span>🛍️</span>
+          <strong>Productos</strong>
+          <small>Marcas y emprendimientos</small>
+        </button>
+
+        <button class="category-card">
+          <span>✨</span>
+          <strong>Servicios</strong>
+          <small>Profesionales y empresas</small>
+        </button>
+
+        <button class="category-card">
+          <span>🛠️</span>
+          <strong>Oficios</strong>
+          <small>Encontrá especialistas</small>
+        </button>
+
+        <button class="category-card">
+          <span>💼</span>
+          <strong>Empleos</strong>
+          <small>Encontrá oportunidades</small>
+        </button>
+
+        <button class="category-card">
+          <span>📣</span>
+          <strong>Necesito</strong>
+          <small>Publicá lo que estás buscando</small>
+        </button>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <footer>
+
+    <strong>Amigate</strong>
+
+    <p>
+      Hecho acá. Encontralo en Amigate.
+    </p>
+
+  </footer>
+
+
+  <script src="supabase.js"></script>
+  <script src="app.js"></script>
+
+</body>
+</html>
