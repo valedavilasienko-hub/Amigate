@@ -6,19 +6,20 @@
 
   <title>Amigate</title>
 
+  <!-- TIPOGRAFÍAS -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
   <link
     href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap"
     rel="stylesheet"
   >
 
-  <!-- amCharts -->
+  <!-- SUPABASE -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- AMCHARTS -->
   <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
   <script src="https://cdn.amcharts.com/lib/5/map.js"></script>
-
-  <!-- MAPA REAL DE ARGENTINA -->
   <script src="https://cdn.amcharts.com/lib/5/geodata/argentinaHigh.js"></script>
 
   <style>
@@ -29,12 +30,16 @@
       --orange-hover:#F08B65;
 
       --cream:#FFF8F2;
-      --cream-dark:#FAEEE7;
+      --cream-2:#FFF2E9;
 
       --dark:#211D1B;
       --gray:#706762;
+      --light-gray:#A69D98;
 
       --white:#FFFFFF;
+      --border:#EEDFD7;
+
+      --sidebar:#211D1B;
     }
 
     *{
@@ -43,31 +48,36 @@
       padding:0;
     }
 
-    html,
-    body{
-      width:100%;
-      height:100%;
+    html{
+      scroll-behavior:smooth;
     }
 
     body{
       font-family:"DM Sans",sans-serif;
       color:var(--dark);
       background:var(--cream);
-      overflow:hidden;
     }
 
-    button{
+    button,
+    input{
       font:inherit;
     }
 
-    /* =============================
-       PÁGINA
-    ============================= */
+    button{
+      cursor:pointer;
+    }
 
-    .page{
-      width:100%;
-      height:100vh;
+    .hidden{
+      display:none !important;
+    }
 
+
+    /* =====================================================
+       PORTADA
+    ===================================================== */
+
+    .home-screen{
+      min-height:100vh;
       display:grid;
       grid-template-columns:44% 56%;
 
@@ -80,20 +90,18 @@
         var(--cream);
     }
 
-    /* =============================
-       IZQUIERDA
-    ============================= */
 
-    .left{
+    /* IZQUIERDA */
+
+    .hero-left{
+      min-height:100vh;
+
       padding:
         40px 3vw
         40px 5vw;
 
       display:flex;
       flex-direction:column;
-
-      position:relative;
-      z-index:20;
     }
 
     .logo{
@@ -105,7 +113,7 @@
       letter-spacing:-2px;
     }
 
-    .hero{
+    .hero-content{
       flex:1;
 
       display:flex;
@@ -130,9 +138,7 @@
     }
 
     h1{
-      font-family:
-        "Playfair Display",
-        serif;
+      font-family:"Playfair Display",serif;
 
       font-size:
         clamp(54px,5.4vw,92px);
@@ -152,16 +158,14 @@
       width:70px;
       height:4px;
 
-      margin:
-        27px 0
-        23px;
+      margin:27px 0 23px;
 
       border-radius:100px;
 
       background:var(--orange);
     }
 
-    .description{
+    .hero-description{
       max-width:600px;
 
       color:var(--gray);
@@ -172,9 +176,8 @@
       line-height:1.6;
     }
 
-    .actions{
+    .hero-actions{
       display:flex;
-
       gap:12px;
 
       margin-top:31px;
@@ -183,24 +186,17 @@
     .btn{
       min-height:56px;
 
-      padding:
-        0 23px;
+      padding:0 23px;
 
       border-radius:15px;
-
       border:none;
-
-      cursor:pointer;
 
       font-weight:700;
 
-      transition:
-        transform .2s,
-        background .2s,
-        box-shadow .2s;
+      transition:.2s;
     }
 
-    .btn-main{
+    .btn-primary{
       color:white;
 
       background:var(--orange);
@@ -210,12 +206,10 @@
         rgba(235,104,65,.19);
     }
 
-    .btn-main:hover{
-      transform:
-        translateY(-2px);
+    .btn-primary:hover{
+      transform:translateY(-2px);
 
-      background:
-        var(--orange-dark);
+      background:var(--orange-dark);
     }
 
     .btn-secondary{
@@ -229,23 +223,13 @@
         rgba(235,104,65,.22);
     }
 
-    .btn-secondary:hover{
-      background:white;
-    }
 
-    /* =============================
-       MAPA
-    ============================= */
+    /* MAPA */
 
-    .right{
-      min-width:0;
-      min-height:0;
+    .map-side{
+      min-height:100vh;
 
       position:relative;
-
-      display:flex;
-      align-items:center;
-      justify-content:center;
 
       overflow:hidden;
     }
@@ -256,11 +240,9 @@
       top:45px;
       right:5vw;
 
-      z-index:10;
+      z-index:5;
 
       text-align:right;
-
-      pointer-events:none;
     }
 
     .map-title span{
@@ -272,6 +254,7 @@
       font-weight:800;
 
       letter-spacing:.13em;
+
       text-transform:uppercase;
     }
 
@@ -291,15 +274,11 @@
 
     #chartdiv{
       width:100%;
-      height:100%;
-
-      position:relative;
-      z-index:2;
+      height:100vh;
     }
 
-    /* =============================
-       PROVINCIA ELEGIDA
-    ============================= */
+
+    /* PROVINCIA */
 
     .province-card{
       position:absolute;
@@ -311,13 +290,12 @@
 
       padding:18px;
 
-      z-index:15;
+      z-index:10;
 
       background:
-        rgba(255,255,255,.93);
+        rgba(255,255,255,.94);
 
-      backdrop-filter:
-        blur(14px);
+      backdrop-filter:blur(14px);
 
       border:
         1px solid
@@ -336,16 +314,13 @@
 
       pointer-events:none;
 
-      transition:
-        opacity .22s,
-        transform .22s;
+      transition:.22s;
     }
 
     .province-card.visible{
       opacity:1;
 
-      transform:
-        translateY(0);
+      transform:translateY(0);
 
       pointer-events:auto;
     }
@@ -360,9 +335,9 @@
       font-size:10px;
       font-weight:800;
 
-      letter-spacing:.09em;
-
       text-transform:uppercase;
+
+      letter-spacing:.09em;
     }
 
     .province-card strong{
@@ -373,12 +348,10 @@
         serif;
 
       font-size:27px;
-
-      line-height:1.1;
     }
 
     .province-card p{
-      margin-top:6px;
+      margin-top:5px;
 
       color:var(--gray);
 
@@ -392,96 +365,786 @@
 
       margin-top:13px;
 
-      padding:13px 12px;
+      padding:13px;
 
       border:none;
 
       border-radius:12px;
 
-      background:
-        var(--orange);
-
       color:white;
 
-      cursor:pointer;
+      background:var(--orange);
 
       font-weight:800;
     }
 
-    .province-card button:hover{
-      background:
-        var(--orange-dark);
-    }
-
-    .clear-selection{
+    .clear-province{
       margin-top:9px;
 
-      text-align:center;
-
       color:var(--gray);
+
+      text-align:center;
 
       font-size:11px;
 
       cursor:pointer;
     }
 
-    .clear-selection:hover{
-      color:var(--dark);
+
+    /* =====================================================
+       EXPLORAR
+    ===================================================== */
+
+    .explore-section{
+      padding:
+        105px 6%
+        115px;
+
+      background:white;
     }
 
-    /* =============================
-       MOBILE
-    ============================= */
+    .section-heading{
+      max-width:850px;
 
-    @media(max-width:900px){
+      margin-bottom:50px;
+    }
 
-      body{
-        overflow:auto;
+    .section-label{
+      color:var(--orange);
+
+      font-size:12px;
+      font-weight:800;
+
+      letter-spacing:.13em;
+
+      text-transform:uppercase;
+    }
+
+    .section-heading h2{
+      margin-top:10px;
+
+      font-family:
+        "Playfair Display",
+        serif;
+
+      font-size:
+        clamp(42px,5vw,70px);
+
+      letter-spacing:-.045em;
+
+      line-height:1;
+    }
+
+    .section-heading p{
+      margin-top:15px;
+
+      color:var(--gray);
+
+      font-size:17px;
+    }
+
+
+    /* CATEGORÍAS */
+
+    .category-grid{
+      display:grid;
+
+      grid-template-columns:
+        repeat(5,1fr);
+
+      gap:15px;
+    }
+
+    .category{
+      min-height:220px;
+
+      padding:23px;
+
+      display:flex;
+      flex-direction:column;
+
+      border:
+        1px solid
+        var(--border);
+
+      border-radius:23px;
+
+      background:var(--cream);
+
+      transition:.2s;
+    }
+
+    .category:hover{
+      transform:translateY(-5px);
+
+      border-color:
+        rgba(235,104,65,.5);
+
+      box-shadow:
+        0 18px 45px
+        rgba(60,30,15,.08);
+    }
+
+    .category-icon{
+      width:46px;
+      height:46px;
+
+      display:grid;
+      place-items:center;
+
+      border-radius:14px;
+
+      background:
+        var(--cream-2);
+
+      font-size:24px;
+    }
+
+    .category strong{
+      margin-top:auto;
+
+      font-size:20px;
+    }
+
+    .category p{
+      margin-top:5px;
+
+      color:var(--gray);
+
+      font-size:13px;
+
+      line-height:1.4;
+    }
+
+
+    /* =====================================================
+       SEGUNDO BLOQUE
+    ===================================================== */
+
+    .about{
+      padding:
+        100px 6%;
+
+      background:var(--cream);
+    }
+
+    .about-layout{
+      display:grid;
+
+      grid-template-columns:
+        .8fr 1.2fr;
+
+      gap:80px;
+
+      align-items:center;
+
+      max-width:1300px;
+
+      margin:auto;
+    }
+
+    .about-number{
+      font-family:
+        "Playfair Display",
+        serif;
+
+      font-size:
+        clamp(100px,15vw,220px);
+
+      line-height:.7;
+
+      color:
+        rgba(235,104,65,.12);
+    }
+
+    .about h3{
+      font-family:
+        "Playfair Display",
+        serif;
+
+      font-size:
+        clamp(38px,4vw,62px);
+
+      line-height:1.02;
+
+      letter-spacing:-.04em;
+    }
+
+    .about p{
+      max-width:680px;
+
+      margin-top:20px;
+
+      color:var(--gray);
+
+      font-size:17px;
+
+      line-height:1.65;
+    }
+
+
+    /* =====================================================
+       FOOTER
+    ===================================================== */
+
+    footer{
+      padding:
+        55px 6%
+        32px;
+
+      color:white;
+
+      background:var(--dark);
+    }
+
+    .footer-top{
+      display:flex;
+
+      justify-content:space-between;
+
+      gap:30px;
+    }
+
+    .footer-logo{
+      font-size:29px;
+      font-weight:800;
+
+      color:var(--orange);
+    }
+
+    .footer-copy{
+      margin-top:7px;
+
+      color:#bbb1ac;
+
+      font-size:13px;
+    }
+
+    .footer-bottom{
+      margin-top:48px;
+
+      padding-top:20px;
+
+      display:flex;
+
+      align-items:center;
+      justify-content:space-between;
+
+      border-top:
+        1px solid
+        rgba(255,255,255,.09);
+
+      color:#817873;
+
+      font-size:11px;
+    }
+
+    .footer-links{
+      display:flex;
+      gap:20px;
+    }
+
+    .admin-access{
+      color:#6d6561;
+
+      cursor:pointer;
+
+      user-select:none;
+
+      transition:.2s;
+    }
+
+    .admin-access:hover{
+      color:#c4b9b4;
+    }
+
+
+    /* =====================================================
+       MODAL ADMIN
+    ===================================================== */
+
+    .modal-overlay{
+      position:fixed;
+
+      inset:0;
+
+      z-index:5000;
+
+      display:flex;
+      align-items:center;
+      justify-content:center;
+
+      padding:20px;
+
+      background:
+        rgba(20,15,13,.58);
+
+      backdrop-filter:blur(12px);
+
+      opacity:0;
+
+      pointer-events:none;
+
+      transition:.2s;
+    }
+
+    .modal-overlay.open{
+      opacity:1;
+
+      pointer-events:auto;
+    }
+
+    .admin-login{
+      width:min(430px,100%);
+
+      padding:31px;
+
+      border-radius:25px;
+
+      background:white;
+
+      box-shadow:
+        0 30px 100px
+        rgba(0,0,0,.22);
+    }
+
+    .modal-top{
+      display:flex;
+
+      justify-content:space-between;
+
+      gap:20px;
+    }
+
+    .modal-top span{
+      color:var(--orange);
+
+      font-size:25px;
+      font-weight:800;
+    }
+
+    .modal-close{
+      border:none;
+
+      background:transparent;
+
+      font-size:21px;
+    }
+
+    .admin-login h3{
+      margin-top:28px;
+
+      font-family:
+        "Playfair Display",
+        serif;
+
+      font-size:34px;
+    }
+
+    .admin-login > p{
+      margin-top:8px;
+
+      color:var(--gray);
+
+      font-size:13px;
+
+      line-height:1.5;
+    }
+
+    .form-group{
+      margin-top:20px;
+    }
+
+    .form-group label{
+      display:block;
+
+      margin-bottom:7px;
+
+      font-size:12px;
+      font-weight:700;
+    }
+
+    .form-group input{
+      width:100%;
+
+      padding:14px 15px;
+
+      border:
+        1px solid
+        var(--border);
+
+      border-radius:13px;
+
+      outline:none;
+    }
+
+    .form-group input:focus{
+      border-color:var(--orange);
+    }
+
+    .admin-submit{
+      width:100%;
+
+      margin-top:22px;
+
+      padding:14px;
+
+      border:none;
+
+      border-radius:13px;
+
+      color:white;
+
+      background:var(--orange);
+
+      font-weight:800;
+    }
+
+    .admin-error{
+      display:none;
+
+      margin-top:13px;
+
+      padding:11px;
+
+      border-radius:10px;
+
+      color:#9c3022;
+
+      background:#fff0ed;
+
+      font-size:12px;
+    }
+
+    .admin-error.visible{
+      display:block;
+    }
+
+
+    /* =====================================================
+       ADMINISTRADOR
+    ===================================================== */
+
+    .admin-app{
+      position:fixed;
+
+      inset:0;
+
+      z-index:6000;
+
+      display:none;
+
+      background:#F5F2F0;
+    }
+
+    .admin-app.visible{
+      display:flex;
+    }
+
+
+    /* SIDEBAR */
+
+    .admin-sidebar{
+      width:260px;
+
+      padding:
+        27px 18px;
+
+      display:flex;
+      flex-direction:column;
+
+      color:white;
+
+      background:var(--sidebar);
+    }
+
+    .admin-brand{
+      padding:
+        0 10px
+        28px;
+
+      color:var(--orange);
+
+      font-size:27px;
+      font-weight:800;
+    }
+
+    .admin-brand small{
+      display:block;
+
+      margin-top:3px;
+
+      color:#8f8580;
+
+      font-size:10px;
+      font-weight:500;
+
+      letter-spacing:.08em;
+
+      text-transform:uppercase;
+    }
+
+    .admin-menu{
+      display:flex;
+
+      flex-direction:column;
+
+      gap:3px;
+    }
+
+    .admin-nav{
+      width:100%;
+
+      padding:11px 13px;
+
+      display:flex;
+      gap:11px;
+
+      align-items:center;
+
+      border:none;
+
+      border-radius:11px;
+
+      color:#bdb3ae;
+
+      background:transparent;
+
+      text-align:left;
+
+      font-size:13px;
+      font-weight:600;
+    }
+
+    .admin-nav:hover{
+      color:white;
+
+      background:
+        rgba(255,255,255,.06);
+    }
+
+    .admin-nav.active{
+      color:white;
+
+      background:
+        rgba(235,104,65,.16);
+    }
+
+    .admin-nav.active span{
+      color:var(--orange);
+    }
+
+    .admin-logout{
+      margin-top:auto;
+
+      padding:12px;
+
+      border:
+        1px solid
+        rgba(255,255,255,.08);
+
+      border-radius:11px;
+
+      color:#aaa09b;
+
+      background:transparent;
+    }
+
+
+    /* ADMIN MAIN */
+
+    .admin-main{
+      flex:1;
+
+      overflow:auto;
+    }
+
+    .admin-header{
+      min-height:80px;
+
+      padding:
+        0 32px;
+
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+
+      background:white;
+
+      border-bottom:
+        1px solid #E5E0DD;
+    }
+
+    .admin-header h2{
+      font-family:
+        "Playfair Display",
+        serif;
+
+      font-size:28px;
+    }
+
+    .admin-user{
+      text-align:right;
+
+      font-size:12px;
+    }
+
+    .admin-user span{
+      display:block;
+
+      color:var(--gray);
+
+      font-size:10px;
+    }
+
+    .admin-content{
+      padding:32px;
+    }
+
+
+    /* CARDS */
+
+    .dashboard-grid{
+      display:grid;
+
+      grid-template-columns:
+        repeat(4,1fr);
+
+      gap:15px;
+    }
+
+    .stat-card{
+      min-height:145px;
+
+      padding:20px;
+
+      border:
+        1px solid
+        #E8E2DF;
+
+      border-radius:17px;
+
+      background:white;
+    }
+
+    .stat-card small{
+      color:var(--gray);
+
+      font-size:11px;
+      font-weight:700;
+
+      text-transform:uppercase;
+
+      letter-spacing:.06em;
+    }
+
+    .stat-card strong{
+      display:block;
+
+      margin-top:17px;
+
+      font-family:
+        "Playfair Display",
+        serif;
+
+      font-size:38px;
+    }
+
+    .stat-card p{
+      margin-top:4px;
+
+      color:#9b928d;
+
+      font-size:11px;
+    }
+
+    .admin-section{
+      display:none;
+    }
+
+    .admin-section.active{
+      display:block;
+    }
+
+    .empty-panel{
+      min-height:360px;
+
+      padding:35px;
+
+      border:
+        1px solid
+        #E7E1DE;
+
+      border-radius:18px;
+
+      background:white;
+    }
+
+    .empty-panel h3{
+      font-size:20px;
+    }
+
+    .empty-panel p{
+      margin-top:9px;
+
+      color:var(--gray);
+
+      font-size:13px;
+    }
+
+
+    /* =====================================================
+       RESPONSIVE
+    ===================================================== */
+
+    @media(max-width:1050px){
+
+      .category-grid{
+        grid-template-columns:
+          repeat(3,1fr);
       }
 
-      .page{
-        height:auto;
-        min-height:100vh;
+      .dashboard-grid{
+        grid-template-columns:
+          repeat(2,1fr);
+      }
 
+    }
+
+
+    @media(max-width:850px){
+
+      .home-screen{
         grid-template-columns:1fr;
       }
 
-      .left{
-        min-height:53vh;
+      .hero-left{
+        min-height:auto;
 
         padding:
           28px 22px
-          20px;
+          50px;
       }
 
-      .hero{
-        padding-top:48px;
+      .hero-content{
+        padding-top:60px;
       }
 
       h1{
         font-size:
-          clamp(49px,13vw,74px);
+          clamp(50px,13vw,74px);
       }
 
-      .description{
-        font-size:16px;
-      }
-
-      .actions{
+      .hero-actions{
         flex-direction:column;
       }
 
-      .btn{
-        width:100%;
-      }
-
-      .right{
+      .map-side{
         min-height:720px;
       }
 
-      .map-title{
-        top:22px;
-        right:22px;
+      #chartdiv{
+        height:720px;
       }
 
       .province-card{
@@ -494,41 +1157,100 @@
         bottom:17px;
       }
 
+      .category-grid{
+        grid-template-columns:
+          repeat(2,1fr);
+      }
+
+      .about-layout{
+        grid-template-columns:1fr;
+        gap:25px;
+      }
+
+      .admin-sidebar{
+        width:75px;
+      }
+
+      .admin-brand{
+        font-size:0;
+      }
+
+      .admin-brand::before{
+        content:"A";
+
+        font-size:28px;
+      }
+
+      .admin-brand small,
+      .admin-nav strong{
+        display:none;
+      }
+
+      .admin-nav{
+        justify-content:center;
+      }
+
     }
+
 
     @media(max-width:520px){
 
-      .logo{
-        font-size:29px;
+      .explore-section,
+      .about{
+        padding:
+          70px 18px;
       }
 
-      h1{
-        font-size:50px;
+      .category-grid{
+        grid-template-columns:1fr 1fr;
+        gap:10px;
       }
 
-      .right{
-        min-height:660px;
+      .category{
+        min-height:170px;
+        padding:17px;
+      }
+
+      .footer-top,
+      .footer-bottom{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+
+      .dashboard-grid{
+        grid-template-columns:1fr;
+      }
+
+      .admin-content{
+        padding:17px;
+      }
+
+      .admin-header{
+        padding:
+          0 18px;
       }
 
     }
+
   </style>
 </head>
 
 <body>
 
-<div class="page">
 
-  <!-- ==========================================
-       IZQUIERDA
-  =========================================== -->
+<!-- =====================================================
+     PORTADA
+===================================================== -->
 
-  <section class="left">
+<section class="home-screen">
+
+  <div class="hero-left">
 
     <div class="logo">
       Amigate
     </div>
 
-    <div class="hero">
+    <div class="hero-content">
 
       <div class="eyebrow">
         Argentina está llena de oportunidades
@@ -537,14 +1259,12 @@
       <h1>
         Todo lo que buscás,
         más cerca
-        <span>
-          de lo que pensás.
-        </span>
+        <span>de lo que pensás.</span>
       </h1>
 
       <div class="accent-line"></div>
 
-      <p class="description">
+      <p class="hero-description">
         Amigate conecta personas con marcas,
         emprendimientos, profesionales, oficios
         y oportunidades de toda Argentina.
@@ -552,10 +1272,10 @@
         que tiene para ofrecer.
       </p>
 
-      <div class="actions">
+      <div class="hero-actions">
 
         <button
-          class="btn btn-main"
+          class="btn btn-primary"
           id="sellerButton"
         >
           Publicar mi marca
@@ -563,7 +1283,7 @@
 
         <button
           class="btn btn-secondary"
-          id="loginButton"
+          id="userLoginButton"
         >
           Iniciar sesión
         </button>
@@ -572,17 +1292,10 @@
 
     </div>
 
-  </section>
+  </div>
 
 
-  <!-- ==========================================
-       DERECHA
-  =========================================== -->
-
-  <section
-    class="right"
-    id="mapSection"
-  >
+  <div class="map-side">
 
     <div class="map-title">
 
@@ -609,12 +1322,11 @@
         Provincia seleccionada
       </small>
 
-      <strong id="provinceName">
-      </strong>
+      <strong id="provinceName"></strong>
 
       <p>
-        Descubrí todo lo disponible
-        en esta provincia.
+        Descubrí marcas y oportunidades
+        disponibles para vos.
       </p>
 
       <button id="exploreButton">
@@ -622,80 +1334,834 @@
       </button>
 
       <div
-        class="clear-selection"
-        id="clearSelection"
+        class="clear-province"
+        id="clearProvince"
       >
         Quitar selección
       </div>
 
     </div>
 
-  </section>
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CATEGORÍAS
+===================================================== -->
+
+<section
+  class="explore-section"
+  id="exploreSection"
+>
+
+  <div class="section-heading">
+
+    <span class="section-label">
+      Explorá Amigate
+    </span>
+
+    <h2 id="exploreTitle">
+      ¿Qué estás buscando?
+    </h2>
+
+    <p id="exploreSubtitle">
+      Elegí una provincia para personalizar
+      los resultados.
+    </p>
+
+  </div>
+
+
+  <div class="category-grid">
+
+    <article class="category">
+      <div class="category-icon">🛍️</div>
+
+      <strong>
+        Productos
+      </strong>
+
+      <p>
+        Descubrí marcas y emprendimientos.
+      </p>
+    </article>
+
+
+    <article class="category">
+      <div class="category-icon">✨</div>
+
+      <strong>
+        Servicios
+      </strong>
+
+      <p>
+        Profesionales y empresas para lo que necesitás.
+      </p>
+    </article>
+
+
+    <article class="category">
+      <div class="category-icon">🛠️</div>
+
+      <strong>
+        Oficios
+      </strong>
+
+      <p>
+        Encontrá especialistas cerca tuyo.
+      </p>
+    </article>
+
+
+    <article class="category">
+      <div class="category-icon">💼</div>
+
+      <strong>
+        Empleos
+      </strong>
+
+      <p>
+        Encontrá nuevas oportunidades laborales.
+      </p>
+    </article>
+
+
+    <article class="category">
+      <div class="category-icon">📣</div>
+
+      <strong>
+        Necesito
+      </strong>
+
+      <p>
+        Publicá exactamente lo que estás buscando.
+      </p>
+    </article>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PRESENTACIÓN
+===================================================== -->
+
+<section class="about">
+
+  <div class="about-layout">
+
+    <div class="about-number">
+      AR
+    </div>
+
+    <div>
+
+      <span class="section-label">
+        Una plataforma, todo el país
+      </span>
+
+      <h3>
+        Lo que existe cerca tuyo
+        merece ser más fácil de encontrar.
+      </h3>
+
+      <p>
+        Desde una marca que recién empieza hasta
+        un profesional, un oficio, una oportunidad
+        laboral o una necesidad concreta.
+        Amigate busca conectar todo eso en un mismo lugar.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+  <div class="footer-top">
+
+    <div>
+
+      <div class="footer-logo">
+        Amigate
+      </div>
+
+      <div class="footer-copy">
+        Hecho acá. Encontralo en Amigate.
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="footer-bottom">
+
+    <div class="footer-links">
+      <span>Términos</span>
+      <span>Privacidad</span>
+      <span>Ayuda</span>
+    </div>
+
+    <!-- ACCESO DISCRETO -->
+    <span
+      class="admin-access"
+      id="adminAccess"
+    >
+      Administración
+    </span>
+
+  </div>
+
+</footer>
+
+
+
+<!-- =====================================================
+     LOGIN ADMIN
+===================================================== -->
+
+<div
+  class="modal-overlay"
+  id="adminModal"
+>
+
+  <div class="admin-login">
+
+    <div class="modal-top">
+
+      <span>
+        Amigate
+      </span>
+
+      <button
+        class="modal-close"
+        id="closeAdminModal"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <h3>
+      Administración
+    </h3>
+
+    <p>
+      Acceso restringido al administrador general
+      de Amigate.
+    </p>
+
+
+    <form id="adminLoginForm">
+
+      <div class="form-group">
+
+        <label>
+          Email
+        </label>
+
+        <input
+          type="email"
+          id="adminEmail"
+          required
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Contraseña
+        </label>
+
+        <input
+          type="password"
+          id="adminPassword"
+          required
+        >
+
+      </div>
+
+
+      <button
+        type="submit"
+        class="admin-submit"
+      >
+        Entrar
+      </button>
+
+
+      <div
+        class="admin-error"
+        id="adminError"
+      ></div>
+
+    </form>
+
+  </div>
 
 </div>
 
 
+
+<!-- =====================================================
+     PANEL ADMIN
+===================================================== -->
+
+<div
+  class="admin-app"
+  id="adminApp"
+>
+
+  <aside class="admin-sidebar">
+
+    <div class="admin-brand">
+      Amigate
+
+      <small>
+        Administración general
+      </small>
+    </div>
+
+
+    <div class="admin-menu">
+
+      <button
+        class="admin-nav active"
+        data-admin-page="dashboard"
+      >
+        <span>◫</span>
+        <strong>Dashboard</strong>
+      </button>
+
+      <button
+        class="admin-nav"
+        data-admin-page="clientes"
+      >
+        <span>♙</span>
+        <strong>Clientes</strong>
+      </button>
+
+      <button
+        class="admin-nav"
+        data-admin-page="vendedores"
+      >
+        <span>◇</span>
+        <strong>Vendedores</strong>
+      </button>
+
+      <button
+        class="admin-nav"
+        data-admin-page="marcas"
+      >
+        <span>▣</span>
+        <strong>Marcas</strong>
+      </button>
+
+      <button
+        class="admin-nav"
+        data-admin-page="categorias"
+      >
+        <span>▦</span>
+        <strong>Categorías</strong>
+      </button>
+
+      <button
+        class="admin-nav"
+        data-admin-page="operaciones"
+      >
+        <span>↔</span>
+        <strong>Operaciones</strong>
+      </button>
+
+      <button
+        class="admin-nav"
+        data-admin-page="finanzas"
+      >
+        <span>$</span>
+        <strong>Finanzas</strong>
+      </button>
+
+      <button
+        class="admin-nav"
+        data-admin-page="publicidad"
+      >
+        <span>◎</span>
+        <strong>Publicidad</strong>
+      </button>
+
+      <button
+        class="admin-nav"
+        data-admin-page="suscripciones"
+      >
+        <span>◷</span>
+        <strong>Suscripciones</strong>
+      </button>
+
+      <button
+        class="admin-nav"
+        data-admin-page="reclamos"
+      >
+        <span>!</span>
+        <strong>Reclamos</strong>
+      </button>
+
+      <button
+        class="admin-nav"
+        data-admin-page="moderacion"
+      >
+        <span>✓</span>
+        <strong>Moderación</strong>
+      </button>
+
+      <button
+        class="admin-nav"
+        data-admin-page="configuracion"
+      >
+        <span>⚙</span>
+        <strong>Configuración</strong>
+      </button>
+
+    </div>
+
+
+    <button
+      class="admin-logout"
+      id="adminLogout"
+    >
+      Cerrar sesión
+    </button>
+
+  </aside>
+
+
+  <main class="admin-main">
+
+    <header class="admin-header">
+
+      <h2 id="adminPageTitle">
+        Dashboard
+      </h2>
+
+      <div class="admin-user">
+
+        Administrador
+
+        <span id="adminUserEmail">
+        </span>
+
+      </div>
+
+    </header>
+
+
+    <div class="admin-content">
+
+      <!-- DASHBOARD -->
+
+      <section
+        class="admin-section active"
+        id="admin-dashboard"
+      >
+
+        <div class="dashboard-grid">
+
+          <article class="stat-card">
+
+            <small>
+              Clientes registrados
+            </small>
+
+            <strong id="countClients">
+              —
+            </strong>
+
+            <p>
+              Compradores de Amigate
+            </p>
+
+          </article>
+
+
+          <article class="stat-card">
+
+            <small>
+              Marcas registradas
+            </small>
+
+            <strong id="countBrands">
+              —
+            </strong>
+
+            <p>
+              Total de marcas
+            </p>
+
+          </article>
+
+
+          <article class="stat-card">
+
+            <small>
+              Marcas activas
+            </small>
+
+            <strong id="countActiveBrands">
+              —
+            </strong>
+
+            <p>
+              Actualmente publicadas
+            </p>
+
+          </article>
+
+
+          <article class="stat-card">
+
+            <small>
+              Vendedores
+            </small>
+
+            <strong id="countSellers">
+              —
+            </strong>
+
+            <p>
+              Cuentas registradas
+            </p>
+
+          </article>
+
+
+          <article class="stat-card">
+
+            <small>
+              Pedidos
+            </small>
+
+            <strong id="countOrders">
+              —
+            </strong>
+
+            <p>
+              Operaciones registradas
+            </p>
+
+          </article>
+
+
+          <article class="stat-card">
+
+            <small>
+              Reclamos
+            </small>
+
+            <strong id="countClaims">
+              —
+            </strong>
+
+            <p>
+              Total registrados
+            </p>
+
+          </article>
+
+
+          <article class="stat-card">
+
+            <small>
+              Suscripciones
+            </small>
+
+            <strong id="countSubscriptions">
+              —
+            </strong>
+
+            <p>
+              Historial de suscripciones
+            </p>
+
+          </article>
+
+
+          <article class="stat-card">
+
+            <small>
+              Provincias
+            </small>
+
+            <strong>
+              24
+            </strong>
+
+            <p>
+              Cobertura nacional
+            </p>
+
+          </article>
+
+        </div>
+
+      </section>
+
+
+      <!-- OTRAS SECCIONES -->
+
+      <section
+        class="admin-section"
+        id="admin-clientes"
+      >
+        <div class="empty-panel">
+          <h3>Clientes</h3>
+          <p>
+            Desde acá vas a administrar todos
+            los compradores registrados.
+          </p>
+        </div>
+      </section>
+
+
+      <section
+        class="admin-section"
+        id="admin-vendedores"
+      >
+        <div class="empty-panel">
+          <h3>Vendedores</h3>
+          <p>
+            Gestión de vendedores, estado,
+            suscripción y permisos.
+          </p>
+        </div>
+      </section>
+
+
+      <section
+        class="admin-section"
+        id="admin-marcas"
+      >
+        <div class="empty-panel">
+          <h3>Marcas</h3>
+          <p>
+            Alta, suspensión, bonificaciones
+            y administración general de marcas.
+          </p>
+        </div>
+      </section>
+
+
+      <section
+        class="admin-section"
+        id="admin-categorias"
+      >
+        <div class="empty-panel">
+          <h3>Categorías</h3>
+          <p>
+            Productos, servicios, oficios,
+            empleos y Necesito.
+          </p>
+        </div>
+      </section>
+
+
+      <section
+        class="admin-section"
+        id="admin-operaciones"
+      >
+        <div class="empty-panel">
+          <h3>Operaciones</h3>
+          <p>
+            Pedidos, movimientos y actividad
+            general de la plataforma.
+          </p>
+        </div>
+      </section>
+
+
+      <section
+        class="admin-section"
+        id="admin-finanzas"
+      >
+        <div class="empty-panel">
+          <h3>Finanzas Amigate</h3>
+          <p>
+            Suscripciones, comisiones,
+            publicidad e ingresos.
+          </p>
+        </div>
+      </section>
+
+
+      <section
+        class="admin-section"
+        id="admin-publicidad"
+      >
+        <div class="empty-panel">
+          <h3>Publicidad</h3>
+          <p>
+            Campañas patrocinadas y promociones.
+          </p>
+        </div>
+      </section>
+
+
+      <section
+        class="admin-section"
+        id="admin-suscripciones"
+      >
+        <div class="empty-panel">
+          <h3>Suscripciones</h3>
+          <p>
+            Planes, vencimientos, bonificaciones
+            y renovaciones.
+          </p>
+        </div>
+      </section>
+
+
+      <section
+        class="admin-section"
+        id="admin-reclamos"
+      >
+        <div class="empty-panel">
+          <h3>Reclamos</h3>
+          <p>
+            Intervenciones y resolución
+            de conflictos.
+          </p>
+        </div>
+      </section>
+
+
+      <section
+        class="admin-section"
+        id="admin-moderacion"
+      >
+        <div class="empty-panel">
+          <h3>Moderación</h3>
+          <p>
+            Reportes, publicaciones, reseñas
+            y cuentas denunciadas.
+          </p>
+        </div>
+      </section>
+
+
+      <section
+        class="admin-section"
+        id="admin-configuracion"
+      >
+        <div class="empty-panel">
+          <h3>Configuración general</h3>
+          <p>
+            Comisión estándar, destacados,
+            patrocinados y parámetros de Amigate.
+          </p>
+        </div>
+      </section>
+
+    </div>
+
+  </main>
+
+</div>
+
+
+
 <script>
-/* ==========================================================
-   ELEMENTOS
-========================================================== */
+/* =====================================================
+   SUPABASE
+===================================================== */
 
-const provinceCard =
-  document.getElementById(
-    "provinceCard"
+const SUPABASE_URL =
+  "https://jqdyaafwixnjasszsvkt.supabase.co";
+
+const SUPABASE_KEY =
+  "sb_publishable_KHbLlwbhlkyaiz-7KXW6Mw_nAnTVsLa";
+
+const db =
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
   );
 
-const provinceName =
-  document.getElementById(
-    "provinceName"
-  );
 
-const exploreButton =
-  document.getElementById(
-    "exploreButton"
-  );
-
-const clearSelectionButton =
-  document.getElementById(
-    "clearSelection"
-  );
+/* =====================================================
+   PROVINCIA
+===================================================== */
 
 let selectedProvince = null;
-
 let selectedPolygon = null;
 
+const provinceCard =
+  document.getElementById("provinceCard");
 
-/* ==========================================================
-   AMCHARTS
-========================================================== */
+const provinceName =
+  document.getElementById("provinceName");
 
-am5.ready(function() {
+const exploreButton =
+  document.getElementById("exploreButton");
+
+const exploreTitle =
+  document.getElementById("exploreTitle");
+
+const exploreSubtitle =
+  document.getElementById("exploreSubtitle");
+
+
+function updateProvinceContent(){
+
+  if(!selectedProvince){
+
+    exploreTitle.textContent =
+      "¿Qué estás buscando?";
+
+    exploreSubtitle.textContent =
+      "Elegí una provincia para personalizar los resultados.";
+
+    return;
+  }
+
+  exploreTitle.textContent =
+    "¿Qué estás buscando en " +
+    selectedProvince.name +
+    "?";
+
+  exploreSubtitle.textContent =
+    "Descubrí marcas, profesionales y oportunidades disponibles en " +
+    selectedProvince.name +
+    ".";
+}
+
+
+/* =====================================================
+   MAPA
+===================================================== */
+
+am5.ready(function(){
 
   const root =
-    am5.Root.new(
-      "chartdiv"
-    );
-
-
-  /*
-    SACAMOS EL LOGO DEL CHART
-  */
+    am5.Root.new("chartdiv");
 
   if(root._logo){
     root._logo.dispose();
   }
-
-
-  /*
-    MAPA
-
-    IMPORTANTE:
-    no estamos cargando océano,
-    rutas, nombres, países vecinos
-    ni relieve.
-
-    Solamente las provincias.
-  */
 
   const chart =
     root.container.children.push(
@@ -713,10 +2179,6 @@ am5.ready(function() {
     );
 
 
-  /*
-    SERIE DE PROVINCIAS REALES
-  */
-
   const polygonSeries =
     chart.series.push(
       am5map.MapPolygonSeries.new(
@@ -729,75 +2191,75 @@ am5.ready(function() {
     );
 
 
-  /*
-    COLORES NORMALES
-  */
-
   polygonSeries.mapPolygons.template.setAll({
+
     fill:
-      am5.color(
-        0xF4C0AE
-      ),
+      am5.color(0xF4C0AE),
 
     stroke:
-      am5.color(
-        0xFFF8F2
-      ),
+      am5.color(0xFFF8F2),
 
     strokeWidth:1.6,
 
     interactive:true,
 
-    cursorOverStyle:
-      "pointer",
+    cursorOverStyle:"pointer",
 
-    tooltipText:
-      "{name}"
+    tooltipText:"{name}"
+
   });
 
-
-  /*
-    HOVER
-  */
 
   polygonSeries.mapPolygons.template.states.create(
     "hover",
     {
       fill:
-        am5.color(
-          0xF08B65
-        ),
-
-      stroke:
-        am5.color(
-          0xFFF8F2
-        )
+        am5.color(0xF08B65)
     }
   );
 
-
-  /*
-    SELECCIONADO
-  */
 
   polygonSeries.mapPolygons.template.states.create(
     "active",
     {
       fill:
-        am5.color(
-          0xEB6841
-        )
+        am5.color(0xEB6841)
     }
   );
 
 
-  /*
-    AL HACER CLICK
-  */
+  function clearSelection(){
+
+    if(selectedPolygon){
+
+      selectedPolygon.set(
+        "active",
+        false
+      );
+
+    }
+
+    selectedPolygon = null;
+
+    selectedProvince = null;
+
+    provinceCard.classList.remove(
+      "visible"
+    );
+
+    localStorage.removeItem(
+      "amigate_province"
+    );
+
+    updateProvinceContent();
+
+    chart.goHome(400);
+  }
+
 
   polygonSeries.mapPolygons.template.events.on(
     "click",
-    function(event) {
+    function(event){
 
       const polygon =
         event.target;
@@ -809,16 +2271,6 @@ am5.ready(function() {
         return;
       }
 
-
-      const name =
-        dataItem.dataContext.name;
-
-
-      /*
-        SI TOCAMOS LA MISMA
-        PROVINCIA, DESELECCIONAR.
-      */
-
       if(
         selectedPolygon ===
         polygon
@@ -829,11 +2281,6 @@ am5.ready(function() {
         return;
       }
 
-
-      /*
-        APAGAR ANTERIOR
-      */
-
       if(selectedPolygon){
 
         selectedPolygon.set(
@@ -843,37 +2290,34 @@ am5.ready(function() {
 
       }
 
-
       selectedPolygon =
         polygon;
-
 
       polygon.set(
         "active",
         true
       );
 
+      selectedProvince = {
 
-      selectedProvince =
-        {
-          name:name,
-          id:
-            dataItem.dataContext.id
-        };
+        name:
+          dataItem.dataContext.name,
 
+        id:
+          dataItem.dataContext.id
+
+      };
 
       provinceName.textContent =
-        name;
-
+        selectedProvince.name;
 
       exploreButton.textContent =
-        "Explorar " + name;
-
+        "Explorar " +
+        selectedProvince.name;
 
       provinceCard.classList.add(
         "visible"
       );
-
 
       localStorage.setItem(
         "amigate_province",
@@ -882,60 +2326,44 @@ am5.ready(function() {
         )
       );
 
-
-      /*
-        PEQUEÑO ZOOM HACIA
-        LA PROVINCIA ELEGIDA.
-      */
-
-      polygonSeries.zoomToDataItem(
-        dataItem
-      );
+      updateProvinceContent();
 
     }
   );
 
 
-  /*
-    CUANDO CARGA TODO,
-    AJUSTAR ARGENTINA COMPLETA.
-  */
+  document
+    .getElementById(
+      "clearProvince"
+    )
+    .addEventListener(
+      "click",
+      clearSelection
+    );
+
 
   polygonSeries.events.on(
     "datavalidated",
     function(){
 
-      chart.goHome(
-        0
-      );
-
-
-      /*
-        RESTAURAR PROVINCIA
-        ELEGIDA ANTERIORMENTE.
-      */
+      chart.goHome(0);
 
       const stored =
         localStorage.getItem(
           "amigate_province"
         );
 
-
       if(!stored){
         return;
       }
 
-
       try{
 
         const saved =
-          JSON.parse(
-            stored
-          );
-
+          JSON.parse(stored);
 
         polygonSeries.dataItems.forEach(
-          function(dataItem){
+          dataItem => {
 
             if(
               dataItem.dataContext.id ===
@@ -947,38 +2375,33 @@ am5.ready(function() {
                   "mapPolygon"
                 );
 
-
               if(!polygon){
                 return;
               }
 
-
               selectedPolygon =
                 polygon;
 
-
               selectedProvince =
                 saved;
-
 
               polygon.set(
                 "active",
                 true
               );
 
-
               provinceName.textContent =
                 saved.name;
-
 
               exploreButton.textContent =
                 "Explorar " +
                 saved.name;
 
-
               provinceCard.classList.add(
                 "visible"
               );
+
+              updateProvinceContent();
 
             }
 
@@ -998,155 +2421,476 @@ am5.ready(function() {
   );
 
 
-  /* ========================================================
-     DESELECCIONAR
-  ======================================================== */
-
-  function clearSelection(){
-
-    if(selectedPolygon){
-
-      selectedPolygon.set(
-        "active",
-        false
-      );
-
-    }
-
-
-    selectedPolygon = null;
-    selectedProvince = null;
-
-
-    provinceCard.classList.remove(
-      "visible"
-    );
-
-
-    localStorage.removeItem(
-      "amigate_province"
-    );
-
-
-    /*
-      VOLVER A VER
-      ARGENTINA COMPLETA
-    */
-
-    chart.goHome(
-      450
-    );
-
-  }
-
-
-  /*
-    BOTÓN QUITAR SELECCIÓN
-  */
-
-  clearSelectionButton.addEventListener(
-    "click",
-    function(event){
-
-      event.stopPropagation();
-
-      clearSelection();
-
-    }
-  );
-
-
-  /*
-    CLICK EN ESPACIO VACÍO
-  */
-
-  chart.chartContainer
-    .get(
-      "background"
-    )
-    ?.events.on(
-      "click",
-      clearSelection
-    );
-
-
-  /*
-    HACEMOS TODO EL FONDO
-    CLICKEABLE PARA QUITAR
-    SELECCIÓN.
-  */
-
-  chart.chartContainer.set(
-    "background",
-    am5.Rectangle.new(
-      root,
-      {
-        fill:
-          am5.color(
-            0xFFF8F2
-          ),
-
-        fillOpacity:0
-      }
-    )
-  );
-
-
-  chart.chartContainer
-    .get(
-      "background"
-    )
-    .events.on(
-      "click",
-      function(){
-
-        if(selectedProvince){
-
-          clearSelection();
-
-        }
-
-      }
-    );
-
-
-  /*
-    APARICIÓN DEL MAPA
-  */
-
-  polygonSeries.appear(
-    700
-  );
+  polygonSeries.appear(700);
 
 });
 
-
-/* ==========================================================
-   BOTONES
-========================================================== */
 
 exploreButton.addEventListener(
   "click",
   function(){
 
-    if(!selectedProvince){
-      return;
-    }
-
-    /*
-      EN EL SIGUIENTE PASO
-      ESTO ABRIRÁ AMIGATE
-      PARA ESTA PROVINCIA.
-    */
-
-    alert(
-      "Explorando " +
-      selectedProvince.name
-    );
+    document
+      .getElementById(
+        "exploreSection"
+      )
+      .scrollIntoView({
+        behavior:"smooth"
+      });
 
   }
 );
 
+
+/* =====================================================
+   ADMIN LOGIN
+===================================================== */
+
+const adminModal =
+  document.getElementById(
+    "adminModal"
+  );
+
+const adminError =
+  document.getElementById(
+    "adminError"
+  );
+
+
+document
+  .getElementById(
+    "adminAccess"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      adminModal.classList.add(
+        "open"
+      );
+
+    }
+  );
+
+
+document
+  .getElementById(
+    "closeAdminModal"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      adminModal.classList.remove(
+        "open"
+      );
+
+    }
+  );
+
+
+document
+  .getElementById(
+    "adminLoginForm"
+  )
+  .addEventListener(
+    "submit",
+    async event => {
+
+      event.preventDefault();
+
+      adminError.classList.remove(
+        "visible"
+      );
+
+      const email =
+        document
+          .getElementById(
+            "adminEmail"
+          )
+          .value
+          .trim();
+
+      const password =
+        document
+          .getElementById(
+            "adminPassword"
+          )
+          .value;
+
+
+      const {
+        data,
+        error
+      } =
+        await db.auth.signInWithPassword({
+          email,
+          password
+        });
+
+
+      if(error){
+
+        showAdminError(
+          "Email o contraseña incorrectos."
+        );
+
+        return;
+      }
+
+
+      const user =
+        data.user;
+
+
+      const {
+        data:profile,
+        error:profileError
+      } =
+        await db
+          .from("profiles")
+          .select(
+            "id, tipo_usuario, activo"
+          )
+          .eq(
+            "id",
+            user.id
+          )
+          .single();
+
+
+      if(
+        profileError ||
+        !profile ||
+        profile.tipo_usuario !== "admin" ||
+        profile.activo !== true
+      ){
+
+        await db.auth.signOut();
+
+        showAdminError(
+          "Esta cuenta no tiene permisos de administrador."
+        );
+
+        return;
+      }
+
+
+      adminModal.classList.remove(
+        "open"
+      );
+
+
+      document
+        .getElementById(
+          "adminUserEmail"
+        )
+        .textContent =
+          email;
+
+
+      document
+        .getElementById(
+          "adminApp"
+        )
+        .classList.add(
+          "visible"
+        );
+
+
+      loadDashboard();
+
+    }
+  );
+
+
+function showAdminError(message){
+
+  adminError.textContent =
+    message;
+
+  adminError.classList.add(
+    "visible"
+  );
+
+}
+
+
+/* =====================================================
+   DASHBOARD ADMIN
+===================================================== */
+
+async function getCount(
+  table,
+  filterColumn = null,
+  filterValue = null
+){
+
+  let query =
+    db
+      .from(table)
+      .select(
+        "*",
+        {
+          count:"exact",
+          head:true
+        }
+      );
+
+
+  if(
+    filterColumn &&
+    filterValue !== null
+  ){
+
+    query =
+      query.eq(
+        filterColumn,
+        filterValue
+      );
+
+  }
+
+
+  const {
+    count,
+    error
+  } =
+    await query;
+
+
+  if(error){
+
+    console.error(
+      table,
+      error
+    );
+
+    return 0;
+  }
+
+
+  return count || 0;
+}
+
+
+async function loadDashboard(){
+
+  const [
+    clients,
+    brands,
+    activeBrands,
+    sellers,
+    orders,
+    claims,
+    subscriptions
+  ] =
+    await Promise.all([
+
+      getCount(
+        "profiles",
+        "tipo_usuario",
+        "comprador"
+      ),
+
+      getCount(
+        "brands"
+      ),
+
+      getCount(
+        "brands",
+        "estado",
+        "activa"
+      ),
+
+      getCount(
+        "seller_profiles"
+      ),
+
+      getCount(
+        "orders"
+      ),
+
+      getCount(
+        "claims"
+      ),
+
+      getCount(
+        "brand_subscriptions"
+      )
+
+    ]);
+
+
+  document
+    .getElementById(
+      "countClients"
+    )
+    .textContent =
+      clients;
+
+
+  document
+    .getElementById(
+      "countBrands"
+    )
+    .textContent =
+      brands;
+
+
+  document
+    .getElementById(
+      "countActiveBrands"
+    )
+    .textContent =
+      activeBrands;
+
+
+  document
+    .getElementById(
+      "countSellers"
+    )
+    .textContent =
+      sellers;
+
+
+  document
+    .getElementById(
+      "countOrders"
+    )
+    .textContent =
+      orders;
+
+
+  document
+    .getElementById(
+      "countClaims"
+    )
+    .textContent =
+      claims;
+
+
+  document
+    .getElementById(
+      "countSubscriptions"
+    )
+    .textContent =
+      subscriptions;
+
+}
+
+
+/* =====================================================
+   NAVEGACIÓN ADMIN
+===================================================== */
+
+document
+  .querySelectorAll(
+    ".admin-nav"
+  )
+  .forEach(
+    button => {
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          const page =
+            button.dataset.adminPage;
+
+
+          document
+            .querySelectorAll(
+              ".admin-nav"
+            )
+            .forEach(
+              item =>
+                item.classList.remove(
+                  "active"
+                )
+            );
+
+
+          button.classList.add(
+            "active"
+          );
+
+
+          document
+            .querySelectorAll(
+              ".admin-section"
+            )
+            .forEach(
+              section =>
+                section.classList.remove(
+                  "active"
+                )
+            );
+
+
+          document
+            .getElementById(
+              "admin-" + page
+            )
+            .classList.add(
+              "active"
+            );
+
+
+          const label =
+            button
+              .querySelector(
+                "strong"
+              )
+              ?.textContent
+              ||
+              "Administración";
+
+
+          document
+            .getElementById(
+              "adminPageTitle"
+            )
+            .textContent =
+              label;
+
+        }
+      );
+
+    }
+  );
+
+
+/* =====================================================
+   CERRAR ADMIN
+===================================================== */
+
+document
+  .getElementById(
+    "adminLogout"
+  )
+  .addEventListener(
+    "click",
+    async () => {
+
+      await db.auth.signOut();
+
+
+      document
+        .getElementById(
+          "adminApp"
+        )
+        .classList.remove(
+          "visible"
+        );
+
+    }
+  );
+
+
+/* =====================================================
+   BOTONES PÚBLICOS
+===================================================== */
 
 document
   .getElementById(
@@ -1154,10 +2898,10 @@ document
   )
   .addEventListener(
     "click",
-    function(){
+    () => {
 
       alert(
-        "Próximo paso: registro de marcas"
+        "Próximo paso: registro de vendedores."
       );
 
     }
@@ -1166,18 +2910,19 @@ document
 
 document
   .getElementById(
-    "loginButton"
+    "userLoginButton"
   )
   .addEventListener(
     "click",
-    function(){
+    () => {
 
       alert(
-        "Próximo paso: iniciar sesión"
+        "Próximo paso: acceso de compradores."
       );
 
     }
   );
+
 </script>
 
 </body>
