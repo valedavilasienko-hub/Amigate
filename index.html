@@ -6,9 +6,9 @@
 
   <title>Amigate</title>
 
-  <!-- TIPOGRAFÍAS -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
   <link
     href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap"
     rel="stylesheet"
@@ -17,7 +17,7 @@
   <!-- SUPABASE -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-  <!-- AMCHARTS -->
+  <!-- MAPA -->
   <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
   <script src="https://cdn.amcharts.com/lib/5/map.js"></script>
   <script src="https://cdn.amcharts.com/lib/5/geodata/argentinaHigh.js"></script>
@@ -34,8 +34,6 @@
 
       --dark:#211D1B;
       --gray:#706762;
-      --light-gray:#A69D98;
-
       --white:#FFFFFF;
       --border:#EEDFD7;
 
@@ -56,6 +54,7 @@
       font-family:"DM Sans",sans-serif;
       color:var(--dark);
       background:var(--cream);
+      overflow-x:hidden;
     }
 
     button,
@@ -78,6 +77,7 @@
 
     .home-screen{
       min-height:100vh;
+
       display:grid;
       grid-template-columns:44% 56%;
 
@@ -91,7 +91,9 @@
     }
 
 
-    /* IZQUIERDA */
+    /* =====================================================
+       IZQUIERDA
+    ===================================================== */
 
     .hero-left{
       min-height:100vh;
@@ -102,6 +104,9 @@
 
       display:flex;
       flex-direction:column;
+
+      position:relative;
+      z-index:10;
     }
 
     .logo{
@@ -134,11 +139,14 @@
       font-weight:800;
 
       letter-spacing:.14em;
+
       text-transform:uppercase;
     }
 
     h1{
-      font-family:"Playfair Display",serif;
+      font-family:
+        "Playfair Display",
+        serif;
 
       font-size:
         clamp(54px,5.4vw,92px);
@@ -158,7 +166,9 @@
       width:70px;
       height:4px;
 
-      margin:27px 0 23px;
+      margin:
+        27px 0
+        23px;
 
       border-radius:100px;
 
@@ -178,6 +188,7 @@
 
     .hero-actions{
       display:flex;
+
       gap:12px;
 
       margin-top:31px;
@@ -216,20 +227,29 @@
       color:var(--dark);
 
       background:
-        rgba(255,255,255,.6);
+        rgba(255,255,255,.62);
 
       border:
         1px solid
         rgba(235,104,65,.22);
     }
 
+    .btn-secondary:hover{
+      background:white;
+    }
 
-    /* MAPA */
+
+    /* =====================================================
+       MAPA
+    ===================================================== */
 
     .map-side{
       min-height:100vh;
 
       position:relative;
+
+      display:flex;
+      flex-direction:column;
 
       overflow:hidden;
     }
@@ -237,12 +257,12 @@
     .map-title{
       position:absolute;
 
-      top:45px;
-      right:5vw;
+      top:36px;
+      left:30px;
 
-      z-index:5;
+      z-index:20;
 
-      text-align:right;
+      pointer-events:none;
     }
 
     .map-title span{
@@ -267,9 +287,18 @@
         "Playfair Display",
         serif;
 
-      font-size:28px;
-
+      font-size:25px;
       font-weight:600;
+
+      line-height:1.1;
+    }
+
+    .chart-holder{
+      width:100%;
+      min-height:100vh;
+      flex:1;
+
+      position:relative;
     }
 
     #chartdiv{
@@ -278,19 +307,21 @@
     }
 
 
-    /* PROVINCIA */
+    /* =====================================================
+       PROVINCIA SELECCIONADA
+    ===================================================== */
 
     .province-card{
       position:absolute;
 
-      right:3.5vw;
-      bottom:5vh;
+      right:3vw;
+      bottom:4vh;
 
       width:260px;
 
       padding:18px;
 
-      z-index:10;
+      z-index:30;
 
       background:
         rgba(255,255,255,.94);
@@ -309,12 +340,13 @@
 
       opacity:0;
 
-      transform:
-        translateY(15px);
+      transform:translateY(15px);
 
       pointer-events:none;
 
-      transition:.22s;
+      transition:
+        opacity .22s,
+        transform .22s;
     }
 
     .province-card.visible{
@@ -348,10 +380,12 @@
         serif;
 
       font-size:27px;
+
+      line-height:1.1;
     }
 
     .province-card p{
-      margin-top:5px;
+      margin-top:6px;
 
       color:var(--gray);
 
@@ -371,15 +405,15 @@
 
       border-radius:12px;
 
-      color:white;
-
       background:var(--orange);
+
+      color:white;
 
       font-weight:800;
     }
 
     .clear-province{
-      margin-top:9px;
+      margin-top:10px;
 
       color:var(--gray);
 
@@ -388,6 +422,10 @@
       font-size:11px;
 
       cursor:pointer;
+    }
+
+    .clear-province:hover{
+      color:var(--dark);
     }
 
 
@@ -444,7 +482,9 @@
     }
 
 
-    /* CATEGORÍAS */
+    /* =====================================================
+       CATEGORÍAS
+    ===================================================== */
 
     .category-grid{
       display:grid;
@@ -471,6 +511,8 @@
 
       background:var(--cream);
 
+      cursor:pointer;
+
       transition:.2s;
     }
 
@@ -494,8 +536,7 @@
 
       border-radius:14px;
 
-      background:
-        var(--cream-2);
+      background:var(--cream-2);
 
       font-size:24px;
     }
@@ -518,7 +559,7 @@
 
 
     /* =====================================================
-       SEGUNDO BLOQUE
+       PRESENTACIÓN
     ===================================================== */
 
     .about{
@@ -597,25 +638,17 @@
       background:var(--dark);
     }
 
-    .footer-top{
-      display:flex;
-
-      justify-content:space-between;
-
-      gap:30px;
-    }
-
     .footer-logo{
+      color:var(--orange);
+
       font-size:29px;
       font-weight:800;
-
-      color:var(--orange);
     }
 
     .footer-copy{
       margin-top:7px;
 
-      color:#bbb1ac;
+      color:#BBB1AC;
 
       font-size:13px;
     }
@@ -626,7 +659,6 @@
       padding-top:20px;
 
       display:flex;
-
       align-items:center;
       justify-content:space-between;
 
@@ -641,26 +673,25 @@
 
     .footer-links{
       display:flex;
+
       gap:20px;
     }
 
     .admin-access{
-      color:#6d6561;
+      color:#6D6561;
 
       cursor:pointer;
-
-      user-select:none;
 
       transition:.2s;
     }
 
     .admin-access:hover{
-      color:#c4b9b4;
+      color:#C4B9B4;
     }
 
 
     /* =====================================================
-       MODAL ADMIN
+       LOGIN ADMIN
     ===================================================== */
 
     .modal-overlay{
@@ -712,8 +743,7 @@
       display:flex;
 
       justify-content:space-between;
-
-      gap:20px;
+      align-items:center;
     }
 
     .modal-top span{
@@ -728,7 +758,7 @@
 
       background:transparent;
 
-      font-size:21px;
+      font-size:24px;
     }
 
     .admin-login h3{
@@ -809,9 +839,9 @@
 
       border-radius:10px;
 
-      color:#9c3022;
+      color:#9C3022;
 
-      background:#fff0ed;
+      background:#FFF0ED;
 
       font-size:12px;
     }
@@ -822,7 +852,7 @@
 
 
     /* =====================================================
-       ADMINISTRADOR
+       ADMIN GENERAL
     ===================================================== */
 
     .admin-app{
@@ -841,9 +871,6 @@
       display:flex;
     }
 
-
-    /* SIDEBAR */
-
     .admin-sidebar{
       width:260px;
 
@@ -853,9 +880,9 @@
       display:flex;
       flex-direction:column;
 
-      color:white;
-
       background:var(--sidebar);
+
+      color:white;
     }
 
     .admin-brand{
@@ -874,7 +901,7 @@
 
       margin-top:3px;
 
-      color:#8f8580;
+      color:#8F8580;
 
       font-size:10px;
       font-weight:500;
@@ -898,17 +925,17 @@
       padding:11px 13px;
 
       display:flex;
-      gap:11px;
-
       align-items:center;
+
+      gap:11px;
 
       border:none;
 
       border-radius:11px;
 
-      color:#bdb3ae;
-
       background:transparent;
+
+      color:#BDB3AE;
 
       text-align:left;
 
@@ -930,10 +957,6 @@
         rgba(235,104,65,.16);
     }
 
-    .admin-nav.active span{
-      color:var(--orange);
-    }
-
     .admin-logout{
       margin-top:auto;
 
@@ -945,16 +968,15 @@
 
       border-radius:11px;
 
-      color:#aaa09b;
-
       background:transparent;
+
+      color:#AAA09B;
     }
-
-
-    /* ADMIN MAIN */
 
     .admin-main{
       flex:1;
+
+      min-width:0;
 
       overflow:auto;
     }
@@ -962,8 +984,7 @@
     .admin-header{
       min-height:80px;
 
-      padding:
-        0 32px;
+      padding:0 32px;
 
       display:flex;
       align-items:center;
@@ -1001,9 +1022,6 @@
       padding:32px;
     }
 
-
-    /* CARDS */
-
     .dashboard-grid{
       display:grid;
 
@@ -1019,8 +1037,7 @@
       padding:20px;
 
       border:
-        1px solid
-        #E8E2DF;
+        1px solid #E8E2DF;
 
       border-radius:17px;
 
@@ -1053,7 +1070,7 @@
     .stat-card p{
       margin-top:4px;
 
-      color:#9b928d;
+      color:#9B928D;
 
       font-size:11px;
     }
@@ -1072,8 +1089,7 @@
       padding:35px;
 
       border:
-        1px solid
-        #E7E1DE;
+        1px solid #E7E1DE;
 
       border-radius:18px;
 
@@ -1094,7 +1110,7 @@
 
 
     /* =====================================================
-       RESPONSIVE
+       TABLET
     ===================================================== */
 
     @media(max-width:1050px){
@@ -1112,10 +1128,14 @@
     }
 
 
+    /* =====================================================
+       CELULAR
+    ===================================================== */
+
     @media(max-width:850px){
 
       .home-screen{
-        grid-template-columns:1fr;
+        display:block;
       }
 
       .hero-left{
@@ -1123,11 +1143,11 @@
 
         padding:
           28px 22px
-          50px;
+          55px;
       }
 
       .hero-content{
-        padding-top:60px;
+        padding-top:55px;
       }
 
       h1{
@@ -1139,22 +1159,57 @@
         flex-direction:column;
       }
 
+      /*
+        IMPORTANTE:
+        EL TÍTULO YA NO FLOTA ENCIMA DEL MAPA.
+      */
+
       .map-side{
-        min-height:720px;
+        min-height:auto;
+
+        overflow:visible;
+
+        padding-top:30px;
+      }
+
+      .map-title{
+        position:relative;
+
+        top:auto;
+        left:auto;
+
+        width:100%;
+
+        padding:
+          0 22px
+          10px;
+
+        text-align:left;
+      }
+
+      .map-title strong{
+        font-size:27px;
+      }
+
+      .chart-holder{
+        min-height:650px;
       }
 
       #chartdiv{
-        height:720px;
+        height:650px;
       }
 
+      /*
+        TARJETA TAMBIÉN FUERA DE MISIONES
+      */
+
       .province-card{
+        right:auto;
+        left:17px;
+        bottom:18px;
+
         width:
           calc(100% - 34px);
-
-        left:17px;
-        right:auto;
-
-        bottom:17px;
       }
 
       .category-grid{
@@ -1164,14 +1219,24 @@
 
       .about-layout{
         grid-template-columns:1fr;
+
         gap:25px;
       }
 
       .admin-sidebar{
-        width:75px;
+        width:72px;
+
+        padding:
+          20px 10px;
       }
 
       .admin-brand{
+        padding:
+          0 0
+          20px;
+
+        text-align:center;
+
         font-size:0;
       }
 
@@ -1188,12 +1253,27 @@
 
       .admin-nav{
         justify-content:center;
+
+        padding:12px 6px;
+      }
+
+      .admin-header{
+        padding:
+          0 18px;
+      }
+
+      .admin-content{
+        padding:18px;
       }
 
     }
 
 
     @media(max-width:520px){
+
+      .logo{
+        font-size:29px;
+      }
 
       .explore-section,
       .about{
@@ -1202,32 +1282,36 @@
       }
 
       .category-grid{
-        grid-template-columns:1fr 1fr;
+        grid-template-columns:
+          1fr 1fr;
+
         gap:10px;
       }
 
       .category{
         min-height:170px;
+
         padding:17px;
       }
 
-      .footer-top,
+      .chart-holder{
+        min-height:610px;
+      }
+
+      #chartdiv{
+        height:610px;
+      }
+
       .footer-bottom{
         flex-direction:column;
+
         align-items:flex-start;
+
+        gap:20px;
       }
 
       .dashboard-grid{
         grid-template-columns:1fr;
-      }
-
-      .admin-content{
-        padding:17px;
-      }
-
-      .admin-header{
-        padding:
-          0 18px;
       }
 
     }
@@ -1239,7 +1323,7 @@
 
 
 <!-- =====================================================
-     PORTADA
+     HOME
 ===================================================== -->
 
 <section class="home-screen">
@@ -1259,7 +1343,9 @@
       <h1>
         Todo lo que buscás,
         más cerca
-        <span>de lo que pensás.</span>
+        <span>
+          de lo que pensás.
+        </span>
       </h1>
 
       <div class="accent-line"></div>
@@ -1310,34 +1396,38 @@
     </div>
 
 
-    <div id="chartdiv"></div>
+    <div class="chart-holder">
 
+      <div id="chartdiv"></div>
 
-    <div
-      class="province-card"
-      id="provinceCard"
-    >
-
-      <small>
-        Provincia seleccionada
-      </small>
-
-      <strong id="provinceName"></strong>
-
-      <p>
-        Descubrí marcas y oportunidades
-        disponibles para vos.
-      </p>
-
-      <button id="exploreButton">
-        Explorar
-      </button>
 
       <div
-        class="clear-province"
-        id="clearProvince"
+        class="province-card"
+        id="provinceCard"
       >
-        Quitar selección
+
+        <small>
+          Provincia seleccionada
+        </small>
+
+        <strong id="provinceName"></strong>
+
+        <p>
+          Descubrí marcas y oportunidades
+          disponibles para vos.
+        </p>
+
+        <button id="exploreButton">
+          Explorar
+        </button>
+
+        <div
+          class="clear-province"
+          id="clearProvince"
+        >
+          Quitar selección
+        </div>
+
       </div>
 
     </div>
@@ -1368,8 +1458,7 @@
     </h2>
 
     <p id="exploreSubtitle">
-      Elegí una provincia para personalizar
-      los resultados.
+      Elegí una provincia para personalizar los resultados.
     </p>
 
   </div>
@@ -1378,7 +1467,9 @@
   <div class="category-grid">
 
     <article class="category">
-      <div class="category-icon">🛍️</div>
+      <div class="category-icon">
+        🛍️
+      </div>
 
       <strong>
         Productos
@@ -1391,7 +1482,9 @@
 
 
     <article class="category">
-      <div class="category-icon">✨</div>
+      <div class="category-icon">
+        ✨
+      </div>
 
       <strong>
         Servicios
@@ -1404,7 +1497,9 @@
 
 
     <article class="category">
-      <div class="category-icon">🛠️</div>
+      <div class="category-icon">
+        🛠️
+      </div>
 
       <strong>
         Oficios
@@ -1417,7 +1512,9 @@
 
 
     <article class="category">
-      <div class="category-icon">💼</div>
+      <div class="category-icon">
+        💼
+      </div>
 
       <strong>
         Empleos
@@ -1430,7 +1527,9 @@
 
 
     <article class="category">
-      <div class="category-icon">📣</div>
+      <div class="category-icon">
+        📣
+      </div>
 
       <strong>
         Necesito
@@ -1474,7 +1573,7 @@
         Desde una marca que recién empieza hasta
         un profesional, un oficio, una oportunidad
         laboral o una necesidad concreta.
-        Amigate busca conectar todo eso en un mismo lugar.
+        Amigate conecta todo eso en un mismo lugar.
       </p>
 
     </div>
@@ -1491,20 +1590,12 @@
 
 <footer>
 
-  <div class="footer-top">
+  <div class="footer-logo">
+    Amigate
+  </div>
 
-    <div>
-
-      <div class="footer-logo">
-        Amigate
-      </div>
-
-      <div class="footer-copy">
-        Hecho acá. Encontralo en Amigate.
-      </div>
-
-    </div>
-
+  <div class="footer-copy">
+    Hecho acá. Encontralo en Amigate.
   </div>
 
 
@@ -1516,7 +1607,6 @@
       <span>Ayuda</span>
     </div>
 
-    <!-- ACCESO DISCRETO -->
     <span
       class="admin-access"
       id="adminAccess"
@@ -1562,8 +1652,7 @@
     </h3>
 
     <p>
-      Acceso restringido al administrador general
-      de Amigate.
+      Acceso restringido al administrador general.
     </p>
 
 
@@ -1578,6 +1667,7 @@
         <input
           type="email"
           id="adminEmail"
+          autocomplete="email"
           required
         >
 
@@ -1593,6 +1683,7 @@
         <input
           type="password"
           id="adminPassword"
+          autocomplete="current-password"
           required
         >
 
@@ -1621,7 +1712,7 @@
 
 
 <!-- =====================================================
-     PANEL ADMIN
+     ADMIN APP
 ===================================================== -->
 
 <div
@@ -1763,8 +1854,7 @@
 
         Administrador
 
-        <span id="adminUserEmail">
-        </span>
+        <span id="adminUserEmail"></span>
 
       </div>
 
@@ -1772,8 +1862,6 @@
 
 
     <div class="admin-content">
-
-      <!-- DASHBOARD -->
 
       <section
         class="admin-section active"
@@ -1783,138 +1871,51 @@
         <div class="dashboard-grid">
 
           <article class="stat-card">
-
-            <small>
-              Clientes registrados
-            </small>
-
-            <strong id="countClients">
-              —
-            </strong>
-
-            <p>
-              Compradores de Amigate
-            </p>
-
+            <small>Clientes registrados</small>
+            <strong id="countClients">—</strong>
+            <p>Compradores de Amigate</p>
           </article>
 
-
           <article class="stat-card">
-
-            <small>
-              Marcas registradas
-            </small>
-
-            <strong id="countBrands">
-              —
-            </strong>
-
-            <p>
-              Total de marcas
-            </p>
-
+            <small>Marcas registradas</small>
+            <strong id="countBrands">—</strong>
+            <p>Total de marcas</p>
           </article>
 
-
           <article class="stat-card">
-
-            <small>
-              Marcas activas
-            </small>
-
-            <strong id="countActiveBrands">
-              —
-            </strong>
-
-            <p>
-              Actualmente publicadas
-            </p>
-
+            <small>Marcas activas</small>
+            <strong id="countActiveBrands">—</strong>
+            <p>Actualmente publicadas</p>
           </article>
 
-
           <article class="stat-card">
-
-            <small>
-              Vendedores
-            </small>
-
-            <strong id="countSellers">
-              —
-            </strong>
-
-            <p>
-              Cuentas registradas
-            </p>
-
+            <small>Vendedores</small>
+            <strong id="countSellers">—</strong>
+            <p>Cuentas registradas</p>
           </article>
 
-
           <article class="stat-card">
-
-            <small>
-              Pedidos
-            </small>
-
-            <strong id="countOrders">
-              —
-            </strong>
-
-            <p>
-              Operaciones registradas
-            </p>
-
+            <small>Pedidos</small>
+            <strong id="countOrders">—</strong>
+            <p>Operaciones registradas</p>
           </article>
 
-
           <article class="stat-card">
-
-            <small>
-              Reclamos
-            </small>
-
-            <strong id="countClaims">
-              —
-            </strong>
-
-            <p>
-              Total registrados
-            </p>
-
+            <small>Reclamos</small>
+            <strong id="countClaims">—</strong>
+            <p>Total registrados</p>
           </article>
 
-
           <article class="stat-card">
-
-            <small>
-              Suscripciones
-            </small>
-
-            <strong id="countSubscriptions">
-              —
-            </strong>
-
-            <p>
-              Historial de suscripciones
-            </p>
-
+            <small>Suscripciones</small>
+            <strong id="countSubscriptions">—</strong>
+            <p>Historial</p>
           </article>
 
-
           <article class="stat-card">
-
-            <small>
-              Provincias
-            </small>
-
-            <strong>
-              24
-            </strong>
-
-            <p>
-              Cobertura nacional
-            </p>
-
+            <small>Provincias</small>
+            <strong>24</strong>
+            <p>Cobertura nacional</p>
           </article>
 
         </div>
@@ -1922,157 +1923,90 @@
       </section>
 
 
-      <!-- OTRAS SECCIONES -->
-
-      <section
-        class="admin-section"
-        id="admin-clientes"
-      >
+      <section class="admin-section" id="admin-clientes">
         <div class="empty-panel">
           <h3>Clientes</h3>
-          <p>
-            Desde acá vas a administrar todos
-            los compradores registrados.
-          </p>
+          <p>Gestión de compradores registrados.</p>
         </div>
       </section>
 
 
-      <section
-        class="admin-section"
-        id="admin-vendedores"
-      >
+      <section class="admin-section" id="admin-vendedores">
         <div class="empty-panel">
           <h3>Vendedores</h3>
-          <p>
-            Gestión de vendedores, estado,
-            suscripción y permisos.
-          </p>
+          <p>Gestión de cuentas vendedoras.</p>
         </div>
       </section>
 
 
-      <section
-        class="admin-section"
-        id="admin-marcas"
-      >
+      <section class="admin-section" id="admin-marcas">
         <div class="empty-panel">
           <h3>Marcas</h3>
-          <p>
-            Alta, suspensión, bonificaciones
-            y administración general de marcas.
-          </p>
+          <p>Alta, suspensión, bonificaciones y administración.</p>
         </div>
       </section>
 
 
-      <section
-        class="admin-section"
-        id="admin-categorias"
-      >
+      <section class="admin-section" id="admin-categorias">
         <div class="empty-panel">
           <h3>Categorías</h3>
-          <p>
-            Productos, servicios, oficios,
-            empleos y Necesito.
-          </p>
+          <p>Administración de categorías y subcategorías.</p>
         </div>
       </section>
 
 
-      <section
-        class="admin-section"
-        id="admin-operaciones"
-      >
+      <section class="admin-section" id="admin-operaciones">
         <div class="empty-panel">
           <h3>Operaciones</h3>
-          <p>
-            Pedidos, movimientos y actividad
-            general de la plataforma.
-          </p>
+          <p>Pedidos y actividad de la plataforma.</p>
         </div>
       </section>
 
 
-      <section
-        class="admin-section"
-        id="admin-finanzas"
-      >
+      <section class="admin-section" id="admin-finanzas">
         <div class="empty-panel">
-          <h3>Finanzas Amigate</h3>
-          <p>
-            Suscripciones, comisiones,
-            publicidad e ingresos.
-          </p>
+          <h3>Finanzas</h3>
+          <p>Suscripciones, comisiones y publicidad.</p>
         </div>
       </section>
 
 
-      <section
-        class="admin-section"
-        id="admin-publicidad"
-      >
+      <section class="admin-section" id="admin-publicidad">
         <div class="empty-panel">
           <h3>Publicidad</h3>
-          <p>
-            Campañas patrocinadas y promociones.
-          </p>
+          <p>Campañas y publicaciones patrocinadas.</p>
         </div>
       </section>
 
 
-      <section
-        class="admin-section"
-        id="admin-suscripciones"
-      >
+      <section class="admin-section" id="admin-suscripciones">
         <div class="empty-panel">
           <h3>Suscripciones</h3>
-          <p>
-            Planes, vencimientos, bonificaciones
-            y renovaciones.
-          </p>
+          <p>Planes, vencimientos y bonificaciones.</p>
         </div>
       </section>
 
 
-      <section
-        class="admin-section"
-        id="admin-reclamos"
-      >
+      <section class="admin-section" id="admin-reclamos">
         <div class="empty-panel">
           <h3>Reclamos</h3>
-          <p>
-            Intervenciones y resolución
-            de conflictos.
-          </p>
+          <p>Intervenciones y resolución de conflictos.</p>
         </div>
       </section>
 
 
-      <section
-        class="admin-section"
-        id="admin-moderacion"
-      >
+      <section class="admin-section" id="admin-moderacion">
         <div class="empty-panel">
           <h3>Moderación</h3>
-          <p>
-            Reportes, publicaciones, reseñas
-            y cuentas denunciadas.
-          </p>
+          <p>Reportes y contenido denunciado.</p>
         </div>
       </section>
 
 
-      <section
-        class="admin-section"
-        id="admin-configuracion"
-      >
+      <section class="admin-section" id="admin-configuracion">
         <div class="empty-panel">
           <h3>Configuración general</h3>
-          <p>
-            Comisión estándar, destacados,
-            patrocinados y parámetros de Amigate.
-          </p>
+          <p>Parámetros generales de Amigate.</p>
         </div>
       </section>
 
@@ -2085,9 +2019,9 @@
 
 
 <script>
-/* =====================================================
+/* =========================================================
    SUPABASE
-===================================================== */
+========================================================= */
 
 const SUPABASE_URL =
   "https://jqdyaafwixnjasszsvkt.supabase.co";
@@ -2102,27 +2036,37 @@ const db =
   );
 
 
-/* =====================================================
-   PROVINCIA
-===================================================== */
+/* =========================================================
+   MAPA
+========================================================= */
 
 let selectedProvince = null;
 let selectedPolygon = null;
 
 const provinceCard =
-  document.getElementById("provinceCard");
+  document.getElementById(
+    "provinceCard"
+  );
 
 const provinceName =
-  document.getElementById("provinceName");
+  document.getElementById(
+    "provinceName"
+  );
 
 const exploreButton =
-  document.getElementById("exploreButton");
+  document.getElementById(
+    "exploreButton"
+  );
 
 const exploreTitle =
-  document.getElementById("exploreTitle");
+  document.getElementById(
+    "exploreTitle"
+  );
 
 const exploreSubtitle =
-  document.getElementById("exploreSubtitle");
+  document.getElementById(
+    "exploreSubtitle"
+  );
 
 
 function updateProvinceContent(){
@@ -2138,10 +2082,12 @@ function updateProvinceContent(){
     return;
   }
 
+
   exploreTitle.textContent =
     "¿Qué estás buscando en " +
     selectedProvince.name +
     "?";
+
 
   exploreSubtitle.textContent =
     "Descubrí marcas, profesionales y oportunidades disponibles en " +
@@ -2150,37 +2096,44 @@ function updateProvinceContent(){
 }
 
 
-/* =====================================================
-   MAPA
-===================================================== */
-
 am5.ready(function(){
 
   const root =
-    am5.Root.new("chartdiv");
+    am5.Root.new(
+      "chartdiv"
+    );
+
 
   if(root._logo){
     root._logo.dispose();
   }
 
+
   const chart =
     root.container.children.push(
+
       am5map.MapChart.new(
         root,
         {
           panX:"none",
           panY:"none",
+
+          wheelX:"none",
           wheelY:"none",
+
           pinchZoom:false,
+
           projection:
             am5map.geoMercator()
         }
       )
+
     );
 
 
   const polygonSeries =
     chart.series.push(
+
       am5map.MapPolygonSeries.new(
         root,
         {
@@ -2188,44 +2141,77 @@ am5.ready(function(){
             am5geodata_argentinaHigh
         }
       )
+
     );
 
 
-  polygonSeries.mapPolygons.template.setAll({
+  polygonSeries
+    .mapPolygons
+    .template
+    .setAll({
 
-    fill:
-      am5.color(0xF4C0AE),
-
-    stroke:
-      am5.color(0xFFF8F2),
-
-    strokeWidth:1.6,
-
-    interactive:true,
-
-    cursorOverStyle:"pointer",
-
-    tooltipText:"{name}"
-
-  });
-
-
-  polygonSeries.mapPolygons.template.states.create(
-    "hover",
-    {
       fill:
-        am5.color(0xF08B65)
-    }
-  );
+        am5.color(
+          0xF4C0AE
+        ),
+
+      stroke:
+        am5.color(
+          0xFFF8F2
+        ),
+
+      strokeWidth:1.6,
+
+      interactive:true,
+
+      cursorOverStyle:
+        "pointer",
+
+      tooltipText:
+        "{name}"
+
+    });
 
 
-  polygonSeries.mapPolygons.template.states.create(
-    "active",
-    {
-      fill:
-        am5.color(0xEB6841)
-    }
-  );
+  polygonSeries
+    .mapPolygons
+    .template
+    .states
+    .create(
+      "hover",
+      {
+        fill:
+          am5.color(
+            0xF08B65
+          )
+      }
+    );
+
+
+  polygonSeries
+    .mapPolygons
+    .template
+    .states
+    .create(
+      "active",
+      {
+        fill:
+          am5.color(
+            0xEB6841
+          )
+      }
+    );
+
+
+  /*
+    IMPORTANTE:
+    YA NO HACEMOS ZOOM AL SELECCIONAR.
+
+    TAMPOCO HACEMOS chart.goHome()
+    CUANDO SE DESELECCIONA.
+
+    ESTO EVITA EL FREEZE EN MÓVIL.
+  */
 
 
   function clearSelection(){
@@ -2239,97 +2225,131 @@ am5.ready(function(){
 
     }
 
-    selectedPolygon = null;
 
-    selectedProvince = null;
+    selectedPolygon =
+      null;
+
+
+    selectedProvince =
+      null;
+
 
     provinceCard.classList.remove(
       "visible"
     );
 
+
     localStorage.removeItem(
       "amigate_province"
     );
 
-    updateProvinceContent();
 
-    chart.goHome(400);
+    updateProvinceContent();
   }
 
 
-  polygonSeries.mapPolygons.template.events.on(
-    "click",
-    function(event){
+  polygonSeries
+    .mapPolygons
+    .template
+    .events
+    .on(
+      "click",
+      function(event){
 
-      const polygon =
-        event.target;
+        const polygon =
+          event.target;
 
-      const dataItem =
-        polygon.dataItem;
 
-      if(!dataItem){
-        return;
-      }
+        const dataItem =
+          polygon.dataItem;
 
-      if(
-        selectedPolygon ===
-        polygon
-      ){
 
-        clearSelection();
+        if(!dataItem){
+          return;
+        }
 
-        return;
-      }
 
-      if(selectedPolygon){
+        /*
+          MISMA PROVINCIA:
+          DESELECCIONA.
+        */
 
-        selectedPolygon.set(
+        if(
+          selectedPolygon ===
+          polygon
+        ){
+
+          clearSelection();
+
+          return;
+        }
+
+
+        /*
+          APAGAR ANTERIOR
+        */
+
+        if(selectedPolygon){
+
+          selectedPolygon.set(
+            "active",
+            false
+          );
+
+        }
+
+
+        selectedPolygon =
+          polygon;
+
+
+        polygon.set(
           "active",
-          false
+          true
         );
 
+
+        selectedProvince = {
+
+          name:
+            dataItem
+              .dataContext
+              .name,
+
+          id:
+            dataItem
+              .dataContext
+              .id
+
+        };
+
+
+        provinceName.textContent =
+          selectedProvince.name;
+
+
+        exploreButton.textContent =
+          "Explorar " +
+          selectedProvince.name;
+
+
+        provinceCard.classList.add(
+          "visible"
+        );
+
+
+        localStorage.setItem(
+          "amigate_province",
+          JSON.stringify(
+            selectedProvince
+          )
+        );
+
+
+        updateProvinceContent();
+
       }
-
-      selectedPolygon =
-        polygon;
-
-      polygon.set(
-        "active",
-        true
-      );
-
-      selectedProvince = {
-
-        name:
-          dataItem.dataContext.name,
-
-        id:
-          dataItem.dataContext.id
-
-      };
-
-      provinceName.textContent =
-        selectedProvince.name;
-
-      exploreButton.textContent =
-        "Explorar " +
-        selectedProvince.name;
-
-      provinceCard.classList.add(
-        "visible"
-      );
-
-      localStorage.setItem(
-        "amigate_province",
-        JSON.stringify(
-          selectedProvince
-        )
-      );
-
-      updateProvinceContent();
-
-    }
-  );
+    );
 
 
   document
@@ -2338,93 +2358,126 @@ am5.ready(function(){
     )
     .addEventListener(
       "click",
-      clearSelection
+      function(){
+
+        clearSelection();
+
+      }
     );
 
 
-  polygonSeries.events.on(
-    "datavalidated",
-    function(){
+  /*
+    RESTAURAR SELECCIÓN
 
-      chart.goHome(0);
+    SIN ZOOM.
+  */
 
-      const stored =
-        localStorage.getItem(
-          "amigate_province"
-        );
+  polygonSeries
+    .events
+    .on(
+      "datavalidated",
+      function(){
 
-      if(!stored){
-        return;
-      }
+        const stored =
+          localStorage.getItem(
+            "amigate_province"
+          );
 
-      try{
 
-        const saved =
-          JSON.parse(stored);
+        if(!stored){
+          return;
+        }
 
-        polygonSeries.dataItems.forEach(
-          dataItem => {
 
-            if(
-              dataItem.dataContext.id ===
-              saved.id
-            ){
+        try{
 
-              const polygon =
-                dataItem.get(
-                  "mapPolygon"
-                );
+          const saved =
+            JSON.parse(
+              stored
+            );
 
-              if(!polygon){
-                return;
+
+          polygonSeries
+            .dataItems
+            .forEach(
+              function(dataItem){
+
+                if(
+                  dataItem
+                    .dataContext
+                    .id ===
+                  saved.id
+                ){
+
+                  const polygon =
+                    dataItem.get(
+                      "mapPolygon"
+                    );
+
+
+                  if(!polygon){
+                    return;
+                  }
+
+
+                  selectedPolygon =
+                    polygon;
+
+
+                  selectedProvince =
+                    saved;
+
+
+                  polygon.set(
+                    "active",
+                    true
+                  );
+
+
+                  provinceName.textContent =
+                    saved.name;
+
+
+                  exploreButton.textContent =
+                    "Explorar " +
+                    saved.name;
+
+
+                  provinceCard.classList.add(
+                    "visible"
+                  );
+
+
+                  updateProvinceContent();
+
+                }
+
               }
+            );
 
-              selectedPolygon =
-                polygon;
+        }
+        catch(error){
 
-              selectedProvince =
-                saved;
+          localStorage.removeItem(
+            "amigate_province"
+          );
 
-              polygon.set(
-                "active",
-                true
-              );
-
-              provinceName.textContent =
-                saved.name;
-
-              exploreButton.textContent =
-                "Explorar " +
-                saved.name;
-
-              provinceCard.classList.add(
-                "visible"
-              );
-
-              updateProvinceContent();
-
-            }
-
-          }
-        );
+        }
 
       }
-      catch(error){
+    );
 
-        localStorage.removeItem(
-          "amigate_province"
-        );
 
-      }
-
-    }
+  polygonSeries.appear(
+    600
   );
-
-
-  polygonSeries.appear(700);
 
 });
 
+
+/* =========================================================
+   EXPLORAR PROVINCIA
+========================================================= */
 
 exploreButton.addEventListener(
   "click",
@@ -2442,9 +2495,9 @@ exploreButton.addEventListener(
 );
 
 
-/* =====================================================
+/* =========================================================
    ADMIN LOGIN
-===================================================== */
+========================================================= */
 
 const adminModal =
   document.getElementById(
@@ -2463,7 +2516,7 @@ document
   )
   .addEventListener(
     "click",
-    () => {
+    function(){
 
       adminModal.classList.add(
         "open"
@@ -2479,7 +2532,7 @@ document
   )
   .addEventListener(
     "click",
-    () => {
+    function(){
 
       adminModal.classList.remove(
         "open"
@@ -2489,19 +2542,40 @@ document
   );
 
 
+adminModal.addEventListener(
+  "click",
+  function(event){
+
+    if(
+      event.target ===
+      adminModal
+    ){
+
+      adminModal.classList.remove(
+        "open"
+      );
+
+    }
+
+  }
+);
+
+
 document
   .getElementById(
     "adminLoginForm"
   )
   .addEventListener(
     "submit",
-    async event => {
+    async function(event){
 
       event.preventDefault();
+
 
       adminError.classList.remove(
         "visible"
       );
+
 
       const email =
         document
@@ -2510,6 +2584,7 @@ document
           )
           .value
           .trim();
+
 
       const password =
         document
@@ -2523,10 +2598,12 @@ document
         data,
         error
       } =
-        await db.auth.signInWithPassword({
-          email,
-          password
-        });
+        await db
+          .auth
+          .signInWithPassword({
+            email,
+            password
+          });
 
 
       if(error){
@@ -2548,7 +2625,9 @@ document
         error:profileError
       } =
         await db
-          .from("profiles")
+          .from(
+            "profiles"
+          )
           .select(
             "id, tipo_usuario, activo"
           )
@@ -2562,15 +2641,21 @@ document
       if(
         profileError ||
         !profile ||
-        profile.tipo_usuario !== "admin" ||
-        profile.activo !== true
+        profile.tipo_usuario !==
+          "admin" ||
+        profile.activo !==
+          true
       ){
 
-        await db.auth.signOut();
+        await db
+          .auth
+          .signOut();
+
 
         showAdminError(
           "Esta cuenta no tiene permisos de administrador."
         );
+
 
         return;
       }
@@ -2609,6 +2694,7 @@ function showAdminError(message){
   adminError.textContent =
     message;
 
+
   adminError.classList.add(
     "visible"
   );
@@ -2616,9 +2702,9 @@ function showAdminError(message){
 }
 
 
-/* =====================================================
-   DASHBOARD ADMIN
-===================================================== */
+/* =========================================================
+   DASHBOARD
+========================================================= */
 
 async function getCount(
   table,
@@ -2780,20 +2866,20 @@ async function loadDashboard(){
 }
 
 
-/* =====================================================
+/* =========================================================
    NAVEGACIÓN ADMIN
-===================================================== */
+========================================================= */
 
 document
   .querySelectorAll(
     ".admin-nav"
   )
   .forEach(
-    button => {
+    function(button){
 
       button.addEventListener(
         "click",
-        () => {
+        function(){
 
           const page =
             button.dataset.adminPage;
@@ -2828,13 +2914,19 @@ document
             );
 
 
-          document
-            .getElementById(
+          const section =
+            document.getElementById(
               "admin-" + page
-            )
-            .classList.add(
+            );
+
+
+          if(section){
+
+            section.classList.add(
               "active"
             );
+
+          }
 
 
           const label =
@@ -2842,9 +2934,8 @@ document
               .querySelector(
                 "strong"
               )
-              ?.textContent
-              ||
-              "Administración";
+              ?.textContent ||
+            "Administración";
 
 
           document
@@ -2861,9 +2952,9 @@ document
   );
 
 
-/* =====================================================
-   CERRAR ADMIN
-===================================================== */
+/* =========================================================
+   LOGOUT ADMIN
+========================================================= */
 
 document
   .getElementById(
@@ -2871,9 +2962,11 @@ document
   )
   .addEventListener(
     "click",
-    async () => {
+    async function(){
 
-      await db.auth.signOut();
+      await db
+        .auth
+        .signOut();
 
 
       document
@@ -2888,9 +2981,9 @@ document
   );
 
 
-/* =====================================================
+/* =========================================================
    BOTONES PÚBLICOS
-===================================================== */
+========================================================= */
 
 document
   .getElementById(
@@ -2898,7 +2991,7 @@ document
   )
   .addEventListener(
     "click",
-    () => {
+    function(){
 
       alert(
         "Próximo paso: registro de vendedores."
@@ -2914,7 +3007,7 @@ document
   )
   .addEventListener(
     "click",
-    () => {
+    function(){
 
       alert(
         "Próximo paso: acceso de compradores."
