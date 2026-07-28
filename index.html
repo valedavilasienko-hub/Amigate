@@ -9,9 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link
-href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap"
-rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -24,22 +22,13 @@ rel="stylesheet">
   --orange:#EB6841;
   --orange-dark:#D65330;
   --orange-soft:#F4C0AE;
-  --orange-hover:#F08B65;
-
   --cream:#FFF8F2;
   --cream2:#FFF2E9;
-
   --dark:#211D1B;
   --gray:#706762;
-  --light-gray:#A49A95;
-
-  --white:#fff;
   --border:#EEDFD7;
-
   --green:#2D8A62;
   --red:#B64839;
-
-  --sidebar:#211D1B;
 }
 
 *{
@@ -61,15 +50,15 @@ body{
 
 button,
 input,
-textarea,
-select{
+select,
+textarea{
   font:inherit;
 }
 
 button{
   cursor:pointer;
-  -webkit-tap-highlight-color:transparent;
   touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
 }
 
 .hidden{
@@ -78,58 +67,10 @@ button{
 
 .section-label{
   color:var(--orange);
-  text-transform:uppercase;
   font-size:11px;
   font-weight:800;
   letter-spacing:.13em;
-}
-
-.primary{
-  border:none;
-  background:var(--orange);
-  color:white;
-}
-
-.soft{
-  border:1px solid var(--border);
-  background:white;
-  color:var(--dark);
-}
-
-/* =========================================================
-HOME
-========================================================= */
-
-.home-screen{
-  min-height:100vh;
-  display:grid;
-  grid-template-columns:44% 56%;
-
-  background:
-    radial-gradient(
-      circle at 79% 47%,
-      rgba(235,104,65,.10),
-      transparent 32%
-    ),
-    var(--cream);
-}
-
-.hero-left{
-  min-height:100vh;
-  padding:40px 3vw 40px 5vw;
-
-  display:flex;
-  flex-direction:column;
-
-  position:relative;
-  z-index:10;
-}
-
-.top-row{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:20px;
+  text-transform:uppercase;
 }
 
 .logo{
@@ -137,6 +78,42 @@ HOME
   font-size:36px;
   font-weight:800;
   letter-spacing:-2px;
+}
+
+/* =========================================================
+HOME
+========================================================= */
+
+.home{
+  min-height:100vh;
+  display:grid;
+  grid-template-columns:44% 56%;
+
+  background:
+    radial-gradient(
+      circle at 80% 45%,
+      rgba(235,104,65,.10),
+      transparent 32%
+    ),
+    var(--cream);
+}
+
+.hero{
+  min-height:100vh;
+  padding:40px 3vw 40px 5vw;
+
+  display:flex;
+  flex-direction:column;
+
+  position:relative;
+  z-index:5;
+}
+
+.hero-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
 }
 
 .session-chip{
@@ -149,7 +126,7 @@ HOME
   border:1px solid rgba(235,104,65,.18);
   border-radius:100px;
 
-  background:rgba(255,255,255,.7);
+  background:rgba(255,255,255,.72);
 
   color:var(--gray);
   font-size:11px;
@@ -199,68 +176,67 @@ h1 span{
   color:var(--orange);
 }
 
-.accent-line{
+.hero-line{
   width:70px;
   height:4px;
+
   margin:27px 0 23px;
 
   border-radius:100px;
+
   background:var(--orange);
 }
 
-.hero-description{
+.hero-text{
   max-width:600px;
+
   color:var(--gray);
+
   font-size:17px;
   line-height:1.6;
 }
 
-.hero-actions{
+.hero-buttons{
   margin-top:31px;
 
   display:flex;
   gap:12px;
 }
 
-.btn{
+.hero-button{
   min-height:56px;
   padding:0 23px;
 
   border-radius:15px;
-  border:none;
 
   font-weight:800;
-
-  transition:.2s;
 }
 
-.btn-primary{
-  color:white;
+.hero-button.primary{
+  border:none;
   background:var(--orange);
-  box-shadow:0 14px 32px rgba(235,104,65,.19);
+  color:white;
+
+  box-shadow:0 14px 32px rgba(235,104,65,.18);
 }
 
-.btn-primary:hover{
-  background:var(--orange-dark);
-  transform:translateY(-2px);
-}
-
-.btn-secondary{
+.hero-button.secondary{
   border:1px solid rgba(235,104,65,.22);
-  background:rgba(255,255,255,.65);
+  background:rgba(255,255,255,.67);
+  color:var(--dark);
 }
 
 /* =========================================================
 MAPA
 ========================================================= */
 
-.map-side{
+.map-area{
   min-height:100vh;
   position:relative;
   overflow:hidden;
 }
 
-.map-title{
+.map-heading{
   position:absolute;
   top:36px;
   left:30px;
@@ -270,29 +246,23 @@ MAPA
   pointer-events:none;
 }
 
-.map-title span{
+.map-heading span{
   display:block;
 
   color:var(--orange);
 
   font-size:11px;
   font-weight:800;
-  text-transform:uppercase;
   letter-spacing:.13em;
+  text-transform:uppercase;
 }
 
-.map-title strong{
+.map-heading strong{
   display:block;
   margin-top:4px;
 
   font-family:"Playfair Display",serif;
   font-size:25px;
-}
-
-.chart-holder{
-  min-height:100vh;
-  width:100%;
-  position:relative;
 }
 
 #chartdiv{
@@ -302,6 +272,7 @@ MAPA
 
 .province-card{
   position:absolute;
+
   right:3vw;
   bottom:4vh;
 
@@ -314,15 +285,14 @@ MAPA
   pointer-events:none;
   transform:translateY(15px);
 
-  background:rgba(255,255,255,.95);
-  backdrop-filter:blur(14px);
-
   border:1px solid rgba(235,104,65,.1);
   border-radius:19px;
 
-  box-shadow:0 20px 50px rgba(60,30,15,.1);
+  background:rgba(255,255,255,.95);
 
-  transition:.22s;
+  box-shadow:0 20px 50px rgba(60,30,15,.10);
+
+  transition:.2s;
 }
 
 .province-card.visible{
@@ -351,7 +321,7 @@ MAPA
 }
 
 .province-card p{
-  margin-top:7px;
+  margin-top:6px;
 
   color:var(--gray);
 
@@ -361,6 +331,7 @@ MAPA
 
 .province-card button{
   width:100%;
+
   margin-top:13px;
   padding:13px;
 
@@ -376,25 +347,25 @@ MAPA
 .clear-province{
   margin-top:10px;
 
-  text-align:center;
-
   color:var(--gray);
 
+  text-align:center;
   font-size:11px;
 
   cursor:pointer;
 }
 
 /* =========================================================
-CATEGORÍAS HOME
+EXPLORAR
 ========================================================= */
 
-.explore-section{
+.explore{
   padding:105px 6% 115px;
-  background:white;
 
   position:relative;
-  z-index:50;
+  z-index:100;
+
+  background:white;
 }
 
 .section-heading{
@@ -406,10 +377,9 @@ CATEGORÍAS HOME
   margin-top:10px;
 
   font-family:"Playfair Display",serif;
-
   font-size:clamp(42px,5vw,70px);
-  letter-spacing:-.045em;
   line-height:1;
+  letter-spacing:-.045em;
 }
 
 .section-heading p{
@@ -431,18 +401,16 @@ CATEGORÍAS HOME
   display:flex;
   flex-direction:column;
 
+  position:relative;
+  z-index:101;
+
   border:1px solid var(--border);
   border-radius:23px;
 
   background:var(--cream);
 
   cursor:pointer;
-
-  position:relative;
-  z-index:2;
-
   user-select:none;
-  -webkit-user-select:none;
   touch-action:manipulation;
 
   transition:.2s;
@@ -464,7 +432,7 @@ CATEGORÍAS HOME
 
   background:var(--cream2);
 
-  font-size:23px;
+  font-size:24px;
 
   pointer-events:none;
 }
@@ -477,9 +445,12 @@ CATEGORÍAS HOME
 
 .category p{
   margin-top:5px;
+
   color:var(--gray);
+
   font-size:13px;
   line-height:1.4;
+
   pointer-events:none;
 }
 
@@ -487,22 +458,24 @@ CATEGORÍAS HOME
 MARKETPLACE
 ========================================================= */
 
-.marketplace-view{
+.marketplace{
   display:none;
+
   min-height:100vh;
+
   background:#FBF8F6;
 }
 
-.marketplace-view.visible{
+.marketplace.visible{
   display:block;
 }
 
-.marketplace-header{
+.market-header{
   min-height:76px;
 
   position:sticky;
   top:0;
-  z-index:400;
+  z-index:500;
 
   padding:0 5%;
 
@@ -512,13 +485,14 @@ MARKETPLACE
   gap:20px;
 
   background:rgba(255,255,255,.96);
-  backdrop-filter:blur(17px);
+  backdrop-filter:blur(16px);
 
-  border-bottom:1px solid #EEE6E2;
+  border-bottom:1px solid #EEE5E0;
 }
 
-.marketplace-brand{
+.market-logo{
   color:var(--orange);
+
   font-size:27px;
   font-weight:800;
   letter-spacing:-1.5px;
@@ -530,21 +504,9 @@ MARKETPLACE
   gap:9px;
 }
 
-.province-pill{
+.province-pill,
+.account-small{
   padding:9px 13px;
-
-  border:1px solid var(--border);
-  border-radius:100px;
-
-  background:var(--cream);
-
-  font-size:11px;
-  font-weight:800;
-}
-
-.header-account{
-  min-height:38px;
-  padding:0 14px;
 
   border:1px solid var(--border);
   border-radius:100px;
@@ -555,8 +517,13 @@ MARKETPLACE
   font-weight:800;
 }
 
+.province-pill{
+  background:var(--cream);
+}
+
 .market-content{
   width:min(1220px,90%);
+
   margin:auto;
 
   padding:50px 0 100px;
@@ -569,6 +536,7 @@ MARKETPLACE
   gap:7px;
 
   color:var(--gray);
+
   font-size:11px;
 }
 
@@ -579,7 +547,7 @@ MARKETPLACE
 }
 
 .market-hero{
-  margin-top:24px;
+  margin-top:25px;
 
   display:flex;
   align-items:flex-end;
@@ -593,12 +561,13 @@ MARKETPLACE
 
   font-family:"Playfair Display",serif;
   font-size:clamp(44px,5vw,70px);
-  line-height:.97;
+  line-height:.98;
 }
 
 .market-hero p{
-  margin-top:14px;
   max-width:680px;
+
+  margin-top:14px;
 
   color:var(--gray);
 
@@ -610,26 +579,25 @@ MARKETPLACE
   min-height:43px;
   padding:0 16px;
 
-  flex:none;
-
   border:1px solid var(--border);
   border-radius:12px;
 
   background:white;
 
-  font-weight:700;
+  font-weight:800;
 }
 
-.market-loader{
+.loader-box{
   display:none;
 
   padding:45px;
 
-  text-align:center;
   color:var(--gray);
+
+  text-align:center;
 }
 
-.market-loader.visible{
+.loader-box.visible{
   display:block;
 }
 
@@ -643,30 +611,26 @@ MARKETPLACE
   border-top-color:var(--orange);
   border-radius:50%;
 
-  animation:spin .75s linear infinite;
+  animation:spin .7s linear infinite;
 }
 
 @keyframes spin{
-  to{ transform:rotate(360deg); }
+  to{transform:rotate(360deg);}
 }
 
-/* =========================================================
-SUBCATEGORÍAS
-========================================================= */
-
-.subcategories-section{
+.subcategories{
   margin-top:45px;
 }
 
-.subcategories-heading{
+.subcategories-top{
   margin-bottom:18px;
 
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:space-between;
 }
 
-.subcategories-heading h3{
+.subcategories-top h3{
   font-family:"Playfair Display",serif;
   font-size:30px;
 }
@@ -682,7 +646,7 @@ SUBCATEGORÍAS
   gap:12px;
 }
 
-.subcategory-card{
+.subcategory{
   min-height:140px;
   padding:19px;
 
@@ -697,31 +661,33 @@ SUBCATEGORÍAS
   cursor:pointer;
   touch-action:manipulation;
 
-  user-select:none;
-  -webkit-user-select:none;
-
   transition:.2s;
 }
 
-.subcategory-card:hover{
-  border-color:rgba(235,104,65,.45);
+.subcategory:hover{
   transform:translateY(-3px);
+  border-color:rgba(235,104,65,.45);
 }
 
-.subcategory-card small{
+.subcategory small{
   color:var(--orange);
+
   font-size:9px;
   font-weight:800;
   text-transform:uppercase;
-}
 
-.subcategory-card strong{
-  margin-top:auto;
-  font-size:17px;
   pointer-events:none;
 }
 
-.subcategory-arrow{
+.subcategory strong{
+  margin-top:auto;
+
+  font-size:17px;
+
+  pointer-events:none;
+}
+
+.subcategory div{
   margin-top:7px;
 
   color:var(--gray);
@@ -731,70 +697,22 @@ SUBCATEGORÍAS
   pointer-events:none;
 }
 
-/* =========================================================
-TIPOS + RESULTADOS
-========================================================= */
-
-.types-section{
+.results{
   display:none;
-  margin-top:35px;
-}
 
-.types-section.visible{
-  display:block;
-}
-
-.types-section h3{
-  font-family:"Playfair Display",serif;
-  font-size:29px;
-}
-
-.types-grid{
-  margin-top:16px;
-
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-}
-
-.type-button,
-.filter-chip{
-  min-height:38px;
-  padding:0 13px;
-
-  border:1px solid var(--border);
-  border-radius:100px;
-
-  background:white;
-
-  color:var(--gray);
-
-  font-size:11px;
-  font-weight:800;
-}
-
-.type-button.active,
-.filter-chip.active{
-  border-color:var(--orange);
-  background:var(--orange);
-  color:white;
-}
-
-.results-section{
-  display:none;
   margin-top:45px;
 }
 
-.results-section.visible{
+.results.visible{
   display:block;
 }
 
-.results-heading h3{
+.results h3{
   font-family:"Playfair Display",serif;
   font-size:31px;
 }
 
-.results-heading p{
+.results p{
   margin-top:5px;
 
   color:var(--gray);
@@ -802,104 +720,7 @@ TIPOS + RESULTADOS
   font-size:12px;
 }
 
-.filter-bar{
-  margin:20px 0;
-
-  display:flex;
-  flex-wrap:wrap;
-  gap:7px;
-}
-
-.brands-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:15px;
-}
-
-.brand-card{
-  overflow:hidden;
-
-  border:1px solid var(--border);
-  border-radius:20px;
-
-  background:white;
-}
-
-.brand-cover{
-  height:120px;
-
-  display:grid;
-  place-items:center;
-
-  background:
-    linear-gradient(
-      135deg,
-      #FFF1EA,
-      #F8D4C5
-    );
-
-  color:var(--orange);
-
-  font-family:"Playfair Display",serif;
-  font-size:42px;
-}
-
-.brand-body{
-  padding:17px;
-}
-
-.brand-name{
-  font-size:18px;
-  font-weight:800;
-}
-
-.brand-meta{
-  margin-top:3px;
-
-  color:var(--gray);
-
-  font-size:10px;
-}
-
-.mini-products{
-  margin-top:14px;
-
-  display:grid;
-  gap:6px;
-}
-
-.mini-product{
-  padding:9px;
-
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-
-  border-radius:10px;
-
-  background:#FBF8F6;
-
-  font-size:10px;
-}
-
-.brand-open{
-  width:100%;
-  min-height:40px;
-
-  margin-top:13px;
-
-  border:none;
-  border-radius:10px;
-
-  background:var(--dark);
-
-  color:white;
-
-  font-weight:800;
-  font-size:11px;
-}
-
-.empty-market{
+.empty-box{
   display:none;
 
   margin-top:35px;
@@ -913,31 +734,33 @@ TIPOS + RESULTADOS
   text-align:center;
 }
 
-.empty-market.visible{
+.empty-box.visible{
   display:block;
 }
 
-.empty-market strong{
+.empty-box strong{
   display:block;
 
   font-family:"Playfair Display",serif;
-  font-size:25px;
+  font-size:24px;
 }
 
-.empty-market p{
-  margin:9px auto 0;
+.empty-box p{
   max-width:520px;
+
+  margin:8px auto 0;
 
   color:var(--gray);
 
   font-size:12px;
-  line-height:1.55;
+  line-height:1.5;
 }
 
-.retry{
-  margin-top:17px;
-  min-height:42px;
-  padding:0 16px;
+.retry-button{
+  min-height:41px;
+
+  margin-top:16px;
+  padding:0 15px;
 
   border:none;
   border-radius:11px;
@@ -949,15 +772,16 @@ TIPOS + RESULTADOS
 }
 
 /* =========================================================
-ABOUT / FOOTER
+ABOUT
 ========================================================= */
 
 .about{
   padding:100px 6%;
 }
 
-.about-layout{
+.about-inner{
   max-width:1250px;
+
   margin:auto;
 
   display:grid;
@@ -967,7 +791,7 @@ ABOUT / FOOTER
   align-items:center;
 }
 
-.about-number{
+.about-ar{
   color:rgba(235,104,65,.12);
 
   font-family:"Playfair Display",serif;
@@ -991,6 +815,10 @@ ABOUT / FOOTER
   font-size:16px;
   line-height:1.65;
 }
+
+/* =========================================================
+FOOTER
+========================================================= */
 
 footer{
   padding:55px 6% 32px;
@@ -1019,6 +847,7 @@ footer{
 
   display:flex;
   justify-content:space-between;
+  gap:20px;
 
   border-top:1px solid rgba(255,255,255,.08);
 
@@ -1032,8 +861,7 @@ footer{
   gap:18px;
 }
 
-.admin-access{
-  color:#6D6561;
+.admin-link{
   cursor:pointer;
 }
 
@@ -1041,15 +869,15 @@ footer{
 MODALES
 ========================================================= */
 
-.modal-overlay{
+.modal{
   position:fixed;
   inset:0;
 
   z-index:5000;
 
   display:flex;
-  justify-content:center;
   align-items:center;
+  justify-content:center;
 
   padding:20px;
 
@@ -1062,12 +890,12 @@ MODALES
   transition:.2s;
 }
 
-.modal-overlay.open{
+.modal.open{
   opacity:1;
   pointer-events:auto;
 }
 
-.modal-box{
+.modal-card{
   width:min(470px,100%);
   max-height:calc(100vh - 40px);
 
@@ -1078,6 +906,8 @@ MODALES
   border-radius:24px;
 
   background:white;
+
+  box-shadow:0 30px 100px rgba(0,0,0,.22);
 }
 
 .modal-top{
@@ -1086,9 +916,8 @@ MODALES
   align-items:center;
 }
 
-.modal-logo{
+.modal-brand{
   color:var(--orange);
-
   font-size:25px;
   font-weight:800;
 }
@@ -1108,7 +937,7 @@ MODALES
   font-size:22px;
 }
 
-.modal-title{
+.modal-card h2{
   margin-top:23px;
 
   font-family:"Playfair Display",serif;
@@ -1125,16 +954,16 @@ MODALES
 }
 
 .auth-tabs{
-  margin-top:21px;
+  margin-top:20px;
   padding:4px;
 
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:4px;
 
-  background:#F7F3F1;
-
   border-radius:13px;
+
+  background:#F7F3F1;
 }
 
 .auth-tab{
@@ -1164,10 +993,10 @@ MODALES
   display:block;
 }
 
-.auth-intent{
+.seller-intent{
   display:none;
 
-  margin-top:15px;
+  margin-top:14px;
   padding:12px;
 
   border-radius:12px;
@@ -1177,9 +1006,10 @@ MODALES
   color:var(--gray);
 
   font-size:11px;
+  line-height:1.5;
 }
 
-.auth-intent.visible{
+.seller-intent.visible{
   display:block;
 }
 
@@ -1204,14 +1034,15 @@ MODALES
 
 .form-control{
   width:100%;
+
   padding:13px;
 
   border:1px solid var(--border);
   border-radius:11px;
 
-  background:white;
-
   outline:none;
+
+  background:white;
 }
 
 .form-control:focus{
@@ -1219,8 +1050,8 @@ MODALES
 }
 
 textarea.form-control{
+  min-height:100px;
   resize:vertical;
-  min-height:95px;
 }
 
 .password-wrap{
@@ -1231,9 +1062,10 @@ textarea.form-control{
   padding-right:65px;
 }
 
-.show-password{
+.password-toggle{
   position:absolute;
-  right:9px;
+
+  right:10px;
   top:50%;
 
   transform:translateY(-50%);
@@ -1247,7 +1079,7 @@ textarea.form-control{
   font-weight:800;
 }
 
-.submit-btn{
+.submit-button{
   width:100%;
   min-height:48px;
 
@@ -1257,17 +1089,16 @@ textarea.form-control{
   border-radius:12px;
 
   background:var(--orange);
-
   color:white;
 
   font-weight:800;
 }
 
-.submit-btn:disabled{
+.submit-button:disabled{
   opacity:.55;
 }
 
-.auth-message{
+.message{
   display:none;
 
   margin-top:12px;
@@ -1276,24 +1107,25 @@ textarea.form-control{
   border-radius:10px;
 
   font-size:11px;
+  line-height:1.45;
 }
 
-.auth-message.visible{
+.message.visible{
   display:block;
 }
 
-.auth-message.error{
+.message.error{
   background:#FFF0ED;
   color:#963B2F;
 }
 
-.auth-message.success{
+.message.success{
   background:#ECF8F2;
   color:#276A4E;
 }
 
 /* =========================================================
-CUENTA
+ACCOUNT
 ========================================================= */
 
 .account-card{
@@ -1306,7 +1138,7 @@ CUENTA
   background:var(--cream);
 }
 
-.account-avatar{
+.avatar{
   width:54px;
   height:54px;
 
@@ -1324,17 +1156,20 @@ CUENTA
 
 .account-name{
   margin-top:12px;
+
   font-size:19px;
   font-weight:800;
 }
 
 .account-email{
   margin-top:3px;
+
   color:var(--gray);
+
   font-size:11px;
 }
 
-.account-type{
+.account-role{
   display:inline-flex;
 
   margin-top:10px;
@@ -1353,6 +1188,7 @@ CUENTA
 
 .account-actions{
   margin-top:16px;
+
   display:grid;
   gap:8px;
 }
@@ -1406,8 +1242,6 @@ PORTALES
   flex-direction:column;
 
   background:var(--dark);
-
-  color:white;
 }
 
 .portal-logo{
@@ -1443,8 +1277,8 @@ PORTALES
 }
 
 .portal-nav.active{
-  color:white;
   background:rgba(235,104,65,.15);
+  color:white;
 }
 
 .portal-exit{
@@ -1470,8 +1304,8 @@ PORTALES
   padding:0 30px;
 
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:space-between;
 
   background:white;
 
@@ -1515,16 +1349,15 @@ PORTALES
 
   font-size:9px;
   font-weight:800;
-
   text-transform:uppercase;
 }
 
 .portal-stat strong{
   display:block;
+
   margin-top:12px;
 
   font-family:"Playfair Display",serif;
-
   font-size:33px;
 }
 
@@ -1538,18 +1371,14 @@ PORTALES
   background:white;
 }
 
-.panel-heading{
+.panel-top{
   display:flex;
   justify-content:space-between;
   align-items:center;
   gap:15px;
 }
 
-.panel-heading h3{
-  font-size:18px;
-}
-
-.panel-heading button{
+.panel-top button{
   min-height:40px;
   padding:0 14px;
 
@@ -1563,21 +1392,9 @@ PORTALES
   font-weight:800;
 }
 
-.empty-panel{
-  margin-top:16px;
-  padding:24px;
-
-  border:1px dashed #DED2CC;
-  border-radius:13px;
-
-  color:var(--gray);
-
-  font-size:12px;
-  text-align:center;
-}
-
 .list{
   margin-top:15px;
+
   display:grid;
   gap:9px;
 }
@@ -1591,6 +1408,7 @@ PORTALES
   background:#FCFAF9;
 
   display:flex;
+  align-items:center;
   justify-content:space-between;
   gap:15px;
 }
@@ -1607,146 +1425,53 @@ PORTALES
   font-size:10px;
 }
 
-.tag{
-  display:inline-flex;
-  padding:5px 8px;
+.empty-panel{
+  margin-top:15px;
+  padding:24px;
 
-  border-radius:100px;
+  border:1px dashed #DED2CC;
+  border-radius:13px;
 
-  background:var(--cream2);
+  color:var(--gray);
 
-  color:var(--orange-dark);
-
-  font-size:9px;
-  font-weight:800;
+  text-align:center;
+  font-size:12px;
 }
 
 /* =========================================================
-ALTA MARCA
+BRAND ONBOARDING
 ========================================================= */
 
-.onboarding-steps{
-  margin-top:20px;
+.brand-summary{
+  margin-top:18px;
+  padding:14px;
 
-  display:flex;
-  gap:6px;
-}
+  border-radius:13px;
 
-.onboarding-step{
-  flex:1;
-  height:5px;
+  background:var(--cream);
 
-  border-radius:100px;
-
-  background:#EEE4DF;
-}
-
-.onboarding-step.active{
-  background:var(--orange);
-}
-
-.onboarding-page{
-  display:none;
-}
-
-.onboarding-page.active{
-  display:block;
-}
-
-.onboarding-actions{
-  margin-top:22px;
-
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-}
-
-.onboarding-actions button{
-  min-height:44px;
-  padding:0 17px;
-
-  border-radius:11px;
-
-  font-weight:800;
-}
-
-.onboarding-back{
-  border:1px solid var(--border);
-  background:white;
-}
-
-.onboarding-next{
-  border:none;
-  background:var(--orange);
-  color:white;
-}
-
-/* =========================================================
-PRODUCT EDITOR
-========================================================= */
-
-.product-form{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:0 13px;
-}
-
-.product-form .wide{
-  grid-column:1/-1;
-}
-
-.product-actions{
-  margin-top:20px;
-
-  display:flex;
-  justify-content:flex-end;
-  gap:8px;
-}
-
-.product-actions button{
-  min-height:43px;
-  padding:0 16px;
-
-  border-radius:11px;
-
-  font-weight:800;
-}
-
-/* =========================================================
-ADMIN
-========================================================= */
-
-.admin-app{
-  position:fixed;
-  inset:0;
-
-  z-index:6000;
-
-  display:none;
-
-  background:#F5F2F0;
-}
-
-.admin-app.visible{
-  display:flex;
-}
-
-.admin-error{
-  display:none;
-
-  margin-top:12px;
-  padding:11px;
-
-  border-radius:10px;
-
-  background:#FFF0ED;
-  color:#963B2F;
+  color:var(--gray);
 
   font-size:11px;
+  line-height:1.55;
 }
 
-.admin-error.visible{
-  display:block;
+.brand-summary strong{
+  color:var(--dark);
+}
+
+/* =========================================================
+PRODUCT
+========================================================= */
+
+.product-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0 12px;
+}
+
+.product-grid .wide{
+  grid-column:1/-1;
 }
 
 /* =========================================================
@@ -1763,10 +1488,6 @@ MOBILE
     grid-template-columns:repeat(3,1fr);
   }
 
-  .brands-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-
   .portal-grid{
     grid-template-columns:repeat(2,1fr);
   }
@@ -1775,11 +1496,11 @@ MOBILE
 
 @media(max-width:850px){
 
-  .home-screen{
+  .home{
     display:block;
   }
 
-  .hero-left{
+  .hero{
     min-height:auto;
     padding:28px 22px 52px;
   }
@@ -1792,40 +1513,29 @@ MOBILE
     font-size:clamp(49px,13vw,73px);
   }
 
-  .hero-actions{
+  .hero-buttons{
     flex-direction:column;
   }
 
-  .map-side{
+  .map-area{
     min-height:auto;
+
     padding-top:25px;
 
     overflow:visible;
-
-    position:relative;
-    z-index:1;
   }
 
-  .map-title{
+  .map-heading{
     position:relative;
 
     top:auto;
     left:auto;
 
     padding:0 22px 8px;
-
-    pointer-events:none;
-  }
-
-  .chart-holder{
-    min-height:650px;
   }
 
   #chartdiv{
     height:650px;
-
-    position:relative;
-    z-index:1;
   }
 
   .province-card{
@@ -1836,13 +1546,7 @@ MOBILE
     width:calc(100% - 34px);
   }
 
-  /*
-    IMPORTANTE:
-    las categorías quedan físicamente
-    por encima de cualquier capa del mapa.
-  */
-
-  .explore-section{
+  .explore{
     position:relative;
     z-index:1000;
     isolation:isolate;
@@ -1857,7 +1561,6 @@ MOBILE
     min-height:145px;
     padding:16px;
 
-    position:relative;
     z-index:1001;
 
     pointer-events:auto !important;
@@ -1866,11 +1569,6 @@ MOBILE
   .category:last-child:nth-child(odd){
     grid-column:1/-1;
     min-height:105px;
-  }
-
-  .category-icon{
-    width:42px;
-    height:42px;
   }
 
   .category strong{
@@ -1883,7 +1581,7 @@ MOBILE
 
   .market-content{
     width:calc(100% - 34px);
-    padding-top:33px;
+    padding-top:34px;
   }
 
   .market-hero{
@@ -1895,13 +1593,7 @@ MOBILE
     display:block;
   }
 
-  /*
-    En móvil dejamos de usar
-    tarjetas grandes para subcategorías.
-  */
-
-  .subcategory-card{
-    width:100%;
+  .subcategory{
     min-height:0;
 
     margin-bottom:8px;
@@ -1912,30 +1604,22 @@ MOBILE
     align-items:center;
 
     border-radius:13px;
-
-    position:relative;
-    z-index:20;
   }
 
-  .subcategory-card small{
+  .subcategory small{
     display:none;
   }
 
-  .subcategory-card strong{
+  .subcategory strong{
     margin:0;
     font-size:14px;
   }
 
-  .subcategory-arrow{
+  .subcategory div{
     margin:0;
-    padding-left:12px;
   }
 
-  .brands-grid{
-    grid-template-columns:1fr;
-  }
-
-  .about-layout{
+  .about-inner{
     grid-template-columns:1fr;
     gap:25px;
   }
@@ -1961,7 +1645,7 @@ MOBILE
   }
 
   .portal-nav{
-    padding:12px 5px;
+    padding:11px 4px;
 
     overflow:hidden;
 
@@ -1972,7 +1656,7 @@ MOBILE
   }
 
   .portal-exit{
-    padding:10px 4px;
+    padding:10px 3px;
     font-size:9px;
   }
 
@@ -1992,86 +1676,74 @@ MOBILE
     font-size:29px;
   }
 
-  .explore-section,
+  .explore,
   .about{
     padding:68px 17px;
-  }
-
-  .chart-holder{
-    min-height:610px;
   }
 
   #chartdiv{
     height:610px;
   }
 
-  .marketplace-header{
+  .market-header{
     padding:0 14px;
   }
 
-  .marketplace-brand{
+  .market-logo{
     font-size:22px;
   }
 
   .province-pill{
     max-width:110px;
 
-    white-space:nowrap;
     overflow:hidden;
+    white-space:nowrap;
     text-overflow:ellipsis;
+  }
+
+  .form-row,
+  .product-grid,
+  .portal-grid{
+    grid-template-columns:1fr;
+  }
+
+  .product-grid .wide{
+    grid-column:auto;
+  }
+
+  .modal-card{
+    padding:21px 18px;
   }
 
   .footer-bottom{
     flex-direction:column;
-    gap:18px;
-  }
-
-  .form-row,
-  .product-form{
-    grid-template-columns:1fr;
-  }
-
-  .product-form .wide{
-    grid-column:auto;
-  }
-
-  .modal-box{
-    padding:21px 18px;
-  }
-
-  .portal-grid{
-    grid-template-columns:1fr;
   }
 
 }
 </style>
 </head>
 
-
 <body>
 
 <!-- =========================================================
-PUBLIC
+HOME
 ========================================================= -->
 
 <div id="publicSite">
 
-<section class="home-screen">
+<section class="home">
 
-<div class="hero-left">
+<div class="hero">
 
-<div class="top-row">
+<div class="hero-top">
 
 <div class="logo">
 Amigate
 </div>
 
-<div
-class="session-chip"
-id="sessionChip"
->
+<div class="session-chip" id="sessionChip">
 <span class="session-dot"></span>
-<span id="sessionChipText"></span>
+<span id="sessionName"></span>
 </div>
 
 </div>
@@ -2089,28 +1761,28 @@ más cerca
 <span>de lo que pensás.</span>
 </h1>
 
-<div class="accent-line"></div>
+<div class="hero-line"></div>
 
-<p class="hero-description">
+<p class="hero-text">
 Amigate conecta personas con marcas,
 emprendimientos, profesionales, oficios
 y oportunidades de toda Argentina.
-Elegí tu provincia y descubrí todo lo
-que tiene para ofrecer.
+Elegí tu provincia y descubrí todo lo que
+tiene para ofrecer.
 </p>
 
-<div class="hero-actions">
+<div class="hero-buttons">
 
 <button
-class="btn btn-primary"
-id="sellerButton"
+class="hero-button primary"
+id="publishBrandButton"
 >
 Publicar mi marca
 </button>
 
 <button
-class="btn btn-secondary"
-id="userLoginButton"
+class="hero-button secondary"
+id="loginButton"
 >
 Iniciar sesión
 </button>
@@ -2122,9 +1794,9 @@ Iniciar sesión
 </div>
 
 
-<div class="map-side">
+<div class="map-area">
 
-<div class="map-title">
+<div class="map-heading">
 
 <span>
 Explorá Argentina
@@ -2136,8 +1808,6 @@ Elegí tu provincia
 
 </div>
 
-
-<div class="chart-holder">
 
 <div id="chartdiv"></div>
 
@@ -2154,21 +1824,18 @@ Provincia seleccionada
 <strong id="provinceName"></strong>
 
 <p>
-Descubrí marcas y oportunidades
-disponibles para vos.
+Descubrí todo lo disponible para vos.
 </p>
 
-<button id="exploreButton">
+<button id="exploreProvinceButton">
 Explorar
 </button>
 
 <div
 class="clear-province"
-id="clearProvince"
+id="clearProvinceButton"
 >
 Quitar selección
-</div>
-
 </div>
 
 </div>
@@ -2178,9 +1845,8 @@ Quitar selección
 </section>
 
 
-
 <section
-class="explore-section"
+class="explore"
 id="exploreSection"
 >
 
@@ -2194,7 +1860,7 @@ Explorá Amigate
 ¿Qué estás buscando?
 </h2>
 
-<p id="exploreSubtitle">
+<p id="exploreText">
 Elegí una provincia para personalizar los resultados.
 </p>
 
@@ -2205,7 +1871,7 @@ Elegí una provincia para personalizar los resultados.
 
 <article
 class="category"
-data-market-category="Productos"
+data-category="Productos"
 role="button"
 tabindex="0"
 >
@@ -2214,34 +1880,31 @@ tabindex="0"
 <p>Descubrí marcas y emprendimientos.</p>
 </article>
 
-
 <article
 class="category"
-data-market-category="Servicios"
+data-category="Servicios"
 role="button"
 tabindex="0"
 >
 <div class="category-icon">✨</div>
 <strong>Servicios</strong>
-<p>Profesionales y empresas para lo que necesitás.</p>
+<p>Profesionales y empresas.</p>
 </article>
-
 
 <article
 class="category"
-data-market-category="Oficios"
+data-category="Oficios"
 role="button"
 tabindex="0"
 >
 <div class="category-icon">🛠️</div>
 <strong>Oficios</strong>
-<p>Encontrá especialistas cerca tuyo.</p>
+<p>Especialistas cerca tuyo.</p>
 </article>
-
 
 <article
 class="category"
-data-market-category="Empleos"
+data-category="Empleos"
 role="button"
 tabindex="0"
 >
@@ -2250,16 +1913,15 @@ tabindex="0"
 <p>Encontrá oportunidades laborales.</p>
 </article>
 
-
 <article
 class="category"
-data-market-category="Necesito"
+data-category="Necesito"
 role="button"
 tabindex="0"
 >
 <div class="category-icon">📣</div>
 <strong>Necesito</strong>
-<p>Publicá exactamente lo que estás buscando.</p>
+<p>Publicá lo que estás buscando.</p>
 </article>
 
 </div>
@@ -2267,12 +1929,11 @@ tabindex="0"
 </section>
 
 
-
 <section class="about">
 
-<div class="about-layout">
+<div class="about-inner">
 
-<div class="about-number">
+<div class="about-ar">
 AR
 </div>
 
@@ -2283,13 +1944,13 @@ Una plataforma, todo el país
 </span>
 
 <h3>
-Lo que existe cerca tuyo
-merece ser más fácil de encontrar.
+Lo que existe cerca tuyo merece ser más fácil de encontrar.
 </h3>
 
 <p>
-Desde una marca que recién empieza hasta un profesional,
-un oficio, una oportunidad laboral o una necesidad concreta.
+Desde una marca que recién empieza hasta
+un profesional, un oficio, una oportunidad laboral
+o una necesidad concreta.
 Amigate conecta todo eso en un mismo lugar.
 </p>
 
@@ -2319,8 +1980,8 @@ Hecho acá. Encontralo en Amigate.
 </div>
 
 <span
-class="admin-access"
-id="adminAccess"
+class="admin-link"
+id="adminLink"
 >
 Administración
 </span>
@@ -2337,15 +1998,15 @@ MARKETPLACE
 ========================================================= -->
 
 <section
-class="marketplace-view"
-id="marketplaceView"
+class="marketplace"
+id="marketplace"
 >
 
-<header class="marketplace-header">
+<header class="market-header">
 
 <div
-class="marketplace-brand"
-id="marketHome"
+class="market-logo"
+id="marketLogo"
 >
 Amigate
 </div>
@@ -2360,7 +2021,7 @@ Argentina
 </div>
 
 <button
-class="header-account"
+class="account-small"
 id="marketAccountButton"
 >
 Iniciar sesión
@@ -2371,34 +2032,34 @@ Iniciar sesión
 </header>
 
 
-<main class="market-content">
+<div class="market-content">
 
 <div class="breadcrumb">
 
-<button id="breadcrumbHome">
+<button id="marketHomeButton">
 Inicio
 </button>
 
 <span>›</span>
 
-<span id="breadcrumbProvince">
+<span id="marketBreadcrumbProvince">
 Argentina
 </span>
 
 <span>›</span>
 
-<span id="breadcrumbCategory"></span>
+<span id="marketBreadcrumbCategory"></span>
 
 <span
-id="breadcrumbSubArrow"
 class="hidden"
+id="subcategorySeparator"
 >
 ›
 </span>
 
 <span
-id="breadcrumbSubcategory"
 class="hidden"
+id="marketBreadcrumbSubcategory"
 ></span>
 
 </div>
@@ -2421,7 +2082,7 @@ id="marketEyebrow"
 
 <button
 class="back-button"
-id="marketBack"
+id="marketBackButton"
 >
 ← Volver
 </button>
@@ -2430,7 +2091,7 @@ id="marketBack"
 
 
 <div
-class="market-loader"
+class="loader-box"
 id="marketLoader"
 >
 
@@ -2442,11 +2103,11 @@ Cargando...
 
 
 <section
-class="subcategories-section"
+class="subcategories"
 id="subcategoriesSection"
 >
 
-<div class="subcategories-heading">
+<div class="subcategories-top">
 
 <h3>
 Categorías
@@ -2468,81 +2129,26 @@ id="subcategoryGrid"
 
 
 <section
-class="types-section"
-id="typesSection"
->
-
-<h3>
-¿Qué tipo buscás?
-</h3>
-
-<div
-class="types-grid"
-id="typesGrid"
-></div>
-
-</section>
-
-
-<section
-class="results-section"
+class="results"
 id="resultsSection"
 >
 
-<div class="results-heading">
-
-<h3 id="resultsTitle">
-Resultados
-</h3>
+<h3 id="resultsTitle"></h3>
 
 <p id="resultsSubtitle"></p>
 
-</div>
-
-
-<div class="filter-bar">
-
-<button class="filter-chip active">
-Relevantes
-</button>
-
-<button class="filter-chip">
-Más vendidos
-</button>
-
-<button class="filter-chip">
-Mejor valorados
-</button>
-
-<button class="filter-chip">
-Más nuevos
-</button>
-
-<button class="filter-chip">
-Promociones
-</button>
-
-</div>
-
-
 <div
-class="brands-grid"
-id="brandsGrid"
-></div>
-
-
-<div
-class="empty-market"
-id="resultsEmpty"
+class="empty-box visible"
+style="display:block;"
 >
 
 <strong>
-Todavía no hay publicaciones
+Estamos preparando esta sección
 </strong>
 
 <p>
-Cuando los vendedores carguen contenido,
-los resultados aparecerán acá automáticamente.
+La navegación y las categorías ya están conectadas.
+Las publicaciones reales irán apareciendo a medida que los vendedores carguen contenido.
 </p>
 
 </div>
@@ -2551,7 +2157,7 @@ los resultados aparecerán acá automáticamente.
 
 
 <div
-class="empty-market"
+class="empty-box"
 id="marketError"
 >
 
@@ -2559,20 +2165,18 @@ id="marketError"
 No pudimos cargar esta sección
 </strong>
 
-<p id="marketErrorText">
-Probá nuevamente.
-</p>
+<p id="marketErrorText"></p>
 
 <button
-class="retry"
-id="marketRetry"
+class="retry-button"
+id="retryMarketButton"
 >
 Reintentar
 </button>
 
 </div>
 
-</main>
+</div>
 
 </section>
 
@@ -2582,29 +2186,28 @@ AUTH
 ========================================================= -->
 
 <div
-class="modal-overlay"
+class="modal"
 id="authModal"
 >
 
-<div class="modal-box">
+<div class="modal-card">
 
 <div class="modal-top">
 
-<span class="modal-logo">
+<div class="modal-brand">
 Amigate
-</span>
+</div>
 
 <button
 class="modal-close"
-id="closeAuth"
-type="button"
+id="closeAuthButton"
 >
 ×
 </button>
 
 </div>
 
-<h2 class="modal-title">
+<h2>
 Bienvenido
 </h2>
 
@@ -2614,13 +2217,13 @@ Iniciá sesión o creá tu cuenta.
 
 
 <div
-class="auth-intent"
+class="seller-intent"
 id="sellerIntent"
 >
 <strong>
-¿Querés publicar tu marca?
-</strong>
-Creá tu cuenta y después continuamos con el alta.
+¿Querés publicar una marca?
+</strong><br>
+Creá tu cuenta y después continuaremos con el alta del vendedor.
 </div>
 
 
@@ -2629,7 +2232,6 @@ Creá tu cuenta y después continuamos con el alta.
 <button
 class="auth-tab active"
 data-auth-tab="login"
-type="button"
 >
 Iniciar sesión
 </button>
@@ -2637,7 +2239,6 @@ Iniciar sesión
 <button
 class="auth-tab"
 data-auth-tab="register"
-type="button"
 >
 Registrarme
 </button>
@@ -2680,9 +2281,9 @@ required
 >
 
 <button
-class="show-password"
+class="password-toggle"
 type="button"
-data-password="loginPassword"
+data-password-target="loginPassword"
 >
 Ver
 </button>
@@ -2693,7 +2294,7 @@ Ver
 
 
 <button
-class="submit-btn"
+class="submit-button"
 id="loginSubmit"
 type="submit"
 >
@@ -2701,7 +2302,7 @@ Iniciar sesión
 </button>
 
 <div
-class="auth-message"
+class="message"
 id="loginMessage"
 ></div>
 
@@ -2720,21 +2321,27 @@ id="auth-register"
 <div class="form-row">
 
 <div class="form-group">
+
 <label>Nombre</label>
+
 <input
 class="form-control"
 id="registerName"
 required
 >
+
 </div>
 
 <div class="form-group">
+
 <label>Apellido</label>
+
 <input
 class="form-control"
 id="registerSurname"
 required
 >
+
 </div>
 
 </div>
@@ -2743,22 +2350,28 @@ required
 <div class="form-row">
 
 <div class="form-group">
+
 <label>DNI</label>
+
 <input
 class="form-control"
 id="registerDni"
 required
 >
+
 </div>
 
 <div class="form-group">
+
 <label>Teléfono</label>
+
 <input
 class="form-control"
 id="registerPhone"
 type="tel"
 required
 >
+
 </div>
 
 </div>
@@ -2793,9 +2406,9 @@ required
 >
 
 <button
-class="show-password"
+class="password-toggle"
 type="button"
-data-password="registerPassword"
+data-password-target="registerPassword"
 >
 Ver
 </button>
@@ -2806,7 +2419,7 @@ Ver
 
 
 <button
-class="submit-btn"
+class="submit-button"
 id="registerSubmit"
 type="submit"
 >
@@ -2814,7 +2427,7 @@ Crear mi cuenta
 </button>
 
 <div
-class="auth-message"
+class="message"
 id="registerMessage"
 ></div>
 
@@ -2828,39 +2441,40 @@ id="registerMessage"
 
 
 <!-- =========================================================
-CUENTA
+ACCOUNT
 ========================================================= -->
 
 <div
-class="modal-overlay"
+class="modal"
 id="accountModal"
 >
 
-<div class="modal-box">
+<div class="modal-card">
 
 <div class="modal-top">
 
-<span class="modal-logo">
+<div class="modal-brand">
 Amigate
-</span>
+</div>
 
 <button
 class="modal-close"
-id="closeAccount"
+id="closeAccountButton"
 >
 ×
 </button>
 
 </div>
 
-<h2 class="modal-title">
+<h2>
 Mi cuenta
 </h2>
+
 
 <div class="account-card">
 
 <div
-class="account-avatar"
+class="avatar"
 id="accountAvatar"
 >
 A
@@ -2876,24 +2490,26 @@ class="account-email"
 id="accountEmail"
 ></div>
 
-<span
-class="account-type"
-id="accountType"
-></span>
+<div
+class="account-role"
+id="accountRole"
+>
+Comprador
+</div>
 
 
 <div class="account-actions">
 
 <button
 class="account-action primary"
-id="portalButton"
+id="openPortalButton"
 >
 Ir a mi portal
 </button>
 
 <button
 class="account-action"
-id="accountSellerButton"
+id="accountPublishBrandButton"
 >
 Publicar mi marca
 </button>
@@ -2915,219 +2531,111 @@ Cerrar sesión
 
 
 <!-- =========================================================
-ALTA MARCA
+ALTA DE MARCA
 ========================================================= -->
 
 <div
-class="modal-overlay"
+class="modal"
 id="brandModal"
 >
 
-<div class="modal-box">
+<div class="modal-card">
 
 <div class="modal-top">
 
-<span class="modal-logo">
+<div class="modal-brand">
 Amigate
-</span>
+</div>
 
 <button
 class="modal-close"
-id="closeBrandModal"
+id="closeBrandButton"
 >
 ×
 </button>
 
 </div>
 
-<h2 class="modal-title">
+<h2>
 Publicar mi marca
 </h2>
 
 <p class="modal-description">
-Vamos a preparar tu espacio en Amigate.
+Primero creamos tu perfil vendedor y después vinculamos tu marca.
 </p>
 
 
-<div class="onboarding-steps">
-
-<span
-class="onboarding-step active"
-data-brand-progress="1"
-></span>
-
-<span
-class="onboarding-step"
-data-brand-progress="2"
-></span>
-
-<span
-class="onboarding-step"
-data-brand-progress="3"
-></span>
-
-</div>
-
-
-<form id="brandOnboardingForm">
-
-<div
-class="onboarding-page active"
-data-brand-step="1"
->
+<form id="brandForm">
 
 <div class="form-group">
-<label>Nombre de la marca</label>
-<input
-class="form-control"
-id="brandName"
-required
->
-</div>
 
-<div class="form-group">
 <label>CUIT</label>
+
 <input
 class="form-control"
 id="brandCuit"
 placeholder="XX-XXXXXXXX-X"
 required
 >
+
 </div>
 
+
 <div class="form-group">
+
+<label>Nombre de la marca</label>
+
+<input
+class="form-control"
+id="brandName"
+required
+>
+
+</div>
+
+
+<div class="form-group">
+
 <label>Descripción</label>
+
 <textarea
 class="form-control"
 id="brandDescription"
-placeholder="Contanos brevemente qué hace tu marca."
+placeholder="¿Qué ofrece tu marca?"
 ></textarea>
-</div>
 
 </div>
 
 
-<div
-class="onboarding-page"
-data-brand-step="2"
->
+<div class="brand-summary">
 
-<div class="form-group">
+<strong>
+En esta etapa guardamos:
+</strong>
 
-<label>Provincia</label>
+<br><br>
 
-<select
-class="form-control"
-id="brandProvince"
->
-<option value="">
-Seleccionar provincia
-</option>
-</select>
+CUIT → <b>seller_profiles</b><br>
+Nombre y descripción → <b>brands</b>
 
+<br><br>
+
+Después agregaremos logo, portada, provincia,
+WhatsApp, Instagram, envíos y personalización del local.
 </div>
 
-<div class="form-group">
-
-<label>Localidad</label>
-
-<input
-class="form-control"
-id="brandLocality"
->
-
-</div>
-
-<div class="form-group">
-
-<label>WhatsApp</label>
-
-<input
-class="form-control"
-id="brandWhatsapp"
-type="tel"
->
-
-</div>
-
-<div class="form-group">
-
-<label>Instagram</label>
-
-<input
-class="form-control"
-id="brandInstagram"
-placeholder="@mimarca"
->
-
-</div>
-
-</div>
-
-
-<div
-class="onboarding-page"
-data-brand-step="3"
->
-
-<div class="form-group">
-
-<label>Categoría principal</label>
-
-<select
-class="form-control"
-id="brandCategory"
->
-<option value="">
-Seleccionar categoría
-</option>
-</select>
-
-</div>
-
-
-<div
-style="
-margin-top:18px;
-padding:15px;
-border-radius:13px;
-background:var(--cream);
-color:var(--gray);
-font-size:11px;
-line-height:1.5;
-"
->
-En esta etapa guardamos la información básica de la marca.
-Logo, portada, métodos de envío, provincias de envío y
-personalización del mini sitio se agregarán desde el Portal Vendedor.
-</div>
-
-</div>
-
-
-<div class="onboarding-actions">
 
 <button
-class="onboarding-back"
-id="brandBack"
-type="button"
+class="submit-button"
+id="createBrandSubmit"
+type="submit"
 >
-Atrás
+Crear mi marca
 </button>
-
-<button
-class="onboarding-next"
-id="brandNext"
-type="button"
->
-Continuar
-</button>
-
-</div>
 
 
 <div
-class="auth-message"
+class="message"
 id="brandMessage"
 ></div>
 
@@ -3206,13 +2714,13 @@ Volver
 
 <header class="portal-header">
 
-<h2 id="buyerTitle">
+<h2 id="buyerPortalTitle">
 Mi Amigate
 </h2>
 
 <button
-class="header-account"
-id="buyerAccount"
+class="account-small"
+id="buyerAccountButton"
 >
 Mi cuenta
 </button>
@@ -3241,7 +2749,7 @@ id="buyer-inicio"
 
 <div class="portal-stat">
 <small>Marcas seguidas</small>
-<strong id="buyerFollowedCount">—</strong>
+<strong id="buyerBrandsCount">—</strong>
 </div>
 
 <div class="portal-stat">
@@ -3255,15 +2763,17 @@ id="buyer-inicio"
 <div class="panel">
 
 <h3>
-Hola, <span id="buyerName">Usuario</span>
+Hola, <span id="buyerWelcomeName">Usuario</span>
 </h3>
 
-<p style="
+<p
+style="
 margin-top:8px;
 color:var(--gray);
 font-size:12px;
-">
-Desde acá vas a administrar tu actividad en Amigate.
+"
+>
+Desde acá vas a administrar toda tu actividad en Amigate.
 </p>
 
 </div>
@@ -3276,8 +2786,8 @@ class="portal-section"
 id="buyer-compras"
 >
 <div class="panel">
-<h3>Mis compras</h3>
-<div class="list" id="buyerOrders"></div>
+<h3>Compras</h3>
+<div class="list" id="buyerOrdersList"></div>
 </div>
 </section>
 
@@ -3288,7 +2798,7 @@ id="buyer-favoritos"
 >
 <div class="panel">
 <h3>Favoritos</h3>
-<div class="list" id="buyerFavorites"></div>
+<div class="list" id="buyerFavoritesList"></div>
 </div>
 </section>
 
@@ -3299,7 +2809,7 @@ id="buyer-direcciones"
 >
 <div class="panel">
 <h3>Direcciones</h3>
-<div class="list" id="buyerAddresses"></div>
+<div class="list" id="buyerAddressesList"></div>
 </div>
 </section>
 
@@ -3310,7 +2820,7 @@ id="buyer-reclamos"
 >
 <div class="panel">
 <h3>Reclamos</h3>
-<div class="list" id="buyerClaims"></div>
+<div class="list" id="buyerClaimsList"></div>
 </div>
 </section>
 
@@ -3410,6 +2920,7 @@ Configuración
 
 </div>
 
+
 <button
 class="portal-exit"
 id="sellerExit"
@@ -3424,13 +2935,13 @@ Volver
 
 <header class="portal-header">
 
-<h2 id="sellerTitle">
+<h2 id="sellerPortalTitle">
 Portal Vendedor
 </h2>
 
 <button
-class="header-account"
-id="sellerAccount"
+class="account-small"
+id="sellerAccountButton"
 >
 Mi cuenta
 </button>
@@ -3454,7 +2965,7 @@ id="seller-inicio"
 
 <div class="portal-stat">
 <small>Pedidos</small>
-<strong id="sellerOrdersCount">—</strong>
+<strong>—</strong>
 </div>
 
 <div class="portal-stat">
@@ -3472,16 +2983,18 @@ id="seller-inicio"
 
 <div class="panel">
 
-<h3 id="sellerWelcome">
-Tu marca en Amigate
+<h3 id="sellerWelcomeTitle">
+Mi marca
 </h3>
 
-<p style="
+<p
+style="
 margin-top:8px;
 color:var(--gray);
 font-size:12px;
-">
-Desde este portal vas a administrar tu presencia comercial.
+"
+>
+Administrá tu presencia comercial en Amigate.
 </p>
 
 </div>
@@ -3496,13 +3009,13 @@ id="seller-marca"
 
 <div class="panel">
 
-<div class="panel-heading">
+<div class="panel-top">
 
 <h3>
 Mi marca
 </h3>
 
-<button id="sellerEditBrand">
+<button id="editBrandButton">
 Editar
 </button>
 
@@ -3525,7 +3038,7 @@ id="seller-productos"
 
 <div class="panel">
 
-<div class="panel-heading">
+<div class="panel-top">
 
 <h3>
 Productos
@@ -3539,7 +3052,7 @@ Productos
 
 <div
 class="list"
-id="sellerProductsList"
+id="sellerProductList"
 ></div>
 
 </div>
@@ -3551,16 +3064,12 @@ id="sellerProductsList"
 class="portal-section"
 id="seller-pedidos"
 >
-
 <div class="panel">
 <h3>Pedidos</h3>
-
 <div class="empty-panel">
-Cuando recibas pedidos aparecerán acá.
+Tus pedidos aparecerán acá.
 </div>
-
 </div>
-
 </section>
 
 
@@ -3568,16 +3077,12 @@ Cuando recibas pedidos aparecerán acá.
 class="portal-section"
 id="seller-mensajes"
 >
-
 <div class="panel">
 <h3>Mensajes</h3>
-
 <div class="empty-panel">
-Las conversaciones con clientes aparecerán acá.
+Tus conversaciones aparecerán acá.
 </div>
-
 </div>
-
 </section>
 
 
@@ -3585,16 +3090,12 @@ Las conversaciones con clientes aparecerán acá.
 class="portal-section"
 id="seller-opiniones"
 >
-
 <div class="panel">
 <h3>Opiniones</h3>
-
 <div class="empty-panel">
-Las opiniones verificadas de tus compradores aparecerán acá.
+Las opiniones aparecerán acá.
 </div>
-
 </div>
-
 </section>
 
 
@@ -3602,16 +3103,12 @@ Las opiniones verificadas de tus compradores aparecerán acá.
 class="portal-section"
 id="seller-publicidad"
 >
-
 <div class="panel">
 <h3>Publicidad</h3>
-
 <div class="empty-panel">
-Desde acá vas a poder promocionar marcas y publicaciones.
+Acá vas a administrar contenido patrocinado.
 </div>
-
 </div>
-
 </section>
 
 
@@ -3619,16 +3116,12 @@ Desde acá vas a poder promocionar marcas y publicaciones.
 class="portal-section"
 id="seller-suscripcion"
 >
-
 <div class="panel">
 <h3>Suscripción</h3>
-
 <div class="empty-panel">
-La integración con Mercado Pago se agregará más adelante.
+Acá conectaremos Mercado Pago.
 </div>
-
 </div>
-
 </section>
 
 
@@ -3636,16 +3129,12 @@ La integración con Mercado Pago se agregará más adelante.
 class="portal-section"
 id="seller-finanzas"
 >
-
 <div class="panel">
 <h3>Finanzas</h3>
-
 <div class="empty-panel">
-Ventas, comisiones y movimientos aparecerán acá.
+Ventas y comisiones aparecerán acá.
 </div>
-
 </div>
-
 </section>
 
 
@@ -3653,16 +3142,12 @@ Ventas, comisiones y movimientos aparecerán acá.
 class="portal-section"
 id="seller-configuracion"
 >
-
 <div class="panel">
 <h3>Configuración</h3>
-
 <div class="empty-panel">
-Configuración del mini sitio, envíos, colores y preferencias.
+Envíos, apariencia y configuración de la marca.
 </div>
-
 </div>
-
 </section>
 
 </div>
@@ -3673,34 +3158,35 @@ Configuración del mini sitio, envíos, colores y preferencias.
 
 
 <!-- =========================================================
-CREAR PRODUCTO
+PRODUCT MODAL
 ========================================================= -->
 
 <div
-class="modal-overlay"
+class="modal"
 id="productModal"
 >
 
-<div class="modal-box">
+<div class="modal-card">
 
 <div class="modal-top">
 
-<span class="modal-logo">
+<div class="modal-brand">
 Nuevo producto
-</span>
+</div>
 
 <button
 class="modal-close"
-id="closeProductModal"
+id="closeProductButton"
 >
 ×
 </button>
 
 </div>
 
+
 <form id="productForm">
 
-<div class="product-form">
+<div class="product-grid">
 
 <div class="form-group wide">
 
@@ -3723,18 +3209,6 @@ required
 class="form-control"
 id="productDescription"
 ></textarea>
-
-</div>
-
-
-<div class="form-group">
-
-<label>Categoría</label>
-
-<select
-class="form-control"
-id="productCategory"
-></select>
 
 </div>
 
@@ -3765,135 +3239,20 @@ step="0.01"
 
 </div>
 
-
-<div class="form-group">
-
-<label>Stock</label>
-
-<input
-class="form-control"
-id="productStock"
-type="number"
-min="0"
-step="1"
->
-
-</div>
-
 </div>
 
 
-<div class="product-actions">
-
 <button
-class="soft"
-type="button"
-id="cancelProduct"
->
-Cancelar
-</button>
-
-<button
-class="primary"
+class="submit-button"
 type="submit"
-style="
-padding:0 17px;
-border-radius:11px;
-"
 >
 Guardar producto
 </button>
 
-</div>
-
 
 <div
-class="auth-message"
+class="message"
 id="productMessage"
-></div>
-
-</form>
-
-</div>
-
-</div>
-
-
-<!-- =========================================================
-ADMIN LOGIN
-========================================================= -->
-
-<div
-class="modal-overlay"
-id="adminModal"
->
-
-<div class="modal-box">
-
-<div class="modal-top">
-
-<span class="modal-logo">
-Amigate
-</span>
-
-<button
-class="modal-close"
-id="closeAdmin"
->
-×
-</button>
-
-</div>
-
-<h2 class="modal-title">
-Administración
-</h2>
-
-<p class="modal-description">
-Acceso restringido.
-</p>
-
-
-<form id="adminForm">
-
-<div class="form-group">
-
-<label>Email</label>
-
-<input
-class="form-control"
-id="adminEmail"
-type="email"
-required
->
-
-</div>
-
-
-<div class="form-group">
-
-<label>Contraseña</label>
-
-<input
-class="form-control"
-id="adminPassword"
-type="password"
-required
->
-
-</div>
-
-
-<button
-class="submit-btn"
-type="submit"
->
-Entrar
-</button>
-
-<div
-class="admin-error"
-id="adminError"
 ></div>
 
 </form>
@@ -3908,8 +3267,81 @@ ADMIN
 ========================================================= -->
 
 <div
-class="portal admin-app"
-id="adminApp"
+class="modal"
+id="adminModal"
+>
+
+<div class="modal-card">
+
+<div class="modal-top">
+
+<div class="modal-brand">
+Amigate
+</div>
+
+<button
+class="modal-close"
+id="closeAdminButton"
+>
+×
+</button>
+
+</div>
+
+<h2>
+Administración
+</h2>
+
+<form id="adminLoginForm">
+
+<div class="form-group">
+
+<label>Email</label>
+
+<input
+class="form-control"
+id="adminEmail"
+type="email"
+required
+>
+
+</div>
+
+<div class="form-group">
+
+<label>Contraseña</label>
+
+<input
+class="form-control"
+id="adminPassword"
+type="password"
+required
+>
+
+</div>
+
+<button
+class="submit-button"
+type="submit"
+>
+Entrar
+</button>
+
+<div
+class="message"
+id="adminMessage"
+></div>
+
+</form>
+
+</div>
+
+</div>
+
+
+<div
+class="portal"
+id="adminPortal"
 >
 
 <aside class="portal-sidebar">
@@ -3920,51 +3352,38 @@ Amigate
 
 <div class="portal-menu">
 
-<button class="portal-nav active" data-admin-page="inicio">
+<button
+class="portal-nav active"
+data-admin-page="inicio"
+>
 Dashboard
 </button>
 
-<button class="portal-nav" data-admin-page="clientes">
-Clientes
-</button>
-
-<button class="portal-nav" data-admin-page="vendedores">
-Vendedores
-</button>
-
-<button class="portal-nav" data-admin-page="marcas">
-Marcas
-</button>
-
-<button class="portal-nav" data-admin-page="categorias">
+<button
+class="portal-nav"
+data-admin-page="categorias"
+>
 Categorías
 </button>
 
-<button class="portal-nav" data-admin-page="operaciones">
-Operaciones
+<button
+class="portal-nav"
+data-admin-page="marcas"
+>
+Marcas
 </button>
 
-<button class="portal-nav" data-admin-page="finanzas">
-Finanzas
+<button
+class="portal-nav"
+data-admin-page="clientes"
+>
+Clientes
 </button>
 
-<button class="portal-nav" data-admin-page="publicidad">
-Publicidad
-</button>
-
-<button class="portal-nav" data-admin-page="suscripciones">
-Suscripciones
-</button>
-
-<button class="portal-nav" data-admin-page="reclamos">
-Reclamos
-</button>
-
-<button class="portal-nav" data-admin-page="moderacion">
-Moderación
-</button>
-
-<button class="portal-nav" data-admin-page="configuracion">
+<button
+class="portal-nav"
+data-admin-page="configuracion"
+>
 Configuración
 </button>
 
@@ -3972,7 +3391,7 @@ Configuración
 
 <button
 class="portal-exit"
-id="adminExit"
+id="adminLogoutButton"
 >
 Cerrar sesión
 </button>
@@ -3984,7 +3403,7 @@ Cerrar sesión
 
 <header class="portal-header">
 
-<h2 id="adminTitle">
+<h2 id="adminPortalTitle">
 Dashboard
 </h2>
 
@@ -3993,7 +3412,7 @@ style="
 font-size:10px;
 color:var(--gray);
 "
-id="adminUserEmail"
+id="adminEmailDisplay"
 ></span>
 
 </header>
@@ -4010,22 +3429,22 @@ id="admin-inicio"
 
 <div class="portal-stat">
 <small>Clientes</small>
-<strong id="adminClients">—</strong>
-</div>
-
-<div class="portal-stat">
-<small>Marcas</small>
-<strong id="adminBrands">—</strong>
-</div>
-
-<div class="portal-stat">
-<small>Productos</small>
-<strong id="adminProducts">—</strong>
+<strong id="adminClientsCount">—</strong>
 </div>
 
 <div class="portal-stat">
 <small>Vendedores</small>
-<strong id="adminSellers">—</strong>
+<strong id="adminSellersCount">—</strong>
+</div>
+
+<div class="portal-stat">
+<small>Marcas</small>
+<strong id="adminBrandsCount">—</strong>
+</div>
+
+<div class="portal-stat">
+<small>Productos</small>
+<strong id="adminProductsCount">—</strong>
 </div>
 
 </div>
@@ -4033,61 +3452,54 @@ id="admin-inicio"
 </section>
 
 
-<section class="portal-section" id="admin-clientes">
-<div class="panel"><h3>Clientes</h3></div>
-</section>
-
-<section class="portal-section" id="admin-vendedores">
-<div class="panel"><h3>Vendedores</h3></div>
-</section>
-
-<section class="portal-section" id="admin-marcas">
-<div class="panel"><h3>Marcas</h3></div>
-</section>
-
-<section class="portal-section" id="admin-categorias">
+<section
+class="portal-section"
+id="admin-categorias"
+>
 
 <div class="panel">
 
 <h3>
-Taxonomía Amigate
+Taxonomía
 </h3>
 
 <div
 class="list"
-id="adminTaxonomy"
+id="adminCategoryList"
 ></div>
 
 </div>
 
 </section>
 
-<section class="portal-section" id="admin-operaciones">
-<div class="panel"><h3>Operaciones</h3></div>
+
+<section
+class="portal-section"
+id="admin-marcas"
+>
+<div class="panel">
+<h3>Marcas</h3>
+</div>
 </section>
 
-<section class="portal-section" id="admin-finanzas">
-<div class="panel"><h3>Finanzas</h3></div>
+
+<section
+class="portal-section"
+id="admin-clientes"
+>
+<div class="panel">
+<h3>Clientes</h3>
+</div>
 </section>
 
-<section class="portal-section" id="admin-publicidad">
-<div class="panel"><h3>Publicidad</h3></div>
-</section>
 
-<section class="portal-section" id="admin-suscripciones">
-<div class="panel"><h3>Suscripciones</h3></div>
-</section>
-
-<section class="portal-section" id="admin-reclamos">
-<div class="panel"><h3>Reclamos</h3></div>
-</section>
-
-<section class="portal-section" id="admin-moderacion">
-<div class="panel"><h3>Moderación</h3></div>
-</section>
-
-<section class="portal-section" id="admin-configuracion">
-<div class="panel"><h3>Configuración general</h3></div>
+<section
+class="portal-section"
+id="admin-configuracion"
+>
+<div class="panel">
+<h3>Configuración</h3>
+</div>
 </section>
 
 </div>
@@ -4115,21 +3527,23 @@ window.supabase.createClient(
   SUPABASE_KEY
 );
 
+
 let currentUser = null;
 let currentProfile = null;
 
+let currentSellerProfile = null;
+let currentBrand = null;
+
 let authIntent = "buyer";
 
-let currentBrand = null;
+
+const $ =
+id => document.getElementById(id);
 
 
 /* =========================================================
 HELPERS
 ========================================================= */
-
-const $ =
-id => document.getElementById(id);
-
 
 function normalizeText(value){
 
@@ -4143,6 +3557,19 @@ return String(
 )
 .trim()
 .toLowerCase();
+
+}
+
+
+function rowName(row){
+
+return (
+  row?.nombre ||
+  row?.name ||
+  row?.titulo ||
+  row?.title ||
+  "Sin nombre"
+);
 
 }
 
@@ -4167,13 +3594,10 @@ keys,
 fallback = null
 ){
 
-if(!row){
-  return fallback;
-}
-
 for(const key of keys){
 
   if(
+    row &&
     row[key] !== undefined &&
     row[key] !== null &&
     row[key] !== ""
@@ -4190,26 +3614,10 @@ return fallback;
 }
 
 
-function rowName(row){
-
-return firstValue(
-  row,
-  [
-    "nombre",
-    "name",
-    "titulo",
-    "title"
-  ],
-  "Sin nombre"
-);
-
-}
-
-
 function withTimeout(
 promise,
-ms,
-code
+ms = 10000,
+code = "TIMEOUT"
 ){
 
 let timer;
@@ -4220,18 +3628,15 @@ new Promise(
 
     timer =
     setTimeout(
-      () => {
-
-        reject(
-          new Error(code)
-        );
-
-      },
+      () => reject(
+        new Error(code)
+      ),
       ms
     );
 
   }
 );
+
 
 return Promise
 .race([
@@ -4245,15 +3650,9 @@ return Promise
 }
 
 
-/* =========================================================
-MODALES
-========================================================= */
-
 function openModal(element){
 
-element.classList.add(
-  "open"
-);
+element.classList.add("open");
 
 document.body.style.overflow =
 "hidden";
@@ -4263,11 +3662,42 @@ document.body.style.overflow =
 
 function closeModal(element){
 
-element.classList.remove(
-  "open"
-);
+element.classList.remove("open");
 
 document.body.style.overflow =
+"";
+
+}
+
+
+function showMessage(
+id,
+text,
+type
+){
+
+const element =
+$(id);
+
+element.className =
+"message visible " +
+type;
+
+element.textContent =
+text;
+
+}
+
+
+function clearMessage(id){
+
+const element =
+$(id);
+
+element.className =
+"message";
+
+element.textContent =
 "";
 
 }
@@ -4281,9 +3711,7 @@ element.addEventListener(
 
     if(event.target === element){
 
-      closeModal(
-        element
-      );
+      closeModal(element);
 
     }
 
@@ -4294,33 +3722,35 @@ element.addEventListener(
 
 
 /* =========================================================
-MAPA
+MAP
 ========================================================= */
 
 let selectedProvince = null;
 let selectedPolygon = null;
 
 
-function updateProvinceText(){
+function updateProvinceUI(){
 
 if(!selectedProvince){
 
   $("exploreTitle").textContent =
   "¿Qué estás buscando?";
 
-  $("exploreSubtitle").textContent =
+  $("exploreText").textContent =
   "Elegí una provincia para personalizar los resultados.";
 
   return;
 
 }
 
+
 $("exploreTitle").textContent =
 "¿Qué estás buscando en " +
 selectedProvince.name +
 "?";
 
-$("exploreSubtitle").textContent =
+
+$("exploreText").textContent =
 "Descubrí marcas, profesionales y oportunidades disponibles en " +
 selectedProvince.name +
 ".";
@@ -4335,6 +3765,7 @@ const root =
 am5.Root.new(
   "chartdiv"
 );
+
 
 if(root._logo){
   root._logo.dispose();
@@ -4443,7 +3874,7 @@ series
 );
 
 
-function clearMapSelection(){
+function clearProvince(){
 
   if(selectedPolygon){
 
@@ -4454,8 +3885,13 @@ function clearMapSelection(){
 
   }
 
-  selectedPolygon = null;
-  selectedProvince = null;
+
+  selectedPolygon =
+  null;
+
+  selectedProvince =
+  null;
+
 
   $("provinceCard")
   .classList
@@ -4463,12 +3899,14 @@ function clearMapSelection(){
     "visible"
   );
 
+
   localStorage
   .removeItem(
     "amigate_province"
   );
 
-  updateProvinceText();
+
+  updateProvinceUI();
 
 }
 
@@ -4487,20 +3925,23 @@ series
     const item =
     polygon.dataItem;
 
+
     if(!item){
       return;
     }
 
+
     if(
-      selectedPolygon ===
-      polygon
+      polygon ===
+      selectedPolygon
     ){
 
-      clearMapSelection();
+      clearProvince();
 
       return;
 
     }
+
 
     if(selectedPolygon){
 
@@ -4511,13 +3952,16 @@ series
 
     }
 
+
     selectedPolygon =
     polygon;
+
 
     polygon.set(
       "active",
       true
     );
+
 
     selectedProvince = {
 
@@ -4529,20 +3973,24 @@ series
 
     };
 
+
     $("provinceName")
     .textContent =
     selectedProvince.name;
 
-    $("exploreButton")
+
+    $("exploreProvinceButton")
     .textContent =
     "Explorar " +
     selectedProvince.name;
+
 
     $("provinceCard")
     .classList
     .add(
       "visible"
     );
+
 
     localStorage
     .setItem(
@@ -4552,16 +4000,17 @@ series
       )
     );
 
-    updateProvinceText();
+
+    updateProvinceUI();
 
   }
 );
 
 
-$("clearProvince")
+$("clearProvinceButton")
 .addEventListener(
   "click",
-  clearMapSelection
+  clearProvince
 );
 
 
@@ -4577,9 +4026,11 @@ series
       "amigate_province"
     );
 
+
     if(!stored){
       return;
     }
+
 
     try{
 
@@ -4587,6 +4038,7 @@ series
       JSON.parse(
         stored
       );
+
 
       series
       .dataItems
@@ -4603,9 +4055,11 @@ series
               "mapPolygon"
             );
 
+
             if(!polygon){
               return;
             }
+
 
             selectedPolygon =
             polygon;
@@ -4613,19 +4067,23 @@ series
             selectedProvince =
             saved;
 
+
             polygon.set(
               "active",
               true
             );
 
+
             $("provinceName")
             .textContent =
             saved.name;
 
-            $("exploreButton")
+
+            $("exploreProvinceButton")
             .textContent =
             "Explorar " +
             saved.name;
+
 
             $("provinceCard")
             .classList
@@ -4633,7 +4091,8 @@ series
               "visible"
             );
 
-            updateProvinceText();
+
+            updateProvinceUI();
 
           }
 
@@ -4653,14 +4112,13 @@ series
   }
 );
 
-series.appear(
-  500
-);
+
+series.appear(500);
 
 });
 
 
-$("exploreButton")
+$("exploreProvinceButton")
 .addEventListener(
 "click",
 () => {
@@ -4675,21 +4133,17 @@ $("exploreSection")
 
 
 /* =========================================================
-CACHÉ TAXONOMÍA
+TAXONOMY CACHE
 ========================================================= */
 
 const taxonomyCache = {
 
 loaded:false,
-
-loadingPromise:null,
+promise:null,
 
 categories:[],
-
 subcategories:[],
-
 types:[],
-
 provinces:[]
 
 };
@@ -4710,11 +4164,11 @@ if(
 
 
 if(
-  taxonomyCache.loadingPromise &&
+  taxonomyCache.promise &&
   !force
 ){
 
-  return taxonomyCache.loadingPromise;
+  return taxonomyCache.promise;
 
 }
 
@@ -4724,22 +4178,22 @@ if(force){
   taxonomyCache.loaded =
   false;
 
-  taxonomyCache.loadingPromise =
+  taxonomyCache.promise =
   null;
 
 }
 
 
-taxonomyCache.loadingPromise =
+taxonomyCache.promise =
 (async () => {
 
   try{
 
     const [
-      categoriesResult,
-      subcategoriesResult,
-      typesResult,
-      provincesResult
+      categories,
+      subcategories,
+      types,
+      provinces
     ] =
     await withTimeout(
 
@@ -4770,47 +4224,48 @@ taxonomyCache.loadingPromise =
     );
 
 
-    if(categoriesResult.error){
-      throw categoriesResult.error;
+    if(categories.error){
+      throw categories.error;
     }
 
-    if(subcategoriesResult.error){
-      throw subcategoriesResult.error;
+    if(subcategories.error){
+      throw subcategories.error;
     }
 
-    if(typesResult.error){
-      throw typesResult.error;
+    if(types.error){
+      throw types.error;
     }
 
-    if(provincesResult.error){
-      throw provincesResult.error;
+    if(provinces.error){
+      throw provinces.error;
     }
 
 
     taxonomyCache.categories =
-    categoriesResult.data || [];
+    categories.data || [];
 
     taxonomyCache.subcategories =
-    subcategoriesResult.data || [];
+    subcategories.data || [];
 
     taxonomyCache.types =
-    typesResult.data || [];
+    types.data || [];
 
     taxonomyCache.provinces =
-    provincesResult.data || [];
+    provinces.data || [];
 
     taxonomyCache.loaded =
     true;
 
 
-    refreshBrandFormOptions();
+    populateProductSubcategories();
+
 
     return taxonomyCache;
 
   }
   finally{
 
-    taxonomyCache.loadingPromise =
+    taxonomyCache.promise =
     null;
 
   }
@@ -4818,25 +4273,17 @@ taxonomyCache.loadingPromise =
 })();
 
 
-return taxonomyCache.loadingPromise;
+return taxonomyCache.promise;
 
 }
 
-
-/*
-Precargamos UNA sola vez.
-*/
 
 setTimeout(
 () => {
 
 loadTaxonomy()
 .catch(
-  error =>
-  console.warn(
-    "Precarga:",
-    error
-  )
+  console.warn
 );
 
 },
@@ -4845,35 +4292,31 @@ loadTaxonomy()
 
 
 /* =========================================================
-MOBILE SAFE CLICK
+SAFE MOBILE PRESS
 ========================================================= */
 
-/*
-En celular usamos Pointer Events.
-
-Esto evita dobles ejecuciones entre
-touchend + click.
-*/
-
-let categoryInteractionLock =
-false;
-
-
-function bindSafePress(
+function bindPress(
 element,
 callback
 ){
 
-let pointerStarted =
-false;
+let startX = 0;
+let startY = 0;
+let active = false;
 
 
 element.addEventListener(
   "pointerdown",
-  () => {
+  event => {
 
-    pointerStarted =
+    active =
     true;
+
+    startX =
+    event.clientX;
+
+    startY =
+    event.clientY;
 
   },
   {
@@ -4886,7 +4329,7 @@ element.addEventListener(
   "pointercancel",
   () => {
 
-    pointerStarted =
+    active =
     false;
 
   }
@@ -4897,14 +4340,33 @@ element.addEventListener(
   "pointerup",
   event => {
 
-    if(!pointerStarted){
+    if(!active){
       return;
     }
 
-    pointerStarted =
+    active =
     false;
 
-    event.preventDefault();
+
+    const distance =
+    Math.hypot(
+      event.clientX -
+      startX,
+
+      event.clientY -
+      startY
+    );
+
+
+    /*
+    Si estaba haciendo scroll,
+    no abrimos la categoría.
+    */
+
+    if(distance > 12){
+      return;
+    }
+
 
     callback();
 
@@ -4937,7 +4399,7 @@ element.addEventListener(
 MARKETPLACE
 ========================================================= */
 
-const marketDescriptions = {
+const descriptions = {
 
 Productos:
 "Descubrí marcas, emprendimientos y productos disponibles cerca tuyo.",
@@ -4946,18 +4408,18 @@ Servicios:
 "Encontrá profesionales y empresas que ofrecen servicios.",
 
 Oficios:
-"Conectate con especialistas y trabajadores de distintos oficios.",
+"Conectate con especialistas de distintos oficios.",
 
 Empleos:
 "Explorá oportunidades laborales y búsquedas de personal.",
 
 Necesito:
-"Publicá exactamente lo que necesitás y encontrá quién pueda resolverlo."
+"Publicá exactamente lo que necesitás y encontrá quién pueda ayudarte."
 
 };
 
 
-let currentMarketCategory =
+let currentCategory =
 null;
 
 let currentRootCategory =
@@ -4966,54 +4428,58 @@ null;
 let currentSubcategory =
 null;
 
-let currentType =
-null;
-
 let navigationVersion =
 0;
+
+let navigationLocked =
+false;
 
 
 document
 .querySelectorAll(
-  "[data-market-category]"
+  "[data-category]"
 )
 .forEach(
-  card => {
+card => {
 
-    bindSafePress(
-      card,
-      () => {
+bindPress(
+  card,
+  async () => {
 
-        if(categoryInteractionLock){
-          return;
-        }
+    if(navigationLocked){
+      return;
+    }
 
-        categoryInteractionLock =
-        true;
 
-        openMarketplace(
-          card.dataset.marketCategory
-        )
-        .finally(
-          () => {
+    navigationLocked =
+    true;
 
-            setTimeout(
-              () => {
 
-                categoryInteractionLock =
-                false;
+    try{
 
-              },
-              180
-            );
+      await openMarketplace(
+        card.dataset.category
+      );
 
-          }
-        );
+    }
+    finally{
 
-      }
-    );
+      setTimeout(
+        () => {
+
+          navigationLocked =
+          false;
+
+        },
+        150
+      );
+
+    }
 
   }
+);
+
+}
 );
 
 
@@ -5025,16 +4491,13 @@ const version =
 ++navigationVersion;
 
 
-currentMarketCategory =
+currentCategory =
 category;
 
 currentRootCategory =
 null;
 
 currentSubcategory =
-null;
-
-currentType =
 null;
 
 
@@ -5045,7 +4508,7 @@ $("publicSite")
 );
 
 
-$("marketplaceView")
+$("marketplace")
 .classList
 .add(
   "visible"
@@ -5071,11 +4534,11 @@ $("marketProvince")
 .textContent =
 province;
 
-$("breadcrumbProvince")
+$("marketBreadcrumbProvince")
 .textContent =
 province;
 
-$("breadcrumbCategory")
+$("marketBreadcrumbCategory")
 .textContent =
 category;
 
@@ -5089,12 +4552,12 @@ category;
 
 $("marketDescription")
 .textContent =
-marketDescriptions[
+descriptions[
   category
 ] || "";
 
 
-resetMarketUI();
+resetMarketplace();
 
 
 $("marketLoader")
@@ -5123,20 +4586,13 @@ try{
   const root =
   taxonomy.categories
   .find(
-    categoryRow => {
-
-      return (
-        normalizeText(
-          rowName(
-            categoryRow
-          )
-        ) ===
-        normalizeText(
-          category
-        )
-      );
-
-    }
+    item =>
+    normalizeText(
+      rowName(item)
+    ) ===
+    normalizeText(
+      category
+    )
   );
 
 
@@ -5153,14 +4609,14 @@ try{
   root;
 
 
-  const subs =
+  const rows =
   taxonomy.subcategories
   .filter(
-    row => {
+    sub => {
 
       const parent =
       firstValue(
-        row,
+        sub,
         [
           "category_id",
           "categoria_id",
@@ -5168,6 +4624,7 @@ try{
           "parent_id"
         ]
       );
+
 
       return (
         String(parent) ===
@@ -5187,7 +4644,7 @@ try{
 
 
   renderSubcategories(
-    subs
+    rows
   );
 
 }
@@ -5196,6 +4653,7 @@ catch(error){
   console.error(
     error
   );
+
 
   if(
     version ===
@@ -5229,7 +4687,7 @@ finally{
 }
 
 
-function resetMarketUI(){
+function resetMarketplace(){
 
 $("marketError")
 .classList
@@ -5247,39 +4705,19 @@ $("subcategoryGrid")
 .innerHTML =
 "";
 
-$("typesSection")
-.classList
-.remove(
-  "visible"
-);
-
-$("typesGrid")
-.innerHTML =
-"";
-
 $("resultsSection")
 .classList
 .remove(
   "visible"
 );
 
-$("brandsGrid")
-.innerHTML =
-"";
-
-$("resultsEmpty")
-.classList
-.remove(
-  "visible"
-);
-
-$("breadcrumbSubArrow")
+$("subcategorySeparator")
 .classList
 .add(
   "hidden"
 );
 
-$("breadcrumbSubcategory")
+$("marketBreadcrumbSubcategory")
 .classList
 .add(
   "hidden"
@@ -5292,11 +4730,8 @@ function renderSubcategories(
 rows
 ){
 
-const grid =
-$("subcategoryGrid");
-
-
-grid.innerHTML =
+$("subcategoryGrid")
+.innerHTML =
 "";
 
 
@@ -5331,13 +4766,9 @@ row => {
     "article"
   );
 
-  card.className =
-  "subcategory-card";
 
-  card.setAttribute(
-    "role",
-    "button"
-  );
+  card.className =
+  "subcategory";
 
   card.tabIndex =
   0;
@@ -5347,7 +4778,7 @@ row => {
   `
   <small>
   ${escapeHtml(
-    currentMarketCategory
+    currentCategory
   )}
   </small>
 
@@ -5357,13 +4788,13 @@ row => {
   )}
   </strong>
 
-  <div class="subcategory-arrow">
+  <div>
   Explorar →
   </div>
   `;
 
 
-  bindSafePress(
+  bindPress(
     card,
     () => {
 
@@ -5375,7 +4806,8 @@ row => {
   );
 
 
-  grid.appendChild(
+  $("subcategoryGrid")
+  .appendChild(
     card
   );
 
@@ -5385,23 +4817,15 @@ row => {
 }
 
 
-/* =========================================================
-SUBCATEGORY
-========================================================= */
-
 function selectSubcategory(
 row
 ){
 
+++navigationVersion;
+
+
 currentSubcategory =
 row;
-
-currentType =
-null;
-
-
-const name =
-rowName(row);
 
 
 $("subcategoriesSection")
@@ -5410,568 +4834,36 @@ $("subcategoriesSection")
   "hidden"
 );
 
-$("breadcrumbSubArrow")
+
+$("subcategorySeparator")
 .classList
 .remove(
   "hidden"
 );
 
-$("breadcrumbSubcategory")
+
+$("marketBreadcrumbSubcategory")
 .classList
 .remove(
   "hidden"
 );
 
-$("breadcrumbSubcategory")
+
+$("marketBreadcrumbSubcategory")
 .textContent =
-name;
-
-
-const types =
-taxonomyCache.types
-.filter(
-  type => {
-
-    const parent =
-    firstValue(
-      type,
-      [
-        "subcategory_id",
-        "subcategoria_id",
-        "parent_subcategory_id",
-        "parent_id"
-      ]
-    );
-
-    return (
-      String(parent) ===
-      String(row.id)
-    );
-
-  }
-)
-.sort(
-  (a,b) =>
-  rowName(a)
-  .localeCompare(
-    rowName(b),
-    "es"
-  )
-);
-
-
-renderTypes(
-types
-);
-
-
-loadMarketResults();
-
-}
-
-
-/* =========================================================
-TIPOS
-========================================================= */
-
-function renderTypes(
-types
-){
-
-const section =
-$("typesSection");
-
-const grid =
-$("typesGrid");
-
-
-grid.innerHTML =
-"";
-
-
-if(!types.length){
-
-  section
-  .classList
-  .remove(
-    "visible"
-  );
-
-  return;
-
-}
-
-
-section
-.classList
-.add(
-  "visible"
-);
-
-
-types.forEach(
-type => {
-
-  const button =
-  document.createElement(
-    "button"
-  );
-
-  button.className =
-  "type-button";
-
-  button.textContent =
-  rowName(type);
-
-
-  button.addEventListener(
-    "click",
-    () => {
-
-      document
-      .querySelectorAll(
-        ".type-button"
-      )
-      .forEach(
-        item =>
-        item.classList.remove(
-          "active"
-        )
-      );
-
-      button
-      .classList
-      .add(
-        "active"
-      );
-
-      currentType =
-      type;
-
-      loadMarketResults();
-
-    }
-  );
-
-
-  grid.appendChild(
-    button
-  );
-
-}
-);
-
-}
-
-
-/* =========================================================
-RESULTADOS
-========================================================= */
-
-async function loadMarketResults(){
-
-const version =
-++navigationVersion;
-
-
-$("marketLoader")
-.classList
-.add(
-  "visible"
-);
-
-
-$("resultsSection")
-.classList
-.remove(
-  "visible"
-);
-
-
-try{
-
-  if(
-    currentMarketCategory !==
-    "Productos"
-  ){
-
-    renderNoResults();
-
-    return;
-
-  }
-
-
-  const [
-    productsResult,
-    brandsResult
-  ] =
-  await withTimeout(
-
-    Promise.all([
-
-      db
-      .from("products")
-      .select("*"),
-
-      db
-      .from("brands")
-      .select("*")
-
-    ]),
-
-    10000,
-
-    "PRODUCT_TIMEOUT"
-
-  );
-
-
-  if(productsResult.error){
-    throw productsResult.error;
-  }
-
-  if(brandsResult.error){
-    throw brandsResult.error;
-  }
-
-
-  if(
-    version !==
-    navigationVersion
-  ){
-
-    return;
-
-  }
-
-
-  let products =
-  productsResult.data || [];
-
-  const brands =
-  brandsResult.data || [];
-
-
-  products =
-  products.filter(
-    product => {
-
-      const subcategory =
-      firstValue(
-        product,
-        [
-          "subcategory_id",
-          "subcategoria_id"
-        ]
-      );
-
-
-      if(
-        String(subcategory) !==
-        String(
-          currentSubcategory.id
-        )
-      ){
-
-        return false;
-
-      }
-
-
-      const active =
-      firstValue(
-        product,
-        [
-          "activo",
-          "active",
-          "is_active"
-        ],
-        true
-      );
-
-
-      return active !== false;
-
-    }
-  );
-
-
-  const grouped =
-  new Map();
-
-
-  products.forEach(
-    product => {
-
-      const brandId =
-      firstValue(
-        product,
-        [
-          "brand_id",
-          "marca_id"
-        ]
-      );
-
-
-      if(!brandId){
-        return;
-      }
-
-
-      const key =
-      String(brandId);
-
-
-      if(!grouped.has(key)){
-
-        grouped.set(
-          key,
-          []
-        );
-
-      }
-
-
-      if(
-        grouped.get(key).length <
-        5
-      ){
-
-        grouped
-        .get(key)
-        .push(
-          product
-        );
-
-      }
-
-    }
-  );
-
-
-  const visibleBrands =
-  brands.filter(
-    brand =>
-    grouped.has(
-      String(brand.id)
-    )
-  );
-
-
-  renderBrands(
-    visibleBrands,
-    grouped
-  );
-
-}
-catch(error){
-
-  console.error(
-    error
-  );
-
-  renderNoResults();
-
-}
-finally{
-
-  if(
-    version ===
-    navigationVersion
-  ){
-
-    $("marketLoader")
-    .classList
-    .remove(
-      "visible"
-    );
-
-  }
-
-}
-
-}
-
-
-function renderBrands(
-brands,
-grouped
-){
-
-$("brandsGrid")
-.innerHTML =
-"";
+rowName(row);
 
 
 $("resultsTitle")
 .textContent =
-rowName(
-  currentSubcategory
-);
+rowName(row);
 
-
-$("resultsSubtitle")
-.textContent =
-brands.length +
-(
-  brands.length === 1
-  ? " marca encontrada"
-  : " marcas encontradas"
-);
-
-
-if(!brands.length){
-
-  renderNoResults();
-
-  return;
-
-}
-
-
-$("resultsEmpty")
-.classList
-.remove(
-  "visible"
-);
-
-
-brands.forEach(
-brand => {
-
-  const name =
-  rowName(brand);
-
-
-  const products =
-  grouped.get(
-    String(brand.id)
-  ) || [];
-
-
-  const card =
-  document.createElement(
-    "article"
-  );
-
-
-  card.className =
-  "brand-card";
-
-
-  const productHTML =
-  products
-  .map(
-    product => {
-
-      const price =
-      firstValue(
-        product,
-        [
-          "precio",
-          "price",
-          "precio_actual"
-        ],
-        null
-      );
-
-
-      return `
-      <div class="mini-product">
-
-      <strong>
-      ${escapeHtml(
-        rowName(product)
-      )}
-      </strong>
-
-      ${
-        price !== null
-        ? `<span>$${escapeHtml(price)}</span>`
-        : ""
-      }
-
-      </div>
-      `;
-
-    }
-  )
-  .join("");
-
-
-  card.innerHTML =
-  `
-  <div class="brand-cover">
-  ${escapeHtml(
-    name
-    .substring(0,2)
-    .toUpperCase()
-  )}
-  </div>
-
-  <div class="brand-body">
-
-  <div class="brand-name">
-  ${escapeHtml(name)}
-  </div>
-
-  <div class="brand-meta">
-  Marca en Amigate
-  </div>
-
-  <div class="mini-products">
-  ${productHTML}
-  </div>
-
-  <button class="brand-open">
-  Ver marca
-  </button>
-
-  </div>
-  `;
-
-
-  $("brandsGrid")
-  .appendChild(
-    card
-  );
-
-}
-);
-
-
-$("resultsSection")
-.classList
-.add(
-  "visible"
-);
-
-}
-
-
-function renderNoResults(){
-
-$("brandsGrid")
-.innerHTML =
-"";
-
-$("resultsTitle")
-.textContent =
-currentSubcategory
-? rowName(currentSubcategory)
-: "Resultados";
 
 $("resultsSubtitle")
 .textContent =
 selectedProvince?.name ||
 "Argentina";
 
-$("resultsEmpty")
-.classList
-.add(
-  "visible"
-);
 
 $("resultsSection")
 .classList
@@ -5979,12 +4871,14 @@ $("resultsSection")
   "visible"
 );
 
+
+window.scrollTo(
+0,
+0
+);
+
 }
 
-
-/* =========================================================
-MARKET ERROR
-========================================================= */
 
 function showMarketError(
 error
@@ -5995,6 +4889,7 @@ $("marketError")
 .add(
   "visible"
 );
+
 
 $("subcategoriesSection")
 .classList
@@ -6007,7 +4902,7 @@ let title =
 "No pudimos cargar esta sección";
 
 let text =
-"Ocurrió un problema al conectarnos con Supabase.";
+"Ocurrió un problema al consultar Supabase.";
 
 
 if(
@@ -6030,10 +4925,10 @@ if(
 ){
 
   title =
-  "No encontramos esta sección";
+  "No encontramos esta categoría";
 
   text =
-  "La categoría principal no apareció en la base de datos.";
+  "La categoría principal no apareció en la tabla categories.";
 
 }
 
@@ -6044,10 +4939,10 @@ if(
 ){
 
   title =
-  "Todavía no hay categorías";
+  "No hay subcategorías";
 
   text =
-  "Esta sección existe, pero todavía no tiene subcategorías asociadas.";
+  "Esta sección todavía no tiene subcategorías asociadas.";
 
 }
 
@@ -6056,6 +4951,7 @@ $("marketErrorTitle")
 .textContent =
 title;
 
+
 $("marketErrorText")
 .textContent =
 text;
@@ -6063,25 +4959,20 @@ text;
 }
 
 
-$("marketRetry")
+$("retryMarketButton")
 .addEventListener(
 "click",
 async () => {
 
 try{
 
-  $("marketError")
-  .classList
-  .remove(
-    "visible"
-  );
-
   await loadTaxonomy(
     true
   );
 
-  openMarketplace(
-    currentMarketCategory
+
+  await openMarketplace(
+    currentCategory
   );
 
 }
@@ -6097,16 +4988,12 @@ catch(error){
 );
 
 
-/* =========================================================
-VOLVER
-========================================================= */
-
 function closeMarketplace(){
 
 ++navigationVersion;
 
 
-$("marketplaceView")
+$("marketplace")
 .classList
 .remove(
   "visible"
@@ -6136,21 +5023,21 @@ $("exploreSection")
 }
 
 
-$("marketHome")
+$("marketLogo")
 .addEventListener(
 "click",
 closeMarketplace
 );
 
 
-$("breadcrumbHome")
+$("marketHomeButton")
 .addEventListener(
 "click",
 closeMarketplace
 );
 
 
-$("marketBack")
+$("marketBackButton")
 .addEventListener(
 "click",
 () => {
@@ -6162,14 +5049,6 @@ if(currentSubcategory){
   currentSubcategory =
   null;
 
-  currentType =
-  null;
-
-  $("typesSection")
-  .classList
-  .remove(
-    "visible"
-  );
 
   $("resultsSection")
   .classList
@@ -6177,17 +5056,20 @@ if(currentSubcategory){
     "visible"
   );
 
-  $("breadcrumbSubArrow")
+
+  $("subcategorySeparator")
   .classList
   .add(
     "hidden"
   );
 
-  $("breadcrumbSubcategory")
+
+  $("marketBreadcrumbSubcategory")
   .classList
   .add(
     "hidden"
   );
+
 
   $("subcategoriesSection")
   .classList
@@ -6195,9 +5077,11 @@ if(currentSubcategory){
     "hidden"
   );
 
+
   return;
 
 }
+
 
 closeMarketplace();
 
@@ -6206,21 +5090,8 @@ closeMarketplace();
 
 
 /* =========================================================
-AUTH MODALS
+AUTH
 ========================================================= */
-
-const authModal =
-$("authModal");
-
-const accountModal =
-$("accountModal");
-
-const brandModal =
-$("brandModal");
-
-const productModal =
-$("productModal");
-
 
 function openAuth(
 intent = "buyer",
@@ -6245,30 +5116,28 @@ tab
 
 
 openModal(
-authModal
+$("authModal")
 );
 
 }
 
 
-function switchAuthTab(
-tab
-){
+function switchAuthTab(tab){
 
 document
 .querySelectorAll(
   ".auth-tab"
 )
 .forEach(
-  button => {
+button => {
 
-    button.classList.toggle(
-      "active",
-      button.dataset.authTab ===
-      tab
-    );
+button.classList.toggle(
+  "active",
+  button.dataset.authTab ===
+  tab
+);
 
-  }
+}
 );
 
 
@@ -6277,10 +5146,13 @@ document
   ".auth-panel"
 )
 .forEach(
-  panel =>
-  panel.classList.remove(
-    "active"
-  )
+panel => {
+
+panel.classList.remove(
+  "active"
+);
+
+}
 );
 
 
@@ -6315,28 +5187,9 @@ button.addEventListener(
 );
 
 
-function authMessage(
-id,
-message,
-type
-){
-
-const element =
-$(id);
-
-element.className =
-"auth-message visible " +
-type;
-
-element.textContent =
-message;
-
-}
-
-
 document
 .querySelectorAll(
-  ".show-password"
+  "[data-password-target]"
 )
 .forEach(
 button => {
@@ -6347,20 +5200,23 @@ button.addEventListener(
 
     const input =
     $(
-      button.dataset.password
+      button.dataset.passwordTarget
     );
 
-    const visible =
+
+    const showing =
     input.type ===
     "text";
 
+
     input.type =
-    visible
+    showing
     ? "password"
     : "text";
 
+
     button.textContent =
-    visible
+    showing
     ? "Ver"
     : "Ocultar";
 
@@ -6387,60 +5243,6 @@ const submit =
 $("registerSubmit");
 
 
-const nombre =
-$("registerName")
-.value
-.trim();
-
-const apellido =
-$("registerSurname")
-.value
-.trim();
-
-const dni =
-$("registerDni")
-.value
-.replace(
-  /\D/g,
-  ""
-);
-
-const telefono =
-$("registerPhone")
-.value
-.trim();
-
-const email =
-$("registerEmail")
-.value
-.trim()
-.toLowerCase();
-
-const password =
-$("registerPassword")
-.value;
-
-
-if(
-  !nombre ||
-  !apellido ||
-  !dni ||
-  !telefono ||
-  !email ||
-  !password
-){
-
-  authMessage(
-    "registerMessage",
-    "Completá todos los campos.",
-    "error"
-  );
-
-  return;
-
-}
-
-
 submit.disabled =
 true;
 
@@ -6448,7 +5250,48 @@ submit.textContent =
 "Creando cuenta...";
 
 
+clearMessage(
+"registerMessage"
+);
+
+
 try{
+
+  const nombre =
+  $("registerName")
+  .value
+  .trim();
+
+
+  const apellido =
+  $("registerSurname")
+  .value
+  .trim();
+
+
+  const dni =
+  $("registerDni")
+  .value
+  .replace(/\D/g,"");
+
+
+  const telefono =
+  $("registerPhone")
+  .value
+  .trim();
+
+
+  const email =
+  $("registerEmail")
+  .value
+  .trim()
+  .toLowerCase();
+
+
+  const password =
+  $("registerPassword")
+  .value;
+
 
   const {
     data,
@@ -6462,6 +5305,7 @@ try{
       password,
 
       options:{
+
         data:{
 
           nombre,
@@ -6474,16 +5318,11 @@ try{
           " " +
           apellido,
 
-          /*
-          IMPORTANTE:
-          esto describe la intención,
-          pero NO concede permisos admin.
-          */
-
           origen_registro:
           authIntent
 
         }
+
       }
 
     }),
@@ -6500,75 +5339,63 @@ try{
   }
 
 
-  if(data?.session){
+  if(!data?.session){
 
-    currentUser =
-    data.user;
-
-
-    authMessage(
+    showMessage(
       "registerMessage",
-      "Cuenta creada correctamente.",
+      "La cuenta se creó, pero Supabase todavía está esperando confirmación de correo.",
       "success"
     );
-
-
-    updateSessionUI();
-
-
-    /*
-    No bloqueamos la interfaz esperando profile.
-    */
-
-    loadCurrentProfile()
-    .then(
-      () => {
-
-        updateSessionUI();
-
-      }
-    )
-    .catch(
-      console.warn
-    );
-
-
-    setTimeout(
-      () => {
-
-        closeModal(
-          authModal
-        );
-
-
-        if(
-          authIntent ===
-          "seller"
-        ){
-
-          openBrandOnboarding();
-
-        }
-        else{
-
-          openAccount();
-
-        }
-
-      },
-      350
-    );
-
 
     return;
 
   }
 
 
-  authMessage(
+  currentUser =
+  data.user;
+
+
+  await loadCurrentProfile();
+
+
+  await loadSellerContext();
+
+
+  updateSessionUI();
+
+
+  showMessage(
     "registerMessage",
-    "La cuenta se creó, pero Supabase sigue esperando confirmación de correo.",
+    "Cuenta creada correctamente.",
     "success"
+  );
+
+
+  setTimeout(
+    () => {
+
+      closeModal(
+        $("authModal")
+      );
+
+
+      if(
+        authIntent ===
+        "seller"
+      ){
+
+        openBrandModal();
+
+      }
+      else{
+
+        openAccount();
+
+      }
+
+    },
+    300
   );
 
 }
@@ -6579,11 +5406,11 @@ catch(error){
   );
 
 
-  authMessage(
+  showMessage(
     "registerMessage",
     error.message ===
     "REGISTER_TIMEOUT"
-    ? "Supabase tardó demasiado. Revisá Authentication → Users para comprobar si la cuenta llegó a crearse."
+    ? "Supabase tardó demasiado. Revisá Authentication → Users para comprobar si la cuenta se creó."
     : error.message,
     "error"
   );
@@ -6626,6 +5453,11 @@ submit.textContent =
 "Ingresando...";
 
 
+clearMessage(
+"loginMessage"
+);
+
+
 try{
 
   const {
@@ -6664,17 +5496,11 @@ try{
   data.user;
 
 
-  await Promise.race([
+  await Promise.all([
 
     loadCurrentProfile(),
 
-    new Promise(
-      resolve =>
-      setTimeout(
-        resolve,
-        3500
-      )
-    )
+    loadSellerContext()
 
   ]);
 
@@ -6682,7 +5508,7 @@ try{
   updateSessionUI();
 
 
-  authMessage(
+  showMessage(
     "loginMessage",
     "Sesión iniciada.",
     "success"
@@ -6693,8 +5519,9 @@ try{
     () => {
 
       closeModal(
-        authModal
+        $("authModal")
       );
+
 
       openAccount();
 
@@ -6705,21 +5532,22 @@ try{
 }
 catch(error){
 
-  const message =
+  const text =
   String(
     error.message ||
     ""
-  )
-  .toLowerCase();
+  );
 
 
-  authMessage(
+  showMessage(
     "loginMessage",
-    message.includes(
+    text
+    .toLowerCase()
+    .includes(
       "invalid login"
     )
     ? "Email o contraseña incorrectos."
-    : error.message,
+    : text,
     "error"
   );
 
@@ -6782,6 +5610,7 @@ if(error){
 currentProfile =
 data;
 
+
 return data;
 
 }
@@ -6812,6 +5641,7 @@ currentUser
 ?.nombre ||
 "";
 
+
 const apellido =
 currentProfile?.apellido ||
 currentUser
@@ -6834,12 +5664,119 @@ return (
 }
 
 
-function userRole(){
+/* =========================================================
+SELLER CONTEXT - CORRECCIÓN CLAVE
+========================================================= */
 
-return (
-  currentProfile?.tipo_usuario ||
-  "comprador"
-);
+async function loadSellerContext(){
+
+currentSellerProfile =
+null;
+
+currentBrand =
+null;
+
+
+if(!currentUser){
+  return;
+}
+
+
+/*
+1. Buscar seller_profiles por user_id.
+*/
+
+const sellerResult =
+await db
+.from("seller_profiles")
+.select("*")
+.eq(
+  "user_id",
+  currentUser.id
+)
+.maybeSingle();
+
+
+if(sellerResult.error){
+
+  console.warn(
+    "seller_profiles:",
+    sellerResult.error
+  );
+
+  return;
+
+}
+
+
+currentSellerProfile =
+sellerResult.data;
+
+
+if(!currentSellerProfile){
+  return;
+}
+
+
+/*
+2. Buscar brands por seller_id.
+*/
+
+const brandResult =
+await db
+.from("brands")
+.select("*")
+.eq(
+  "seller_id",
+  currentSellerProfile.id
+)
+.limit(1)
+.maybeSingle();
+
+
+if(brandResult.error){
+
+  console.warn(
+    "brands:",
+    brandResult.error
+  );
+
+  return;
+
+}
+
+
+currentBrand =
+brandResult.data;
+
+}
+
+
+/* =========================================================
+SESSION UI
+========================================================= */
+
+function effectiveRole(){
+
+if(
+  currentProfile
+  ?.tipo_usuario ===
+  "admin"
+){
+
+  return "admin";
+
+}
+
+
+if(currentSellerProfile){
+
+  return "vendedor";
+
+}
+
+
+return "comprador";
 
 }
 
@@ -6848,13 +5785,15 @@ function updateSessionUI(){
 
 if(currentUser){
 
-  $("userLoginButton")
+  $("loginButton")
   .textContent =
   "Mi cuenta";
+
 
   $("marketAccountButton")
   .textContent =
   "Mi cuenta";
+
 
   $("sessionChip")
   .classList
@@ -6862,20 +5801,23 @@ if(currentUser){
     "visible"
   );
 
-  $("sessionChipText")
+
+  $("sessionName")
   .textContent =
   userName();
 
 }
 else{
 
-  $("userLoginButton")
+  $("loginButton")
   .textContent =
   "Iniciar sesión";
+
 
   $("marketAccountButton")
   .textContent =
   "Iniciar sesión";
+
 
   $("sessionChip")
   .classList
@@ -6911,14 +5853,16 @@ $("accountName")
 .textContent =
 name;
 
+
 $("accountEmail")
 .textContent =
 currentUser.email ||
 "";
 
-$("accountType")
+
+$("accountRole")
 .textContent =
-userRole();
+effectiveRole();
 
 
 $("accountAvatar")
@@ -6928,22 +5872,30 @@ name
 .filter(Boolean)
 .slice(0,2)
 .map(
-  value =>
-  value.charAt(0)
-  .toUpperCase()
+value =>
+value
+.charAt(0)
+.toUpperCase()
 )
 .join("") ||
 "A";
 
 
+$("accountPublishBrandButton")
+.textContent =
+currentBrand
+? "Administrar mi marca"
+: "Publicar mi marca";
+
+
 openModal(
-accountModal
+$("accountModal")
 );
 
 }
 
 
-$("userLoginButton")
+$("loginButton")
 .addEventListener(
 "click",
 () => {
@@ -6969,10 +5921,11 @@ currentUser
 );
 
 
-$("sellerButton")
-.addEventListener(
-"click",
-() => {
+/* =========================================================
+OPEN BRAND
+========================================================= */
+
+async function openBrandModal(){
 
 if(!currentUser){
 
@@ -6985,57 +5938,449 @@ if(!currentUser){
 
 }
 
-openBrandOnboarding();
 
-}
-);
+await loadSellerContext();
 
 
-$("accountSellerButton")
-.addEventListener(
-"click",
-() => {
+if(currentBrand){
 
-closeModal(
-  accountModal
-);
-
-openBrandOnboarding();
-
-}
-);
+  closeModal(
+    $("accountModal")
+  );
 
 
-$("portalButton")
-.addEventListener(
-"click",
-async () => {
-
-const role =
-userRole();
-
-
-closeModal(
-accountModal
-);
-
-
-if(role === "admin"){
-
-  openAdminPanel();
+  openSellerPortal();
 
   return;
 
 }
 
 
-await loadOwnedBrand();
+clearMessage(
+"brandMessage"
+);
 
 
-if(
-  currentBrand ||
-  role === "vendedor"
-){
+if(currentSellerProfile?.cuit){
+
+  $("brandCuit")
+  .value =
+  currentSellerProfile.cuit;
+
+}
+
+
+openModal(
+$("brandModal")
+);
+
+}
+
+
+$("publishBrandButton")
+.addEventListener(
+"click",
+() => {
+
+if(!currentUser){
+
+  openAuth(
+    "seller",
+    "register"
+  );
+
+}
+else{
+
+  openBrandModal();
+
+}
+
+}
+);
+
+
+$("accountPublishBrandButton")
+.addEventListener(
+"click",
+() => {
+
+closeModal(
+  $("accountModal")
+);
+
+
+openBrandModal();
+
+}
+);
+
+
+/* =========================================================
+CREATE SELLER + BRAND
+========================================================= */
+
+$("brandForm")
+.addEventListener(
+"submit",
+async event => {
+
+event.preventDefault();
+
+
+if(!currentUser){
+
+  showMessage(
+    "brandMessage",
+    "Tenés que iniciar sesión.",
+    "error"
+  );
+
+  return;
+
+}
+
+
+const submit =
+$("createBrandSubmit");
+
+
+submit.disabled =
+true;
+
+submit.textContent =
+"Creando marca...";
+
+
+clearMessage(
+"brandMessage"
+);
+
+
+try{
+
+  const cuit =
+  $("brandCuit")
+  .value
+  .trim();
+
+
+  const nombre =
+  $("brandName")
+  .value
+  .trim();
+
+
+  const descripcion =
+  $("brandDescription")
+  .value
+  .trim();
+
+
+  if(!cuit){
+
+    throw new Error(
+      "Ingresá tu CUIT."
+    );
+
+  }
+
+
+  if(!nombre){
+
+    throw new Error(
+      "Ingresá el nombre de la marca."
+    );
+
+  }
+
+
+  /*
+  ==========================================
+  PASO 1
+  BUSCAR SELLER_PROFILE EXISTENTE
+  ==========================================
+  */
+
+  let seller =
+  currentSellerProfile;
+
+
+  if(!seller){
+
+    const existingSeller =
+    await db
+    .from("seller_profiles")
+    .select("*")
+    .eq(
+      "user_id",
+      currentUser.id
+    )
+    .maybeSingle();
+
+
+    if(existingSeller.error){
+
+      throw new Error(
+        "No pudimos consultar tu perfil vendedor: " +
+        existingSeller.error.message
+      );
+
+    }
+
+
+    seller =
+    existingSeller.data;
+
+  }
+
+
+  /*
+  ==========================================
+  PASO 2
+  CREAR SELLER_PROFILE
+  ==========================================
+  */
+
+  if(!seller){
+
+    const createSeller =
+    await db
+    .from("seller_profiles")
+    .insert({
+
+      user_id:
+      currentUser.id,
+
+      cuit:
+      cuit
+
+    })
+    .select("*")
+    .single();
+
+
+    if(createSeller.error){
+
+      throw new Error(
+        "No pudimos crear el perfil vendedor: " +
+        createSeller.error.message
+      );
+
+    }
+
+
+    seller =
+    createSeller.data;
+
+  }
+
+
+  currentSellerProfile =
+  seller;
+
+
+  /*
+  ==========================================
+  PASO 3
+  COMPROBAR SI YA TIENE MARCA
+  ==========================================
+  */
+
+  const existingBrand =
+  await db
+  .from("brands")
+  .select("*")
+  .eq(
+    "seller_id",
+    seller.id
+  )
+  .limit(1)
+  .maybeSingle();
+
+
+  if(existingBrand.error){
+
+    throw new Error(
+      "No pudimos comprobar tus marcas: " +
+      existingBrand.error.message
+    );
+
+  }
+
+
+  if(existingBrand.data){
+
+    currentBrand =
+    existingBrand.data;
+
+
+    showMessage(
+      "brandMessage",
+      "Tu marca ya existe. Abriendo Portal Vendedor...",
+      "success"
+    );
+
+
+    setTimeout(
+      () => {
+
+        closeModal(
+          $("brandModal")
+        );
+
+
+        openSellerPortal();
+
+      },
+      350
+    );
+
+
+    return;
+
+  }
+
+
+  /*
+  ==========================================
+  PASO 4
+  CREAR BRAND
+
+  TABLA REAL:
+  id
+  seller_id
+  nombre
+  descripcion
+  ==========================================
+  */
+
+  const createBrand =
+  await db
+  .from("brands")
+  .insert({
+
+    seller_id:
+    seller.id,
+
+    nombre:
+    nombre,
+
+    descripcion:
+    descripcion
+
+  })
+  .select("*")
+  .single();
+
+
+  if(createBrand.error){
+
+    throw new Error(
+      "No pudimos guardar la marca: " +
+      createBrand.error.message
+    );
+
+  }
+
+
+  currentBrand =
+  createBrand.data;
+
+
+  /*
+  No dependemos de cambiar profiles.tipo_usuario.
+  La existencia de seller_profiles ya determina
+  que tiene Portal Vendedor.
+  */
+
+
+  updateSessionUI();
+
+
+  showMessage(
+    "brandMessage",
+    "¡Marca creada correctamente!",
+    "success"
+  );
+
+
+  setTimeout(
+    () => {
+
+      closeModal(
+        $("brandModal")
+      );
+
+
+      openSellerPortal();
+
+    },
+    450
+  );
+
+}
+catch(error){
+
+  console.error(
+    "CREAR MARCA:",
+    error
+  );
+
+
+  showMessage(
+    "brandMessage",
+    error.message ||
+    "No pudimos crear la marca.",
+    "error"
+  );
+
+}
+finally{
+
+  submit.disabled =
+  false;
+
+  submit.textContent =
+  "Crear mi marca";
+
+}
+
+}
+);
+
+
+/* =========================================================
+PORTAL CHOICE
+========================================================= */
+
+$("openPortalButton")
+.addEventListener(
+"click",
+async () => {
+
+closeModal(
+  $("accountModal")
+);
+
+
+await loadSellerContext();
+
+
+const role =
+effectiveRole();
+
+
+if(role === "admin"){
+
+  openAdminPortal();
+
+  return;
+
+}
+
+
+if(currentSellerProfile){
 
   openSellerPortal();
 
@@ -7051,546 +6396,15 @@ else{
 
 
 /* =========================================================
-SESSION INIT
-========================================================= */
-
-async function initializeSession(){
-
-try{
-
-  const {
-    data
-  } =
-  await db.auth
-  .getSession();
-
-
-  currentUser =
-  data?.session?.user ||
-  null;
-
-
-  if(currentUser){
-
-    await Promise.race([
-
-      loadCurrentProfile(),
-
-      new Promise(
-        resolve =>
-        setTimeout(
-          resolve,
-          3000
-        )
-      )
-
-    ]);
-
-  }
-
-
-  updateSessionUI();
-
-}
-catch(error){
-
-  console.warn(
-    error
-  );
-
-}
-
-}
-
-
-initializeSession();
-
-
-/* =========================================================
-LOGOUT
-========================================================= */
-
-async function logout(){
-
-try{
-
-  await db.auth
-  .signOut();
-
-}
-catch(error){
-
-  console.warn(error);
-
-}
-
-
-currentUser =
-null;
-
-currentProfile =
-null;
-
-currentBrand =
-null;
-
-
-[
-accountModal,
-$("buyerPortal"),
-$("sellerPortal"),
-$("adminApp")
-]
-.forEach(
-element => {
-
-element
-?.classList
-.remove(
-  "open",
-  "visible"
-);
-
-}
-);
-
-
-document.body.style.overflow =
-"";
-
-
-updateSessionUI();
-
-}
-
-
-$("logoutButton")
-.addEventListener(
-"click",
-logout
-);
-
-
-/* =========================================================
-BRAND ONBOARDING
-========================================================= */
-
-let brandStep =
-1;
-
-
-function refreshBrandFormOptions(){
-
-const provinceSelect =
-$("brandProvince");
-
-const categorySelect =
-$("brandCategory");
-
-
-provinceSelect.innerHTML =
-`<option value="">Seleccionar provincia</option>`;
-
-
-taxonomyCache.provinces
-.slice()
-.sort(
-  (a,b) =>
-  rowName(a)
-  .localeCompare(
-    rowName(b),
-    "es"
-  )
-)
-.forEach(
-province => {
-
-provinceSelect
-.insertAdjacentHTML(
-  "beforeend",
-  `
-  <option value="${escapeHtml(province.id)}">
-  ${escapeHtml(rowName(province))}
-  </option>
-  `
-);
-
-}
-);
-
-
-categorySelect.innerHTML =
-`<option value="">Seleccionar categoría</option>`;
-
-
-taxonomyCache.categories
-.slice()
-.sort(
-  (a,b) =>
-  rowName(a)
-  .localeCompare(
-    rowName(b),
-    "es"
-  )
-)
-.forEach(
-category => {
-
-categorySelect
-.insertAdjacentHTML(
-  "beforeend",
-  `
-  <option value="${escapeHtml(category.id)}">
-  ${escapeHtml(rowName(category))}
-  </option>
-  `
-);
-
-}
-);
-
-}
-
-
-async function openBrandOnboarding(){
-
-if(!currentUser){
-
-  openAuth(
-    "seller",
-    "register"
-  );
-
-  return;
-
-}
-
-
-try{
-
-  await loadTaxonomy();
-
-}
-catch(error){
-
-  console.warn(error);
-
-}
-
-
-brandStep =
-1;
-
-renderBrandStep();
-
-openModal(
-brandModal
-);
-
-}
-
-
-function renderBrandStep(){
-
-document
-.querySelectorAll(
-  "[data-brand-step]"
-)
-.forEach(
-page => {
-
-page.classList.toggle(
-  "active",
-  Number(
-    page.dataset.brandStep
-  ) ===
-  brandStep
-);
-
-}
-);
-
-
-document
-.querySelectorAll(
-  "[data-brand-progress]"
-)
-.forEach(
-indicator => {
-
-indicator.classList.toggle(
-  "active",
-  Number(
-    indicator.dataset.brandProgress
-  ) <=
-  brandStep
-);
-
-}
-);
-
-
-$("brandBack")
-.style.visibility =
-brandStep === 1
-? "hidden"
-: "visible";
-
-
-$("brandNext")
-.textContent =
-brandStep === 3
-? "Crear marca"
-: "Continuar";
-
-}
-
-
-$("brandNext")
-.addEventListener(
-"click",
-async () => {
-
-if(brandStep < 3){
-
-  brandStep++;
-
-  renderBrandStep();
-
-  return;
-
-}
-
-
-await createBrand();
-
-}
-);
-
-
-$("brandBack")
-.addEventListener(
-"click",
-() => {
-
-if(brandStep > 1){
-
-  brandStep--;
-
-  renderBrandStep();
-
-}
-
-}
-);
-
-
-/*
-Guardamos únicamente columnas que sabemos
-con certeza que forman parte del esquema básico.
-
-Si alguna instalación concreta tiene una columna
-distinta, mostramos el error y no bloqueamos la web.
-*/
-
-async function createBrand(){
-
-const name =
-$("brandName")
-.value
-.trim();
-
-const cuit =
-$("brandCuit")
-.value
-.trim();
-
-
-if(
-  !name ||
-  !cuit
-){
-
-  authMessage(
-    "brandMessage",
-    "Completá nombre y CUIT.",
-    "error"
-  );
-
-  return;
-
-}
-
-
-const payload = {
-
-owner_id:
-currentUser.id,
-
-nombre:
-name,
-
-descripcion:
-$("brandDescription")
-.value
-.trim(),
-
-province_id:
-$("brandProvince")
-.value ||
-null,
-
-localidad:
-$("brandLocality")
-.value
-.trim(),
-
-whatsapp:
-$("brandWhatsapp")
-.value
-.trim(),
-
-instagram:
-$("brandInstagram")
-.value
-.trim()
-
-};
-
-
-let result =
-await db
-.from("brands")
-.insert(
-  payload
-)
-.select("*")
-.single();
-
-
-if(result.error){
-
-  /*
-  Segunda versión mínima:
-  tolera diferencias de columnas secundarias.
-  */
-
-  result =
-  await db
-  .from("brands")
-  .insert({
-
-    owner_id:
-    currentUser.id,
-
-    nombre:
-    name
-
-  })
-  .select("*")
-  .single();
-
-}
-
-
-if(result.error){
-
-  console.error(
-    result.error
-  );
-
-  authMessage(
-    "brandMessage",
-    "No pudimos guardar la marca: " +
-    result.error.message,
-    "error"
-  );
-
-  return;
-
-}
-
-
-currentBrand =
-result.data;
-
-
-authMessage(
-"brandMessage",
-"Marca creada correctamente.",
-"success"
-);
-
-
-setTimeout(
-async () => {
-
-closeModal(
-  brandModal
-);
-
-
-await loadOwnedBrand();
-
-openSellerPortal();
-
-},
-400
-);
-
-}
-
-
-/* =========================================================
-OWNED BRAND
-========================================================= */
-
-async function loadOwnedBrand(){
-
-if(!currentUser){
-  return null;
-}
-
-
-const {
-data,
-error
-} =
-await db
-.from("brands")
-.select("*")
-.eq(
-  "owner_id",
-  currentUser.id
-)
-.limit(1)
-.maybeSingle();
-
-
-if(error){
-
-  console.warn(
-    error
-  );
-
-  return null;
-
-}
-
-
-currentBrand =
-data;
-
-return data;
-
-}
-
-
-/* =========================================================
 BUYER PORTAL
 ========================================================= */
 
-function openBuyerPortal(){
+async function openBuyerPortal(){
+
+$("buyerWelcomeName")
+.textContent =
+userName();
+
 
 $("buyerPortal")
 .classList
@@ -7598,101 +6412,88 @@ $("buyerPortal")
   "visible"
 );
 
-$("buyerName")
-.textContent =
-userName();
 
-loadBuyerData();
+const [
+orders,
+favorites,
+brands,
+claims
+] =
+await Promise.all([
 
-}
+safeRead(
+  "orders"
+),
 
+safeRead(
+  "favorite_products"
+),
 
-$("buyerExit")
-.addEventListener(
-"click",
-() => {
+safeRead(
+  "favorite_brands"
+),
 
-$("buyerPortal")
-.classList
-.remove(
-  "visible"
-);
-
-}
-);
-
-
-$("buyerAccount")
-.addEventListener(
-"click",
-openAccount
-);
-
-
-document
-.querySelectorAll(
-  "[data-buyer-page]"
+safeRead(
+  "claims"
 )
-.forEach(
-button => {
 
-button.addEventListener(
-  "click",
-  () => {
-
-    document
-    .querySelectorAll(
-      "[data-buyer-page]"
-    )
-    .forEach(
-      item =>
-      item.classList.remove(
-        "active"
-      )
-    );
-
-    button.classList.add(
-      "active"
-    );
+]);
 
 
-    document
-    .querySelectorAll(
-      "#buyerPortal .portal-section"
-    )
-    .forEach(
-      section =>
-      section.classList.remove(
-        "active"
-      )
-    );
+$("buyerOrdersCount")
+.textContent =
+orders.length;
+
+$("buyerFavoritesCount")
+.textContent =
+favorites.length;
+
+$("buyerBrandsCount")
+.textContent =
+brands.length;
+
+$("buyerClaimsCount")
+.textContent =
+claims.length;
 
 
-    const page =
-    button.dataset.buyerPage;
+renderSimpleList(
+"buyerOrdersList",
+orders,
+"Todavía no realizaste compras."
+);
 
 
-    $("buyer-" + page)
-    ?.classList
-    .add(
-      "active"
-    );
+renderSimpleList(
+"buyerFavoritesList",
+favorites,
+"Todavía no guardaste favoritos."
+);
 
 
-    $("buyerTitle")
-    .textContent =
-    button.textContent.trim();
+renderSimpleList(
+"buyerClaimsList",
+claims,
+"No tenés reclamos."
+);
 
-  }
+
+const addresses =
+await safeRead(
+  "user_addresses"
+);
+
+
+renderSimpleList(
+"buyerAddressesList",
+addresses,
+"Todavía no guardaste direcciones."
 );
 
 }
-);
 
 
-async function safeRead(
-table
-){
+async function safeRead(table){
 
 try{
 
@@ -7720,6 +6521,7 @@ catch(error){
     error
   );
 
+
   return [];
 
 }
@@ -7727,213 +6529,26 @@ catch(error){
 }
 
 
-async function loadBuyerData(){
-
-const [
-orders,
-favorites,
-followed,
-addresses,
-claims
-] =
-await Promise.all([
-
-safeRead(
-  "orders"
-),
-
-safeRead(
-  "favorite_products"
-),
-
-safeRead(
-  "favorite_brands"
-),
-
-safeRead(
-  "user_addresses"
-),
-
-safeRead(
-  "claims"
-)
-
-]);
-
-
-$("buyerOrdersCount")
-.textContent =
-orders.length;
-
-$("buyerFavoritesCount")
-.textContent =
-favorites.length;
-
-$("buyerFollowedCount")
-.textContent =
-followed.length;
-
-$("buyerClaimsCount")
-.textContent =
-claims.length;
-
-
-renderGenericList(
-"buyerOrders",
-orders,
-"Todavía no realizaste compras."
-);
-
-renderGenericList(
-"buyerFavorites",
-favorites,
-"Todavía no agregaste favoritos."
-);
-
-renderGenericList(
-"buyerAddresses",
-addresses,
-"Todavía no guardaste direcciones."
-);
-
-renderGenericList(
-"buyerClaims",
-claims,
-"No tenés reclamos."
-);
-
-}
-
-
-/* =========================================================
-SELLER PORTAL
-========================================================= */
-
-async function openSellerPortal(){
-
-await loadOwnedBrand();
-
-$("sellerPortal")
-.classList
-.add(
-  "visible"
-);
-
-
-$("sellerWelcome")
-.textContent =
-currentBrand
-? rowName(currentBrand)
-: "Tu marca en Amigate";
-
-
-renderSellerBrand();
-
-loadSellerProducts();
-
-}
-
-
-$("sellerExit")
-.addEventListener(
-"click",
-() => {
-
-$("sellerPortal")
-.classList
-.remove(
-  "visible"
-);
-
-}
-);
-
-
-$("sellerAccount")
-.addEventListener(
-"click",
-openAccount
-);
-
-
-document
-.querySelectorAll(
-  "[data-seller-page]"
-)
-.forEach(
-button => {
-
-button.addEventListener(
-  "click",
-  () => {
-
-    document
-    .querySelectorAll(
-      "[data-seller-page]"
-    )
-    .forEach(
-      item =>
-      item.classList.remove(
-        "active"
-      )
-    );
-
-
-    button.classList.add(
-      "active"
-    );
-
-
-    document
-    .querySelectorAll(
-      "#sellerPortal .portal-section"
-    )
-    .forEach(
-      section =>
-      section.classList.remove(
-        "active"
-      )
-    );
-
-
-    const page =
-    button.dataset.sellerPage;
-
-
-    $("seller-" + page)
-    ?.classList
-    .add(
-      "active"
-    );
-
-
-    $("sellerTitle")
-    .textContent =
-    button.textContent.trim();
-
-  }
-);
-
-}
-);
-
-
-function renderSellerBrand(){
+function renderSimpleList(
+id,
+rows,
+emptyText
+){
 
 const container =
-$("sellerBrandInfo");
+$(id);
 
 
 container.innerHTML =
 "";
 
 
-if(!currentBrand){
+if(!rows.length){
 
   container.innerHTML =
   `
   <div class="empty-panel">
-  Todavía no tenés una marca creada.
+  ${escapeHtml(emptyText)}
   </div>
   `;
 
@@ -7942,54 +6557,25 @@ if(!currentBrand){
 }
 
 
-const items = [
+rows
+.slice(0,20)
+.forEach(
+(row,index) => {
 
-[
-"Nombre",
-rowName(currentBrand)
-],
-
-[
-"Localidad",
+const title =
 firstValue(
-  currentBrand,
+  row,
   [
-    "localidad",
-    "city",
-    "ciudad"
+    "nombre",
+    "titulo",
+    "estado",
+    "status",
+    "direccion"
   ],
-  "Sin completar"
-)
-],
+  "Registro " +
+  (index + 1)
+);
 
-[
-"WhatsApp",
-firstValue(
-  currentBrand,
-  [
-    "whatsapp",
-    "telefono"
-  ],
-  "Sin completar"
-)
-],
-
-[
-"Instagram",
-firstValue(
-  currentBrand,
-  [
-    "instagram"
-  ],
-  "Sin completar"
-)
-]
-
-];
-
-
-items.forEach(
-([title,value]) => {
 
 container
 .insertAdjacentHTML(
@@ -8004,7 +6590,7 @@ container
   </strong>
 
   <p>
-  ${escapeHtml(value)}
+  Información guardada en Amigate.
   </p>
 
   </div>
@@ -8019,37 +6605,134 @@ container
 }
 
 
-$("sellerEditBrand")
-.addEventListener(
-"click",
-openBrandOnboarding
+/* =========================================================
+SELLER PORTAL
+========================================================= */
+
+async function openSellerPortal(){
+
+await loadSellerContext();
+
+
+if(!currentSellerProfile){
+
+  openBrandModal();
+
+  return;
+
+}
+
+
+if(!currentBrand){
+
+  openBrandModal();
+
+  return;
+
+}
+
+
+$("sellerPortal")
+.classList
+.add(
+  "visible"
 );
 
 
+$("sellerWelcomeTitle")
+.textContent =
+rowName(
+  currentBrand
+);
+
+
+renderSellerBrand();
+
+
+await loadSellerProducts();
+
+}
+
+
+function renderSellerBrand(){
+
+const container =
+$("sellerBrandInfo");
+
+
+container.innerHTML =
+`
+<div class="list-row">
+
+<div>
+
+<strong>
+Nombre
+</strong>
+
+<p>
+${escapeHtml(
+  currentBrand?.nombre ||
+  "Sin nombre"
+)}
+</p>
+
+</div>
+
+</div>
+
+
+<div class="list-row">
+
+<div>
+
+<strong>
+Descripción
+</strong>
+
+<p>
+${escapeHtml(
+  currentBrand?.descripcion ||
+  "Sin descripción"
+)}
+</p>
+
+</div>
+
+</div>
+
+
+<div class="list-row">
+
+<div>
+
+<strong>
+CUIT
+</strong>
+
+<p>
+${escapeHtml(
+  currentSellerProfile?.cuit ||
+  "Sin CUIT"
+)}
+</p>
+
+</div>
+
+</div>
+`;
+
+}
+
+
 /* =========================================================
-SELLER PRODUCTS
+PRODUCTS
 ========================================================= */
 
 async function loadSellerProducts(){
 
-if(
-  !currentBrand
-){
-
-  $("sellerProductsList")
-  .innerHTML =
-  `
-  <div class="empty-panel">
-  Primero creá tu marca.
-  </div>
-  `;
-
-  $("sellerProductsCount")
-  .textContent =
-  "0";
-
+if(!currentBrand){
   return;
-
 }
 
 
@@ -8072,31 +6755,39 @@ if(error){
     error
   );
 
+
+  $("sellerProductList")
+  .innerHTML =
+  `
+  <div class="empty-panel">
+  No pudimos cargar los productos.
+  </div>
+  `;
+
+
   return;
 
 }
 
 
-const products =
+const rows =
 data || [];
 
 
 $("sellerProductsCount")
 .textContent =
-products.length;
+rows.length;
 
 
-const container =
-$("sellerProductsList");
-
-
-container.innerHTML =
+$("sellerProductList")
+.innerHTML =
 "";
 
 
-if(!products.length){
+if(!rows.length){
 
-  container.innerHTML =
+  $("sellerProductList")
+  .innerHTML =
   `
   <div class="empty-panel">
   Todavía no cargaste productos.
@@ -8108,7 +6799,7 @@ if(!products.length){
 }
 
 
-products.forEach(
+rows.forEach(
 product => {
 
 const price =
@@ -8123,7 +6814,7 @@ firstValue(
 );
 
 
-container
+$("sellerProductList")
 .insertAdjacentHTML(
   "beforeend",
   `
@@ -8147,10 +6838,6 @@ container
 
   </div>
 
-  <span class="tag">
-  Producto
-  </span>
-
   </div>
   `
 );
@@ -8161,83 +6848,35 @@ container
 }
 
 
-/* =========================================================
-PRODUCT MODAL
-========================================================= */
-
-$("newProductButton")
-.addEventListener(
-"click",
-async () => {
-
-await loadTaxonomy();
-
-populateProductCategories();
-
-openModal(
-productModal
-);
-
-}
-);
-
-
-function populateProductCategories(){
-
-const root =
-taxonomyCache.categories
-.find(
-category =>
-normalizeText(
-  rowName(category)
-) ===
-"productos"
-);
-
-
-const select =
-$("productCategory");
-
-
-select.innerHTML =
-"";
-
-
-if(!root){
-
-  select.innerHTML =
-  `<option value="">Productos</option>`;
-
-  return;
-
-}
-
-
-select.innerHTML =
-`
-<option value="${escapeHtml(root.id)}">
-Productos
-</option>
-`;
-
-
-populateProductSubcategories(
-root.id
-);
-
-}
-
-
-function populateProductSubcategories(
-categoryId
-){
+function populateProductSubcategories(){
 
 const select =
 $("productSubcategory");
 
 
+if(!select){
+  return;
+}
+
+
 select.innerHTML =
 `<option value="">Seleccionar</option>`;
+
+
+const root =
+taxonomyCache.categories
+.find(
+item =>
+normalizeText(
+  rowName(item)
+) ===
+"productos"
+);
+
+
+if(!root){
+  return;
+}
 
 
 taxonomyCache.subcategories
@@ -8258,7 +6897,7 @@ firstValue(
 
 return (
   String(parent) ===
-  String(categoryId)
+  String(root.id)
 );
 
 }
@@ -8274,7 +6913,8 @@ rowName(a)
 .forEach(
 sub => {
 
-select.insertAdjacentHTML(
+select
+.insertAdjacentHTML(
   "beforeend",
   `
   <option value="${escapeHtml(sub.id)}">
@@ -8289,9 +6929,24 @@ select.insertAdjacentHTML(
 }
 
 
-/* =========================================================
-CREATE PRODUCT
-========================================================= */
+$("newProductButton")
+.addEventListener(
+"click",
+async () => {
+
+await loadTaxonomy();
+
+
+populateProductSubcategories();
+
+
+openModal(
+$("productModal")
+);
+
+}
+);
+
 
 $("productForm")
 .addEventListener(
@@ -8303,15 +6958,20 @@ event.preventDefault();
 
 if(!currentBrand){
 
-  authMessage(
+  showMessage(
     "productMessage",
-    "Primero necesitás crear una marca.",
+    "Primero tenés que crear una marca.",
     "error"
   );
 
   return;
 
 }
+
+
+clearMessage(
+"productMessage"
+);
 
 
 const name =
@@ -8322,9 +6982,9 @@ $("productName")
 
 if(!name){
 
-  authMessage(
+  showMessage(
     "productMessage",
-    "Ingresá el nombre del producto.",
+    "Ingresá un nombre.",
     "error"
   );
 
@@ -8333,52 +6993,41 @@ if(!name){
 }
 
 
-const payload = {
-
-brand_id:
-currentBrand.id,
-
-nombre:
-name,
-
-descripcion:
-$("productDescription")
-.value
-.trim(),
-
-subcategory_id:
-$("productSubcategory")
-.value ||
-null,
-
-precio:
-$("productPrice")
-.value
-? Number(
-    $("productPrice").value
-  )
-: null,
-
-stock:
-$("productStock")
-.value
-? Number(
-    $("productStock").value
-  )
-: 0,
-
-activo:
-true
-
-};
-
+/*
+Primero intentamos con las columnas
+que veníamos utilizando.
+*/
 
 let result =
 await db
 .from("products")
-.insert(
-  payload
-)
+.insert({
+
+  brand_id:
+  currentBrand.id,
+
+  nombre:
+  name,
+
+  descripcion:
+  $("productDescription")
+  .value
+  .trim(),
+
+  subcategory_id:
+  $("productSubcategory")
+  .value ||
+  null,
+
+  precio:
+  $("productPrice")
+  .value
+  ? Number(
+      $("productPrice").value
+    )
+  : null
+
+})
 .select("*")
 .single();
 
@@ -8386,8 +7035,8 @@ await db
 if(result.error){
 
   /*
-  Si precio/stock tienen nombres diferentes,
-  intentamos una versión mínima.
+  Versión mínima si precio no coincide
+  con el esquema real.
   */
 
   result =
@@ -8420,8 +7069,9 @@ if(result.error){
 
 if(result.error){
 
-  authMessage(
+  showMessage(
     "productMessage",
+    "No pudimos guardar el producto: " +
     result.error.message,
     "error"
   );
@@ -8431,7 +7081,7 @@ if(result.error){
 }
 
 
-authMessage(
+showMessage(
 "productMessage",
 "Producto creado correctamente.",
 "success"
@@ -8439,16 +7089,18 @@ authMessage(
 
 
 setTimeout(
-() => {
+async () => {
 
 closeModal(
-  productModal
+  $("productModal")
 );
+
 
 $("productForm")
 .reset();
 
-loadSellerProducts();
+
+await loadSellerProducts();
 
 },
 350
@@ -8459,93 +7111,116 @@ loadSellerProducts();
 
 
 /* =========================================================
-GENERIC LIST
+PORTAL NAVIGATION
 ========================================================= */
 
-function renderGenericList(
-containerId,
-rows,
-empty
+function setupPortalNavigation(
+attribute,
+portalId,
+titleId,
+sectionPrefix
 ){
 
-const container =
-$(containerId);
-
-
-container.innerHTML =
-"";
-
-
-if(!rows.length){
-
-  container.innerHTML =
-  `
-  <div class="empty-panel">
-  ${escapeHtml(empty)}
-  </div>
-  `;
-
-  return;
-
-}
-
-
-rows
-.slice(0,20)
+document
+.querySelectorAll(
+  `[${attribute}]`
+)
 .forEach(
-(row,index) => {
+button => {
 
-const title =
-firstValue(
-  row,
-  [
-    "nombre",
-    "titulo",
-    "estado",
-    "status",
-    "direccion"
-  ],
-  "Registro " +
-  (index + 1)
-);
+button.addEventListener(
+  "click",
+  () => {
+
+    document
+    .querySelectorAll(
+      `[${attribute}]`
+    )
+    .forEach(
+      item =>
+      item.classList.remove(
+        "active"
+      )
+    );
 
 
-container.insertAdjacentHTML(
-  "beforeend",
-  `
-  <div class="list-row">
+    button
+    .classList
+    .add(
+      "active"
+    );
 
-  <div>
 
-  <strong>
-  ${escapeHtml(title)}
-  </strong>
+    document
+    .querySelectorAll(
+      `#${portalId} .portal-section`
+    )
+    .forEach(
+      section =>
+      section.classList.remove(
+        "active"
+      )
+    );
 
-  <p>
-  Información guardada en Amigate.
-  </p>
 
-  </div>
+    const page =
+    button.getAttribute(
+      attribute
+    );
 
-  </div>
-  `
+
+    $(
+      sectionPrefix +
+      page
+    )
+    ?.classList
+    .add(
+      "active"
+    );
+
+
+    $(titleId)
+    .textContent =
+    button.textContent.trim();
+
+  }
 );
 
 }
 );
 
 }
+
+
+setupPortalNavigation(
+"data-buyer-page",
+"buyerPortal",
+"buyerPortalTitle",
+"buyer-"
+);
+
+
+setupPortalNavigation(
+"data-seller-page",
+"sellerPortal",
+"sellerPortalTitle",
+"seller-"
+);
+
+
+setupPortalNavigation(
+"data-admin-page",
+"adminPortal",
+"adminPortalTitle",
+"admin-"
+);
 
 
 /* =========================================================
 ADMIN
 ========================================================= */
 
-const adminModal =
-$("adminModal");
-
-
-$("adminAccess")
+$("adminLink")
 .addEventListener(
 "click",
 async () => {
@@ -8564,7 +7239,7 @@ if(currentUser){
     true
   ){
 
-    openAdminPanel();
+    openAdminPortal();
 
     return;
 
@@ -8574,14 +7249,14 @@ if(currentUser){
 
 
 openModal(
-adminModal
+$("adminModal")
 );
 
 }
 );
 
 
-$("adminForm")
+$("adminLoginForm")
 .addEventListener(
 "submit",
 async event => {
@@ -8599,7 +7274,8 @@ await db.auth
 email:
 $("adminEmail")
 .value
-.trim(),
+.trim()
+.toLowerCase(),
 
 password:
 $("adminPassword")
@@ -8610,14 +7286,10 @@ $("adminPassword")
 
 if(error){
 
-  $("adminError")
-  .textContent =
-  "Email o contraseña incorrectos.";
-
-  $("adminError")
-  .classList
-  .add(
-    "visible"
+  showMessage(
+    "adminMessage",
+    "Email o contraseña incorrectos.",
+    "error"
   );
 
   return;
@@ -8633,7 +7305,7 @@ await db
   "id",
   data.user.id
 )
-.single();
+.maybeSingle();
 
 
 if(
@@ -8648,15 +7320,13 @@ if(
 
   await db.auth.signOut();
 
-  $("adminError")
-  .textContent =
-  "Esta cuenta no tiene permisos de administrador.";
 
-  $("adminError")
-  .classList
-  .add(
-    "visible"
+  showMessage(
+    "adminMessage",
+    "Esta cuenta no tiene permisos de administrador.",
+    "error"
   );
+
 
   return;
 
@@ -8670,47 +7340,97 @@ currentProfile =
 profileResult.data;
 
 
-closeModal(
-adminModal
-);
+await loadSellerContext();
 
 
 updateSessionUI();
 
-openAdminPanel();
+
+closeModal(
+$("adminModal")
+);
+
+
+openAdminPortal();
 
 }
 );
 
 
-async function openAdminPanel(){
+async function openAdminPortal(){
 
-$("adminApp")
+$("adminPortal")
 .classList
 .add(
   "visible"
 );
 
 
-$("adminUserEmail")
+$("adminEmailDisplay")
 .textContent =
 currentUser?.email ||
 "";
 
 
-loadAdminStats();
+const [
+clients,
+sellers,
+brands,
+products
+] =
+await Promise.all([
+
+countRows(
+  "profiles",
+  "tipo_usuario",
+  "comprador"
+),
+
+countRows(
+  "seller_profiles"
+),
+
+countRows(
+  "brands"
+),
+
+countRows(
+  "products"
+)
+
+]);
+
+
+$("adminClientsCount")
+.textContent =
+clients;
+
+$("adminSellersCount")
+.textContent =
+sellers;
+
+$("adminBrandsCount")
+.textContent =
+brands;
+
+$("adminProductsCount")
+.textContent =
+products;
 
 
 try{
 
   await loadTaxonomy();
 
-  renderAdminTaxonomy();
+
+  renderAdminCategories();
 
 }
 catch(error){
 
-  console.warn(error);
+  console.warn(
+    error
+  );
 
 }
 
@@ -8775,63 +7495,10 @@ catch(error){
 }
 
 
-async function loadAdminStats(){
+function renderAdminCategories(){
 
-const [
-clients,
-brands,
-products,
-sellers
-] =
-await Promise.all([
-
-countRows(
-  "profiles",
-  "tipo_usuario",
-  "comprador"
-),
-
-countRows(
-  "brands"
-),
-
-countRows(
-  "products"
-),
-
-countRows(
-  "seller_profiles"
-)
-
-]);
-
-
-$("adminClients")
-.textContent =
-clients;
-
-$("adminBrands")
-.textContent =
-brands;
-
-$("adminProducts")
-.textContent =
-products;
-
-$("adminSellers")
-.textContent =
-sellers;
-
-}
-
-
-function renderAdminTaxonomy(){
-
-const container =
-$("adminTaxonomy");
-
-
-container.innerHTML =
+$("adminCategoryList")
+.innerHTML =
 "";
 
 
@@ -8848,7 +7515,7 @@ rowName(a)
 .forEach(
 category => {
 
-const subs =
+const count =
 taxonomyCache.subcategories
 .filter(
 sub => {
@@ -8871,10 +7538,12 @@ return (
 );
 
 }
-);
+)
+.length;
 
 
-container.insertAdjacentHTML(
+$("adminCategoryList")
+.insertAdjacentHTML(
   "beforeend",
   `
   <div class="list-row">
@@ -8888,10 +7557,7 @@ container.insertAdjacentHTML(
   </strong>
 
   <p>
-  ${
-    subs.length
-  }
-  subcategorías
+  ${count} subcategorías
   </p>
 
   </div>
@@ -8906,69 +7572,77 @@ container.insertAdjacentHTML(
 }
 
 
-document
-.querySelectorAll(
-  "[data-admin-page]"
-)
+/* =========================================================
+LOGOUT
+========================================================= */
+
+async function logout(){
+
+try{
+
+  await db.auth
+  .signOut();
+
+}
+catch(error){
+
+  console.warn(
+    error
+  );
+
+}
+
+
+currentUser =
+null;
+
+currentProfile =
+null;
+
+currentSellerProfile =
+null;
+
+currentBrand =
+null;
+
+
+[
+$("accountModal"),
+$("buyerPortal"),
+$("sellerPortal"),
+$("adminPortal")
+]
 .forEach(
-button => {
+element => {
 
-button.addEventListener(
-  "click",
-  () => {
-
-    document
-    .querySelectorAll(
-      "[data-admin-page]"
-    )
-    .forEach(
-      item =>
-      item.classList.remove(
-        "active"
-      )
-    );
-
-
-    button.classList.add(
-      "active"
-    );
-
-
-    document
-    .querySelectorAll(
-      "#adminApp .portal-section"
-    )
-    .forEach(
-      section =>
-      section.classList.remove(
-        "active"
-      )
-    );
-
-
-    const page =
-    button.dataset.adminPage;
-
-
-    $("admin-" + page)
-    ?.classList
-    .add(
-      "active"
-    );
-
-
-    $("adminTitle")
-    .textContent =
-    button.textContent.trim();
-
-  }
+element
+?.classList
+.remove(
+  "open",
+  "visible"
 );
 
 }
 );
 
 
-$("adminExit")
+document.body.style.overflow =
+"";
+
+
+updateSessionUI();
+
+}
+
+
+$("logoutButton")
+.addEventListener(
+"click",
+logout
+);
+
+
+$("adminLogoutButton")
 .addEventListener(
 "click",
 logout
@@ -8976,64 +7650,193 @@ logout
 
 
 /* =========================================================
-CLOSE BUTTONS
+INITIAL SESSION
 ========================================================= */
 
-$("closeAuth")
+async function initializeSession(){
+
+try{
+
+  const {
+    data
+  } =
+  await db.auth
+  .getSession();
+
+
+  currentUser =
+  data?.session?.user ||
+  null;
+
+
+  if(currentUser){
+
+    await Promise.all([
+
+      loadCurrentProfile(),
+
+      loadSellerContext()
+
+    ]);
+
+  }
+
+
+  updateSessionUI();
+
+}
+catch(error){
+
+  console.warn(
+    error
+  );
+
+}
+
+}
+
+
+initializeSession();
+
+
+/* =========================================================
+BUTTONS / CLOSE
+========================================================= */
+
+$("buyerExit")
+.addEventListener(
+"click",
+() => {
+
+$("buyerPortal")
+.classList
+.remove(
+  "visible"
+);
+
+}
+);
+
+
+$("sellerExit")
+.addEventListener(
+"click",
+() => {
+
+$("sellerPortal")
+.classList
+.remove(
+  "visible"
+);
+
+}
+);
+
+
+$("buyerAccountButton")
+.addEventListener(
+"click",
+openAccount
+);
+
+
+$("sellerAccountButton")
+.addEventListener(
+"click",
+openAccount
+);
+
+
+$("editBrandButton")
+.addEventListener(
+"click",
+() => {
+
+if(currentBrand){
+
+  $("brandName")
+  .value =
+  currentBrand.nombre ||
+  "";
+
+
+  $("brandDescription")
+  .value =
+  currentBrand.descripcion ||
+  "";
+
+}
+
+
+if(currentSellerProfile){
+
+  $("brandCuit")
+  .value =
+  currentSellerProfile.cuit ||
+  "";
+
+}
+
+
+openModal(
+$("brandModal")
+);
+
+}
+);
+
+
+$("closeAuthButton")
 .addEventListener(
 "click",
 () => closeModal(
-authModal
+$("authModal")
 )
 );
 
-$("closeAccount")
+
+$("closeAccountButton")
 .addEventListener(
 "click",
 () => closeModal(
-accountModal
+$("accountModal")
 )
 );
 
-$("closeBrandModal")
+
+$("closeBrandButton")
 .addEventListener(
 "click",
 () => closeModal(
-brandModal
+$("brandModal")
 )
 );
 
-$("closeProductModal")
+
+$("closeProductButton")
 .addEventListener(
 "click",
 () => closeModal(
-productModal
+$("productModal")
 )
 );
 
-$("cancelProduct")
-.addEventListener(
-"click",
-() => closeModal(
-productModal
-)
-);
 
-$("closeAdmin")
+$("closeAdminButton")
 .addEventListener(
 "click",
 () => closeModal(
-adminModal
+$("adminModal")
 )
 );
 
 
 [
-authModal,
-accountModal,
-brandModal,
-productModal,
-adminModal
+$("authModal"),
+$("accountModal"),
+$("brandModal"),
+$("productModal"),
+$("adminModal")
 ]
 .forEach(
 backgroundClose
