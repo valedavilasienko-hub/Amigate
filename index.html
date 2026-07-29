@@ -1066,6 +1066,221 @@
       .modal-card{padding:21px 18px}
       .brand-card-cover{height:125px}
     }
+  
+    /* =====================================================
+       GESTOR DE PRODUCTOS
+    ===================================================== */
+
+    .products-toolbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:15px;
+    }
+
+    .product-admin-grid{
+      margin-top:18px;
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:13px;
+    }
+
+    .product-admin-card{
+      overflow:hidden;
+      border:1px solid #E6DFDB;
+      border-radius:16px;
+      background:#fff;
+    }
+
+    .product-admin-image{
+      height:145px;
+      display:grid;
+      place-items:center;
+      background:var(--cream-2);
+      color:var(--orange);
+      font-family:"Playfair Display",serif;
+      font-size:35px;
+      overflow:hidden;
+    }
+
+    .product-admin-image img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .product-admin-body{padding:15px}
+    .product-admin-name{font-size:15px;font-weight:800}
+    .product-admin-meta{margin-top:4px;color:var(--gray);font-size:10px}
+    .product-admin-price{margin-top:11px;font-size:17px;font-weight:800}
+    .product-admin-old-price{margin-left:6px;color:var(--muted);font-size:10px;text-decoration:line-through}
+    .product-admin-actions{margin-top:13px;display:grid;grid-template-columns:1fr 1fr;gap:7px}
+
+    .small-action{
+      min-height:37px;
+      border:1px solid var(--border);
+      border-radius:9px;
+      background:#fff;
+      font-size:10px;
+      font-weight:800;
+    }
+
+    .small-action.danger{color:var(--red)}
+    .small-action.primary{border-color:var(--dark);background:var(--dark);color:#fff}
+
+    .product-status{
+      display:inline-flex;
+      margin-top:9px;
+      padding:5px 8px;
+      border-radius:100px;
+      background:#EAF7F1;
+      color:var(--green);
+      font-size:8px;
+      font-weight:800;
+      text-transform:uppercase;
+    }
+
+    .product-status.inactive{background:#F4EFEC;color:var(--gray)}
+
+    .draft-builder{
+      margin-top:13px;
+      padding:13px;
+      border:1px solid var(--border);
+      border-radius:13px;
+      background:#FCFAF9;
+    }
+
+    .draft-builder h4{font-size:12px}
+    .draft-builder p{margin-top:4px;color:var(--gray);font-size:10px;line-height:1.45}
+
+    .inline-builder{
+      margin-top:11px;
+      display:grid;
+      grid-template-columns:1.2fr .7fr auto;
+      gap:8px;
+      align-items:end;
+    }
+
+    .variant-builder{
+      margin-top:11px;
+      display:grid;
+      grid-template-columns:1fr 1fr 1fr 1fr 1fr auto;
+      gap:8px;
+      align-items:end;
+    }
+
+    .compact-field label{
+      display:block;
+      margin-bottom:5px;
+      font-size:9px;
+      font-weight:800;
+    }
+
+    .compact-field input,
+    .compact-field select{
+      width:100%;
+      min-height:38px;
+      padding:8px;
+      border:1px solid var(--border);
+      border-radius:9px;
+      background:#fff;
+      outline:none;
+    }
+
+    .add-draft-button{
+      min-height:38px;
+      padding:0 12px;
+      border:none;
+      border-radius:9px;
+      background:var(--dark);
+      color:#fff;
+      font-size:10px;
+      font-weight:800;
+    }
+
+    .draft-list{
+      margin-top:10px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:7px;
+    }
+
+    .draft-chip{
+      display:flex;
+      align-items:center;
+      gap:7px;
+      padding:7px 9px;
+      border:1px solid var(--border);
+      border-radius:100px;
+      background:#fff;
+      font-size:10px;
+    }
+
+    .color-dot{
+      width:13px;
+      height:13px;
+      border:1px solid rgba(0,0,0,.12);
+      border-radius:50%;
+    }
+
+    .draft-remove{
+      border:none;
+      background:none;
+      color:var(--red);
+      font-weight:800;
+    }
+
+    .variant-list{
+      margin-top:11px;
+      display:grid;
+      gap:7px;
+    }
+
+    .variant-row{
+      padding:9px 10px;
+      display:grid;
+      grid-template-columns:1.2fr repeat(4,.8fr) auto;
+      gap:8px;
+      align-items:center;
+      border:1px solid var(--border);
+      border-radius:10px;
+      background:#fff;
+      font-size:9px;
+    }
+
+    .image-help{
+      margin-top:7px;
+      color:var(--gray);
+      font-size:10px;
+      line-height:1.45;
+    }
+
+    .toggle-row{
+      margin-top:15px;
+      display:flex;
+      align-items:center;
+      gap:9px;
+      font-size:11px;
+      font-weight:700;
+    }
+
+    .toggle-row input{
+      width:17px;
+      height:17px;
+      accent-color:var(--orange);
+    }
+
+    @media(max-width:1060px){
+      .product-admin-grid{grid-template-columns:repeat(2,1fr)}
+      .variant-builder{grid-template-columns:repeat(3,1fr)}
+    }
+
+    @media(max-width:650px){
+      .product-admin-grid{grid-template-columns:1fr}
+      .inline-builder,.variant-builder{grid-template-columns:1fr}
+      .variant-row{grid-template-columns:1fr 1fr}
+    }
+
   </style>
 </head>
 
@@ -1419,6 +1634,153 @@
   </div>
 </div>
 
+
+<!-- =====================================================
+     ALTA Y EDICIÓN DE PRODUCTOS
+===================================================== -->
+
+<div class="modal" id="productModal">
+  <div class="modal-card" style="width:min(900px,100%)">
+    <div class="modal-top">
+      <div class="modal-brand">Amigate</div>
+      <button class="modal-close" id="closeProductButton">×</button>
+    </div>
+
+    <h2 id="productModalTitle">Agregar producto</h2>
+    <p class="modal-description">
+      Completá la información principal y agregá variantes cuando el precio o el stock cambien por talle o color.
+    </p>
+
+    <form id="productForm">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Categoría</label>
+          <select class="form-control" id="productCategory" required>
+            <option value="">Seleccionar categoría</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Subcategoría</label>
+          <select class="form-control" id="productSubcategory" required>
+            <option value="">Seleccionar subcategoría</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group hidden" id="productTypeGroup">
+        <label>Tipo</label>
+        <select class="form-control" id="productType">
+          <option value="">Seleccionar tipo</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Nombre</label>
+        <input class="form-control" id="productName" required>
+      </div>
+
+      <div class="form-group">
+        <label>Descripción</label>
+        <textarea class="form-control" id="productDescription" placeholder="Características, materiales, uso y cualquier información importante."></textarea>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Precio anterior</label>
+          <input class="form-control" id="productOldPrice" type="number" min="0" step="0.01" placeholder="Opcional">
+        </div>
+
+        <div class="form-group">
+          <label>Precio actual</label>
+          <input class="form-control" id="productCurrentPrice" type="number" min="0" step="0.01" required>
+        </div>
+      </div>
+
+      <label class="toggle-row">
+        <input type="checkbox" id="productControlsStock" checked>
+        Controlar stock
+      </label>
+
+      <label class="toggle-row">
+        <input type="checkbox" id="productActive" checked>
+        Producto activo y visible
+      </label>
+
+      <div class="draft-builder">
+        <h4>Colores</h4>
+        <p>Agregá los colores disponibles. Podés dejar esta sección vacía.</p>
+
+        <div class="inline-builder">
+          <div class="compact-field">
+            <label>Nombre</label>
+            <input id="draftColorName" placeholder="Ej.: Negro">
+          </div>
+
+          <div class="compact-field">
+            <label>Color</label>
+            <input id="draftColorHex" type="color" value="#000000">
+          </div>
+
+          <button class="add-draft-button" id="addColorButton" type="button">Agregar</button>
+        </div>
+
+        <div class="draft-list" id="draftColorsList"></div>
+      </div>
+
+      <div class="draft-builder">
+        <h4>Variantes</h4>
+        <p>
+          Usá variantes cuando existan talles, colores, precios o stocks diferentes.
+          Cada combinación se guarda por separado.
+        </p>
+
+        <div class="variant-builder">
+          <div class="compact-field">
+            <label>Color</label>
+            <select id="draftVariantColor"><option value="">Sin color</option></select>
+          </div>
+
+          <div class="compact-field">
+            <label>Talle</label>
+            <input id="draftVariantSize" placeholder="Ej.: M">
+          </div>
+
+          <div class="compact-field">
+            <label>Precio</label>
+            <input id="draftVariantPrice" type="number" min="0" step="0.01">
+          </div>
+
+          <div class="compact-field">
+            <label>Stock</label>
+            <input id="draftVariantStock" type="number" min="0" step="1">
+          </div>
+
+          <div class="compact-field">
+            <label>SKU</label>
+            <input id="draftVariantSku" placeholder="Opcional">
+          </div>
+
+          <button class="add-draft-button" id="addVariantButton" type="button">Agregar</button>
+        </div>
+
+        <div class="variant-list" id="draftVariantsList"></div>
+      </div>
+
+      <div class="form-group">
+        <label>Imágenes</label>
+        <input class="form-control" id="productImagesInput" type="file" accept="image/jpeg,image/png,image/webp" multiple>
+        <p class="image-help">
+          Podés seleccionar varias imágenes. La primera imagen nueva será principal cuando el producto todavía no tenga una.
+        </p>
+      </div>
+
+      <button class="submit-button" id="productSubmitButton" type="submit">Guardar producto</button>
+      <div class="message" id="productMessage"></div>
+    </form>
+  </div>
+</div>
+
 <!-- =====================================================
      PORTAL DEL COMPRADOR
 ===================================================== -->
@@ -1542,8 +1904,19 @@
 
       <section class="portal-section" id="seller-productos">
         <div class="panel">
-          <div class="panel-top"><h3>Productos</h3><button type="button">Próximamente</button></div>
-          <div class="empty-panel">La carga completa de productos se conectará en el siguiente bloque.</div>
+          <div class="products-toolbar">
+            <div>
+              <h3>Productos</h3>
+              <p style="margin-top:5px;color:var(--gray);font-size:11px">
+                Cargá productos, colores, talles, precios, stock e imágenes.
+              </p>
+            </div>
+
+            <button class="primary-button" id="addProductButton" type="button">Agregar producto</button>
+          </div>
+
+          <div class="product-admin-grid" id="sellerProductsGrid"></div>
+          <div class="empty-panel" id="sellerProductsEmpty">Todavía no cargaste productos.</div>
         </div>
       </section>
 
@@ -1580,11 +1953,18 @@
   let selectedCategoryName = "";
   let selectedSubcategoryId = null;
 
+  let editingProduct = null;
+  let productColorsDraft = [];
+  let productVariantsDraft = [];
+  let sellerProductsCache = [];
+  let sellerProductImagesCache = [];
+
   const taxonomyCache = {
     loaded:false,
     promise:null,
     categories:[],
     subcategories:[],
+    categoryTypes:[],
     provinces:[]
   };
 
@@ -1830,10 +2210,11 @@
 
     taxonomyCache.promise = (async()=>{
       try{
-        const [categoriesResult,subcategoriesResult,provincesResult] = await withTimeout(
+        const [categoriesResult,subcategoriesResult,categoryTypesResult,provincesResult] = await withTimeout(
           Promise.all([
             db.from("categories").select("*"),
             db.from("subcategories").select("*"),
+            db.from("category_types").select("*").eq("activa",true),
             db.from("provinces").select("*")
           ]),
           10000,
@@ -1842,10 +2223,12 @@
 
         if(categoriesResult.error) throw categoriesResult.error;
         if(subcategoriesResult.error) throw subcategoriesResult.error;
+        if(categoryTypesResult.error) throw categoryTypesResult.error;
         if(provincesResult.error) throw provincesResult.error;
 
         taxonomyCache.categories = categoriesResult.data || [];
         taxonomyCache.subcategories = subcategoriesResult.data || [];
+        taxonomyCache.categoryTypes = categoryTypesResult.data || [];
         taxonomyCache.provinces = provincesResult.data || [];
         taxonomyCache.loaded = true;
 
@@ -2795,9 +3178,8 @@
 
     $("sellerPortal").classList.add("visible");
     $("sellerWelcomeTitle").textContent = rowName(currentBrand);
-    $("sellerProductsCount").textContent = "0";
-
     renderSellerBrand();
+    await loadSellerProducts();
   }
 
   function renderSellerBrand(){
@@ -2827,6 +3209,676 @@
       )}</p></div></div>
       <div class="list-row"><div><strong>CUIT</strong><p>${escapeHtml(currentSellerProfile?.cuit || "Sin completar")}</p></div></div>
     `;
+  }
+
+
+  /* =====================================================
+     GESTOR DE PRODUCTOS DEL VENDEDOR
+  ===================================================== */
+
+  function formatMoney(value){
+    const number = Number(value);
+
+    if(!Number.isFinite(number)) return "";
+
+    return new Intl.NumberFormat("es-AR",{
+      style:"currency",
+      currency:"ARS",
+      maximumFractionDigits:2
+    }).format(number);
+  }
+
+  function populateProductCategories(){
+    const categorySelect = $("productCategory");
+
+    categorySelect.innerHTML = '<option value="">Seleccionar categoría</option>';
+
+    taxonomyCache.categories
+      .slice()
+      .sort((a,b)=>rowName(a).localeCompare(rowName(b),"es"))
+      .forEach(category=>{
+        categorySelect.insertAdjacentHTML(
+          "beforeend",
+          `<option value="${escapeHtml(category.id)}">${escapeHtml(rowName(category))}</option>`
+        );
+      });
+
+    const productsCategory = taxonomyCache.categories.find(category=>{
+      return normalizeText(rowName(category)) === "productos";
+    });
+
+    if(!editingProduct && productsCategory){
+      categorySelect.value = productsCategory.id;
+    }
+
+    populateProductSubcategories();
+  }
+
+  function populateProductSubcategories(){
+    const categoryId = $("productCategory").value;
+    const subcategorySelect = $("productSubcategory");
+
+    subcategorySelect.innerHTML = '<option value="">Seleccionar subcategoría</option>';
+
+    taxonomyCache.subcategories
+      .filter(row=>{
+        const parent = firstValue(row,["category_id","categoria_id","parent_category_id","parent_id"]);
+        return String(parent) === String(categoryId);
+      })
+      .sort((a,b)=>rowName(a).localeCompare(rowName(b),"es"))
+      .forEach(subcategory=>{
+        subcategorySelect.insertAdjacentHTML(
+          "beforeend",
+          `<option value="${escapeHtml(subcategory.id)}">${escapeHtml(rowName(subcategory))}</option>`
+        );
+      });
+
+    if(editingProduct?.subcategory_id){
+      subcategorySelect.value = editingProduct.subcategory_id;
+    }
+
+    populateProductTypes();
+  }
+
+  function populateProductTypes(){
+    const subcategoryId = $("productSubcategory").value;
+    const typeSelect = $("productType");
+    const typeGroup = $("productTypeGroup");
+
+    typeSelect.innerHTML = '<option value="">Seleccionar tipo</option>';
+
+    const types = taxonomyCache.categoryTypes
+      .filter(row=>String(row.subcategory_id) === String(subcategoryId))
+      .sort((a,b)=>rowName(a).localeCompare(rowName(b),"es"));
+
+    types.forEach(type=>{
+      typeSelect.insertAdjacentHTML(
+        "beforeend",
+        `<option value="${escapeHtml(type.id)}">${escapeHtml(rowName(type))}</option>`
+      );
+    });
+
+    typeGroup.classList.toggle("hidden",types.length === 0);
+
+    if(editingProduct?.category_type_id){
+      typeSelect.value = editingProduct.category_type_id;
+    }
+  }
+
+  $("productCategory").addEventListener("change",()=>{
+    editingProduct = editingProduct ? {...editingProduct,subcategory_id:null,category_type_id:null} : null;
+    populateProductSubcategories();
+  });
+
+  $("productSubcategory").addEventListener("change",()=>{
+    populateProductTypes();
+  });
+
+  function renderProductDrafts(){
+    const colorsList = $("draftColorsList");
+    const variantColorSelect = $("draftVariantColor");
+
+    colorsList.innerHTML = "";
+    variantColorSelect.innerHTML = '<option value="">Sin color</option>';
+
+    productColorsDraft.forEach(color=>{
+      colorsList.insertAdjacentHTML(
+        "beforeend",
+        `<div class="draft-chip">
+          <span class="color-dot" style="background:${escapeHtml(color.color_hex || "#ffffff")}"></span>
+          <span>${escapeHtml(color.nombre)}</span>
+          <button class="draft-remove" type="button" data-remove-color="${escapeHtml(color.localId)}">×</button>
+        </div>`
+      );
+
+      variantColorSelect.insertAdjacentHTML(
+        "beforeend",
+        `<option value="${escapeHtml(color.localId)}">${escapeHtml(color.nombre)}</option>`
+      );
+    });
+
+    document.querySelectorAll("[data-remove-color]").forEach(button=>{
+      button.addEventListener("click",()=>{
+        const localId = button.dataset.removeColor;
+
+        productColorsDraft = productColorsDraft.filter(color=>color.localId !== localId);
+        productVariantsDraft = productVariantsDraft.filter(variant=>variant.colorLocalId !== localId);
+
+        renderProductDrafts();
+      });
+    });
+
+    const variantsList = $("draftVariantsList");
+    variantsList.innerHTML = "";
+
+    productVariantsDraft.forEach(variant=>{
+      const color = productColorsDraft.find(item=>item.localId === variant.colorLocalId);
+
+      variantsList.insertAdjacentHTML(
+        "beforeend",
+        `<div class="variant-row">
+          <span><strong>${escapeHtml(color?.nombre || "Sin color")}</strong></span>
+          <span>Talle: ${escapeHtml(variant.talle || "—")}</span>
+          <span>${variant.precio !== null ? escapeHtml(formatMoney(variant.precio)) : "Precio general"}</span>
+          <span>Stock: ${variant.stock ?? "—"}</span>
+          <span>SKU: ${escapeHtml(variant.sku || "—")}</span>
+          <button class="draft-remove" type="button" data-remove-variant="${escapeHtml(variant.localId)}">×</button>
+        </div>`
+      );
+    });
+
+    document.querySelectorAll("[data-remove-variant]").forEach(button=>{
+      button.addEventListener("click",()=>{
+        productVariantsDraft = productVariantsDraft.filter(
+          variant=>variant.localId !== button.dataset.removeVariant
+        );
+
+        renderProductDrafts();
+      });
+    });
+  }
+
+  $("addColorButton").addEventListener("click",()=>{
+    const name = $("draftColorName").value.trim();
+    const hex = $("draftColorHex").value;
+
+    if(!name){
+      showMessage("productMessage","Escribí el nombre del color.","error");
+      return;
+    }
+
+    productColorsDraft.push({
+      localId:crypto.randomUUID(),
+      nombre:name,
+      color_hex:hex,
+      activo:true
+    });
+
+    $("draftColorName").value = "";
+    clearMessage("productMessage");
+    renderProductDrafts();
+  });
+
+  $("addVariantButton").addEventListener("click",()=>{
+    const colorLocalId = $("draftVariantColor").value || null;
+    const talle = $("draftVariantSize").value.trim() || null;
+    const priceValue = $("draftVariantPrice").value;
+    const stockValue = $("draftVariantStock").value;
+    const sku = $("draftVariantSku").value.trim() || null;
+
+    if(!colorLocalId && !talle){
+      showMessage(
+        "productMessage",
+        "La variante debe tener al menos un color o un talle.",
+        "error"
+      );
+      return;
+    }
+
+    productVariantsDraft.push({
+      localId:crypto.randomUUID(),
+      colorLocalId,
+      talle,
+      precio:priceValue === "" ? null : Number(priceValue),
+      stock:stockValue === "" ? null : Number(stockValue),
+      sku,
+      activo:true
+    });
+
+    $("draftVariantSize").value = "";
+    $("draftVariantPrice").value = "";
+    $("draftVariantStock").value = "";
+    $("draftVariantSku").value = "";
+
+    clearMessage("productMessage");
+    renderProductDrafts();
+  });
+
+  async function openProductModal(productId=null){
+    if(!currentBrand){
+      await loadSellerContext();
+    }
+
+    await loadTaxonomy();
+
+    editingProduct = productId
+      ? sellerProductsCache.find(product=>String(product.id) === String(productId)) || null
+      : null;
+
+    productColorsDraft = [];
+    productVariantsDraft = [];
+
+    $("productForm").reset();
+    $("productControlsStock").checked = true;
+    $("productActive").checked = true;
+    $("productImagesInput").value = "";
+    clearMessage("productMessage");
+
+    if(editingProduct){
+      $("productModalTitle").textContent = "Editar producto";
+
+      const [colorsResult,variantsResult] = await Promise.all([
+        db.from("product_colors").select("*").eq("product_id",editingProduct.id),
+        db.from("product_variants").select("*").eq("product_id",editingProduct.id)
+      ]);
+
+      if(colorsResult.error) throw colorsResult.error;
+      if(variantsResult.error) throw variantsResult.error;
+
+      const databaseColors = colorsResult.data || [];
+
+      productColorsDraft = databaseColors.map(color=>({
+        ...color,
+        localId:color.id
+      }));
+
+      productVariantsDraft = (variantsResult.data || []).map(variant=>({
+        ...variant,
+        localId:variant.id,
+        colorLocalId:variant.color_id
+      }));
+
+      $("productName").value = editingProduct.nombre || "";
+      $("productDescription").value = editingProduct.descripcion || "";
+      $("productOldPrice").value = editingProduct.precio_anterior ?? "";
+      $("productCurrentPrice").value = editingProduct.precio_actual ?? "";
+      $("productControlsStock").checked = editingProduct.controla_stock !== false;
+      $("productActive").checked = editingProduct.activo !== false;
+    }else{
+      $("productModalTitle").textContent = "Agregar producto";
+    }
+
+    populateProductCategories();
+
+    if(editingProduct){
+      $("productCategory").value = editingProduct.category_id || "";
+      populateProductSubcategories();
+      $("productSubcategory").value = editingProduct.subcategory_id || "";
+      populateProductTypes();
+      $("productType").value = editingProduct.category_type_id || "";
+    }
+
+    renderProductDrafts();
+    openModal($("productModal"));
+  }
+
+  $("addProductButton").addEventListener("click",()=>openProductModal());
+
+  function safeStorageName(fileName){
+    return String(fileName || "imagen")
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g,"")
+      .replace(/[^a-zA-Z0-9._-]/g,"_")
+      .toLowerCase();
+  }
+
+  async function uploadProductImages(product){
+    const files = Array.from($("productImagesInput").files || []);
+
+    if(!files.length) return;
+
+    const existingPrincipal = sellerProductImagesCache.some(image=>{
+      return String(image.product_id) === String(product.id) && image.es_principal === true;
+    });
+
+    const rows = [];
+
+    for(let index=0; index<files.length; index++){
+      const file = files[index];
+
+      if(file.size > 8 * 1024 * 1024){
+        throw new Error("Cada imagen debe pesar menos de 8 MB.");
+      }
+
+      const filePath =
+        `${currentUser.id}/${currentBrand.id}/${product.id}/` +
+        `${Date.now()}_${index}_${safeStorageName(file.name)}`;
+
+      const uploadResult = await db.storage
+        .from("product-image")
+        .upload(filePath,file,{
+          cacheControl:"3600",
+          upsert:false
+        });
+
+      if(uploadResult.error){
+        throw new Error("No pudimos subir una imagen: " + uploadResult.error.message);
+      }
+
+      const publicResult = db.storage
+        .from("product-image")
+        .getPublicUrl(filePath);
+
+      rows.push({
+        product_id:product.id,
+        color_id:null,
+        image_url:publicResult.data.publicUrl,
+        orden:index,
+        es_principal:!existingPrincipal && index === 0
+      });
+    }
+
+    const insertResult = await db.from("product_images").insert(rows);
+
+    if(insertResult.error){
+      throw new Error("No pudimos registrar las imágenes: " + insertResult.error.message);
+    }
+  }
+
+  async function replaceProductColorsAndVariants(productId){
+    const clearImageColors = await db
+      .from("product_images")
+      .update({color_id:null})
+      .eq("product_id",productId);
+
+    if(clearImageColors.error) throw clearImageColors.error;
+
+    const deleteVariants = await db
+      .from("product_variants")
+      .delete()
+      .eq("product_id",productId);
+
+    if(deleteVariants.error) throw deleteVariants.error;
+
+    const deleteColors = await db
+      .from("product_colors")
+      .delete()
+      .eq("product_id",productId);
+
+    if(deleteColors.error) throw deleteColors.error;
+
+    const colorIdMap = new Map();
+
+    if(productColorsDraft.length){
+      const colorRows = productColorsDraft.map(color=>({
+        product_id:productId,
+        nombre:color.nombre,
+        color_hex:color.color_hex || null,
+        activo:color.activo !== false
+      }));
+
+      const colorInsert = await db
+        .from("product_colors")
+        .insert(colorRows)
+        .select("*");
+
+      if(colorInsert.error) throw colorInsert.error;
+
+      (colorInsert.data || []).forEach((savedColor,index)=>{
+        colorIdMap.set(productColorsDraft[index].localId,savedColor.id);
+      });
+    }
+
+    if(productVariantsDraft.length){
+      const variantRows = productVariantsDraft.map(variant=>({
+        product_id:productId,
+        color_id:variant.colorLocalId
+          ? colorIdMap.get(variant.colorLocalId) || null
+          : null,
+        talle:variant.talle || null,
+        precio:variant.precio,
+        stock:$("productControlsStock").checked ? variant.stock : null,
+        sku:variant.sku || null,
+        activo:variant.activo !== false
+      }));
+
+      const variantInsert = await db
+        .from("product_variants")
+        .insert(variantRows);
+
+      if(variantInsert.error) throw variantInsert.error;
+    }
+  }
+
+  $("productForm").addEventListener("submit",async event=>{
+    event.preventDefault();
+
+    if(!currentBrand){
+      showMessage("productMessage","No encontramos tu marca.","error");
+      return;
+    }
+
+    const submit = $("productSubmitButton");
+    submit.disabled = true;
+    submit.textContent = "Guardando...";
+    clearMessage("productMessage");
+
+    try{
+      const categoryId = Number($("productCategory").value);
+      const subcategoryId = Number($("productSubcategory").value);
+      const typeValue = $("productType").value;
+      const currentPrice = Number($("productCurrentPrice").value);
+      const oldPriceValue = $("productOldPrice").value;
+
+      if(!categoryId || !subcategoryId){
+        throw new Error("Seleccioná la categoría y la subcategoría.");
+      }
+
+      if(!Number.isFinite(currentPrice) || currentPrice < 0){
+        throw new Error("Ingresá un precio actual válido.");
+      }
+
+      const payload = {
+        brand_id:currentBrand.id,
+        category_id:categoryId,
+        subcategory_id:subcategoryId,
+        category_type_id:typeValue ? Number(typeValue) : null,
+        nombre:$("productName").value.trim(),
+        descripcion:$("productDescription").value.trim() || null,
+        precio_anterior:oldPriceValue === "" ? null : Number(oldPriceValue),
+        precio_actual:currentPrice,
+        controla_stock:$("productControlsStock").checked,
+        activo:$("productActive").checked,
+        updated_at:new Date().toISOString()
+      };
+
+      let savedProduct;
+
+      if(editingProduct){
+        const updateResult = await db
+          .from("products")
+          .update(payload)
+          .eq("id",editingProduct.id)
+          .select("*")
+          .single();
+
+        if(updateResult.error) throw updateResult.error;
+
+        savedProduct = updateResult.data;
+      }else{
+        const insertResult = await db
+          .from("products")
+          .insert(payload)
+          .select("*")
+          .single();
+
+        if(insertResult.error) throw insertResult.error;
+
+        savedProduct = insertResult.data;
+      }
+
+      await replaceProductColorsAndVariants(savedProduct.id);
+      await uploadProductImages(savedProduct);
+
+      showMessage("productMessage","Producto guardado correctamente.","success");
+
+      setTimeout(async()=>{
+        closeModal($("productModal"));
+        await loadSellerProducts();
+      },350);
+    }catch(error){
+      console.error(error);
+      showMessage(
+        "productMessage",
+        error.message || "No pudimos guardar el producto.",
+        "error"
+      );
+    }finally{
+      submit.disabled = false;
+      submit.textContent = "Guardar producto";
+    }
+  });
+
+  async function loadSellerProducts(){
+    if(!currentBrand) return;
+
+    const [productsResult,imagesResult] = await Promise.all([
+      db.from("products")
+        .select("*")
+        .eq("brand_id",currentBrand.id)
+        .order("created_at",{ascending:false}),
+      db.from("product_images")
+        .select("*")
+    ]);
+
+    if(productsResult.error){
+      console.warn(productsResult.error);
+      return;
+    }
+
+    sellerProductsCache = productsResult.data || [];
+    sellerProductImagesCache = (imagesResult.data || []).filter(image=>{
+      return sellerProductsCache.some(product=>String(product.id) === String(image.product_id));
+    });
+
+    $("sellerProductsCount").textContent = sellerProductsCache.length;
+    renderSellerProducts();
+  }
+
+  function renderSellerProducts(){
+    const grid = $("sellerProductsGrid");
+    const empty = $("sellerProductsEmpty");
+
+    grid.innerHTML = "";
+    empty.classList.toggle("hidden",sellerProductsCache.length > 0);
+
+    sellerProductsCache.forEach(product=>{
+      const principalImage = sellerProductImagesCache.find(image=>{
+        return String(image.product_id) === String(product.id) && image.es_principal === true;
+      }) || sellerProductImagesCache.find(image=>{
+        return String(image.product_id) === String(product.id);
+      });
+
+      const subcategory = taxonomyCache.subcategories.find(row=>{
+        return String(row.id) === String(product.subcategory_id);
+      });
+
+      const card = document.createElement("article");
+      card.className = "product-admin-card";
+
+      card.innerHTML = `
+        <div class="product-admin-image">
+          ${principalImage
+            ? `<img src="${escapeHtml(principalImage.image_url)}" alt="${escapeHtml(product.nombre)}">`
+            : escapeHtml(String(product.nombre || "P").substring(0,2).toUpperCase())
+          }
+        </div>
+
+        <div class="product-admin-body">
+          <div class="product-admin-name">${escapeHtml(product.nombre)}</div>
+          <div class="product-admin-meta">${escapeHtml(rowName(subcategory))}</div>
+
+          <div class="product-admin-price">
+            ${escapeHtml(formatMoney(product.precio_actual))}
+            ${product.precio_anterior !== null
+              ? `<span class="product-admin-old-price">${escapeHtml(formatMoney(product.precio_anterior))}</span>`
+              : ""
+            }
+          </div>
+
+          <span class="product-status ${product.activo ? "" : "inactive"}">
+            ${product.activo ? "Activo" : "Inactivo"}
+          </span>
+
+          <div class="product-admin-actions">
+            <button class="small-action primary" type="button" data-edit-product="${escapeHtml(product.id)}">Editar</button>
+            <button class="small-action danger" type="button" data-delete-product="${escapeHtml(product.id)}">Eliminar</button>
+          </div>
+        </div>
+      `;
+
+      grid.appendChild(card);
+    });
+
+    document.querySelectorAll("[data-edit-product]").forEach(button=>{
+      button.addEventListener("click",()=>openProductModal(button.dataset.editProduct));
+    });
+
+    document.querySelectorAll("[data-delete-product]").forEach(button=>{
+      button.addEventListener("click",()=>deleteProduct(button.dataset.deleteProduct));
+    });
+  }
+
+  function storagePathFromPublicUrl(url){
+    const marker = "/storage/v1/object/public/product-image/";
+    const index = String(url || "").indexOf(marker);
+
+    if(index === -1) return null;
+
+    return decodeURIComponent(String(url).slice(index + marker.length));
+  }
+
+  async function deleteProduct(productId){
+    const product = sellerProductsCache.find(item=>String(item.id) === String(productId));
+
+    if(!product) return;
+
+    const accepted = confirm(
+      `¿Eliminar "${product.nombre}"? Esta acción también elimina sus variantes e imágenes.`
+    );
+
+    if(!accepted) return;
+
+    try{
+      const images = sellerProductImagesCache.filter(image=>{
+        return String(image.product_id) === String(productId);
+      });
+
+      const storagePaths = images
+        .map(image=>storagePathFromPublicUrl(image.image_url))
+        .filter(Boolean);
+
+      if(storagePaths.length){
+        const storageDelete = await db.storage
+          .from("product-image")
+          .remove(storagePaths);
+
+        if(storageDelete.error) console.warn(storageDelete.error);
+      }
+
+      const imageDelete = await db
+        .from("product_images")
+        .delete()
+        .eq("product_id",productId);
+
+      if(imageDelete.error) throw imageDelete.error;
+
+      const variantDelete = await db
+        .from("product_variants")
+        .delete()
+        .eq("product_id",productId);
+
+      if(variantDelete.error) throw variantDelete.error;
+
+      const colorDelete = await db
+        .from("product_colors")
+        .delete()
+        .eq("product_id",productId);
+
+      if(colorDelete.error) throw colorDelete.error;
+
+      const productDelete = await db
+        .from("products")
+        .delete()
+        .eq("id",productId);
+
+      if(productDelete.error) throw productDelete.error;
+
+      await loadSellerProducts();
+    }catch(error){
+      console.error(error);
+      alert("No pudimos eliminar el producto: " + error.message);
+    }
   }
 
   /* =====================================================
@@ -2944,11 +3996,13 @@
   $("closeAuthButton").addEventListener("click",()=>closeModal($("authModal")));
   $("closeAccountButton").addEventListener("click",()=>closeModal($("accountModal")));
   $("closeBrandButton").addEventListener("click",()=>closeModal($("brandModal")));
+  $("closeProductButton").addEventListener("click",()=>closeModal($("productModal")));
 
   [
     $("authModal"),
     $("accountModal"),
-    $("brandModal")
+    $("brandModal"),
+    $("productModal")
   ].forEach(backgroundClose);
 </script>
 
