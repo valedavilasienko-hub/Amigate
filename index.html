@@ -6885,12 +6885,41 @@
 
         $(sectionPrefix + page)?.classList.add("active");
         $(titleId).textContent = button.textContent.trim();
+
+        // Los gráficos se dibujan después de volver visible la sección.
+        if(attribute === "data-seller-page" && page === "economico"){
+          requestAnimationFrame(()=>{
+            requestAnimationFrame(renderEconomicCharts);
+          });
+        }
+
+        if(attribute === "data-seller-page" && page === "financiero"){
+          requestAnimationFrame(()=>{
+            requestAnimationFrame(renderFinancialCharts);
+          });
+        }
+
+        if(attribute === "data-seller-page" && page === "diseno"){
+          loadStoreDesign().catch(console.warn);
+        }
+
+        if(attribute === "data-seller-page" && page === "productos"){
+          loadSellerProducts().catch(console.warn);
+        }
       });
     });
   }
 
   setupPortalNavigation("data-buyer-page","buyerPortal","buyerPortalTitle","buyer-");
   setupPortalNavigation("data-seller-page","sellerPortal","sellerPortalTitle","seller-");
+
+  window.addEventListener("resize",()=>{
+    const economicVisible = $("seller-economico")?.classList.contains("active");
+    const financialVisible = $("seller-financiero")?.classList.contains("active");
+
+    if(economicVisible) renderEconomicCharts();
+    if(financialVisible) renderFinancialCharts();
+  });
 
   $("openBuyerPortalButton").addEventListener("click",async()=>{
     closeModal($("accountModal"));
