@@ -1,7848 +1,1303 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Amigate</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script src="https://cdn.amcharts.com/lib/5/index.js"></script>
-<script src="https://cdn.amcharts.com/lib/5/map.js"></script>
-<script src="https://cdn.amcharts.com/lib/5/geodata/argentinaHigh.js"></script>
-
-<style>
-:root{
-  --orange:#EB6841;
-  --orange-dark:#D65330;
-  --orange-soft:#F4C0AE;
-  --cream:#FFF8F2;
-  --cream2:#FFF2E9;
-  --dark:#211D1B;
-  --gray:#706762;
-  --border:#EEDFD7;
-  --green:#2D8A62;
-  --red:#B64839;
-}
-
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
-html{
-  scroll-behavior:smooth;
-}
-
-body{
-  font-family:"DM Sans",sans-serif;
-  background:var(--cream);
-  color:var(--dark);
-  overflow-x:hidden;
-}
-
-button,
-input,
-select,
-textarea{
-  font:inherit;
-}
-
-button{
-  cursor:pointer;
-  touch-action:manipulation;
-  -webkit-tap-highlight-color:transparent;
-}
-
-.hidden{
-  display:none !important;
-}
-
-.section-label{
-  color:var(--orange);
-  font-size:11px;
-  font-weight:800;
-  letter-spacing:.13em;
-  text-transform:uppercase;
-}
-
-.logo{
-  color:var(--orange);
-  font-size:36px;
-  font-weight:800;
-  letter-spacing:-2px;
-}
-
-/* =========================================================
-HOME
-========================================================= */
-
-.home{
-  min-height:100vh;
-  display:grid;
-  grid-template-columns:44% 56%;
-
-  background:
-    radial-gradient(
-      circle at 80% 45%,
-      rgba(235,104,65,.10),
-      transparent 32%
-    ),
-    var(--cream);
-}
-
-.hero{
-  min-height:100vh;
-  padding:40px 3vw 40px 5vw;
-
-  display:flex;
-  flex-direction:column;
-
-  position:relative;
-  z-index:5;
-}
-
-.hero-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:20px;
-}
-
-.session-chip{
-  display:none;
-  align-items:center;
-  gap:7px;
-
-  padding:7px 11px;
-
-  border:1px solid rgba(235,104,65,.18);
-  border-radius:100px;
-
-  background:rgba(255,255,255,.72);
-
-  color:var(--gray);
-  font-size:11px;
-}
-
-.session-chip.visible{
-  display:flex;
-}
-
-.session-dot{
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  background:#42A87C;
-}
-
-.hero-content{
-  flex:1;
-
-  max-width:680px;
-
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-}
-
-.eyebrow{
-  margin-bottom:19px;
-
-  color:var(--orange);
-
-  font-size:12px;
-  font-weight:800;
-  letter-spacing:.14em;
-  text-transform:uppercase;
-}
-
-h1{
-  font-family:"Playfair Display",serif;
-  font-size:clamp(54px,5.4vw,92px);
-  line-height:.95;
-  letter-spacing:-.055em;
-  font-weight:600;
-}
-
-h1 span{
-  color:var(--orange);
-}
-
-.hero-line{
-  width:70px;
-  height:4px;
-
-  margin:27px 0 23px;
-
-  border-radius:100px;
-
-  background:var(--orange);
-}
-
-.hero-text{
-  max-width:600px;
-
-  color:var(--gray);
-
-  font-size:17px;
-  line-height:1.6;
-}
-
-.hero-buttons{
-  margin-top:31px;
-
-  display:flex;
-  gap:12px;
-}
-
-.hero-button{
-  min-height:56px;
-  padding:0 23px;
-
-  border-radius:15px;
-
-  font-weight:800;
-}
-
-.hero-button.primary{
-  border:none;
-  background:var(--orange);
-  color:white;
-
-  box-shadow:0 14px 32px rgba(235,104,65,.18);
-}
-
-.hero-button.secondary{
-  border:1px solid rgba(235,104,65,.22);
-  background:rgba(255,255,255,.67);
-  color:var(--dark);
-}
-
-/* =========================================================
-MAPA
-========================================================= */
-
-.map-area{
-  min-height:100vh;
-  position:relative;
-  overflow:hidden;
-}
-
-.map-heading{
-  position:absolute;
-  top:36px;
-  left:30px;
-
-  z-index:20;
-
-  pointer-events:none;
-}
-
-.map-heading span{
-  display:block;
-
-  color:var(--orange);
-
-  font-size:11px;
-  font-weight:800;
-  letter-spacing:.13em;
-  text-transform:uppercase;
-}
-
-.map-heading strong{
-  display:block;
-  margin-top:4px;
-
-  font-family:"Playfair Display",serif;
-  font-size:25px;
-}
-
-#chartdiv{
-  width:100%;
-  height:100vh;
-}
-
-.province-card{
-  position:absolute;
-
-  right:3vw;
-  bottom:4vh;
-
-  width:260px;
-  padding:18px;
-
-  z-index:30;
-
-  opacity:0;
-  pointer-events:none;
-  transform:translateY(15px);
-
-  border:1px solid rgba(235,104,65,.1);
-  border-radius:19px;
-
-  background:rgba(255,255,255,.95);
-
-  box-shadow:0 20px 50px rgba(60,30,15,.10);
-
-  transition:.2s;
-}
-
-.province-card.visible{
-  opacity:1;
-  pointer-events:auto;
-  transform:none;
-}
-
-.province-card small{
-  display:block;
-
-  color:var(--gray);
-
-  font-size:10px;
-  font-weight:800;
-  text-transform:uppercase;
-}
-
-.province-card strong{
-  display:block;
-
-  margin-top:4px;
-
-  font-family:"Playfair Display",serif;
-  font-size:27px;
-}
-
-.province-card p{
-  margin-top:6px;
-
-  color:var(--gray);
-
-  font-size:12px;
-  line-height:1.45;
-}
-
-.province-card button{
-  width:100%;
-
-  margin-top:13px;
-  padding:13px;
-
-  border:none;
-  border-radius:12px;
-
-  background:var(--orange);
-  color:white;
-
-  font-weight:800;
-}
-
-.clear-province{
-  margin-top:10px;
-
-  color:var(--gray);
-
-  text-align:center;
-  font-size:11px;
-
-  cursor:pointer;
-}
-
-/* =========================================================
-EXPLORAR
-========================================================= */
-
-.explore{
-  padding:105px 6% 115px;
-
-  position:relative;
-  z-index:100;
-
-  background:white;
-}
-
-.section-heading{
-  max-width:850px;
-  margin-bottom:50px;
-}
-
-.section-heading h2{
-  margin-top:10px;
-
-  font-family:"Playfair Display",serif;
-  font-size:clamp(42px,5vw,70px);
-  line-height:1;
-  letter-spacing:-.045em;
-}
-
-.section-heading p{
-  margin-top:15px;
-  color:var(--gray);
-  font-size:17px;
-}
-
-.category-grid{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:15px;
-}
-
-.category{
-  min-height:220px;
-  padding:23px;
-
-  display:flex;
-  flex-direction:column;
-
-  position:relative;
-  z-index:101;
-
-  border:1px solid var(--border);
-  border-radius:23px;
-
-  background:var(--cream);
-
-  cursor:pointer;
-  user-select:none;
-  touch-action:manipulation;
-
-  transition:.2s;
-}
-
-.category:hover{
-  transform:translateY(-4px);
-  border-color:rgba(235,104,65,.45);
-}
-
-.category-icon{
-  width:46px;
-  height:46px;
-
-  display:grid;
-  place-items:center;
-
-  border-radius:14px;
-
-  background:var(--cream2);
-
-  font-size:24px;
-
-  pointer-events:none;
-}
-
-.category strong{
-  margin-top:auto;
-  font-size:20px;
-  pointer-events:none;
-}
-
-.category p{
-  margin-top:5px;
-
-  color:var(--gray);
-
-  font-size:13px;
-  line-height:1.4;
-
-  pointer-events:none;
-}
-
-/* =========================================================
-MARKETPLACE
-========================================================= */
-
-.marketplace{
-  display:none;
-
-  min-height:100vh;
-
-  background:#FBF8F6;
-}
-
-.marketplace.visible{
-  display:block;
-}
-
-.market-header{
-  min-height:76px;
-
-  position:sticky;
-  top:0;
-  z-index:500;
-
-  padding:0 5%;
-
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:20px;
-
-  background:rgba(255,255,255,.96);
-  backdrop-filter:blur(16px);
-
-  border-bottom:1px solid #EEE5E0;
-}
-
-.market-logo{
-  color:var(--orange);
-
-  font-size:27px;
-  font-weight:800;
-  letter-spacing:-1.5px;
-}
-
-.market-header-right{
-  display:flex;
-  align-items:center;
-  gap:9px;
-}
-
-.province-pill,
-.account-small{
-  padding:9px 13px;
-
-  border:1px solid var(--border);
-  border-radius:100px;
-
-  background:white;
-
-  font-size:11px;
-  font-weight:800;
-}
-
-.province-pill{
-  background:var(--cream);
-}
-
-.market-content{
-  width:min(1220px,90%);
-
-  margin:auto;
-
-  padding:50px 0 100px;
-}
-
-.breadcrumb{
-  display:flex;
-  flex-wrap:wrap;
-  align-items:center;
-  gap:7px;
-
-  color:var(--gray);
-
-  font-size:11px;
-}
-
-.breadcrumb button{
-  border:none;
-  background:none;
-  color:var(--gray);
-}
-
-.market-hero{
-  margin-top:25px;
-
-  display:flex;
-  align-items:flex-end;
-  justify-content:space-between;
-
-  gap:25px;
-}
-
-.market-hero h2{
-  margin-top:7px;
-
-  font-family:"Playfair Display",serif;
-  font-size:clamp(44px,5vw,70px);
-  line-height:.98;
-}
-
-.market-hero p{
-  max-width:680px;
-
-  margin-top:14px;
-
-  color:var(--gray);
-
-  font-size:14px;
-  line-height:1.6;
-}
-
-.back-button{
-  min-height:43px;
-  padding:0 16px;
-
-  border:1px solid var(--border);
-  border-radius:12px;
-
-  background:white;
-
-  font-weight:800;
-}
-
-.loader-box{
-  display:none;
-
-  padding:45px;
-
-  color:var(--gray);
-
-  text-align:center;
-}
-
-.loader-box.visible{
-  display:block;
-}
-
-.loader{
-  width:30px;
-  height:30px;
-
-  margin:0 auto 12px;
-
-  border:3px solid #F0DFD7;
-  border-top-color:var(--orange);
-  border-radius:50%;
-
-  animation:spin .7s linear infinite;
-}
-
-@keyframes spin{
-  to{transform:rotate(360deg);}
-}
-
-.subcategories{
-  margin-top:45px;
-}
-
-.subcategories-top{
-  margin-bottom:18px;
-
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
-
-.subcategories-top h3{
-  font-family:"Playfair Display",serif;
-  font-size:30px;
-}
-
-.subcategory-count{
-  color:var(--gray);
-  font-size:11px;
-}
-
-.subcategory-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:12px;
-}
-
-.subcategory{
-  min-height:140px;
-  padding:19px;
-
-  display:flex;
-  flex-direction:column;
-
-  border:1px solid #E8DFDA;
-  border-radius:18px;
-
-  background:white;
-
-  cursor:pointer;
-  touch-action:manipulation;
-
-  transition:.2s;
-}
-
-.subcategory:hover{
-  transform:translateY(-3px);
-  border-color:rgba(235,104,65,.45);
-}
-
-.subcategory small{
-  color:var(--orange);
-
-  font-size:9px;
-  font-weight:800;
-  text-transform:uppercase;
-
-  pointer-events:none;
-}
-
-.subcategory strong{
-  margin-top:auto;
-
-  font-size:17px;
-
-  pointer-events:none;
-}
-
-.subcategory div{
-  margin-top:7px;
-
-  color:var(--gray);
-
-  font-size:11px;
-
-  pointer-events:none;
-}
-
-.results{
-  display:none;
-
-  margin-top:45px;
-}
-
-.results.visible{
-  display:block;
-}
-
-.results h3{
-  font-family:"Playfair Display",serif;
-  font-size:31px;
-}
-
-.results p{
-  margin-top:5px;
-
-  color:var(--gray);
-
-  font-size:12px;
-}
-
-.empty-box{
-  display:none;
-
-  margin-top:35px;
-  padding:40px 25px;
-
-  border:1px dashed #DDCDC5;
-  border-radius:20px;
-
-  background:white;
-
-  text-align:center;
-}
-
-.empty-box.visible{
-  display:block;
-}
-
-.empty-box strong{
-  display:block;
-
-  font-family:"Playfair Display",serif;
-  font-size:24px;
-}
-
-.empty-box p{
-  max-width:520px;
-
-  margin:8px auto 0;
-
-  color:var(--gray);
-
-  font-size:12px;
-  line-height:1.5;
-}
-
-.retry-button{
-  min-height:41px;
-
-  margin-top:16px;
-  padding:0 15px;
-
-  border:none;
-  border-radius:11px;
-
-  background:var(--orange);
-  color:white;
-
-  font-weight:800;
-}
-
-/* =========================================================
-ABOUT
-========================================================= */
-
-.about{
-  padding:100px 6%;
-}
-
-.about-inner{
-  max-width:1250px;
-
-  margin:auto;
-
-  display:grid;
-  grid-template-columns:.8fr 1.2fr;
-  gap:70px;
-
-  align-items:center;
-}
-
-.about-ar{
-  color:rgba(235,104,65,.12);
-
-  font-family:"Playfair Display",serif;
-  font-size:clamp(100px,15vw,220px);
-  line-height:.7;
-}
-
-.about h3{
-  font-family:"Playfair Display",serif;
-  font-size:clamp(38px,4vw,62px);
-  line-height:1;
-}
-
-.about p{
-  max-width:650px;
-
-  margin-top:19px;
-
-  color:var(--gray);
-
-  font-size:16px;
-  line-height:1.65;
-}
-
-/* =========================================================
-FOOTER
-========================================================= */
-
-footer{
-  padding:55px 6% 32px;
-
-  background:var(--dark);
-  color:white;
-}
-
-.footer-logo{
-  color:var(--orange);
-  font-size:29px;
-  font-weight:800;
-}
-
-.footer-copy{
-  margin-top:6px;
-
-  color:#BBB1AC;
-
-  font-size:12px;
-}
-
-.footer-bottom{
-  margin-top:45px;
-  padding-top:20px;
-
-  display:flex;
-  justify-content:space-between;
-  gap:20px;
-
-  border-top:1px solid rgba(255,255,255,.08);
-
-  color:#817873;
-
-  font-size:10px;
-}
-
-.footer-links{
-  display:flex;
-  gap:18px;
-}
-
-.admin-link{
-  cursor:pointer;
-}
-
-/* =========================================================
-MODALES
-========================================================= */
-
-.modal{
-  position:fixed;
-  inset:0;
-
-  z-index:5000;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  padding:20px;
-
-  opacity:0;
-  pointer-events:none;
-
-  background:rgba(20,15,13,.58);
-  backdrop-filter:blur(12px);
-
-  transition:.2s;
-}
-
-.modal.open{
-  opacity:1;
-  pointer-events:auto;
-}
-
-.modal-card{
-  width:min(470px,100%);
-  max-height:calc(100vh - 40px);
-
-  overflow:auto;
-
-  padding:30px;
-
-  border-radius:24px;
-
-  background:white;
-
-  box-shadow:0 30px 100px rgba(0,0,0,.22);
-}
-
-.modal-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-.modal-brand{
-  color:var(--orange);
-  font-size:25px;
-  font-weight:800;
-}
-
-.modal-close{
-  width:36px;
-  height:36px;
-
-  display:grid;
-  place-items:center;
-
-  border:none;
-  border-radius:50%;
-
-  background:#F7F2EF;
-
-  font-size:22px;
-}
-
-.modal-card h2{
-  margin-top:23px;
-
-  font-family:"Playfair Display",serif;
-  font-size:35px;
-}
-
-.modal-description{
-  margin-top:7px;
-
-  color:var(--gray);
-
-  font-size:12px;
-  line-height:1.5;
-}
-
-.auth-tabs{
-  margin-top:20px;
-  padding:4px;
-
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:4px;
-
-  border-radius:13px;
-
-  background:#F7F3F1;
-}
-
-.auth-tab{
-  padding:10px;
-
-  border:none;
-  border-radius:10px;
-
-  background:transparent;
-
-  color:var(--gray);
-
-  font-size:11px;
-  font-weight:800;
-}
-
-.auth-tab.active{
-  background:white;
-  color:var(--dark);
-}
-
-.auth-panel{
-  display:none;
-}
-
-.auth-panel.active{
-  display:block;
-}
-
-.seller-intent{
-  display:none;
-
-  margin-top:14px;
-  padding:12px;
-
-  border-radius:12px;
-
-  background:var(--cream2);
-
-  color:var(--gray);
-
-  font-size:11px;
-  line-height:1.5;
-}
-
-.seller-intent.visible{
-  display:block;
-}
-
-.form-row{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-}
-
-.form-group{
-  margin-top:15px;
-}
-
-.form-group label{
-  display:block;
-
-  margin-bottom:6px;
-
-  font-size:10px;
-  font-weight:800;
-}
-
-.form-control{
-  width:100%;
-
-  padding:13px;
-
-  border:1px solid var(--border);
-  border-radius:11px;
-
-  outline:none;
-
-  background:white;
-}
-
-.form-control:focus{
-  border-color:var(--orange);
-}
-
-textarea.form-control{
-  min-height:100px;
-  resize:vertical;
-}
-
-.password-wrap{
-  position:relative;
-}
-
-.password-wrap input{
-  padding-right:65px;
-}
-
-.password-toggle{
-  position:absolute;
-
-  right:10px;
-  top:50%;
-
-  transform:translateY(-50%);
-
-  border:none;
-  background:none;
-
-  color:var(--gray);
-
-  font-size:10px;
-  font-weight:800;
-}
-
-.submit-button{
-  width:100%;
-  min-height:48px;
-
-  margin-top:20px;
-
-  border:none;
-  border-radius:12px;
-
-  background:var(--orange);
-  color:white;
-
-  font-weight:800;
-}
-
-.submit-button:disabled{
-  opacity:.55;
-}
-
-.message{
-  display:none;
-
-  margin-top:12px;
-  padding:11px;
-
-  border-radius:10px;
-
-  font-size:11px;
-  line-height:1.45;
-}
-
-.message.visible{
-  display:block;
-}
-
-.message.error{
-  background:#FFF0ED;
-  color:#963B2F;
-}
-
-.message.success{
-  background:#ECF8F2;
-  color:#276A4E;
-}
-
-/* =========================================================
-ACCOUNT
-========================================================= */
-
-.account-card{
-  margin-top:20px;
-  padding:18px;
-
-  border:1px solid var(--border);
-  border-radius:17px;
-
-  background:var(--cream);
-}
-
-.avatar{
-  width:54px;
-  height:54px;
-
-  display:grid;
-  place-items:center;
-
-  border-radius:50%;
-
-  background:var(--orange);
-  color:white;
-
-  font-family:"Playfair Display",serif;
-  font-size:23px;
-}
-
-.account-name{
-  margin-top:12px;
-
-  font-size:19px;
-  font-weight:800;
-}
-
-.account-email{
-  margin-top:3px;
-
-  color:var(--gray);
-
-  font-size:11px;
-}
-
-.account-role{
-  display:inline-flex;
-
-  margin-top:10px;
-  padding:6px 9px;
-
-  border-radius:100px;
-
-  background:var(--cream2);
-
-  color:var(--orange-dark);
-
-  font-size:9px;
-  font-weight:800;
-  text-transform:uppercase;
-}
-
-.account-actions{
-  margin-top:16px;
-
-  display:grid;
-  gap:8px;
-}
-
-.account-action{
-  min-height:44px;
-
-  border:1px solid var(--border);
-  border-radius:11px;
-
-  background:white;
-
-  font-weight:700;
-}
-
-.account-action.primary{
-  border-color:var(--orange);
-  background:var(--orange);
-  color:white;
-}
-
-.account-action.logout{
-  color:var(--red);
-}
-
-/* =========================================================
-PORTALES
-========================================================= */
-
-.portal{
-  position:fixed;
-  inset:0;
-
-  z-index:5800;
-
-  display:none;
-
-  background:#F6F3F1;
-}
-
-.portal.visible{
-  display:flex;
-}
-
-.portal-sidebar{
-  width:255px;
-
-  padding:25px 17px;
-
-  display:flex;
-  flex-direction:column;
-
-  background:var(--dark);
-}
-
-.portal-logo{
-  padding:0 10px 25px;
-
-  color:var(--orange);
-
-  font-size:27px;
-  font-weight:800;
-}
-
-.portal-menu{
-  display:grid;
-  gap:3px;
-}
-
-.portal-nav{
-  width:100%;
-
-  padding:11px 12px;
-
-  border:none;
-  border-radius:10px;
-
-  background:transparent;
-
-  color:#B9AEAA;
-
-  text-align:left;
-
-  font-size:12px;
-  font-weight:700;
-}
-
-.portal-nav.active{
-  background:rgba(235,104,65,.15);
-  color:white;
-}
-
-.portal-exit{
-  margin-top:auto;
-  padding:11px;
-
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:10px;
-
-  background:none;
-
-  color:#AAA19D;
-}
-
-.portal-main{
-  flex:1;
-  min-width:0;
-  overflow:auto;
-}
-
-.portal-header{
-  min-height:77px;
-  padding:0 30px;
-
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-
-  background:white;
-
-  border-bottom:1px solid #E8E1DD;
-}
-
-.portal-header h2{
-  font-family:"Playfair Display",serif;
-  font-size:28px;
-}
-
-.portal-content{
-  padding:30px;
-}
-
-.portal-section{
-  display:none;
-}
-
-.portal-section.active{
-  display:block;
-}
-
-.portal-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:13px;
-}
-
-.portal-stat{
-  padding:19px;
-
-  border:1px solid #E6DFDB;
-  border-radius:16px;
-
-  background:white;
-}
-
-.portal-stat small{
-  color:var(--gray);
-
-  font-size:9px;
-  font-weight:800;
-  text-transform:uppercase;
-}
-
-.portal-stat strong{
-  display:block;
-
-  margin-top:12px;
-
-  font-family:"Playfair Display",serif;
-  font-size:33px;
-}
-
-.panel{
-  margin-top:17px;
-  padding:23px;
-
-  border:1px solid #E6DFDB;
-  border-radius:17px;
-
-  background:white;
-}
-
-.panel-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:15px;
-}
-
-.panel-top button{
-  min-height:40px;
-  padding:0 14px;
-
-  border:none;
-  border-radius:10px;
-
-  background:var(--orange);
-  color:white;
-
-  font-size:11px;
-  font-weight:800;
-}
-
-.list{
-  margin-top:15px;
-
-  display:grid;
-  gap:9px;
-}
-
-.list-row{
-  padding:14px;
-
-  border:1px solid #ECE5E1;
-  border-radius:12px;
-
-  background:#FCFAF9;
-
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:15px;
-}
-
-.list-row strong{
-  font-size:12px;
-}
-
-.list-row p{
-  margin-top:3px;
-
-  color:var(--gray);
-
-  font-size:10px;
-}
-
-.empty-panel{
-  margin-top:15px;
-  padding:24px;
-
-  border:1px dashed #DED2CC;
-  border-radius:13px;
-
-  color:var(--gray);
-
-  text-align:center;
-  font-size:12px;
-}
-
-/* =========================================================
-BRAND ONBOARDING
-========================================================= */
-
-.brand-summary{
-  margin-top:18px;
-  padding:14px;
-
-  border-radius:13px;
-
-  background:var(--cream);
-
-  color:var(--gray);
-
-  font-size:11px;
-  line-height:1.55;
-}
-
-.brand-summary strong{
-  color:var(--dark);
-}
-
-/* =========================================================
-PRODUCT
-========================================================= */
-
-.product-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:0 12px;
-}
-
-.product-grid .wide{
-  grid-column:1/-1;
-}
-
-/* =========================================================
-MOBILE
-========================================================= */
-
-@media(max-width:1050px){
-
-  .category-grid{
-    grid-template-columns:repeat(3,1fr);
-  }
-
-  .subcategory-grid{
-    grid-template-columns:repeat(3,1fr);
-  }
-
-  .portal-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-}
-
-@media(max-width:850px){
-
-  .home{
-    display:block;
-  }
-
-  .hero{
-    min-height:auto;
-    padding:28px 22px 52px;
-  }
-
-  .hero-content{
-    padding-top:55px;
-  }
-
-  h1{
-    font-size:clamp(49px,13vw,73px);
-  }
-
-  .hero-buttons{
-    flex-direction:column;
-  }
-
-  .map-area{
-    min-height:auto;
-
-    padding-top:25px;
-
-    overflow:visible;
-  }
-
-  .map-heading{
-    position:relative;
-
-    top:auto;
-    left:auto;
-
-    padding:0 22px 8px;
-  }
-
-  #chartdiv{
-    height:650px;
-  }
-
-  .province-card{
-    left:17px;
-    right:auto;
-    bottom:18px;
-
-    width:calc(100% - 34px);
-  }
-
-  .explore{
-    position:relative;
-    z-index:1000;
-    isolation:isolate;
-  }
-
-  .category-grid{
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-  }
-
-  .category{
-    min-height:145px;
-    padding:16px;
-
-    z-index:1001;
-
-    pointer-events:auto !important;
-  }
-
-  .category:last-child:nth-child(odd){
-    grid-column:1/-1;
-    min-height:105px;
-  }
-
-  .category strong{
-    font-size:16px;
-  }
-
-  .category p{
-    font-size:11px;
-  }
-
-  .market-content{
-    width:calc(100% - 34px);
-    padding-top:34px;
-  }
-
-  .market-hero{
-    flex-direction:column;
-    align-items:flex-start;
-  }
-
-  .subcategory-grid{
-    display:block;
-  }
-
-  .subcategory{
-    min-height:0;
-
-    margin-bottom:8px;
-    padding:16px;
-
-    display:grid;
-    grid-template-columns:1fr auto;
-    align-items:center;
-
-    border-radius:13px;
-  }
-
-  .subcategory small{
-    display:none;
-  }
-
-  .subcategory strong{
-    margin:0;
-    font-size:14px;
-  }
-
-  .subcategory div{
-    margin:0;
-  }
-
-  .about-inner{
-    grid-template-columns:1fr;
-    gap:25px;
-  }
-
-  .portal-sidebar{
-    width:74px;
-    padding:20px 9px;
-  }
-
-  .portal-logo{
-    padding:0 0 20px;
-
-    font-size:0;
-
-    text-align:center;
-  }
-
-  .portal-logo::before{
-    content:"A";
-    color:var(--orange);
-    font-size:27px;
-    font-weight:800;
-  }
-
-  .portal-nav{
-    padding:11px 4px;
-
-    overflow:hidden;
-
-    text-align:center;
-    white-space:nowrap;
-
-    font-size:9px;
-  }
-
-  .portal-exit{
-    padding:10px 3px;
-    font-size:9px;
-  }
-
-  .portal-header{
-    padding:0 17px;
-  }
-
-  .portal-content{
-    padding:17px;
-  }
-
-}
-
-@media(max-width:520px){
-
-  .logo{
-    font-size:29px;
-  }
-
-  .explore,
-  .about{
-    padding:68px 17px;
-  }
-
-  #chartdiv{
-    height:610px;
-  }
-
-  .market-header{
-    padding:0 14px;
-  }
-
-  .market-logo{
-    font-size:22px;
-  }
-
-  .province-pill{
-    max-width:110px;
-
-    overflow:hidden;
-    white-space:nowrap;
-    text-overflow:ellipsis;
-  }
-
-  .form-row,
-  .product-grid,
-  .portal-grid{
-    grid-template-columns:1fr;
-  }
-
-  .product-grid .wide{
-    grid-column:auto;
-  }
-
-  .modal-card{
-    padding:21px 18px;
-  }
-
-  .footer-bottom{
-    flex-direction:column;
-  }
-
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amigate</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+  <script src="https://cdn.amcharts.com/lib/5/map.js"></script>
+  <script src="https://cdn.amcharts.com/lib/5/geodata/argentinaHigh.js"></script>
+
+  <style>
+    :root{
+      --orange:#EB6841;
+      --orange-dark:#D65330;
+      --orange-soft:#F4C0AE;
+      --cream:#FFF8F2;
+      --cream-2:#FFF2E9;
+      --dark:#211D1B;
+      --gray:#706762;
+      --border:#EEDFD7;
+      --white:#fff;
+      --green:#2D8A62;
+      --red:#B64839;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:"DM Sans",sans-serif;background:var(--cream);color:var(--dark);overflow-x:hidden}
+    button,input,select,textarea{font:inherit}
+    button{cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+    .hidden{display:none!important}
+    .section-label{color:var(--orange);font-size:11px;font-weight:800;letter-spacing:.13em;text-transform:uppercase}
+
+    .home{
+      min-height:100vh;
+      display:grid;
+      grid-template-columns:44% 56%;
+      background:radial-gradient(circle at 80% 45%,rgba(235,104,65,.10),transparent 32%),var(--cream);
+    }
+
+    .hero{min-height:100vh;padding:40px 3vw 40px 5vw;display:flex;flex-direction:column;position:relative;z-index:5}
+    .hero-top{display:flex;justify-content:space-between;align-items:center;gap:20px}
+    .logo,.market-logo,.modal-brand,.portal-logo{color:var(--orange);font-weight:800;letter-spacing:-1.5px}
+    .logo{font-size:36px}
+
+    .session-chip{
+      display:none;align-items:center;gap:7px;padding:7px 11px;border:1px solid rgba(235,104,65,.18);
+      border-radius:100px;background:rgba(255,255,255,.72);color:var(--gray);font-size:11px
+    }
+    .session-chip.visible{display:flex}
+    .session-dot{width:7px;height:7px;border-radius:50%;background:#42A87C}
+
+    .hero-content{flex:1;max-width:680px;display:flex;flex-direction:column;justify-content:center}
+    .eyebrow{margin-bottom:19px;color:var(--orange);font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+    h1{font-family:"Playfair Display",serif;font-size:clamp(54px,5.4vw,92px);line-height:.95;letter-spacing:-.055em;font-weight:600}
+    h1 span{color:var(--orange)}
+    .hero-line{width:70px;height:4px;margin:27px 0 23px;border-radius:100px;background:var(--orange)}
+    .hero-text{max-width:600px;color:var(--gray);font-size:17px;line-height:1.6}
+    .hero-buttons{margin-top:31px;display:flex;gap:12px}
+    .hero-button{min-height:56px;padding:0 23px;border-radius:15px;font-weight:800}
+    .hero-button.primary{border:none;background:var(--orange);color:white}
+    .hero-button.secondary{border:1px solid rgba(235,104,65,.22);background:rgba(255,255,255,.67);color:var(--dark)}
+
+    .map-area{min-height:100vh;position:relative;overflow:hidden}
+    .map-heading{position:absolute;top:36px;left:30px;z-index:20;pointer-events:none}
+    .map-heading span{display:block;color:var(--orange);font-size:11px;font-weight:800;letter-spacing:.13em;text-transform:uppercase}
+    .map-heading strong{display:block;margin-top:4px;font-family:"Playfair Display",serif;font-size:25px}
+    #chartdiv{width:100%;height:100vh}
+
+    .province-card{
+      position:absolute;right:3vw;bottom:4vh;width:260px;padding:18px;z-index:30;opacity:0;pointer-events:none;
+      transform:translateY(15px);border:1px solid rgba(235,104,65,.1);border-radius:19px;background:rgba(255,255,255,.95);
+      box-shadow:0 20px 50px rgba(60,30,15,.10);transition:.2s
+    }
+    .province-card.visible{opacity:1;pointer-events:auto;transform:none}
+    .province-card small{display:block;color:var(--gray);font-size:10px;font-weight:800;text-transform:uppercase}
+    .province-card strong{display:block;margin-top:4px;font-family:"Playfair Display",serif;font-size:27px}
+    .province-card p{margin-top:6px;color:var(--gray);font-size:12px;line-height:1.45}
+    .province-card button{width:100%;margin-top:13px;padding:13px;border:none;border-radius:12px;background:var(--orange);color:white;font-weight:800}
+    .clear-province{margin-top:10px;color:var(--gray);text-align:center;font-size:11px;cursor:pointer}
+
+    .explore{padding:105px 6% 115px;position:relative;z-index:100;background:white}
+    .section-heading{max-width:850px;margin-bottom:50px}
+    .section-heading h2{margin-top:10px;font-family:"Playfair Display",serif;font-size:clamp(42px,5vw,70px);line-height:1;letter-spacing:-.045em}
+    .section-heading p{margin-top:15px;color:var(--gray);font-size:17px}
+    .category-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:15px}
+    .category{
+      min-height:220px;padding:23px;display:flex;flex-direction:column;position:relative;z-index:101;border:1px solid var(--border);
+      border-radius:23px;background:var(--cream);cursor:pointer;user-select:none;transition:.2s
+    }
+    .category:hover{transform:translateY(-4px);border-color:rgba(235,104,65,.45)}
+    .category-icon{width:46px;height:46px;display:grid;place-items:center;border-radius:14px;background:var(--cream-2);font-size:24px;pointer-events:none}
+    .category strong{margin-top:auto;font-size:20px;pointer-events:none}
+    .category p{margin-top:5px;color:var(--gray);font-size:13px;line-height:1.4;pointer-events:none}
+
+    .about{padding:100px 6%}
+    .about-inner{max-width:1250px;margin:auto;display:grid;grid-template-columns:.8fr 1.2fr;gap:70px;align-items:center}
+    .about-ar{color:rgba(235,104,65,.12);font-family:"Playfair Display",serif;font-size:clamp(100px,15vw,220px);line-height:.7}
+    .about h3{font-family:"Playfair Display",serif;font-size:clamp(38px,4vw,62px);line-height:1}
+    .about p{max-width:650px;margin-top:19px;color:var(--gray);font-size:16px;line-height:1.65}
+
+    footer{padding:55px 6% 32px;background:var(--dark);color:white}
+    .footer-logo{color:var(--orange);font-size:29px;font-weight:800}
+    .footer-copy{margin-top:6px;color:#BBB1AC;font-size:12px}
+    .footer-bottom{margin-top:45px;padding-top:20px;display:flex;justify-content:space-between;gap:20px;border-top:1px solid rgba(255,255,255,.08);color:#817873;font-size:10px}
+    .footer-links{display:flex;gap:18px}
+    .admin-link{cursor:pointer}
+
+    .marketplace{display:none;min-height:100vh;background:#FBF8F6}
+    .marketplace.visible{display:block}
+    .market-header{
+      min-height:76px;position:sticky;top:0;z-index:500;padding:0 5%;display:flex;align-items:center;justify-content:space-between;
+      gap:20px;background:rgba(255,255,255,.96);backdrop-filter:blur(16px);border-bottom:1px solid #EEE5E0
+    }
+    .market-logo{font-size:27px}
+    .market-header-right{display:flex;align-items:center;gap:9px}
+    .province-pill,.account-small{padding:9px 13px;border:1px solid var(--border);border-radius:100px;background:white;font-size:11px;font-weight:800}
+    .province-pill{background:var(--cream)}
+    .market-content{width:min(1220px,90%);margin:auto;padding:50px 0 100px}
+    .breadcrumb{display:flex;flex-wrap:wrap;align-items:center;gap:7px;color:var(--gray);font-size:11px}
+    .breadcrumb button{border:none;background:none;color:var(--gray)}
+    .market-hero{margin-top:25px;display:flex;align-items:flex-end;justify-content:space-between;gap:25px}
+    .market-hero h2{margin-top:7px;font-family:"Playfair Display",serif;font-size:clamp(44px,5vw,70px);line-height:.98}
+    .market-hero p{max-width:680px;margin-top:14px;color:var(--gray);font-size:14px;line-height:1.6}
+    .back-button{min-height:43px;padding:0 16px;border:1px solid var(--border);border-radius:12px;background:white;font-weight:800}
+    .loader-box{display:none;padding:45px;color:var(--gray);text-align:center}
+    .loader-box.visible{display:block}
+    .loader{width:30px;height:30px;margin:0 auto 12px;border:3px solid #F0DFD7;border-top-color:var(--orange);border-radius:50%;animation:spin .7s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .subcategories{margin-top:45px}
+    .subcategories-top{margin-bottom:18px;display:flex;align-items:center;justify-content:space-between}
+    .subcategories-top h3{font-family:"Playfair Display",serif;font-size:30px}
+    .subcategory-count{color:var(--gray);font-size:11px}
+    .subcategory-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+    .subcategory{min-height:140px;padding:19px;display:flex;flex-direction:column;border:1px solid #E8DFDA;border-radius:18px;background:white;cursor:pointer;transition:.2s}
+    .subcategory:hover{transform:translateY(-3px);border-color:rgba(235,104,65,.45)}
+    .subcategory small{color:var(--orange);font-size:9px;font-weight:800;text-transform:uppercase;pointer-events:none}
+    .subcategory strong{margin-top:auto;font-size:17px;pointer-events:none}
+    .subcategory div{margin-top:7px;color:var(--gray);font-size:11px;pointer-events:none}
+    .results{display:none;margin-top:45px}
+    .results.visible{display:block}
+    .results h3{font-family:"Playfair Display",serif;font-size:31px}
+    .results p{margin-top:5px;color:var(--gray);font-size:12px}
+    .empty-box{display:none;margin-top:35px;padding:40px 25px;border:1px dashed #DDCDC5;border-radius:20px;background:white;text-align:center}
+    .empty-box.visible{display:block}
+    .empty-box strong{display:block;font-family:"Playfair Display",serif;font-size:24px}
+    .empty-box p{max-width:520px;margin:8px auto 0;color:var(--gray);font-size:12px;line-height:1.5}
+    .retry-button{min-height:41px;margin-top:16px;padding:0 15px;border:none;border-radius:11px;background:var(--orange);color:white;font-weight:800}
+
+    .modal{
+      position:fixed;inset:0;z-index:5000;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;
+      background:rgba(20,15,13,.58);backdrop-filter:blur(12px);transition:.2s
+    }
+    .modal.open{opacity:1;pointer-events:auto}
+    .modal-card{width:min(560px,100%);max-height:calc(100vh - 40px);overflow:auto;padding:30px;border-radius:24px;background:white;box-shadow:0 30px 100px rgba(0,0,0,.22)}
+    .modal-top{display:flex;justify-content:space-between;align-items:center}
+    .modal-brand{font-size:25px}
+    .modal-close{width:36px;height:36px;display:grid;place-items:center;border:none;border-radius:50%;background:#F7F2EF;font-size:22px}
+    .modal-card h2{margin-top:23px;font-family:"Playfair Display",serif;font-size:35px}
+    .modal-description{margin-top:7px;color:var(--gray);font-size:12px;line-height:1.5}
+    .auth-tabs{margin-top:20px;padding:4px;display:grid;grid-template-columns:1fr 1fr;gap:4px;border-radius:13px;background:#F7F3F1}
+    .auth-tab{padding:10px;border:none;border-radius:10px;background:transparent;color:var(--gray);font-size:11px;font-weight:800}
+    .auth-tab.active{background:white;color:var(--dark)}
+    .auth-panel{display:none}
+    .auth-panel.active{display:block}
+    .seller-intent{display:none;margin-top:14px;padding:12px;border-radius:12px;background:var(--cream-2);color:var(--gray);font-size:11px;line-height:1.5}
+    .seller-intent.visible{display:block}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .form-group{margin-top:15px}
+    .form-group label{display:block;margin-bottom:6px;font-size:10px;font-weight:800}
+    .form-control{width:100%;padding:13px;border:1px solid var(--border);border-radius:11px;outline:none;background:white}
+    .form-control:focus{border-color:var(--orange)}
+    textarea.form-control{min-height:100px;resize:vertical}
+    .password-wrap{position:relative}
+    .password-wrap input{padding-right:65px}
+    .password-toggle{position:absolute;right:10px;top:50%;transform:translateY(-50%);border:none;background:none;color:var(--gray);font-size:10px;font-weight:800}
+    .submit-button{width:100%;min-height:48px;margin-top:20px;border:none;border-radius:12px;background:var(--orange);color:white;font-weight:800}
+    .submit-button:disabled{opacity:.55}
+    .message{display:none;margin-top:12px;padding:11px;border-radius:10px;font-size:11px;line-height:1.45}
+    .message.visible{display:block}
+    .message.error{background:#FFF0ED;color:#963B2F}
+    .message.success{background:#ECF8F2;color:#276A4E}
+
+    .account-card{margin-top:20px;padding:18px;border:1px solid var(--border);border-radius:17px;background:var(--cream)}
+    .avatar{width:54px;height:54px;display:grid;place-items:center;border-radius:50%;background:var(--orange);color:white;font-family:"Playfair Display",serif;font-size:23px}
+    .account-name{margin-top:12px;font-size:19px;font-weight:800}
+    .account-email{margin-top:3px;color:var(--gray);font-size:11px}
+    .account-role{display:inline-flex;margin-top:10px;padding:6px 9px;border-radius:100px;background:var(--cream-2);color:var(--orange-dark);font-size:9px;font-weight:800;text-transform:uppercase}
+    .account-actions{margin-top:16px;display:grid;gap:8px}
+    .account-action{min-height:44px;border:1px solid var(--border);border-radius:11px;background:white;font-weight:700}
+    .account-action.primary{border-color:var(--orange);background:var(--orange);color:white}
+    .account-action.logout{color:var(--red)}
+
+    .steps{display:flex;gap:6px;margin-top:20px}
+    .step-dot{height:5px;flex:1;border-radius:100px;background:#EEE4DF}
+    .step-dot.active{background:var(--orange)}
+    .brand-step{display:none}
+    .brand-step.active{display:block}
+    .step-actions{display:flex;justify-content:space-between;gap:10px;margin-top:22px}
+    .step-actions button{min-height:44px;padding:0 17px;border-radius:11px;font-weight:800}
+    .step-back{border:1px solid var(--border);background:white}
+    .step-next{border:none;background:var(--orange);color:white}
+    .email-readonly{background:#F8F5F3;color:var(--gray)}
+    .shipping-tools{margin-top:15px;padding:13px;border:1px solid var(--border);border-radius:13px;background:var(--cream)}
+    .check-row{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:700}
+    .check-row input{width:17px;height:17px;accent-color:var(--orange)}
+    .province-checks{margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px;max-height:260px;overflow:auto;padding-right:4px}
+    .province-option{display:flex;align-items:center;gap:8px;padding:10px;border:1px solid var(--border);border-radius:10px;background:white;font-size:11px}
+    .province-option input{accent-color:var(--orange)}
+
+    .portal{position:fixed;inset:0;z-index:5800;display:none;background:#F6F3F1}
+    .portal.visible{display:flex}
+    .portal-sidebar{width:255px;padding:25px 17px;display:flex;flex-direction:column;background:var(--dark)}
+    .portal-logo{padding:0 10px 25px;font-size:27px}
+    .portal-menu{display:grid;gap:3px}
+    .portal-nav{width:100%;padding:11px 12px;border:none;border-radius:10px;background:transparent;color:#B9AEAA;text-align:left;font-size:12px;font-weight:700}
+    .portal-nav.active{background:rgba(235,104,65,.15);color:white}
+    .portal-exit{margin-top:auto;padding:11px;border:1px solid rgba(255,255,255,.08);border-radius:10px;background:none;color:#AAA19D}
+    .portal-main{flex:1;min-width:0;overflow:auto}
+    .portal-header{min-height:77px;padding:0 30px;display:flex;align-items:center;justify-content:space-between;background:white;border-bottom:1px solid #E8E1DD}
+    .portal-header h2{font-family:"Playfair Display",serif;font-size:28px}
+    .portal-content{padding:30px}
+    .portal-section{display:none}
+    .portal-section.active{display:block}
+    .portal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}
+    .portal-stat{padding:19px;border:1px solid #E6DFDB;border-radius:16px;background:white}
+    .portal-stat small{color:var(--gray);font-size:9px;font-weight:800;text-transform:uppercase}
+    .portal-stat strong{display:block;margin-top:12px;font-family:"Playfair Display",serif;font-size:33px}
+    .panel{margin-top:17px;padding:23px;border:1px solid #E6DFDB;border-radius:17px;background:white}
+    .panel-top{display:flex;justify-content:space-between;align-items:center;gap:15px}
+    .panel-top button{min-height:40px;padding:0 14px;border:none;border-radius:10px;background:var(--orange);color:white;font-size:11px;font-weight:800}
+    .list{margin-top:15px;display:grid;gap:9px}
+    .list-row{padding:14px;border:1px solid #ECE5E1;border-radius:12px;background:#FCFAF9;display:flex;align-items:center;justify-content:space-between;gap:15px}
+    .list-row strong{font-size:12px}
+    .list-row p{margin-top:3px;color:var(--gray);font-size:10px}
+    .empty-panel{margin-top:15px;padding:24px;border:1px dashed #DED2CC;border-radius:13px;color:var(--gray);text-align:center;font-size:12px}
+
+    @media(max-width:1050px){
+      .category-grid{grid-template-columns:repeat(3,1fr)}
+      .subcategory-grid{grid-template-columns:repeat(3,1fr)}
+      .portal-grid{grid-template-columns:repeat(2,1fr)}
+    }
+
+    @media(max-width:850px){
+      .home{display:block}
+      .hero{min-height:auto;padding:28px 22px 52px}
+      .hero-content{padding-top:55px}
+      h1{font-size:clamp(49px,13vw,73px)}
+      .hero-buttons{flex-direction:column}
+      .map-area{min-height:auto;padding-top:25px;overflow:visible}
+      .map-heading{position:relative;top:auto;left:auto;padding:0 22px 8px}
+      #chartdiv{height:650px}
+      .province-card{left:17px;right:auto;bottom:18px;width:calc(100% - 34px)}
+      .explore{z-index:1000;isolation:isolate}
+      .category-grid{grid-template-columns:1fr 1fr;gap:10px}
+      .category{min-height:145px;padding:16px;z-index:1001;pointer-events:auto!important}
+      .category:last-child:nth-child(odd){grid-column:1/-1;min-height:105px}
+      .category strong{font-size:16px}
+      .category p{font-size:11px}
+      .market-content{width:calc(100% - 34px);padding-top:34px}
+      .market-hero{flex-direction:column;align-items:flex-start}
+      .subcategory-grid{display:block}
+      .subcategory{min-height:0;margin-bottom:8px;padding:16px;display:grid;grid-template-columns:1fr auto;align-items:center;border-radius:13px}
+      .subcategory small{display:none}
+      .subcategory strong{margin:0;font-size:14px}
+      .subcategory div{margin:0}
+      .about-inner{grid-template-columns:1fr;gap:25px}
+      .portal-sidebar{width:74px;padding:20px 9px}
+      .portal-logo{padding:0 0 20px;font-size:0;text-align:center}
+      .portal-logo::before{content:"A";color:var(--orange);font-size:27px;font-weight:800}
+      .portal-nav{padding:11px 4px;overflow:hidden;text-align:center;white-space:nowrap;font-size:9px}
+      .portal-exit{padding:10px 3px;font-size:9px}
+      .portal-header{padding:0 17px}
+      .portal-content{padding:17px}
+    }
+
+    @media(max-width:520px){
+      .logo{font-size:29px}
+      .explore,.about{padding:68px 17px}
+      #chartdiv{height:610px}
+      .market-header{padding:0 14px}
+      .market-logo{font-size:22px}
+      .province-pill{max-width:110px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+      .form-row,.portal-grid,.province-checks{grid-template-columns:1fr}
+      .modal-card{padding:21px 18px}
+      .footer-bottom{flex-direction:column}
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- =========================================================
-HOME
-========================================================= -->
-
 <div id="publicSite">
+  <section class="home">
+    <div class="hero">
+      <div class="hero-top">
+        <div class="logo">Amigate</div>
+        <div class="session-chip" id="sessionChip"><span class="session-dot"></span><span id="sessionName"></span></div>
+      </div>
 
-<section class="home">
+      <div class="hero-content">
+        <div class="eyebrow">Argentina está llena de oportunidades</div>
+        <h1>Todo lo que buscás,<br>más cerca<br><span>de lo que pensás.</span></h1>
+        <div class="hero-line"></div>
+        <p class="hero-text">
+          Amigate conecta personas con marcas, emprendimientos, profesionales, oficios y oportunidades de toda Argentina.
+          Elegí tu provincia y descubrí todo lo que tiene para ofrecer.
+        </p>
+        <div class="hero-buttons">
+          <button class="hero-button primary" id="publishBrandButton">Publicar mi marca</button>
+          <button class="hero-button secondary" id="loginButton">Iniciar sesión</button>
+        </div>
+      </div>
+    </div>
 
-<div class="hero">
+    <div class="map-area">
+      <div class="map-heading"><span>Explorá Argentina</span><strong>Elegí tu provincia</strong></div>
+      <div id="chartdiv"></div>
+      <div class="province-card" id="provinceCard">
+        <small>Provincia seleccionada</small>
+        <strong id="provinceName"></strong>
+        <p>Descubrí todo lo disponible para vos.</p>
+        <button id="exploreProvinceButton">Explorar</button>
+        <div class="clear-province" id="clearProvinceButton">Quitar selección</div>
+      </div>
+    </div>
+  </section>
 
-<div class="hero-top">
+  <section class="explore" id="exploreSection">
+    <div class="section-heading">
+      <span class="section-label">Explorá Amigate</span>
+      <h2 id="exploreTitle">¿Qué estás buscando?</h2>
+      <p id="exploreText">Elegí una provincia para personalizar los resultados.</p>
+    </div>
 
-<div class="logo">
-Amigate
+    <div class="category-grid">
+      <article class="category" data-category="Productos" role="button" tabindex="0"><div class="category-icon">🛍️</div><strong>Productos</strong><p>Descubrí marcas y emprendimientos.</p></article>
+      <article class="category" data-category="Servicios" role="button" tabindex="0"><div class="category-icon">✨</div><strong>Servicios</strong><p>Profesionales y empresas.</p></article>
+      <article class="category" data-category="Oficios" role="button" tabindex="0"><div class="category-icon">🛠️</div><strong>Oficios</strong><p>Especialistas cerca tuyo.</p></article>
+      <article class="category" data-category="Empleos" role="button" tabindex="0"><div class="category-icon">💼</div><strong>Empleos</strong><p>Encontrá oportunidades laborales.</p></article>
+      <article class="category" data-category="Necesito" role="button" tabindex="0"><div class="category-icon">📣</div><strong>Necesito</strong><p>Publicá lo que estás buscando.</p></article>
+    </div>
+  </section>
+
+  <section class="about">
+    <div class="about-inner">
+      <div class="about-ar">AR</div>
+      <div>
+        <span class="section-label">Una plataforma, todo el país</span>
+        <h3>Lo que existe cerca tuyo merece ser más fácil de encontrar.</h3>
+        <p>Desde una marca que recién empieza hasta un profesional, un oficio, una oportunidad laboral o una necesidad concreta. Amigate conecta todo eso en un mismo lugar.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">Amigate</div>
+    <div class="footer-copy">Hecho acá. Encontralo en Amigate.</div>
+    <div class="footer-bottom">
+      <div class="footer-links"><span>Términos</span><span>Privacidad</span><span>Ayuda</span></div>
+      <span class="admin-link" id="adminLink">Administración</span>
+    </div>
+  </footer>
 </div>
 
-<div class="session-chip" id="sessionChip">
-<span class="session-dot"></span>
-<span id="sessionName"></span>
-</div>
+<section class="marketplace" id="marketplace">
+  <header class="market-header">
+    <div class="market-logo" id="marketLogo">Amigate</div>
+    <div class="market-header-right">
+      <div class="province-pill" id="marketProvince">Argentina</div>
+      <button class="account-small" id="marketAccountButton">Iniciar sesión</button>
+    </div>
+  </header>
 
-</div>
+  <div class="market-content">
+    <div class="breadcrumb">
+      <button id="marketHomeButton">Inicio</button><span>›</span><span id="marketBreadcrumbProvince">Argentina</span>
+      <span>›</span><span id="marketBreadcrumbCategory"></span><span class="hidden" id="subcategorySeparator">›</span>
+      <span class="hidden" id="marketBreadcrumbSubcategory"></span>
+    </div>
 
+    <div class="market-hero">
+      <div>
+        <span class="section-label" id="marketEyebrow"></span>
+        <h2 id="marketTitle"></h2>
+        <p id="marketDescription"></p>
+      </div>
+      <button class="back-button" id="marketBackButton">← Volver</button>
+    </div>
 
-<div class="hero-content">
+    <div class="loader-box" id="marketLoader"><div class="loader"></div>Cargando...</div>
 
-<div class="eyebrow">
-Argentina está llena de oportunidades
-</div>
+    <section class="subcategories" id="subcategoriesSection">
+      <div class="subcategories-top"><h3>Categorías</h3><span class="subcategory-count" id="subcategoryCount"></span></div>
+      <div class="subcategory-grid" id="subcategoryGrid"></div>
+    </section>
 
-<h1>
-Todo lo que buscás,
-más cerca
-<span>de lo que pensás.</span>
-</h1>
+    <section class="results" id="resultsSection">
+      <h3 id="resultsTitle"></h3>
+      <p id="resultsSubtitle"></p>
+      <div class="empty-box visible" style="display:block">
+        <strong>Estamos preparando esta sección</strong>
+        <p>Las publicaciones reales aparecerán cuando los vendedores carguen contenido.</p>
+      </div>
+    </section>
 
-<div class="hero-line"></div>
-
-<p class="hero-text">
-Amigate conecta personas con marcas,
-emprendimientos, profesionales, oficios
-y oportunidades de toda Argentina.
-Elegí tu provincia y descubrí todo lo que
-tiene para ofrecer.
-</p>
-
-<div class="hero-buttons">
-
-<button
-class="hero-button primary"
-id="publishBrandButton"
->
-Publicar mi marca
-</button>
-
-<button
-class="hero-button secondary"
-id="loginButton"
->
-Iniciar sesión
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-
-<div class="map-area">
-
-<div class="map-heading">
-
-<span>
-Explorá Argentina
-</span>
-
-<strong>
-Elegí tu provincia
-</strong>
-
-</div>
-
-
-<div id="chartdiv"></div>
-
-
-<div
-class="province-card"
-id="provinceCard"
->
-
-<small>
-Provincia seleccionada
-</small>
-
-<strong id="provinceName"></strong>
-
-<p>
-Descubrí todo lo disponible para vos.
-</p>
-
-<button id="exploreProvinceButton">
-Explorar
-</button>
-
-<div
-class="clear-province"
-id="clearProvinceButton"
->
-Quitar selección
-</div>
-
-</div>
-
-</div>
-
+    <div class="empty-box" id="marketError">
+      <strong id="marketErrorTitle">No pudimos cargar esta sección</strong>
+      <p id="marketErrorText"></p>
+      <button class="retry-button" id="retryMarketButton">Reintentar</button>
+    </div>
+  </div>
 </section>
 
-
-<section
-class="explore"
-id="exploreSection"
->
-
-<div class="section-heading">
-
-<span class="section-label">
-Explorá Amigate
-</span>
-
-<h2 id="exploreTitle">
-¿Qué estás buscando?
-</h2>
-
-<p id="exploreText">
-Elegí una provincia para personalizar los resultados.
-</p>
-
-</div>
-
-
-<div class="category-grid">
-
-<article
-class="category"
-data-category="Productos"
-role="button"
-tabindex="0"
->
-<div class="category-icon">🛍️</div>
-<strong>Productos</strong>
-<p>Descubrí marcas y emprendimientos.</p>
-</article>
-
-<article
-class="category"
-data-category="Servicios"
-role="button"
-tabindex="0"
->
-<div class="category-icon">✨</div>
-<strong>Servicios</strong>
-<p>Profesionales y empresas.</p>
-</article>
-
-<article
-class="category"
-data-category="Oficios"
-role="button"
-tabindex="0"
->
-<div class="category-icon">🛠️</div>
-<strong>Oficios</strong>
-<p>Especialistas cerca tuyo.</p>
-</article>
-
-<article
-class="category"
-data-category="Empleos"
-role="button"
-tabindex="0"
->
-<div class="category-icon">💼</div>
-<strong>Empleos</strong>
-<p>Encontrá oportunidades laborales.</p>
-</article>
-
-<article
-class="category"
-data-category="Necesito"
-role="button"
-tabindex="0"
->
-<div class="category-icon">📣</div>
-<strong>Necesito</strong>
-<p>Publicá lo que estás buscando.</p>
-</article>
-
-</div>
-
-</section>
-
-
-<section class="about">
-
-<div class="about-inner">
-
-<div class="about-ar">
-AR
-</div>
-
-<div>
-
-<span class="section-label">
-Una plataforma, todo el país
-</span>
-
-<h3>
-Lo que existe cerca tuyo merece ser más fácil de encontrar.
-</h3>
-
-<p>
-Desde una marca que recién empieza hasta
-un profesional, un oficio, una oportunidad laboral
-o una necesidad concreta.
-Amigate conecta todo eso en un mismo lugar.
-</p>
-
-</div>
-
-</div>
-
-</section>
-
-
-<footer>
-
-<div class="footer-logo">
-Amigate
-</div>
-
-<div class="footer-copy">
-Hecho acá. Encontralo en Amigate.
-</div>
-
-<div class="footer-bottom">
-
-<div class="footer-links">
-<span>Términos</span>
-<span>Privacidad</span>
-<span>Ayuda</span>
-</div>
-
-<span
-class="admin-link"
-id="adminLink"
->
-Administración
-</span>
-
-</div>
-
-</footer>
-
-</div>
-
-
-<!-- =========================================================
-MARKETPLACE
-========================================================= -->
-
-<section
-class="marketplace"
-id="marketplace"
->
-
-<header class="market-header">
-
-<div
-class="market-logo"
-id="marketLogo"
->
-Amigate
-</div>
-
-<div class="market-header-right">
-
-<div
-class="province-pill"
-id="marketProvince"
->
-Argentina
-</div>
-
-<button
-class="account-small"
-id="marketAccountButton"
->
-Iniciar sesión
-</button>
-
-</div>
-
-</header>
-
-
-<div class="market-content">
-
-<div class="breadcrumb">
-
-<button id="marketHomeButton">
-Inicio
-</button>
-
-<span>›</span>
-
-<span id="marketBreadcrumbProvince">
-Argentina
-</span>
-
-<span>›</span>
-
-<span id="marketBreadcrumbCategory"></span>
-
-<span
-class="hidden"
-id="subcategorySeparator"
->
-›
-</span>
-
-<span
-class="hidden"
-id="marketBreadcrumbSubcategory"
-></span>
-
-</div>
-
-
-<div class="market-hero">
-
-<div>
-
-<span
-class="section-label"
-id="marketEyebrow"
-></span>
-
-<h2 id="marketTitle"></h2>
-
-<p id="marketDescription"></p>
-
-</div>
-
-<button
-class="back-button"
-id="marketBackButton"
->
-← Volver
-</button>
-
-</div>
-
-
-<div
-class="loader-box"
-id="marketLoader"
->
-
-<div class="loader"></div>
-
-Cargando...
-
-</div>
-
-
-<section
-class="subcategories"
-id="subcategoriesSection"
->
-
-<div class="subcategories-top">
-
-<h3>
-Categorías
-</h3>
-
-<span
-class="subcategory-count"
-id="subcategoryCount"
-></span>
-
-</div>
-
-<div
-class="subcategory-grid"
-id="subcategoryGrid"
-></div>
-
-</section>
-
-
-<section
-class="results"
-id="resultsSection"
->
-
-<h3 id="resultsTitle"></h3>
-
-<p id="resultsSubtitle"></p>
-
-<div
-class="empty-box visible"
-style="display:block;"
->
-
-<strong>
-Estamos preparando esta sección
-</strong>
-
-<p>
-La navegación y las categorías ya están conectadas.
-Las publicaciones reales irán apareciendo a medida que los vendedores carguen contenido.
-</p>
-
-</div>
-
-</section>
-
-
-<div
-class="empty-box"
-id="marketError"
->
-
-<strong id="marketErrorTitle">
-No pudimos cargar esta sección
-</strong>
-
-<p id="marketErrorText"></p>
-
-<button
-class="retry-button"
-id="retryMarketButton"
->
-Reintentar
-</button>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- =========================================================
-AUTH
-========================================================= -->
-
-<div
-class="modal"
-id="authModal"
->
-
-<div class="modal-card">
-
-<div class="modal-top">
-
-<div class="modal-brand">
-Amigate
-</div>
-
-<button
-class="modal-close"
-id="closeAuthButton"
->
-×
-</button>
-
-</div>
-
-<h2>
-Bienvenido
-</h2>
-
-<p class="modal-description">
-Iniciá sesión o creá tu cuenta.
-</p>
-
-
-<div
-class="seller-intent"
-id="sellerIntent"
->
-<strong>
-¿Querés publicar una marca?
-</strong><br>
-Creá tu cuenta y después continuaremos con el alta del vendedor.
-</div>
-
-
-<div class="auth-tabs">
-
-<button
-class="auth-tab active"
-data-auth-tab="login"
->
-Iniciar sesión
-</button>
-
-<button
-class="auth-tab"
-data-auth-tab="register"
->
-Registrarme
-</button>
-
-</div>
-
-
-<div
-class="auth-panel active"
-id="auth-login"
->
-
-<form id="loginForm">
-
-<div class="form-group">
-
-<label>Email</label>
-
-<input
-class="form-control"
-id="loginEmail"
-type="email"
-required
->
-
-</div>
-
-
-<div class="form-group">
-
-<label>Contraseña</label>
-
-<div class="password-wrap">
-
-<input
-class="form-control"
-id="loginPassword"
-type="password"
-required
->
-
-<button
-class="password-toggle"
-type="button"
-data-password-target="loginPassword"
->
-Ver
-</button>
-
-</div>
-
-</div>
-
-
-<button
-class="submit-button"
-id="loginSubmit"
-type="submit"
->
-Iniciar sesión
-</button>
-
-<div
-class="message"
-id="loginMessage"
-></div>
-
-</form>
-
-</div>
-
-
-<div
-class="auth-panel"
-id="auth-register"
->
-
-<form id="registerForm">
-
-<div class="form-row">
-
-<div class="form-group">
-
-<label>Nombre</label>
-
-<input
-class="form-control"
-id="registerName"
-required
->
-
-</div>
-
-<div class="form-group">
-
-<label>Apellido</label>
-
-<input
-class="form-control"
-id="registerSurname"
-required
->
-
-</div>
-
-</div>
-
-
-<div class="form-row">
-
-<div class="form-group">
-
-<label>DNI</label>
-
-<input
-class="form-control"
-id="registerDni"
-required
->
-
-</div>
-
-<div class="form-group">
-
-<label>Teléfono</label>
-
-<input
-class="form-control"
-id="registerPhone"
-type="tel"
-required
->
-
-</div>
-
-</div>
-
-
-<div class="form-group">
-
-<label>Email</label>
-
-<input
-class="form-control"
-id="registerEmail"
-type="email"
-required
->
-
-</div>
-
-
-<div class="form-group">
-
-<label>Contraseña</label>
-
-<div class="password-wrap">
-
-<input
-class="form-control"
-id="registerPassword"
-type="password"
-minlength="6"
-required
->
-
-<button
-class="password-toggle"
-type="button"
-data-password-target="registerPassword"
->
-Ver
-</button>
-
-</div>
-
-</div>
-
-
-<button
-class="submit-button"
-id="registerSubmit"
-type="submit"
->
-Crear mi cuenta
-</button>
-
-<div
-class="message"
-id="registerMessage"
-></div>
-
-</form>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- =========================================================
-ACCOUNT
-========================================================= -->
-
-<div
-class="modal"
-id="accountModal"
->
-
-<div class="modal-card">
-
-<div class="modal-top">
-
-<div class="modal-brand">
-Amigate
-</div>
-
-<button
-class="modal-close"
-id="closeAccountButton"
->
-×
-</button>
-
-</div>
-
-<h2>
-Mi cuenta
-</h2>
-
-
-<div class="account-card">
-
-<div
-class="avatar"
-id="accountAvatar"
->
-A
-</div>
-
-<div
-class="account-name"
-id="accountName"
-></div>
-
-<div
-class="account-email"
-id="accountEmail"
-></div>
-
-<div
-class="account-role"
-id="accountRole"
->
-Comprador
-</div>
-
-
-<div class="account-actions">
-
-<button
-class="account-action primary"
-id="openPortalButton"
->
-Ir a mi portal
-</button>
-
-<button
-class="account-action"
-id="accountPublishBrandButton"
->
-Publicar mi marca
-</button>
-
-<button
-class="account-action logout"
-id="logoutButton"
->
-Cerrar sesión
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- =========================================================
-ALTA DE MARCA
-========================================================= -->
-
-<div
-class="modal"
-id="brandModal"
->
-
-<div class="modal-card">
-
-<div class="modal-top">
-
-<div class="modal-brand">
-Amigate
-</div>
-
-<button
-class="modal-close"
-id="closeBrandButton"
->
-×
-</button>
-
-</div>
-
-<h2>
-Publicar mi marca
-</h2>
-
-<p class="modal-description">
-Primero creamos tu perfil vendedor y después vinculamos tu marca.
-</p>
-
-
-<form id="brandForm">
-
-<div class="form-group">
-
-<label>CUIT</label>
-
-<input
-class="form-control"
-id="brandCuit"
-placeholder="XX-XXXXXXXX-X"
-required
->
-
-</div>
-
-
-<div class="form-group">
-
-<label>Nombre de la marca</label>
-
-<input
-class="form-control"
-id="brandName"
-required
->
-
-</div>
-
-
-<div class="form-group">
-
-<label>Descripción</label>
-
-<textarea
-class="form-control"
-id="brandDescription"
-placeholder="¿Qué ofrece tu marca?"
-></textarea>
-
-</div>
-
-
-<div class="brand-summary">
-
-<strong>
-En esta etapa guardamos:
-</strong>
-
-<br><br>
-
-CUIT → <b>seller_profiles</b><br>
-Nombre y descripción → <b>brands</b>
-
-<br><br>
-
-Después agregaremos logo, portada, provincia,
-WhatsApp, Instagram, envíos y personalización del local.
-</div>
-
-
-<button
-class="submit-button"
-id="createBrandSubmit"
-type="submit"
->
-Crear mi marca
-</button>
-
-
-<div
-class="message"
-id="brandMessage"
-></div>
-
-</form>
-
-</div>
-
-</div>
-
-
-<!-- =========================================================
-PORTAL COMPRADOR
-========================================================= -->
-
-<div
-class="portal"
-id="buyerPortal"
->
-
-<aside class="portal-sidebar">
-
-<div class="portal-logo">
-Amigate
-</div>
-
-<div class="portal-menu">
-
-<button
-class="portal-nav active"
-data-buyer-page="inicio"
->
-Inicio
-</button>
-
-<button
-class="portal-nav"
-data-buyer-page="compras"
->
-Compras
-</button>
-
-<button
-class="portal-nav"
-data-buyer-page="favoritos"
->
-Favoritos
-</button>
-
-<button
-class="portal-nav"
-data-buyer-page="direcciones"
->
-Direcciones
-</button>
-
-<button
-class="portal-nav"
-data-buyer-page="reclamos"
->
-Reclamos
-</button>
-
-</div>
-
-<button
-class="portal-exit"
-id="buyerExit"
->
-Volver
-</button>
-
-</aside>
-
-
-<main class="portal-main">
-
-<header class="portal-header">
-
-<h2 id="buyerPortalTitle">
-Mi Amigate
-</h2>
-
-<button
-class="account-small"
-id="buyerAccountButton"
->
-Mi cuenta
-</button>
-
-</header>
-
-
-<div class="portal-content">
-
-<section
-class="portal-section active"
-id="buyer-inicio"
->
-
-<div class="portal-grid">
-
-<div class="portal-stat">
-<small>Compras</small>
-<strong id="buyerOrdersCount">—</strong>
-</div>
-
-<div class="portal-stat">
-<small>Favoritos</small>
-<strong id="buyerFavoritesCount">—</strong>
-</div>
-
-<div class="portal-stat">
-<small>Marcas seguidas</small>
-<strong id="buyerBrandsCount">—</strong>
-</div>
-
-<div class="portal-stat">
-<small>Reclamos</small>
-<strong id="buyerClaimsCount">—</strong>
-</div>
-
-</div>
-
-
-<div class="panel">
-
-<h3>
-Hola, <span id="buyerWelcomeName">Usuario</span>
-</h3>
-
-<p
-style="
-margin-top:8px;
-color:var(--gray);
-font-size:12px;
-"
->
-Desde acá vas a administrar toda tu actividad en Amigate.
-</p>
-
-</div>
-
-</section>
-
-
-<section
-class="portal-section"
-id="buyer-compras"
->
-<div class="panel">
-<h3>Compras</h3>
-<div class="list" id="buyerOrdersList"></div>
-</div>
-</section>
-
-
-<section
-class="portal-section"
-id="buyer-favoritos"
->
-<div class="panel">
-<h3>Favoritos</h3>
-<div class="list" id="buyerFavoritesList"></div>
-</div>
-</section>
-
-
-<section
-class="portal-section"
-id="buyer-direcciones"
->
-<div class="panel">
-<h3>Direcciones</h3>
-<div class="list" id="buyerAddressesList"></div>
-</div>
-</section>
-
-
-<section
-class="portal-section"
-id="buyer-reclamos"
->
-<div class="panel">
-<h3>Reclamos</h3>
-<div class="list" id="buyerClaimsList"></div>
-</div>
-</section>
-
-</div>
-
-</main>
-
-</div>
-
-
-<!-- =========================================================
-PORTAL VENDEDOR
-========================================================= -->
-
-<div
-class="portal"
-id="sellerPortal"
->
-
-<aside class="portal-sidebar">
-
-<div class="portal-logo">
-Amigate
-</div>
-
-<div class="portal-menu">
-
-<button
-class="portal-nav active"
-data-seller-page="inicio"
->
-Inicio
-</button>
-
-<button
-class="portal-nav"
-data-seller-page="marca"
->
-Mi marca
-</button>
-
-<button
-class="portal-nav"
-data-seller-page="productos"
->
-Productos
-</button>
-
-<button
-class="portal-nav"
-data-seller-page="pedidos"
->
-Pedidos
-</button>
-
-<button
-class="portal-nav"
-data-seller-page="mensajes"
->
-Mensajes
-</button>
-
-<button
-class="portal-nav"
-data-seller-page="opiniones"
->
-Opiniones
-</button>
-
-<button
-class="portal-nav"
-data-seller-page="publicidad"
->
-Publicidad
-</button>
-
-<button
-class="portal-nav"
-data-seller-page="suscripcion"
->
-Suscripción
-</button>
-
-<button
-class="portal-nav"
-data-seller-page="finanzas"
->
-Finanzas
-</button>
-
-<button
-class="portal-nav"
-data-seller-page="configuracion"
->
-Configuración
-</button>
-
-</div>
-
-
-<button
-class="portal-exit"
-id="sellerExit"
->
-Volver
-</button>
-
-</aside>
-
-
-<main class="portal-main">
-
-<header class="portal-header">
-
-<h2 id="sellerPortalTitle">
-Portal Vendedor
-</h2>
-
-<button
-class="account-small"
-id="sellerAccountButton"
->
-Mi cuenta
-</button>
-
-</header>
-
-
-<div class="portal-content">
-
-<section
-class="portal-section active"
-id="seller-inicio"
->
-
-<div class="portal-grid">
-
-<div class="portal-stat">
-<small>Productos</small>
-<strong id="sellerProductsCount">—</strong>
-</div>
-
-<div class="portal-stat">
-<small>Pedidos</small>
-<strong>—</strong>
-</div>
-
-<div class="portal-stat">
-<small>Ventas</small>
-<strong>—</strong>
-</div>
-
-<div class="portal-stat">
-<small>Opiniones</small>
-<strong>—</strong>
-</div>
-
-</div>
-
-
-<div class="panel">
-
-<h3 id="sellerWelcomeTitle">
-Mi marca
-</h3>
-
-<p
-style="
-margin-top:8px;
-color:var(--gray);
-font-size:12px;
-"
->
-Administrá tu presencia comercial en Amigate.
-</p>
-
-</div>
-
-</section>
-
-
-<section
-class="portal-section"
-id="seller-marca"
->
-
-<div class="panel">
-
-<div class="panel-top">
-
-<h3>
-Mi marca
-</h3>
-
-<button id="editBrandButton">
-Editar
-</button>
-
-</div>
-
-<div
-class="list"
-id="sellerBrandInfo"
-></div>
-
-</div>
-
-</section>
-
-
-<section
-class="portal-section"
-id="seller-productos"
->
-
-<div class="panel">
-
-<div class="panel-top">
-
-<h3>
-Productos
-</h3>
-
-<button id="newProductButton">
-+ Crear producto
-</button>
-
-</div>
-
-<div
-class="list"
-id="sellerProductList"
-></div>
-
-</div>
-
-</section>
-
-
-<section
-class="portal-section"
-id="seller-pedidos"
->
-<div class="panel">
-<h3>Pedidos</h3>
-<div class="empty-panel">
-Tus pedidos aparecerán acá.
-</div>
-</div>
-</section>
-
-
-<section
-class="portal-section"
-id="seller-mensajes"
->
-<div class="panel">
-<h3>Mensajes</h3>
-<div class="empty-panel">
-Tus conversaciones aparecerán acá.
-</div>
-</div>
-</section>
-
-
-<section
-class="portal-section"
-id="seller-opiniones"
->
-<div class="panel">
-<h3>Opiniones</h3>
-<div class="empty-panel">
-Las opiniones aparecerán acá.
-</div>
-</div>
-</section>
-
-
-<section
-class="portal-section"
-id="seller-publicidad"
->
-<div class="panel">
-<h3>Publicidad</h3>
-<div class="empty-panel">
-Acá vas a administrar contenido patrocinado.
-</div>
-</div>
-</section>
-
-
-<section
-class="portal-section"
-id="seller-suscripcion"
->
-<div class="panel">
-<h3>Suscripción</h3>
-<div class="empty-panel">
-Acá conectaremos Mercado Pago.
-</div>
-</div>
-</section>
-
-
-<section
-class="portal-section"
-id="seller-finanzas"
->
-<div class="panel">
-<h3>Finanzas</h3>
-<div class="empty-panel">
-Ventas y comisiones aparecerán acá.
-</div>
-</div>
-</section>
-
-
-<section
-class="portal-section"
-id="seller-configuracion"
->
-<div class="panel">
-<h3>Configuración</h3>
-<div class="empty-panel">
-Envíos, apariencia y configuración de la marca.
-</div>
-</div>
-</section>
-
-</div>
-
-</main>
-
-</div>
-
-
-<!-- =========================================================
-PRODUCT MODAL
-========================================================= -->
-
-<div
-class="modal"
-id="productModal"
->
-
-<div class="modal-card">
-
-<div class="modal-top">
-
-<div class="modal-brand">
-Nuevo producto
-</div>
-
-<button
-class="modal-close"
-id="closeProductButton"
->
-×
-</button>
-
-</div>
-
-
-<form id="productForm">
-
-<div class="product-grid">
-
-<div class="form-group wide">
-
-<label>Nombre</label>
-
-<input
-class="form-control"
-id="productName"
-required
->
-
-</div>
-
-
-<div class="form-group wide">
-
-<label>Descripción</label>
-
-<textarea
-class="form-control"
-id="productDescription"
-></textarea>
-
-</div>
-
-
-<div class="form-group">
-
-<label>Subcategoría</label>
-
-<select
-class="form-control"
-id="productSubcategory"
-></select>
-
-</div>
-
-
-<div class="form-group">
-
-<label>Precio</label>
-
-<input
-class="form-control"
-id="productPrice"
-type="number"
-min="0"
-step="0.01"
->
-
-</div>
-
-</div>
-
-
-<button
-class="submit-button"
-type="submit"
->
-Guardar producto
-</button>
-
-
-<div
-class="message"
-id="productMessage"
-></div>
-
-</form>
-
-</div>
-
-</div>
-
-
-<!-- =========================================================
-ADMIN
-========================================================= -->
-
-<div
-class="modal"
-id="adminModal"
->
-
-<div class="modal-card">
-
-<div class="modal-top">
-
-<div class="modal-brand">
-Amigate
-</div>
-
-<button
-class="modal-close"
-id="closeAdminButton"
->
-×
-</button>
-
-</div>
-
-<h2>
-Administración
-</h2>
-
-<form id="adminLoginForm">
-
-<div class="form-group">
-
-<label>Email</label>
-
-<input
-class="form-control"
-id="adminEmail"
-type="email"
-required
->
-
-</div>
-
-<div class="form-group">
-
-<label>Contraseña</label>
-
-<input
-class="form-control"
-id="adminPassword"
-type="password"
-required
->
-
-</div>
-
-<button
-class="submit-button"
-type="submit"
->
-Entrar
-</button>
-
-<div
-class="message"
-id="adminMessage"
-></div>
-
-</form>
-
-</div>
-
-</div>
-
-
-<div
-class="portal"
-id="adminPortal"
->
-
-<aside class="portal-sidebar">
-
-<div class="portal-logo">
-Amigate
-</div>
-
-<div class="portal-menu">
-
-<button
-class="portal-nav active"
-data-admin-page="inicio"
->
-Dashboard
-</button>
-
-<button
-class="portal-nav"
-data-admin-page="categorias"
->
-Categorías
-</button>
-
-<button
-class="portal-nav"
-data-admin-page="marcas"
->
-Marcas
-</button>
-
-<button
-class="portal-nav"
-data-admin-page="clientes"
->
-Clientes
-</button>
-
-<button
-class="portal-nav"
-data-admin-page="configuracion"
->
-Configuración
-</button>
-
-</div>
-
-<button
-class="portal-exit"
-id="adminLogoutButton"
->
-Cerrar sesión
-</button>
-
-</aside>
-
-
-<main class="portal-main">
-
-<header class="portal-header">
-
-<h2 id="adminPortalTitle">
-Dashboard
-</h2>
-
-<span
-style="
-font-size:10px;
-color:var(--gray);
-"
-id="adminEmailDisplay"
-></span>
-
-</header>
-
-
-<div class="portal-content">
-
-<section
-class="portal-section active"
-id="admin-inicio"
->
-
-<div class="portal-grid">
-
-<div class="portal-stat">
-<small>Clientes</small>
-<strong id="adminClientsCount">—</strong>
-</div>
-
-<div class="portal-stat">
-<small>Vendedores</small>
-<strong id="adminSellersCount">—</strong>
-</div>
-
-<div class="portal-stat">
-<small>Marcas</small>
-<strong id="adminBrandsCount">—</strong>
-</div>
-
-<div class="portal-stat">
-<small>Productos</small>
-<strong id="adminProductsCount">—</strong>
-</div>
-
-</div>
-
-</section>
-
-
-<section
-class="portal-section"
-id="admin-categorias"
->
-
-<div class="panel">
-
-<h3>
-Taxonomía
-</h3>
-
-<div
-class="list"
-id="adminCategoryList"
-></div>
-
-</div>
-
-</section>
-
-
-<section
-class="portal-section"
-id="admin-marcas"
->
-<div class="panel">
-<h3>Marcas</h3>
-</div>
-</section>
-
-
-<section
-class="portal-section"
-id="admin-clientes"
->
-<div class="panel">
-<h3>Clientes</h3>
+<div class="modal" id="authModal">
+  <div class="modal-card">
+    <div class="modal-top"><div class="modal-brand">Amigate</div><button class="modal-close" id="closeAuthButton">×</button></div>
+    <h2>Bienvenido</h2>
+    <p class="modal-description">Iniciá sesión o creá tu cuenta.</p>
+
+    <div class="seller-intent" id="sellerIntent">
+      <strong>¿Querés publicar una marca?</strong><br>
+      Creá tu cuenta y después completá los datos del vendedor y de la marca.
+    </div>
+
+    <div class="auth-tabs">
+      <button class="auth-tab active" data-auth-tab="login">Iniciar sesión</button>
+      <button class="auth-tab" data-auth-tab="register">Registrarme</button>
+    </div>
+
+    <div class="auth-panel active" id="auth-login">
+      <form id="loginForm">
+        <div class="form-group"><label>Email</label><input class="form-control" id="loginEmail" type="email" required></div>
+        <div class="form-group">
+          <label>Contraseña</label>
+          <div class="password-wrap">
+            <input class="form-control" id="loginPassword" type="password" required>
+            <button class="password-toggle" type="button" data-password-target="loginPassword">Ver</button>
+          </div>
+        </div>
+        <button class="submit-button" id="loginSubmit" type="submit">Iniciar sesión</button>
+        <div class="message" id="loginMessage"></div>
+      </form>
+    </div>
+
+    <div class="auth-panel" id="auth-register">
+      <form id="registerForm">
+        <div class="form-row">
+          <div class="form-group"><label>Nombre</label><input class="form-control" id="registerName" required></div>
+          <div class="form-group"><label>Apellido</label><input class="form-control" id="registerSurname" required></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>DNI</label><input class="form-control" id="registerDni" required></div>
+          <div class="form-group"><label>Teléfono</label><input class="form-control" id="registerPhone" type="tel" required></div>
+        </div>
+        <div class="form-group"><label>Email</label><input class="form-control" id="registerEmail" type="email" required></div>
+        <div class="form-group">
+          <label>Contraseña</label>
+          <div class="password-wrap">
+            <input class="form-control" id="registerPassword" type="password" minlength="6" required>
+            <button class="password-toggle" type="button" data-password-target="registerPassword">Ver</button>
+          </div>
+        </div>
+        <button class="submit-button" id="registerSubmit" type="submit">Crear mi cuenta</button>
+        <div class="message" id="registerMessage"></div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="accountModal">
+  <div class="modal-card">
+    <div class="modal-top"><div class="modal-brand">Amigate</div><button class="modal-close" id="closeAccountButton">×</button></div>
+    <h2>Mi cuenta</h2>
+    <div class="account-card">
+      <div class="avatar" id="accountAvatar">A</div>
+      <div class="account-name" id="accountName"></div>
+      <div class="account-email" id="accountEmail"></div>
+      <div class="account-role" id="accountRole">Comprador</div>
+      <div class="account-actions">
+        <button class="account-action primary" id="openPortalButton">Ir a mi portal</button>
+        <button class="account-action" id="accountPublishBrandButton">Publicar mi marca</button>
+        <button class="account-action logout" id="logoutButton">Cerrar sesión</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="brandModal">
+  <div class="modal-card">
+    <div class="modal-top"><div class="modal-brand">Amigate</div><button class="modal-close" id="closeBrandButton">×</button></div>
+    <h2>Publicar mi marca</h2>
+    <p class="modal-description">Completá los datos básicos, ubicación y envíos.</p>
+
+    <div class="steps">
+      <span class="step-dot active" data-step-dot="1"></span>
+      <span class="step-dot" data-step-dot="2"></span>
+      <span class="step-dot" data-step-dot="3"></span>
+      <span class="step-dot" data-step-dot="4"></span>
+    </div>
+
+    <form id="brandForm">
+      <section class="brand-step active" data-brand-step="1">
+        <div class="form-group"><label>CUIT</label><input class="form-control" id="brandCuit" placeholder="XX-XXXXXXXX-X" required></div>
+        <div class="form-group"><label>Email de la cuenta</label><input class="form-control email-readonly" id="brandAccountEmail" type="email" readonly></div>
+      </section>
+
+      <section class="brand-step" data-brand-step="2">
+        <div class="form-group"><label>Nombre de la marca</label><input class="form-control" id="brandName" required></div>
+        <div class="form-group"><label>Descripción</label><textarea class="form-control" id="brandDescription" placeholder="¿Qué ofrece tu marca?"></textarea></div>
+        <div class="form-group"><label>Email comercial</label><input class="form-control" id="brandCommercialEmail" type="email" required></div>
+        <div class="form-row">
+          <div class="form-group"><label>Teléfono</label><input class="form-control" id="brandPhone" type="tel"></div>
+          <div class="form-group"><label>WhatsApp</label><input class="form-control" id="brandWhatsapp" type="tel"></div>
+        </div>
+        <div class="form-group"><label>Instagram</label><input class="form-control" id="brandInstagram" placeholder="@mimarca"></div>
+      </section>
+
+      <section class="brand-step" data-brand-step="3">
+        <div class="form-group">
+          <label>Provincia de origen</label>
+          <select class="form-control" id="brandProvince" required><option value="">Seleccionar provincia</option></select>
+        </div>
+        <div class="form-group"><label>Localidad</label><input class="form-control" id="brandLocality" required></div>
+      </section>
+
+      <section class="brand-step" data-brand-step="4">
+        <div class="shipping-tools">
+          <label class="check-row"><input type="checkbox" id="allArgentina"> Hago envíos a toda Argentina</label>
+        </div>
+        <div class="province-checks" id="shippingProvinceList"></div>
+      </section>
+
+      <div class="step-actions">
+        <button class="step-back" id="brandBackButton" type="button">Atrás</button>
+        <button class="step-next" id="brandNextButton" type="button">Continuar</button>
+      </div>
+
+      <div class="message" id="brandMessage"></div>
+    </form>
+  </div>
+</div>
+
+<div class="portal" id="buyerPortal">
+  <aside class="portal-sidebar">
+    <div class="portal-logo">Amigate</div>
+    <div class="portal-menu">
+      <button class="portal-nav active" data-buyer-page="inicio">Inicio</button>
+      <button class="portal-nav" data-buyer-page="compras">Compras</button>
+      <button class="portal-nav" data-buyer-page="favoritos">Favoritos</button>
+      <button class="portal-nav" data-buyer-page="direcciones">Direcciones</button>
+      <button class="portal-nav" data-buyer-page="reclamos">Reclamos</button>
+    </div>
+    <button class="portal-exit" id="buyerExit">Volver</button>
+  </aside>
+  <main class="portal-main">
+    <header class="portal-header"><h2 id="buyerPortalTitle">Mi Amigate</h2><button class="account-small" id="buyerAccountButton">Mi cuenta</button></header>
+    <div class="portal-content">
+      <section class="portal-section active" id="buyer-inicio">
+        <div class="portal-grid">
+          <div class="portal-stat"><small>Compras</small><strong id="buyerOrdersCount">—</strong></div>
+          <div class="portal-stat"><small>Favoritos</small><strong id="buyerFavoritesCount">—</strong></div>
+          <div class="portal-stat"><small>Marcas seguidas</small><strong id="buyerBrandsCount">—</strong></div>
+          <div class="portal-stat"><small>Reclamos</small><strong id="buyerClaimsCount">—</strong></div>
+        </div>
+        <div class="panel"><h3>Hola, <span id="buyerWelcomeName">Usuario</span></h3><p style="margin-top:8px;color:var(--gray);font-size:12px">Desde acá administrás tu actividad en Amigate.</p></div>
+      </section>
+      <section class="portal-section" id="buyer-compras"><div class="panel"><h3>Compras</h3><div class="list" id="buyerOrdersList"></div></div></section>
+      <section class="portal-section" id="buyer-favoritos"><div class="panel"><h3>Favoritos</h3><div class="list" id="buyerFavoritesList"></div></div></section>
+      <section class="portal-section" id="buyer-direcciones"><div class="panel"><h3>Direcciones</h3><div class="list" id="buyerAddressesList"></div></div></section>
+      <section class="portal-section" id="buyer-reclamos"><div class="panel"><h3>Reclamos</h3><div class="list" id="buyerClaimsList"></div></div></section>
+    </div>
+  </main>
+</div>
+
+<div class="portal" id="sellerPortal">
+  <aside class="portal-sidebar">
+    <div class="portal-logo">Amigate</div>
+    <div class="portal-menu">
+      <button class="portal-nav active" data-seller-page="inicio">Inicio</button>
+      <button class="portal-nav" data-seller-page="marca">Mi marca</button>
+      <button class="portal-nav" data-seller-page="productos">Productos</button>
+      <button class="portal-nav" data-seller-page="pedidos">Pedidos</button>
+      <button class="portal-nav" data-seller-page="mensajes">Mensajes</button>
+      <button class="portal-nav" data-seller-page="opiniones">Opiniones</button>
+      <button class="portal-nav" data-seller-page="publicidad">Publicidad</button>
+      <button class="portal-nav" data-seller-page="suscripcion">Suscripción</button>
+      <button class="portal-nav" data-seller-page="finanzas">Finanzas</button>
+      <button class="portal-nav" data-seller-page="configuracion">Configuración</button>
+    </div>
+    <button class="portal-exit" id="sellerExit">Volver</button>
+  </aside>
+
+  <main class="portal-main">
+    <header class="portal-header"><h2 id="sellerPortalTitle">Portal Vendedor</h2><button class="account-small" id="sellerAccountButton">Mi cuenta</button></header>
+    <div class="portal-content">
+      <section class="portal-section active" id="seller-inicio">
+        <div class="portal-grid">
+          <div class="portal-stat"><small>Productos</small><strong id="sellerProductsCount">—</strong></div>
+          <div class="portal-stat"><small>Pedidos</small><strong>—</strong></div>
+          <div class="portal-stat"><small>Ventas</small><strong>—</strong></div>
+          <div class="portal-stat"><small>Opiniones</small><strong>—</strong></div>
+        </div>
+        <div class="panel"><h3 id="sellerWelcomeTitle">Mi marca</h3><p style="margin-top:8px;color:var(--gray);font-size:12px">Administrá tu presencia comercial en Amigate.</p></div>
+      </section>
+
+      <section class="portal-section" id="seller-marca">
+        <div class="panel">
+          <div class="panel-top"><h3>Mi marca</h3><button id="editBrandButton">Editar</button></div>
+          <div class="list" id="sellerBrandInfo"></div>
+        </div>
+      </section>
+
+      <section class="portal-section" id="seller-productos"><div class="panel"><div class="panel-top"><h3>Productos</h3><button type="button">Próximamente</button></div><div class="empty-panel">La carga completa de productos se conectará en el siguiente bloque.</div></div></section>
+      <section class="portal-section" id="seller-pedidos"><div class="panel"><h3>Pedidos</h3><div class="empty-panel">Tus pedidos aparecerán acá.</div></div></section>
+      <section class="portal-section" id="seller-mensajes"><div class="panel"><h3>Mensajes</h3><div class="empty-panel">Tus conversaciones aparecerán acá.</div></div></section>
+      <section class="portal-section" id="seller-opiniones"><div class="panel"><h3>Opiniones</h3><div class="empty-panel">Las opiniones aparecerán acá.</div></div></section>
+      <section class="portal-section" id="seller-publicidad"><div class="panel"><h3>Publicidad</h3><div class="empty-panel">Acá vas a administrar contenido patrocinado.</div></div></section>
+      <section class="portal-section" id="seller-suscripcion"><div class="panel"><h3>Suscripción</h3><div class="empty-panel">Acá conectaremos Mercado Pago.</div></div></section>
+      <section class="portal-section" id="seller-finanzas"><div class="panel"><h3>Finanzas</h3><div class="empty-panel">Ventas y comisiones aparecerán acá.</div></div></section>
+      <section class="portal-section" id="seller-configuracion"><div class="panel"><h3>Configuración</h3><div class="empty-panel">Envíos, apariencia y configuración.</div></div></section>
+    </div>
+  </main>
 </div>
-</section>
-
-
-<section
-class="portal-section"
-id="admin-configuracion"
->
-<div class="panel">
-<h3>Configuración</h3>
-</div>
-</section>
-
-</div>
-
-</main>
-
-</div>
-
 
 <script>
-
-/* =========================================================
-SUPABASE
-========================================================= */
-
-const SUPABASE_URL =
-"https://jqdyaafwixnjasszsvkt.supabase.co";
-
-const SUPABASE_KEY =
-"sb_publishable_KHbLlwbhlkyaiz-7KXW6Mw_nAnTVsLa";
-
-const db =
-window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
-
-
-let currentUser = null;
-let currentProfile = null;
-
-let currentSellerProfile = null;
-let currentBrand = null;
-
-let authIntent = "buyer";
-
-
-const $ =
-id => document.getElementById(id);
-
-
-/* =========================================================
-HELPERS
-========================================================= */
-
-function normalizeText(value){
-
-return String(
-  value || ""
-)
-.normalize("NFD")
-.replace(
-  /[\u0300-\u036f]/g,
-  ""
-)
-.trim()
-.toLowerCase();
-
-}
-
-
-function rowName(row){
-
-return (
-  row?.nombre ||
-  row?.name ||
-  row?.titulo ||
-  row?.title ||
-  "Sin nombre"
-);
-
-}
-
-
-function escapeHtml(value){
-
-return String(
-  value ?? ""
-)
-.replaceAll("&","&amp;")
-.replaceAll("<","&lt;")
-.replaceAll(">","&gt;")
-.replaceAll('"',"&quot;")
-.replaceAll("'","&#039;");
-
-}
-
-
-function firstValue(
-row,
-keys,
-fallback = null
-){
-
-for(const key of keys){
-
-  if(
-    row &&
-    row[key] !== undefined &&
-    row[key] !== null &&
-    row[key] !== ""
-  ){
-
-    return row[key];
-
-  }
-
-}
-
-return fallback;
-
-}
-
-
-function withTimeout(
-promise,
-ms = 10000,
-code = "TIMEOUT"
-){
-
-let timer;
-
-const timeout =
-new Promise(
-  (_,reject) => {
-
-    timer =
-    setTimeout(
-      () => reject(
-        new Error(code)
-      ),
-      ms
-    );
-
-  }
-);
-
-
-return Promise
-.race([
-  promise,
-  timeout
-])
-.finally(
-  () => clearTimeout(timer)
-);
-
-}
-
-
-function openModal(element){
-
-element.classList.add("open");
-
-document.body.style.overflow =
-"hidden";
-
-}
-
-
-function closeModal(element){
-
-element.classList.remove("open");
-
-document.body.style.overflow =
-"";
-
-}
-
-
-function showMessage(
-id,
-text,
-type
-){
-
-const element =
-$(id);
-
-element.className =
-"message visible " +
-type;
-
-element.textContent =
-text;
-
-}
-
-
-function clearMessage(id){
-
-const element =
-$(id);
-
-element.className =
-"message";
-
-element.textContent =
-"";
-
-}
-
-
-function backgroundClose(element){
-
-element.addEventListener(
-  "click",
-  event => {
-
-    if(event.target === element){
-
-      closeModal(element);
-
-    }
-
-  }
-);
-
-}
-
-
-/* =========================================================
-MAP
-========================================================= */
-
-let selectedProvince = null;
-let selectedPolygon = null;
-
+const SUPABASE_URL="https://jqdyaafwixnjasszsvkt.supabase.co";
+const SUPABASE_KEY="sb_publishable_KHbLlwbhlkyaiz-7KXW6Mw_nAnTVsLa";
+const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+const $=id=>document.getElementById(id);
+
+let currentUser=null,currentProfile=null,currentSellerProfile=null,currentBrand=null,currentShippingProvinceIds=[];
+let authIntent="buyer",brandStep=1,selectedProvince=null,selectedPolygon=null;
+let currentCategory=null,currentRootCategory=null,currentSubcategory=null,navigationVersion=0;
+
+const taxonomyCache={loaded:false,promise:null,categories:[],subcategories:[],provinces:[]};
+const descriptions={
+  Productos:"Descubrí marcas, emprendimientos y productos disponibles cerca tuyo.",
+  Servicios:"Encontrá profesionales y empresas que ofrecen servicios.",
+  Oficios:"Conectate con especialistas de distintos oficios.",
+  Empleos:"Explorá oportunidades laborales y búsquedas de personal.",
+  Necesito:"Publicá exactamente lo que necesitás y encontrá quién pueda ayudarte."
+};
+
+function normalizeText(v){return String(v||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").trim().toLowerCase()}
+function rowName(r){return r?.nombre||r?.name||r?.titulo||r?.title||"Sin nombre"}
+function escapeHtml(v){return String(v??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;")}
+function firstValue(row,keys,fallback=null){for(const key of keys){if(row&&row[key]!==undefined&&row[key]!==null&&row[key]!=="")return row[key]}return fallback}
+function withTimeout(promise,ms=10000,code="TIMEOUT"){let timer;const timeout=new Promise((_,reject)=>{timer=setTimeout(()=>reject(new Error(code)),ms)});return Promise.race([promise,timeout]).finally(()=>clearTimeout(timer))}
+function openModal(el){el.classList.add("open");document.body.style.overflow="hidden"}
+function closeModal(el){el.classList.remove("open");document.body.style.overflow=""}
+function showMessage(id,text,type){const el=$(id);el.className="message visible "+type;el.textContent=text}
+function clearMessage(id){const el=$(id);el.className="message";el.textContent=""}
+function backgroundClose(el){el.addEventListener("click",e=>{if(e.target===el)closeModal(el)})}
+function userName(){return currentProfile?.nombre||currentUser?.user_metadata?.nombre||currentUser?.email?.split("@")[0]||"Usuario"}
+function userFullName(){const n=currentProfile?.nombre||currentUser?.user_metadata?.nombre||"";const a=currentProfile?.apellido||currentUser?.user_metadata?.apellido||"";return((n+" "+a).trim()||currentUser?.email||"Usuario")}
+function effectiveRole(){if(currentProfile?.tipo_usuario==="admin")return"admin";if(currentSellerProfile)return"vendedor";return"comprador"}
 
 function updateProvinceUI(){
-
-if(!selectedProvince){
-
-  $("exploreTitle").textContent =
-  "¿Qué estás buscando?";
-
-  $("exploreText").textContent =
-  "Elegí una provincia para personalizar los resultados.";
-
-  return;
-
-}
-
-
-$("exploreTitle").textContent =
-"¿Qué estás buscando en " +
-selectedProvince.name +
-"?";
-
-
-$("exploreText").textContent =
-"Descubrí marcas, profesionales y oportunidades disponibles en " +
-selectedProvince.name +
-".";
-
-}
-
-
-am5.ready(
-function(){
-
-const root =
-am5.Root.new(
-  "chartdiv"
-);
-
-
-if(root._logo){
-  root._logo.dispose();
-}
-
-
-const chart =
-root.container.children.push(
-
-  am5map.MapChart.new(
-    root,
-    {
-
-      panX:"none",
-      panY:"none",
-
-      wheelX:"none",
-      wheelY:"none",
-
-      pinchZoom:false,
-
-      projection:
-      am5map.geoMercator()
-
-    }
-  )
-
-);
-
-
-const series =
-chart.series.push(
-
-  am5map.MapPolygonSeries.new(
-    root,
-    {
-
-      geoJSON:
-      am5geodata_argentinaHigh
-
-    }
-  )
-
-);
-
-
-series
-.mapPolygons
-.template
-.setAll({
-
-  fill:
-  am5.color(
-    0xF4C0AE
-  ),
-
-  stroke:
-  am5.color(
-    0xFFF8F2
-  ),
-
-  strokeWidth:1.6,
-
-  interactive:true,
-
-  cursorOverStyle:
-  "pointer",
-
-  tooltipText:
-  "{name}"
-
-});
-
-
-series
-.mapPolygons
-.template
-.states
-.create(
-  "hover",
-  {
-
-    fill:
-    am5.color(
-      0xF08B65
-    )
-
+  if(!selectedProvince){
+    $("exploreTitle").textContent="¿Qué estás buscando?";
+    $("exploreText").textContent="Elegí una provincia para personalizar los resultados.";
+    return;
   }
-);
-
-
-series
-.mapPolygons
-.template
-.states
-.create(
-  "active",
-  {
-
-    fill:
-    am5.color(
-      0xEB6841
-    )
-
-  }
-);
-
-
-function clearProvince(){
-
-  if(selectedPolygon){
-
-    selectedPolygon.set(
-      "active",
-      false
-    );
-
-  }
-
-
-  selectedPolygon =
-  null;
-
-  selectedProvince =
-  null;
-
-
-  $("provinceCard")
-  .classList
-  .remove(
-    "visible"
-  );
-
-
-  localStorage
-  .removeItem(
-    "amigate_province"
-  );
-
-
-  updateProvinceUI();
-
+  $("exploreTitle").textContent="¿Qué estás buscando en "+selectedProvince.name+"?";
+  $("exploreText").textContent="Descubrí marcas, profesionales y oportunidades disponibles en "+selectedProvince.name+".";
 }
 
+am5.ready(function(){
+  const root=am5.Root.new("chartdiv");
+  if(root._logo)root._logo.dispose();
 
-series
-.mapPolygons
-.template
-.events
-.on(
-  "click",
-  event => {
+  const chart=root.container.children.push(am5map.MapChart.new(root,{
+    panX:"none",panY:"none",wheelX:"none",wheelY:"none",pinchZoom:false,projection:am5map.geoMercator()
+  }));
 
-    const polygon =
-    event.target;
+  const series=chart.series.push(am5map.MapPolygonSeries.new(root,{geoJSON:am5geodata_argentinaHigh}));
 
-    const item =
-    polygon.dataItem;
+  series.mapPolygons.template.setAll({
+    fill:am5.color(0xF4C0AE),stroke:am5.color(0xFFF8F2),strokeWidth:1.6,interactive:true,cursorOverStyle:"pointer",tooltipText:"{name}"
+  });
 
+  series.mapPolygons.template.states.create("hover",{fill:am5.color(0xF08B65)});
+  series.mapPolygons.template.states.create("active",{fill:am5.color(0xEB6841)});
 
-    if(!item){
-      return;
-    }
-
-
-    if(
-      polygon ===
-      selectedPolygon
-    ){
-
-      clearProvince();
-
-      return;
-
-    }
-
-
-    if(selectedPolygon){
-
-      selectedPolygon.set(
-        "active",
-        false
-      );
-
-    }
-
-
-    selectedPolygon =
-    polygon;
-
-
-    polygon.set(
-      "active",
-      true
-    );
-
-
-    selectedProvince = {
-
-      id:
-      item.dataContext.id,
-
-      name:
-      item.dataContext.name
-
-    };
-
-
-    $("provinceName")
-    .textContent =
-    selectedProvince.name;
-
-
-    $("exploreProvinceButton")
-    .textContent =
-    "Explorar " +
-    selectedProvince.name;
-
-
-    $("provinceCard")
-    .classList
-    .add(
-      "visible"
-    );
-
-
-    localStorage
-    .setItem(
-      "amigate_province",
-      JSON.stringify(
-        selectedProvince
-      )
-    );
-
-
+  function clearProvince(){
+    if(selectedPolygon)selectedPolygon.set("active",false);
+    selectedPolygon=null;selectedProvince=null;
+    $("provinceCard").classList.remove("visible");
+    localStorage.removeItem("amigate_province");
     updateProvinceUI();
-
   }
-);
 
+  series.mapPolygons.template.events.on("click",event=>{
+    const polygon=event.target,item=polygon.dataItem;
+    if(!item)return;
+    if(polygon===selectedPolygon){clearProvince();return}
+    if(selectedPolygon)selectedPolygon.set("active",false);
+    selectedPolygon=polygon;polygon.set("active",true);
+    selectedProvince={id:item.dataContext.id,name:item.dataContext.name};
+    $("provinceName").textContent=selectedProvince.name;
+    $("exploreProvinceButton").textContent="Explorar "+selectedProvince.name;
+    $("provinceCard").classList.add("visible");
+    localStorage.setItem("amigate_province",JSON.stringify(selectedProvince));
+    updateProvinceUI();
+  });
 
-$("clearProvinceButton")
-.addEventListener(
-  "click",
-  clearProvince
-);
+  $("clearProvinceButton").addEventListener("click",clearProvince);
 
-
-series
-.events
-.on(
-  "datavalidated",
-  () => {
-
-    const stored =
-    localStorage
-    .getItem(
-      "amigate_province"
-    );
-
-
-    if(!stored){
-      return;
-    }
-
-
+  series.events.on("datavalidated",()=>{
+    const stored=localStorage.getItem("amigate_province");
+    if(!stored)return;
     try{
-
-      const saved =
-      JSON.parse(
-        stored
-      );
-
-
-      series
-      .dataItems
-      .forEach(
-        item => {
-
-          if(
-            item.dataContext.id ===
-            saved.id
-          ){
-
-            const polygon =
-            item.get(
-              "mapPolygon"
-            );
-
-
-            if(!polygon){
-              return;
-            }
-
-
-            selectedPolygon =
-            polygon;
-
-            selectedProvince =
-            saved;
-
-
-            polygon.set(
-              "active",
-              true
-            );
-
-
-            $("provinceName")
-            .textContent =
-            saved.name;
-
-
-            $("exploreProvinceButton")
-            .textContent =
-            "Explorar " +
-            saved.name;
-
-
-            $("provinceCard")
-            .classList
-            .add(
-              "visible"
-            );
-
-
-            updateProvinceUI();
-
-          }
-
+      const saved=JSON.parse(stored);
+      series.dataItems.forEach(item=>{
+        if(item.dataContext.id===saved.id){
+          const polygon=item.get("mapPolygon");
+          if(!polygon)return;
+          selectedPolygon=polygon;selectedProvince=saved;polygon.set("active",true);
+          $("provinceName").textContent=saved.name;
+          $("exploreProvinceButton").textContent="Explorar "+saved.name;
+          $("provinceCard").classList.add("visible");
+          updateProvinceUI();
         }
-      );
+      });
+    }catch(error){localStorage.removeItem("amigate_province")}
+  });
 
-    }
-    catch(error){
-
-      localStorage
-      .removeItem(
-        "amigate_province"
-      );
-
-    }
-
-  }
-);
-
-
-series.appear(500);
-
+  series.appear(500);
 });
 
+$("exploreProvinceButton").addEventListener("click",()=>$("exploreSection").scrollIntoView({behavior:"smooth"}));
 
-$("exploreProvinceButton")
-.addEventListener(
-"click",
-() => {
+async function loadTaxonomy(force=false){
+  if(taxonomyCache.loaded&&!force)return taxonomyCache;
+  if(taxonomyCache.promise&&!force)return taxonomyCache.promise;
 
-$("exploreSection")
-.scrollIntoView({
-  behavior:"smooth"
-});
+  taxonomyCache.promise=(async()=>{
+    try{
+      const [categoriesResult,subcategoriesResult,provincesResult]=await withTimeout(Promise.all([
+        db.from("categories").select("*"),
+        db.from("subcategories").select("*"),
+        db.from("provinces").select("*")
+      ]),10000,"TAXONOMY_TIMEOUT");
 
-}
-);
+      if(categoriesResult.error)throw categoriesResult.error;
+      if(subcategoriesResult.error)throw subcategoriesResult.error;
+      if(provincesResult.error)throw provincesResult.error;
 
-
-/* =========================================================
-TAXONOMY CACHE
-========================================================= */
-
-const taxonomyCache = {
-
-loaded:false,
-promise:null,
-
-categories:[],
-subcategories:[],
-types:[],
-provinces:[]
-
-};
-
-
-async function loadTaxonomy(
-force = false
-){
-
-if(
-  taxonomyCache.loaded &&
-  !force
-){
-
-  return taxonomyCache;
-
-}
-
-
-if(
-  taxonomyCache.promise &&
-  !force
-){
+      taxonomyCache.categories=categoriesResult.data||[];
+      taxonomyCache.subcategories=subcategoriesResult.data||[];
+      taxonomyCache.provinces=provincesResult.data||[];
+      taxonomyCache.loaded=true;
+      populateProvinceControls();
+      return taxonomyCache;
+    }finally{taxonomyCache.promise=null}
+  })();
 
   return taxonomyCache.promise;
-
-}
-
-
-if(force){
-
-  taxonomyCache.loaded =
-  false;
-
-  taxonomyCache.promise =
-  null;
-
-}
-
-
-taxonomyCache.promise =
-(async () => {
-
-  try{
-
-    const [
-      categories,
-      subcategories,
-      types,
-      provinces
-    ] =
-    await withTimeout(
-
-      Promise.all([
-
-        db
-        .from("categories")
-        .select("*"),
-
-        db
-        .from("subcategories")
-        .select("*"),
-
-        db
-        .from("category_types")
-        .select("*"),
-
-        db
-        .from("provinces")
-        .select("*")
-
-      ]),
-
-      10000,
-
-      "TAXONOMY_TIMEOUT"
-
-    );
-
-
-    if(categories.error){
-      throw categories.error;
-    }
-
-    if(subcategories.error){
-      throw subcategories.error;
-    }
-
-    if(types.error){
-      throw types.error;
-    }
-
-    if(provinces.error){
-      throw provinces.error;
-    }
-
-
-    taxonomyCache.categories =
-    categories.data || [];
-
-    taxonomyCache.subcategories =
-    subcategories.data || [];
-
-    taxonomyCache.types =
-    types.data || [];
-
-    taxonomyCache.provinces =
-    provinces.data || [];
-
-    taxonomyCache.loaded =
-    true;
-
-
-    populateProductSubcategories();
-
-
-    return taxonomyCache;
-
-  }
-  finally{
-
-    taxonomyCache.promise =
-    null;
-
-  }
-
-})();
-
-
-return taxonomyCache.promise;
-
-}
-
-
-setTimeout(
-() => {
-
-loadTaxonomy()
-.catch(
-  console.warn
-);
-
-},
-700
-);
-
-
-/* =========================================================
-SAFE MOBILE PRESS
-========================================================= */
-
-function bindPress(
-element,
-callback
-){
-
-let startX = 0;
-let startY = 0;
-let active = false;
-
-
-element.addEventListener(
-  "pointerdown",
-  event => {
-
-    active =
-    true;
-
-    startX =
-    event.clientX;
-
-    startY =
-    event.clientY;
-
-  },
-  {
-    passive:true
-  }
-);
-
-
-element.addEventListener(
-  "pointercancel",
-  () => {
-
-    active =
-    false;
-
-  }
-);
-
-
-element.addEventListener(
-  "pointerup",
-  event => {
-
-    if(!active){
-      return;
-    }
-
-    active =
-    false;
-
-
-    const distance =
-    Math.hypot(
-      event.clientX -
-      startX,
-
-      event.clientY -
-      startY
-    );
-
-
-    /*
-    Si estaba haciendo scroll,
-    no abrimos la categoría.
-    */
-
-    if(distance > 12){
-      return;
-    }
-
-
-    callback();
-
-  }
-);
-
-
-element.addEventListener(
-  "keydown",
-  event => {
-
-    if(
-      event.key === "Enter" ||
-      event.key === " "
-    ){
-
-      event.preventDefault();
-
-      callback();
-
-    }
-
-  }
-);
-
-}
-
-
-/* =========================================================
-MARKETPLACE
-========================================================= */
-
-const descriptions = {
-
-Productos:
-"Descubrí marcas, emprendimientos y productos disponibles cerca tuyo.",
-
-Servicios:
-"Encontrá profesionales y empresas que ofrecen servicios.",
-
-Oficios:
-"Conectate con especialistas de distintos oficios.",
-
-Empleos:
-"Explorá oportunidades laborales y búsquedas de personal.",
-
-Necesito:
-"Publicá exactamente lo que necesitás y encontrá quién pueda ayudarte."
-
-};
-
-
-let currentCategory =
-null;
-
-let currentRootCategory =
-null;
-
-let currentSubcategory =
-null;
-
-let navigationVersion =
-0;
-
-let navigationLocked =
-false;
-
-
-document
-.querySelectorAll(
-  "[data-category]"
-)
-.forEach(
-card => {
-
-bindPress(
-  card,
-  async () => {
-
-    if(navigationLocked){
-      return;
-    }
-
-
-    navigationLocked =
-    true;
-
-
-    try{
-
-      await openMarketplace(
-        card.dataset.category
-      );
-
-    }
-    finally{
-
-      setTimeout(
-        () => {
-
-          navigationLocked =
-          false;
-
-        },
-        150
-      );
-
-    }
-
-  }
-);
-
-}
-);
-
-
-async function openMarketplace(
-category
-){
-
-const version =
-++navigationVersion;
-
-
-currentCategory =
-category;
-
-currentRootCategory =
-null;
-
-currentSubcategory =
-null;
-
-
-$("publicSite")
-.classList
-.add(
-  "hidden"
-);
-
-
-$("marketplace")
-.classList
-.add(
-  "visible"
-);
-
-
-document.body.style.overflow =
-"auto";
-
-
-window.scrollTo(
-0,
-0
-);
-
-
-const province =
-selectedProvince?.name ||
-"Argentina";
-
-
-$("marketProvince")
-.textContent =
-province;
-
-$("marketBreadcrumbProvince")
-.textContent =
-province;
-
-$("marketBreadcrumbCategory")
-.textContent =
-category;
-
-$("marketEyebrow")
-.textContent =
-province;
-
-$("marketTitle")
-.textContent =
-category;
-
-$("marketDescription")
-.textContent =
-descriptions[
-  category
-] || "";
-
-
-resetMarketplace();
-
-
-$("marketLoader")
-.classList
-.add(
-  "visible"
-);
-
-
-try{
-
-  const taxonomy =
-  await loadTaxonomy();
-
-
-  if(
-    version !==
-    navigationVersion
-  ){
-
-    return;
-
-  }
-
-
-  const root =
-  taxonomy.categories
-  .find(
-    item =>
-    normalizeText(
-      rowName(item)
-    ) ===
-    normalizeText(
-      category
-    )
-  );
-
-
-  if(!root){
-
-    throw new Error(
-      "ROOT_NOT_FOUND"
-    );
-
-  }
-
-
-  currentRootCategory =
-  root;
-
-
-  const rows =
-  taxonomy.subcategories
-  .filter(
-    sub => {
-
-      const parent =
-      firstValue(
-        sub,
-        [
-          "category_id",
-          "categoria_id",
-          "parent_category_id",
-          "parent_id"
-        ]
-      );
-
-
-      return (
-        String(parent) ===
-        String(root.id)
-      );
-
-    }
-  )
-  .sort(
-    (a,b) =>
-    rowName(a)
-    .localeCompare(
-      rowName(b),
-      "es"
-    )
-  );
-
-
-  renderSubcategories(
-    rows
-  );
-
-}
-catch(error){
-
-  console.error(
-    error
-  );
-
-
-  if(
-    version ===
-    navigationVersion
-  ){
-
-    showMarketError(
-      error
-    );
-
-  }
-
-}
-finally{
-
-  if(
-    version ===
-    navigationVersion
-  ){
-
-    $("marketLoader")
-    .classList
-    .remove(
-      "visible"
-    );
-
-  }
-
-}
-
-}
-
-
-function resetMarketplace(){
-
-$("marketError")
-.classList
-.remove(
-  "visible"
-);
-
-$("subcategoriesSection")
-.classList
-.remove(
-  "hidden"
-);
-
-$("subcategoryGrid")
-.innerHTML =
-"";
-
-$("resultsSection")
-.classList
-.remove(
-  "visible"
-);
-
-$("subcategorySeparator")
-.classList
-.add(
-  "hidden"
-);
-
-$("marketBreadcrumbSubcategory")
-.classList
-.add(
-  "hidden"
-);
-
-}
-
-
-function renderSubcategories(
-rows
-){
-
-$("subcategoryGrid")
-.innerHTML =
-"";
-
-
-$("subcategoryCount")
-.textContent =
-rows.length +
-(
-  rows.length === 1
-  ? " categoría"
-  : " categorías"
-);
-
-
-if(!rows.length){
-
-  showMarketError(
-    new Error(
-      "NO_SUBCATEGORIES"
-    )
-  );
-
-  return;
-
-}
-
-
-rows.forEach(
-row => {
-
-  const card =
-  document.createElement(
-    "article"
-  );
-
-
-  card.className =
-  "subcategory";
-
-  card.tabIndex =
-  0;
-
-
-  card.innerHTML =
-  `
-  <small>
-  ${escapeHtml(
-    currentCategory
-  )}
-  </small>
-
-  <strong>
-  ${escapeHtml(
-    rowName(row)
-  )}
-  </strong>
-
-  <div>
-  Explorar →
-  </div>
-  `;
-
-
-  bindPress(
-    card,
-    () => {
-
-      selectSubcategory(
-        row
-      );
-
-    }
-  );
-
-
-  $("subcategoryGrid")
-  .appendChild(
-    card
-  );
-
-}
-);
-
-}
-
-
-function selectSubcategory(
-row
-){
-
-++navigationVersion;
-
-
-currentSubcategory =
-row;
-
-
-$("subcategoriesSection")
-.classList
-.add(
-  "hidden"
-);
-
-
-$("subcategorySeparator")
-.classList
-.remove(
-  "hidden"
-);
-
-
-$("marketBreadcrumbSubcategory")
-.classList
-.remove(
-  "hidden"
-);
-
-
-$("marketBreadcrumbSubcategory")
-.textContent =
-rowName(row);
-
-
-$("resultsTitle")
-.textContent =
-rowName(row);
-
-
-$("resultsSubtitle")
-.textContent =
-selectedProvince?.name ||
-"Argentina";
-
-
-$("resultsSection")
-.classList
-.add(
-  "visible"
-);
-
-
-window.scrollTo(
-0,
-0
-);
-
-}
-
-
-function showMarketError(
-error
-){
-
-$("marketError")
-.classList
-.add(
-  "visible"
-);
-
-
-$("subcategoriesSection")
-.classList
-.add(
-  "hidden"
-);
-
-
-let title =
-"No pudimos cargar esta sección";
-
-let text =
-"Ocurrió un problema al consultar Supabase.";
-
-
-if(
-  error.message ===
-  "TAXONOMY_TIMEOUT"
-){
-
-  title =
-  "La conexión está tardando demasiado";
-
-  text =
-  "Tocá Reintentar para volver a cargar las categorías.";
-
-}
-
-
-if(
-  error.message ===
-  "ROOT_NOT_FOUND"
-){
-
-  title =
-  "No encontramos esta categoría";
-
-  text =
-  "La categoría principal no apareció en la tabla categories.";
-
-}
-
-
-if(
-  error.message ===
-  "NO_SUBCATEGORIES"
-){
-
-  title =
-  "No hay subcategorías";
-
-  text =
-  "Esta sección todavía no tiene subcategorías asociadas.";
-
-}
-
-
-$("marketErrorTitle")
-.textContent =
-title;
-
-
-$("marketErrorText")
-.textContent =
-text;
-
-}
-
-
-$("retryMarketButton")
-.addEventListener(
-"click",
-async () => {
-
-try{
-
-  await loadTaxonomy(
-    true
-  );
-
-
-  await openMarketplace(
-    currentCategory
-  );
-
-}
-catch(error){
-
-  showMarketError(
-    error
-  );
-
-}
-
-}
-);
-
-
-function closeMarketplace(){
-
-++navigationVersion;
-
-
-$("marketplace")
-.classList
-.remove(
-  "visible"
-);
-
-
-$("publicSite")
-.classList
-.remove(
-  "hidden"
-);
-
-
-document.body.style.overflow =
-"";
-
-
-requestAnimationFrame(
-() => {
-
-$("exploreSection")
-.scrollIntoView();
-
-}
-);
-
-}
-
-
-$("marketLogo")
-.addEventListener(
-"click",
-closeMarketplace
-);
-
-
-$("marketHomeButton")
-.addEventListener(
-"click",
-closeMarketplace
-);
-
-
-$("marketBackButton")
-.addEventListener(
-"click",
-() => {
-
-if(currentSubcategory){
-
-  ++navigationVersion;
-
-  currentSubcategory =
-  null;
-
-
-  $("resultsSection")
-  .classList
-  .remove(
-    "visible"
-  );
-
-
-  $("subcategorySeparator")
-  .classList
-  .add(
-    "hidden"
-  );
-
-
-  $("marketBreadcrumbSubcategory")
-  .classList
-  .add(
-    "hidden"
-  );
-
-
-  $("subcategoriesSection")
-  .classList
-  .remove(
-    "hidden"
-  );
-
-
-  return;
-
-}
-
-
-closeMarketplace();
-
-}
-);
-
-
-/* =========================================================
-AUTH
-========================================================= */
-
-function openAuth(
-intent = "buyer",
-tab = "login"
-){
-
-authIntent =
-intent;
-
-
-$("sellerIntent")
-.classList
-.toggle(
-  "visible",
-  intent === "seller"
-);
-
-
-switchAuthTab(
-tab
-);
-
-
-openModal(
-$("authModal")
-);
-
-}
-
-
-function switchAuthTab(tab){
-
-document
-.querySelectorAll(
-  ".auth-tab"
-)
-.forEach(
-button => {
-
-button.classList.toggle(
-  "active",
-  button.dataset.authTab ===
-  tab
-);
-
-}
-);
-
-
-document
-.querySelectorAll(
-  ".auth-panel"
-)
-.forEach(
-panel => {
-
-panel.classList.remove(
-  "active"
-);
-
-}
-);
-
-
-$("auth-" + tab)
-.classList
-.add(
-  "active"
-);
-
-}
-
-
-document
-.querySelectorAll(
-  ".auth-tab"
-)
-.forEach(
-button => {
-
-button.addEventListener(
-  "click",
-  () => {
-
-    switchAuthTab(
-      button.dataset.authTab
-    );
-
-  }
-);
-
-}
-);
-
-
-document
-.querySelectorAll(
-  "[data-password-target]"
-)
-.forEach(
-button => {
-
-button.addEventListener(
-  "click",
-  () => {
-
-    const input =
-    $(
-      button.dataset.passwordTarget
-    );
-
-
-    const showing =
-    input.type ===
-    "text";
-
-
-    input.type =
-    showing
-    ? "password"
-    : "text";
-
-
-    button.textContent =
-    showing
-    ? "Ver"
-    : "Ocultar";
-
-  }
-);
-
-}
-);
-
-
-/* =========================================================
-REGISTER
-========================================================= */
-
-$("registerForm")
-.addEventListener(
-"submit",
-async event => {
-
-event.preventDefault();
-
-
-const submit =
-$("registerSubmit");
-
-
-submit.disabled =
-true;
-
-submit.textContent =
-"Creando cuenta...";
-
-
-clearMessage(
-"registerMessage"
-);
-
-
-try{
-
-  const nombre =
-  $("registerName")
-  .value
-  .trim();
-
-
-  const apellido =
-  $("registerSurname")
-  .value
-  .trim();
-
-
-  const dni =
-  $("registerDni")
-  .value
-  .replace(/\D/g,"");
-
-
-  const telefono =
-  $("registerPhone")
-  .value
-  .trim();
-
-
-  const email =
-  $("registerEmail")
-  .value
-  .trim()
-  .toLowerCase();
-
-
-  const password =
-  $("registerPassword")
-  .value;
-
-
-  const {
-    data,
-    error
-  } =
-  await withTimeout(
-
-    db.auth.signUp({
-
-      email,
-      password,
-
-      options:{
-
-        data:{
-
-          nombre,
-          apellido,
-          dni,
-          telefono,
-
-          nombre_completo:
-          nombre +
-          " " +
-          apellido,
-
-          origen_registro:
-          authIntent
-
-        }
-
-      }
-
-    }),
-
-    15000,
-
-    "REGISTER_TIMEOUT"
-
-  );
-
-
-  if(error){
-    throw error;
-  }
-
-
-  if(!data?.session){
-
-    showMessage(
-      "registerMessage",
-      "La cuenta se creó, pero Supabase todavía está esperando confirmación de correo.",
-      "success"
-    );
-
-    return;
-
-  }
-
-
-  currentUser =
-  data.user;
-
-
-  await loadCurrentProfile();
-
-
-  await loadSellerContext();
-
-
-  updateSessionUI();
-
-
-  showMessage(
-    "registerMessage",
-    "Cuenta creada correctamente.",
-    "success"
-  );
-
-
-  setTimeout(
-    () => {
-
-      closeModal(
-        $("authModal")
-      );
-
-
-      if(
-        authIntent ===
-        "seller"
-      ){
-
-        openBrandModal();
-
-      }
-      else{
-
-        openAccount();
-
-      }
-
-    },
-    300
-  );
-
-}
-catch(error){
-
-  console.error(
-    error
-  );
-
-
-  showMessage(
-    "registerMessage",
-    error.message ===
-    "REGISTER_TIMEOUT"
-    ? "Supabase tardó demasiado. Revisá Authentication → Users para comprobar si la cuenta se creó."
-    : error.message,
-    "error"
-  );
-
-}
-finally{
-
-  submit.disabled =
-  false;
-
-  submit.textContent =
-  "Crear mi cuenta";
-
-}
-
-}
-);
-
-
-/* =========================================================
-LOGIN
-========================================================= */
-
-$("loginForm")
-.addEventListener(
-"submit",
-async event => {
-
-event.preventDefault();
-
-
-const submit =
-$("loginSubmit");
-
-
-submit.disabled =
-true;
-
-submit.textContent =
-"Ingresando...";
-
-
-clearMessage(
-"loginMessage"
-);
-
-
-try{
-
-  const {
-    data,
-    error
-  } =
-  await withTimeout(
-
-    db.auth.signInWithPassword({
-
-      email:
-      $("loginEmail")
-      .value
-      .trim()
-      .toLowerCase(),
-
-      password:
-      $("loginPassword")
-      .value
-
-    }),
-
-    12000,
-
-    "LOGIN_TIMEOUT"
-
-  );
-
-
-  if(error){
-    throw error;
-  }
-
-
-  currentUser =
-  data.user;
-
-
-  await Promise.all([
-
-    loadCurrentProfile(),
-
-    loadSellerContext()
-
-  ]);
-
-
-  updateSessionUI();
-
-
-  showMessage(
-    "loginMessage",
-    "Sesión iniciada.",
-    "success"
-  );
-
-
-  setTimeout(
-    () => {
-
-      closeModal(
-        $("authModal")
-      );
-
-
-      openAccount();
-
-    },
-    250
-  );
-
-}
-catch(error){
-
-  const text =
-  String(
-    error.message ||
-    ""
-  );
-
-
-  showMessage(
-    "loginMessage",
-    text
-    .toLowerCase()
-    .includes(
-      "invalid login"
-    )
-    ? "Email o contraseña incorrectos."
-    : text,
-    "error"
-  );
-
-}
-finally{
-
-  submit.disabled =
-  false;
-
-  submit.textContent =
-  "Iniciar sesión";
-
-}
-
-}
-);
-
-
-/* =========================================================
-PROFILE
-========================================================= */
-
-async function loadCurrentProfile(){
-
-if(!currentUser){
-
-  currentProfile =
-  null;
-
-  return null;
-
-}
-
-
-const {
-data,
-error
-} =
-await db
-.from("profiles")
-.select("*")
-.eq(
-  "id",
-  currentUser.id
-)
-.maybeSingle();
-
-
-if(error){
-
-  console.warn(
-    error
-  );
-
-  return null;
-
-}
-
-
-currentProfile =
-data;
-
-
-return data;
-
-}
-
-
-function userName(){
-
-return (
-  currentProfile?.nombre ||
-  currentUser
-  ?.user_metadata
-  ?.nombre ||
-  currentUser
-  ?.email
-  ?.split("@")[0] ||
-  "Usuario"
-);
-
-}
-
-
-function userFullName(){
-
-const nombre =
-currentProfile?.nombre ||
-currentUser
-?.user_metadata
-?.nombre ||
-"";
-
-
-const apellido =
-currentProfile?.apellido ||
-currentUser
-?.user_metadata
-?.apellido ||
-"";
-
-
-return (
-  (
-    nombre +
-    " " +
-    apellido
-  )
-  .trim() ||
-  currentUser?.email ||
-  "Usuario"
-);
-
-}
-
-
-/* =========================================================
-SELLER CONTEXT - CORRECCIÓN CLAVE
-========================================================= */
-
-async function loadSellerContext(){
-
-currentSellerProfile =
-null;
-
-currentBrand =
-null;
-
-
-if(!currentUser){
-  return;
-}
-
-
-/*
-1. Buscar seller_profiles por user_id.
-*/
-
-const sellerResult =
-await db
-.from("seller_profiles")
-.select("*")
-.eq(
-  "user_id",
-  currentUser.id
-)
-.maybeSingle();
-
-
-if(sellerResult.error){
-
-  console.warn(
-    "seller_profiles:",
-    sellerResult.error
-  );
-
-  return;
-
-}
-
-
-currentSellerProfile =
-sellerResult.data;
-
-
-if(!currentSellerProfile){
-  return;
-}
-
-
-/*
-2. Buscar brands por seller_id.
-*/
-
-const brandResult =
-await db
-.from("brands")
-.select("*")
-.eq(
-  "seller_id",
-  currentSellerProfile.id
-)
-.limit(1)
-.maybeSingle();
-
-
-if(brandResult.error){
-
-  console.warn(
-    "brands:",
-    brandResult.error
-  );
-
-  return;
-
-}
-
-
-currentBrand =
-brandResult.data;
-
-}
-
-
-/* =========================================================
-SESSION UI
-========================================================= */
-
-function effectiveRole(){
-
-if(
-  currentProfile
-  ?.tipo_usuario ===
-  "admin"
-){
-
-  return "admin";
-
-}
-
-
-if(currentSellerProfile){
-
-  return "vendedor";
-
-}
-
-
-return "comprador";
-
-}
-
-
-function updateSessionUI(){
-
-if(currentUser){
-
-  $("loginButton")
-  .textContent =
-  "Mi cuenta";
-
-
-  $("marketAccountButton")
-  .textContent =
-  "Mi cuenta";
-
-
-  $("sessionChip")
-  .classList
-  .add(
-    "visible"
-  );
-
-
-  $("sessionName")
-  .textContent =
-  userName();
-
-}
-else{
-
-  $("loginButton")
-  .textContent =
-  "Iniciar sesión";
-
-
-  $("marketAccountButton")
-  .textContent =
-  "Iniciar sesión";
-
-
-  $("sessionChip")
-  .classList
-  .remove(
-    "visible"
-  );
-
-}
-
-}
-
-
-/* =========================================================
-ACCOUNT
-========================================================= */
-
-function openAccount(){
-
-if(!currentUser){
-
-  openAuth();
-
-  return;
-
-}
-
-
-const name =
-userFullName();
-
-
-$("accountName")
-.textContent =
-name;
-
-
-$("accountEmail")
-.textContent =
-currentUser.email ||
-"";
-
-
-$("accountRole")
-.textContent =
-effectiveRole();
-
-
-$("accountAvatar")
-.textContent =
-name
-.split(" ")
-.filter(Boolean)
-.slice(0,2)
-.map(
-value =>
-value
-.charAt(0)
-.toUpperCase()
-)
-.join("") ||
-"A";
-
-
-$("accountPublishBrandButton")
-.textContent =
-currentBrand
-? "Administrar mi marca"
-: "Publicar mi marca";
-
-
-openModal(
-$("accountModal")
-);
-
-}
-
-
-$("loginButton")
-.addEventListener(
-"click",
-() => {
-
-currentUser
-? openAccount()
-: openAuth();
-
-}
-);
-
-
-$("marketAccountButton")
-.addEventListener(
-"click",
-() => {
-
-currentUser
-? openAccount()
-: openAuth();
-
-}
-);
-
-
-/* =========================================================
-OPEN BRAND
-========================================================= */
-
-async function openBrandModal(){
-
-if(!currentUser){
-
-  openAuth(
-    "seller",
-    "register"
-  );
-
-  return;
-
-}
-
-
-await loadSellerContext();
-
-
-if(currentBrand){
-
-  closeModal(
-    $("accountModal")
-  );
-
-
-  openSellerPortal();
-
-  return;
-
-}
-
-
-clearMessage(
-"brandMessage"
-);
-
-
-if(currentSellerProfile?.cuit){
-
-  $("brandCuit")
-  .value =
-  currentSellerProfile.cuit;
-
-}
-
-
-openModal(
-$("brandModal")
-);
-
-}
-
-
-$("publishBrandButton")
-.addEventListener(
-"click",
-() => {
-
-if(!currentUser){
-
-  openAuth(
-    "seller",
-    "register"
-  );
-
-}
-else{
-
-  openBrandModal();
-
-}
-
-}
-);
-
-
-$("accountPublishBrandButton")
-.addEventListener(
-"click",
-() => {
-
-closeModal(
-  $("accountModal")
-);
-
-
-openBrandModal();
-
-}
-);
-
-
-/* =========================================================
-CREATE SELLER + BRAND
-========================================================= */
-
-$("brandForm")
-.addEventListener(
-"submit",
-async event => {
-
-event.preventDefault();
-
-
-if(!currentUser){
-
-  showMessage(
-    "brandMessage",
-    "Tenés que iniciar sesión.",
-    "error"
-  );
-
-  return;
-
-}
-
-
-const submit =
-$("createBrandSubmit");
-
-
-submit.disabled =
-true;
-
-submit.textContent =
-"Creando marca...";
-
-
-clearMessage(
-"brandMessage"
-);
-
-
-try{
-
-  const cuit =
-  $("brandCuit")
-  .value
-  .trim();
-
-
-  const nombre =
-  $("brandName")
-  .value
-  .trim();
-
-
-  const descripcion =
-  $("brandDescription")
-  .value
-  .trim();
-
-
-  if(!cuit){
-
-    throw new Error(
-      "Ingresá tu CUIT."
-    );
-
-  }
-
-
-  if(!nombre){
-
-    throw new Error(
-      "Ingresá el nombre de la marca."
-    );
-
-  }
-
-
-  /*
-  ==========================================
-  PASO 1
-  BUSCAR SELLER_PROFILE EXISTENTE
-  ==========================================
-  */
-
-  let seller =
-  currentSellerProfile;
-
-
-  if(!seller){
-
-    const existingSeller =
-    await db
-    .from("seller_profiles")
-    .select("*")
-    .eq(
-      "user_id",
-      currentUser.id
-    )
-    .maybeSingle();
-
-
-    if(existingSeller.error){
-
-      throw new Error(
-        "No pudimos consultar tu perfil vendedor: " +
-        existingSeller.error.message
-      );
-
-    }
-
-
-    seller =
-    existingSeller.data;
-
-  }
-
-
-  /*
-  ==========================================
-  PASO 2
-  CREAR SELLER_PROFILE
-  ==========================================
-  */
-
-  if(!seller){
-
-    const createSeller =
-    await db
-    .from("seller_profiles")
-    .insert({
-
-      user_id:
-      currentUser.id,
-
-      cuit:
-      cuit
-
-    })
-    .select("*")
-    .single();
-
-
-    if(createSeller.error){
-
-      throw new Error(
-        "No pudimos crear el perfil vendedor: " +
-        createSeller.error.message
-      );
-
-    }
-
-
-    seller =
-    createSeller.data;
-
-  }
-
-
-  currentSellerProfile =
-  seller;
-
-
-  /*
-  ==========================================
-  PASO 3
-  COMPROBAR SI YA TIENE MARCA
-  ==========================================
-  */
-
-  const existingBrand =
-  await db
-  .from("brands")
-  .select("*")
-  .eq(
-    "seller_id",
-    seller.id
-  )
-  .limit(1)
-  .maybeSingle();
-
-
-  if(existingBrand.error){
-
-    throw new Error(
-      "No pudimos comprobar tus marcas: " +
-      existingBrand.error.message
-    );
-
-  }
-
-
-  if(existingBrand.data){
-
-    currentBrand =
-    existingBrand.data;
-
-
-    showMessage(
-      "brandMessage",
-      "Tu marca ya existe. Abriendo Portal Vendedor...",
-      "success"
-    );
-
-
-    setTimeout(
-      () => {
-
-        closeModal(
-          $("brandModal")
-        );
-
-
-        openSellerPortal();
-
-      },
-      350
-    );
-
-
-    return;
-
-  }
-
-
-  /*
-  ==========================================
-  PASO 4
-  CREAR BRAND
-
-  TABLA REAL:
-  id
-  seller_id
-  nombre
-  descripcion
-  ==========================================
-  */
-
-  const createBrand =
-  await db
-  .from("brands")
-  .insert({
-
-    seller_id:
-    seller.id,
-
-    nombre:
-    nombre,
-
-    descripcion:
-    descripcion
-
-  })
-  .select("*")
-  .single();
-
-
-  if(createBrand.error){
-
-    throw new Error(
-      "No pudimos guardar la marca: " +
-      createBrand.error.message
-    );
-
-  }
-
-
-  currentBrand =
-  createBrand.data;
-
-
-  /*
-  No dependemos de cambiar profiles.tipo_usuario.
-  La existencia de seller_profiles ya determina
-  que tiene Portal Vendedor.
-  */
-
-
-  updateSessionUI();
-
-
-  showMessage(
-    "brandMessage",
-    "¡Marca creada correctamente!",
-    "success"
-  );
-
-
-  setTimeout(
-    () => {
-
-      closeModal(
-        $("brandModal")
-      );
-
-
-      openSellerPortal();
-
-    },
-    450
-  );
-
-}
-catch(error){
-
-  console.error(
-    "CREAR MARCA:",
-    error
-  );
-
-
-  showMessage(
-    "brandMessage",
-    error.message ||
-    "No pudimos crear la marca.",
-    "error"
-  );
-
-}
-finally{
-
-  submit.disabled =
-  false;
-
-  submit.textContent =
-  "Crear mi marca";
-
-}
-
-}
-);
-
-
-/* =========================================================
-PORTAL CHOICE
-========================================================= */
-
-$("openPortalButton")
-.addEventListener(
-"click",
-async () => {
-
-closeModal(
-  $("accountModal")
-);
-
-
-await loadSellerContext();
-
-
-const role =
-effectiveRole();
-
-
-if(role === "admin"){
-
-  openAdminPortal();
-
-  return;
-
-}
-
-
-if(currentSellerProfile){
-
-  openSellerPortal();
-
-}
-else{
-
-  openBuyerPortal();
-
-}
-
-}
-);
-
-
-/* =========================================================
-BUYER PORTAL
-========================================================= */
-
-async function openBuyerPortal(){
-
-$("buyerWelcomeName")
-.textContent =
-userName();
-
-
-$("buyerPortal")
-.classList
-.add(
-  "visible"
-);
-
-
-const [
-orders,
-favorites,
-brands,
-claims
-] =
-await Promise.all([
-
-safeRead(
-  "orders"
-),
-
-safeRead(
-  "favorite_products"
-),
-
-safeRead(
-  "favorite_brands"
-),
-
-safeRead(
-  "claims"
-)
-
-]);
-
-
-$("buyerOrdersCount")
-.textContent =
-orders.length;
-
-$("buyerFavoritesCount")
-.textContent =
-favorites.length;
-
-$("buyerBrandsCount")
-.textContent =
-brands.length;
-
-$("buyerClaimsCount")
-.textContent =
-claims.length;
-
-
-renderSimpleList(
-"buyerOrdersList",
-orders,
-"Todavía no realizaste compras."
-);
-
-
-renderSimpleList(
-"buyerFavoritesList",
-favorites,
-"Todavía no guardaste favoritos."
-);
-
-
-renderSimpleList(
-"buyerClaimsList",
-claims,
-"No tenés reclamos."
-);
-
-
-const addresses =
-await safeRead(
-  "user_addresses"
-);
-
-
-renderSimpleList(
-"buyerAddressesList",
-addresses,
-"Todavía no guardaste direcciones."
-);
-
-}
-
-
-async function safeRead(table){
-
-try{
-
-  const {
-    data,
-    error
-  } =
-  await db
-  .from(table)
-  .select("*");
-
-
-  if(error){
-    throw error;
-  }
-
-
-  return data || [];
-
-}
-catch(error){
-
-  console.warn(
-    table,
-    error
-  );
-
-
-  return [];
-
-}
-
-}
-
-
-function renderSimpleList(
-id,
-rows,
-emptyText
-){
-
-const container =
-$(id);
-
-
-container.innerHTML =
-"";
-
-
-if(!rows.length){
-
-  container.innerHTML =
-  `
-  <div class="empty-panel">
-  ${escapeHtml(emptyText)}
-  </div>
-  `;
-
-  return;
-
-}
-
-
-rows
-.slice(0,20)
-.forEach(
-(row,index) => {
-
-const title =
-firstValue(
-  row,
-  [
-    "nombre",
-    "titulo",
-    "estado",
-    "status",
-    "direccion"
-  ],
-  "Registro " +
-  (index + 1)
-);
-
-
-container
-.insertAdjacentHTML(
-  "beforeend",
-  `
-  <div class="list-row">
-
-  <div>
-
-  <strong>
-  ${escapeHtml(title)}
-  </strong>
-
-  <p>
-  Información guardada en Amigate.
-  </p>
-
-  </div>
-
-  </div>
-  `
-);
-
-}
-);
-
-}
-
-
-/* =========================================================
-SELLER PORTAL
-========================================================= */
-
-async function openSellerPortal(){
-
-await loadSellerContext();
-
-
-if(!currentSellerProfile){
-
-  openBrandModal();
-
-  return;
-
-}
-
-
-if(!currentBrand){
-
-  openBrandModal();
-
-  return;
-
-}
-
-
-$("sellerPortal")
-.classList
-.add(
-  "visible"
-);
-
-
-$("sellerWelcomeTitle")
-.textContent =
-rowName(
-  currentBrand
-);
-
-
-renderSellerBrand();
-
-
-await loadSellerProducts();
-
-}
-
-
-function renderSellerBrand(){
-
-const container =
-$("sellerBrandInfo");
-
-
-container.innerHTML =
-`
-<div class="list-row">
-
-<div>
-
-<strong>
-Nombre
-</strong>
-
-<p>
-${escapeHtml(
-  currentBrand?.nombre ||
-  "Sin nombre"
-)}
-</p>
-
-</div>
-
-</div>
-
-
-<div class="list-row">
-
-<div>
-
-<strong>
-Descripción
-</strong>
-
-<p>
-${escapeHtml(
-  currentBrand?.descripcion ||
-  "Sin descripción"
-)}
-</p>
-
-</div>
-
-</div>
-
-
-<div class="list-row">
-
-<div>
-
-<strong>
-CUIT
-</strong>
-
-<p>
-${escapeHtml(
-  currentSellerProfile?.cuit ||
-  "Sin CUIT"
-)}
-</p>
-
-</div>
-
-</div>
-`;
-
-}
-
-
-/* =========================================================
-PRODUCTS
-========================================================= */
-
-async function loadSellerProducts(){
-
-if(!currentBrand){
-  return;
-}
-
-
-const {
-data,
-error
-} =
-await db
-.from("products")
-.select("*")
-.eq(
-  "brand_id",
-  currentBrand.id
-);
-
-
-if(error){
-
-  console.warn(
-    error
-  );
-
-
-  $("sellerProductList")
-  .innerHTML =
-  `
-  <div class="empty-panel">
-  No pudimos cargar los productos.
-  </div>
-  `;
-
-
-  return;
-
-}
-
-
-const rows =
-data || [];
-
-
-$("sellerProductsCount")
-.textContent =
-rows.length;
-
-
-$("sellerProductList")
-.innerHTML =
-"";
-
-
-if(!rows.length){
-
-  $("sellerProductList")
-  .innerHTML =
-  `
-  <div class="empty-panel">
-  Todavía no cargaste productos.
-  </div>
-  `;
-
-  return;
-
-}
-
-
-rows.forEach(
-product => {
-
-const price =
-firstValue(
-  product,
-  [
-    "precio",
-    "price",
-    "precio_actual"
-  ],
-  null
-);
-
-
-$("sellerProductList")
-.insertAdjacentHTML(
-  "beforeend",
-  `
-  <div class="list-row">
-
-  <div>
-
-  <strong>
-  ${escapeHtml(
-    rowName(product)
-  )}
-  </strong>
-
-  <p>
-  ${
-    price !== null
-    ? "$" + escapeHtml(price)
-    : "Precio sin definir"
-  }
-  </p>
-
-  </div>
-
-  </div>
-  `
-);
-
-}
-);
-
-}
-
-
-function populateProductSubcategories(){
-
-const select =
-$("productSubcategory");
-
-
-if(!select){
-  return;
-}
-
-
-select.innerHTML =
-`<option value="">Seleccionar</option>`;
-
-
-const root =
-taxonomyCache.categories
-.find(
-item =>
-normalizeText(
-  rowName(item)
-) ===
-"productos"
-);
-
-
-if(!root){
-  return;
-}
-
-
-taxonomyCache.subcategories
-.filter(
-sub => {
-
-const parent =
-firstValue(
-  sub,
-  [
-    "category_id",
-    "categoria_id",
-    "parent_category_id",
-    "parent_id"
-  ]
-);
-
-
-return (
-  String(parent) ===
-  String(root.id)
-);
-
-}
-)
-.sort(
-(a,b) =>
-rowName(a)
-.localeCompare(
-  rowName(b),
-  "es"
-)
-)
-.forEach(
-sub => {
-
-select
-.insertAdjacentHTML(
-  "beforeend",
-  `
-  <option value="${escapeHtml(sub.id)}">
-  ${escapeHtml(rowName(sub))}
-  </option>
-  `
-);
-
-}
-);
-
-}
-
-
-$("newProductButton")
-.addEventListener(
-"click",
-async () => {
-
-await loadTaxonomy();
-
-
-populateProductSubcategories();
-
-
-openModal(
-$("productModal")
-);
-
-}
-);
-
-
-$("productForm")
-.addEventListener(
-"submit",
-async event => {
-
-event.preventDefault();
-
-
-if(!currentBrand){
-
-  showMessage(
-    "productMessage",
-    "Primero tenés que crear una marca.",
-    "error"
-  );
-
-  return;
-
-}
-
-
-clearMessage(
-"productMessage"
-);
-
-
-const name =
-$("productName")
-.value
-.trim();
-
-
-if(!name){
-
-  showMessage(
-    "productMessage",
-    "Ingresá un nombre.",
-    "error"
-  );
-
-  return;
-
-}
-
-
-/*
-Primero intentamos con las columnas
-que veníamos utilizando.
-*/
-
-let result =
-await db
-.from("products")
-.insert({
-
-  brand_id:
-  currentBrand.id,
-
-  nombre:
-  name,
-
-  descripcion:
-  $("productDescription")
-  .value
-  .trim(),
-
-  subcategory_id:
-  $("productSubcategory")
-  .value ||
-  null,
-
-  precio:
-  $("productPrice")
-  .value
-  ? Number(
-      $("productPrice").value
-    )
-  : null
-
-})
-.select("*")
-.single();
-
-
-if(result.error){
-
-  /*
-  Versión mínima si precio no coincide
-  con el esquema real.
-  */
-
-  result =
-  await db
-  .from("products")
-  .insert({
-
-    brand_id:
-    currentBrand.id,
-
-    nombre:
-    name,
-
-    descripcion:
-    $("productDescription")
-    .value
-    .trim(),
-
-    subcategory_id:
-    $("productSubcategory")
-    .value ||
-    null
-
-  })
-  .select("*")
-  .single();
-
-}
-
-
-if(result.error){
-
-  showMessage(
-    "productMessage",
-    "No pudimos guardar el producto: " +
-    result.error.message,
-    "error"
-  );
-
-  return;
-
-}
-
-
-showMessage(
-"productMessage",
-"Producto creado correctamente.",
-"success"
-);
-
-
-setTimeout(
-async () => {
-
-closeModal(
-  $("productModal")
-);
-
-
-$("productForm")
-.reset();
-
-
-await loadSellerProducts();
-
-},
-350
-);
-
-}
-);
-
-
-/* =========================================================
-PORTAL NAVIGATION
-========================================================= */
-
-function setupPortalNavigation(
-attribute,
-portalId,
-titleId,
-sectionPrefix
-){
-
-document
-.querySelectorAll(
-  `[${attribute}]`
-)
-.forEach(
-button => {
-
-button.addEventListener(
-  "click",
-  () => {
-
-    document
-    .querySelectorAll(
-      `[${attribute}]`
-    )
-    .forEach(
-      item =>
-      item.classList.remove(
-        "active"
-      )
-    );
-
-
-    button
-    .classList
-    .add(
-      "active"
-    );
-
-
-    document
-    .querySelectorAll(
-      `#${portalId} .portal-section`
-    )
-    .forEach(
-      section =>
-      section.classList.remove(
-        "active"
-      )
-    );
-
-
-    const page =
-    button.getAttribute(
-      attribute
-    );
-
-
-    $(
-      sectionPrefix +
-      page
-    )
-    ?.classList
-    .add(
-      "active"
-    );
-
-
-    $(titleId)
-    .textContent =
-    button.textContent.trim();
-
-  }
-);
-
-}
-);
-
 }
-
-
-setupPortalNavigation(
-"data-buyer-page",
-"buyerPortal",
-"buyerPortalTitle",
-"buyer-"
-);
-
-
-setupPortalNavigation(
-"data-seller-page",
-"sellerPortal",
-"sellerPortalTitle",
-"seller-"
-);
-
 
-setupPortalNavigation(
-"data-admin-page",
-"adminPortal",
-"adminPortalTitle",
-"admin-"
-);
+setTimeout(()=>loadTaxonomy().catch(console.warn),500);
 
+function populateProvinceControls(){
+  const provinceSelect=$("brandProvince"),shippingList=$("shippingProvinceList");
+  provinceSelect.innerHTML='<option value="">Seleccionar provincia</option>';
+  shippingList.innerHTML="";
 
-/* =========================================================
-ADMIN
-========================================================= */
+  taxonomyCache.provinces.slice().sort((a,b)=>rowName(a).localeCompare(rowName(b),"es")).forEach(province=>{
+    provinceSelect.insertAdjacentHTML("beforeend",`<option value="${escapeHtml(province.id)}">${escapeHtml(rowName(province))}</option>`);
+    shippingList.insertAdjacentHTML("beforeend",`<label class="province-option"><input type="checkbox" class="shipping-province" value="${escapeHtml(province.id)}">${escapeHtml(rowName(province))}</label>`);
+  });
 
-$("adminLink")
-.addEventListener(
-"click",
-async () => {
-
-if(currentUser){
-
-  await loadCurrentProfile();
-
-
-  if(
-    currentProfile
-    ?.tipo_usuario ===
-    "admin" &&
-    currentProfile
-    ?.activo ===
-    true
-  ){
-
-    openAdminPortal();
-
-    return;
-
-  }
-
+  syncShippingChecks();
 }
 
-
-openModal(
-$("adminModal")
-);
-
+function syncShippingChecks(){
+  document.querySelectorAll(".shipping-province").forEach(input=>{input.checked=currentShippingProvinceIds.map(String).includes(String(input.value))});
+  const total=document.querySelectorAll(".shipping-province").length;
+  const selected=document.querySelectorAll(".shipping-province:checked").length;
+  $("allArgentina").checked=total>0&&total===selected;
 }
-);
-
-
-$("adminLoginForm")
-.addEventListener(
-"submit",
-async event => {
-
-event.preventDefault();
-
-
-const {
-data,
-error
-} =
-await db.auth
-.signInWithPassword({
-
-email:
-$("adminEmail")
-.value
-.trim()
-.toLowerCase(),
-
-password:
-$("adminPassword")
-.value
 
+$("allArgentina").addEventListener("change",event=>{
+  document.querySelectorAll(".shipping-province").forEach(input=>{input.checked=event.target.checked});
 });
 
-
-if(error){
-
-  showMessage(
-    "adminMessage",
-    "Email o contraseña incorrectos.",
-    "error"
-  );
-
-  return;
-
+function bindPress(el,callback){
+  el.addEventListener("click",callback);
+  el.addEventListener("keydown",event=>{
+    if(event.key==="Enter"||event.key===" "){event.preventDefault();callback()}
+  });
 }
 
+document.querySelectorAll("[data-category]").forEach(card=>bindPress(card,()=>openMarketplace(card.dataset.category)));
 
-const profileResult =
-await db
-.from("profiles")
-.select("*")
-.eq(
-  "id",
-  data.user.id
-)
-.maybeSingle();
+async function openMarketplace(category){
+  const version=++navigationVersion;
+  currentCategory=category;currentRootCategory=null;currentSubcategory=null;
 
+  $("publicSite").classList.add("hidden");
+  $("marketplace").classList.add("visible");
+  document.body.style.overflow="auto";
+  window.scrollTo({top:0,left:0,behavior:"auto"});
 
-if(
-  profileResult.error ||
-  profileResult.data
-  ?.tipo_usuario !==
-  "admin" ||
-  profileResult.data
-  ?.activo !==
-  true
-){
+  const province=selectedProvince?.name||"Argentina";
+  $("marketProvince").textContent=province;
+  $("marketBreadcrumbProvince").textContent=province;
+  $("marketBreadcrumbCategory").textContent=category;
+  $("marketEyebrow").textContent=province;
+  $("marketTitle").textContent=category;
+  $("marketDescription").textContent=descriptions[category]||"";
 
-  await db.auth.signOut();
+  $("marketError").classList.remove("visible");
+  $("subcategoriesSection").classList.remove("hidden");
+  $("subcategoryGrid").innerHTML="";
+  $("resultsSection").classList.remove("visible");
+  $("subcategorySeparator").classList.add("hidden");
+  $("marketBreadcrumbSubcategory").classList.add("hidden");
+  $("marketLoader").classList.add("visible");
 
+  try{
+    const taxonomy=await loadTaxonomy();
+    if(version!==navigationVersion)return;
+    const root=taxonomy.categories.find(item=>normalizeText(rowName(item))===normalizeText(category));
+    if(!root)throw new Error("ROOT_NOT_FOUND");
+    currentRootCategory=root;
 
-  showMessage(
-    "adminMessage",
-    "Esta cuenta no tiene permisos de administrador.",
-    "error"
-  );
+    const rows=taxonomy.subcategories.filter(sub=>{
+      const parent=firstValue(sub,["category_id","categoria_id","parent_category_id","parent_id"]);
+      return String(parent)===String(root.id);
+    }).sort((a,b)=>rowName(a).localeCompare(rowName(b),"es"));
 
-
-  return;
-
+    renderSubcategories(rows);
+  }catch(error){showMarketError(error)}
+  finally{if(version===navigationVersion)$("marketLoader").classList.remove("visible")}
 }
 
+function renderSubcategories(rows){
+  $("subcategoryGrid").innerHTML="";
+  $("subcategoryCount").textContent=rows.length+(rows.length===1?" categoría":" categorías");
+  if(!rows.length){showMarketError(new Error("NO_SUBCATEGORIES"));return}
 
-currentUser =
-data.user;
-
-currentProfile =
-profileResult.data;
-
-
-await loadSellerContext();
-
-
-updateSessionUI();
-
-
-closeModal(
-$("adminModal")
-);
-
-
-openAdminPortal();
-
-}
-);
-
-
-async function openAdminPortal(){
-
-$("adminPortal")
-.classList
-.add(
-  "visible"
-);
-
-
-$("adminEmailDisplay")
-.textContent =
-currentUser?.email ||
-"";
-
-
-const [
-clients,
-sellers,
-brands,
-products
-] =
-await Promise.all([
-
-countRows(
-  "profiles",
-  "tipo_usuario",
-  "comprador"
-),
-
-countRows(
-  "seller_profiles"
-),
-
-countRows(
-  "brands"
-),
-
-countRows(
-  "products"
-)
-
-]);
-
-
-$("adminClientsCount")
-.textContent =
-clients;
-
-$("adminSellersCount")
-.textContent =
-sellers;
-
-$("adminBrandsCount")
-.textContent =
-brands;
-
-$("adminProductsCount")
-.textContent =
-products;
-
-
-try{
-
-  await loadTaxonomy();
-
-
-  renderAdminCategories();
-
-}
-catch(error){
-
-  console.warn(
-    error
-  );
-
+  rows.forEach(row=>{
+    const card=document.createElement("article");
+    card.className="subcategory";card.tabIndex=0;
+    card.innerHTML=`<small>${escapeHtml(currentCategory)}</small><strong>${escapeHtml(rowName(row))}</strong><div>Explorar →</div>`;
+    bindPress(card,()=>selectSubcategory(row));
+    $("subcategoryGrid").appendChild(card);
+  });
 }
 
+function selectSubcategory(row){
+  ++navigationVersion;
+  currentSubcategory=row;
+  $("subcategoriesSection").classList.add("hidden");
+  $("subcategorySeparator").classList.remove("hidden");
+  $("marketBreadcrumbSubcategory").classList.remove("hidden");
+  $("marketBreadcrumbSubcategory").textContent=rowName(row);
+  $("resultsTitle").textContent=rowName(row);
+  $("resultsSubtitle").textContent=selectedProvince?.name||"Argentina";
+  $("resultsSection").classList.add("visible");
+  window.scrollTo({top:0,left:0,behavior:"auto"});
 }
 
+function showMarketError(error){
+  $("marketError").classList.add("visible");
+  $("subcategoriesSection").classList.add("hidden");
 
-async function countRows(
-table,
-column = null,
-value = null
-){
+  let title="No pudimos cargar esta sección",text="Ocurrió un problema al consultar Supabase.";
+  if(error.message==="TAXONOMY_TIMEOUT"){title="La conexión está tardando demasiado";text="Tocá Reintentar para volver a cargar las categorías."}
+  if(error.message==="ROOT_NOT_FOUND"){title="No encontramos esta categoría";text="La categoría principal no apareció en la tabla categories."}
+  if(error.message==="NO_SUBCATEGORIES"){title="No hay subcategorías";text="Esta sección todavía no tiene subcategorías asociadas."}
 
-try{
+  $("marketErrorTitle").textContent=title;
+  $("marketErrorText").textContent=text;
+}
 
-  let query =
-  db
-  .from(table)
-  .select(
-    "*",
-    {
-      count:"exact",
-      head:true
+$("retryMarketButton").addEventListener("click",async()=>{
+  taxonomyCache.loaded=false;
+  await openMarketplace(currentCategory);
+});
+
+function closeMarketplace(){
+  ++navigationVersion;
+  $("marketplace").classList.remove("visible");
+  $("publicSite").classList.remove("hidden");
+  document.body.style.overflow="";
+  requestAnimationFrame(()=>$("exploreSection").scrollIntoView());
+}
+
+$("marketLogo").addEventListener("click",closeMarketplace);
+$("marketHomeButton").addEventListener("click",closeMarketplace);
+
+$("marketBackButton").addEventListener("click",()=>{
+  if(currentSubcategory){
+    ++navigationVersion;currentSubcategory=null;
+    $("resultsSection").classList.remove("visible");
+    $("subcategorySeparator").classList.add("hidden");
+    $("marketBreadcrumbSubcategory").classList.add("hidden");
+    $("subcategoriesSection").classList.remove("hidden");
+    return;
+  }
+  closeMarketplace();
+});
+
+function switchAuthTab(tab){
+  document.querySelectorAll(".auth-tab").forEach(button=>button.classList.toggle("active",button.dataset.authTab===tab));
+  document.querySelectorAll(".auth-panel").forEach(panel=>panel.classList.remove("active"));
+  $("auth-"+tab).classList.add("active");
+}
+
+function openAuth(intent="buyer",tab="login"){
+  authIntent=intent;
+  $("sellerIntent").classList.toggle("visible",intent==="seller");
+  switchAuthTab(tab);
+  openModal($("authModal"));
+}
+
+document.querySelectorAll(".auth-tab").forEach(button=>button.addEventListener("click",()=>switchAuthTab(button.dataset.authTab)));
+document.querySelectorAll("[data-password-target]").forEach(button=>{
+  button.addEventListener("click",()=>{
+    const input=$(button.dataset.passwordTarget),showing=input.type==="text";
+    input.type=showing?"password":"text";
+    button.textContent=showing?"Ver":"Ocultar";
+  });
+});
+
+$("registerForm").addEventListener("submit",async event=>{
+  event.preventDefault();
+  const submit=$("registerSubmit");
+  submit.disabled=true;submit.textContent="Creando cuenta...";clearMessage("registerMessage");
+
+  try{
+    const nombre=$("registerName").value.trim(),apellido=$("registerSurname").value.trim();
+    const dni=$("registerDni").value.replace(/\D/g,""),telefono=$("registerPhone").value.trim();
+    const email=$("registerEmail").value.trim().toLowerCase(),password=$("registerPassword").value;
+
+    const {data,error}=await withTimeout(db.auth.signUp({
+      email,password,
+      options:{data:{nombre,apellido,dni,telefono,nombre_completo:nombre+" "+apellido,origen_registro:authIntent}}
+    }),15000,"REGISTER_TIMEOUT");
+
+    if(error)throw error;
+
+    if(!data?.session){
+      showMessage("registerMessage","La cuenta se creó, pero Supabase todavía está esperando confirmación de correo.","success");
+      return;
     }
-  );
 
+    currentUser=data.user;
+    await loadCurrentProfile();
+    await loadSellerContext();
+    updateSessionUI();
+    showMessage("registerMessage","Cuenta creada correctamente.","success");
 
-  if(
-    column &&
-    value !== null
-  ){
-
-    query =
-    query.eq(
-      column,
-      value
-    );
-
+    setTimeout(()=>{
+      closeModal($("authModal"));
+      authIntent==="seller"?openBrandModal():openAccount();
+    },300);
+  }catch(error){
+    showMessage("registerMessage",error.message==="REGISTER_TIMEOUT"?"Supabase tardó demasiado. Revisá Authentication → Users.":error.message,"error");
+  }finally{
+    submit.disabled=false;submit.textContent="Crear mi cuenta";
   }
+});
 
+$("loginForm").addEventListener("submit",async event=>{
+  event.preventDefault();
+  const submit=$("loginSubmit");
+  submit.disabled=true;submit.textContent="Ingresando...";clearMessage("loginMessage");
 
-  const {
-    count,
-    error
-  } =
-  await query;
+  try{
+    const {data,error}=await withTimeout(db.auth.signInWithPassword({
+      email:$("loginEmail").value.trim().toLowerCase(),
+      password:$("loginPassword").value
+    }),12000,"LOGIN_TIMEOUT");
 
+    if(error)throw error;
+    currentUser=data.user;
+    await Promise.all([loadCurrentProfile(),loadSellerContext()]);
+    updateSessionUI();
+    showMessage("loginMessage","Sesión iniciada.","success");
 
-  if(error){
-    throw error;
+    setTimeout(()=>{closeModal($("authModal"));openAccount()},250);
+  }catch(error){
+    const text=String(error.message||"");
+    showMessage("loginMessage",text.toLowerCase().includes("invalid login")?"Email o contraseña incorrectos.":text,"error");
+  }finally{
+    submit.disabled=false;submit.textContent="Iniciar sesión";
   }
+});
 
-
-  return count ?? 0;
-
-}
-catch(error){
-
-  return "—";
-
+async function loadCurrentProfile(){
+  if(!currentUser){currentProfile=null;return null}
+  const {data,error}=await db.from("profiles").select("*").eq("id",currentUser.id).maybeSingle();
+  if(error){console.warn(error);return null}
+  currentProfile=data;return data;
 }
 
+async function loadSellerContext(){
+  currentSellerProfile=null;currentBrand=null;currentShippingProvinceIds=[];
+  if(!currentUser)return;
+
+  const sellerResult=await db.from("seller_profiles").select("*").eq("user_id",currentUser.id).maybeSingle();
+  if(sellerResult.error){console.warn("seller_profiles:",sellerResult.error);return}
+  currentSellerProfile=sellerResult.data;
+  if(!currentSellerProfile)return;
+
+  const brandResult=await db.from("brands").select("*").eq("seller_id",currentSellerProfile.id).limit(1).maybeSingle();
+  if(brandResult.error){console.warn("brands:",brandResult.error);return}
+  currentBrand=brandResult.data;
+  if(!currentBrand)return;
+
+  const shippingResult=await db.from("brand_shipping_provinces").select("province_id").eq("brand_id",currentBrand.id);
+  if(!shippingResult.error)currentShippingProvinceIds=(shippingResult.data||[]).map(row=>row.province_id);
 }
 
-
-function renderAdminCategories(){
-
-$("adminCategoryList")
-.innerHTML =
-"";
-
-
-taxonomyCache.categories
-.slice()
-.sort(
-(a,b) =>
-rowName(a)
-.localeCompare(
-  rowName(b),
-  "es"
-)
-)
-.forEach(
-category => {
-
-const count =
-taxonomyCache.subcategories
-.filter(
-sub => {
-
-const parent =
-firstValue(
-  sub,
-  [
-    "category_id",
-    "categoria_id",
-    "parent_category_id",
-    "parent_id"
-  ]
-);
-
-
-return (
-  String(parent) ===
-  String(category.id)
-);
-
-}
-)
-.length;
-
-
-$("adminCategoryList")
-.insertAdjacentHTML(
-  "beforeend",
-  `
-  <div class="list-row">
-
-  <div>
-
-  <strong>
-  ${escapeHtml(
-    rowName(category)
-  )}
-  </strong>
-
-  <p>
-  ${count} subcategorías
-  </p>
-
-  </div>
-
-  </div>
-  `
-);
-
-}
-);
-
+function updateSessionUI(){
+  if(currentUser){
+    $("loginButton").textContent="Mi cuenta";
+    $("marketAccountButton").textContent="Mi cuenta";
+    $("sessionChip").classList.add("visible");
+    $("sessionName").textContent=userName();
+  }else{
+    $("loginButton").textContent="Iniciar sesión";
+    $("marketAccountButton").textContent="Iniciar sesión";
+    $("sessionChip").classList.remove("visible");
+  }
 }
 
+function openAccount(){
+  if(!currentUser){openAuth();return}
+  const name=userFullName();
+  $("accountName").textContent=name;
+  $("accountEmail").textContent=currentUser.email||"";
+  $("accountRole").textContent=effectiveRole();
+  $("accountAvatar").textContent=name.split(" ").filter(Boolean).slice(0,2).map(value=>value.charAt(0).toUpperCase()).join("")||"A";
+  $("accountPublishBrandButton").textContent=currentBrand?"Administrar mi marca":"Publicar mi marca";
+  openModal($("accountModal"));
+}
 
-/* =========================================================
-LOGOUT
-========================================================= */
+$("loginButton").addEventListener("click",()=>currentUser?openAccount():openAuth());
+$("marketAccountButton").addEventListener("click",()=>currentUser?openAccount():openAuth());
+
+function renderBrandStep(){
+  document.querySelectorAll("[data-brand-step]").forEach(section=>section.classList.toggle("active",Number(section.dataset.brandStep)===brandStep));
+  document.querySelectorAll("[data-step-dot]").forEach(dot=>dot.classList.toggle("active",Number(dot.dataset.stepDot)<=brandStep));
+  $("brandBackButton").style.visibility=brandStep===1?"hidden":"visible";
+  $("brandNextButton").textContent=brandStep===4?(currentBrand?"Guardar cambios":"Crear mi marca"):"Continuar";
+}
+
+function validateBrandStep(){
+  if(brandStep===1&&!$("brandCuit").value.trim()){showMessage("brandMessage","Ingresá el CUIT.","error");return false}
+  if(brandStep===2){
+    if(!$("brandName").value.trim()){showMessage("brandMessage","Ingresá el nombre de la marca.","error");return false}
+    if(!$("brandCommercialEmail").value.trim()){showMessage("brandMessage","Ingresá el email comercial.","error");return false}
+  }
+  if(brandStep===3){
+    if(!$("brandProvince").value){showMessage("brandMessage","Seleccioná la provincia de origen.","error");return false}
+    if(!$("brandLocality").value.trim()){showMessage("brandMessage","Ingresá la localidad.","error");return false}
+  }
+  if(brandStep===4&&document.querySelectorAll(".shipping-province:checked").length===0){
+    showMessage("brandMessage","Seleccioná al menos una provincia de envío.","error");return false;
+  }
+  clearMessage("brandMessage");return true;
+}
+
+async function openBrandModal(){
+  if(!currentUser){openAuth("seller","register");return}
+  await Promise.all([loadTaxonomy(),loadSellerContext()]);
+  brandStep=1;
+
+  $("brandAccountEmail").value=currentUser.email||"";
+  $("brandCommercialEmail").value=currentBrand?.email||currentUser.email||"";
+  $("brandCuit").value=currentSellerProfile?.cuit||"";
+  $("brandName").value=currentBrand?.nombre||"";
+  $("brandDescription").value=currentBrand?.descripcion||"";
+  $("brandPhone").value=currentBrand?.telefono||"";
+  $("brandWhatsapp").value=currentBrand?.whatsapp||"";
+  $("brandInstagram").value=currentBrand?.instagram||"";
+  $("brandProvince").value=currentBrand?.province_id||"";
+  $("brandLocality").value=currentBrand?.localidad||"";
+
+  populateProvinceControls();
+  syncShippingChecks();
+  renderBrandStep();
+  clearMessage("brandMessage");
+  openModal($("brandModal"));
+}
+
+$("publishBrandButton").addEventListener("click",()=>currentUser?openBrandModal():openAuth("seller","register"));
+$("accountPublishBrandButton").addEventListener("click",()=>{closeModal($("accountModal"));openBrandModal()});
+
+$("brandBackButton").addEventListener("click",()=>{
+  if(brandStep>1){brandStep--;renderBrandStep()}
+});
+
+$("brandNextButton").addEventListener("click",async()=>{
+  if(!validateBrandStep())return;
+  if(brandStep<4){brandStep++;renderBrandStep();return}
+  await saveBrand();
+});
+
+async function saveBrand(){
+  const button=$("brandNextButton");
+  button.disabled=true;button.textContent="Guardando...";clearMessage("brandMessage");
+
+  try{
+    let seller=currentSellerProfile;
+
+    if(!seller){
+      const createSeller=await db.from("seller_profiles").insert({
+        user_id:currentUser.id,
+        cuit:$("brandCuit").value.trim()
+      }).select("*").single();
+
+      if(createSeller.error)throw new Error("No pudimos crear el perfil vendedor: "+createSeller.error.message);
+      seller=createSeller.data;currentSellerProfile=seller;
+    }else if(String(seller.cuit||"")!==$("brandCuit").value.trim()){
+      const updateSeller=await db.from("seller_profiles").update({cuit:$("brandCuit").value.trim()}).eq("id",seller.id).select("*").single();
+      if(updateSeller.error)throw new Error("No pudimos actualizar el CUIT: "+updateSeller.error.message);
+      seller=updateSeller.data;currentSellerProfile=seller;
+    }
+
+    const brandPayload={
+      seller_id:seller.id,
+      nombre:$("brandName").value.trim(),
+      descripcion:$("brandDescription").value.trim(),
+      email:$("brandCommercialEmail").value.trim().toLowerCase(),
+      telefono:$("brandPhone").value.trim(),
+      whatsapp:$("brandWhatsapp").value.trim(),
+      instagram:$("brandInstagram").value.trim(),
+      province_id:Number($("brandProvince").value),
+      localidad:$("brandLocality").value.trim()
+    };
+
+    if(currentBrand){
+      const updateBrand=await db.from("brands").update(brandPayload).eq("id",currentBrand.id).select("*").single();
+      if(updateBrand.error)throw new Error("No pudimos actualizar la marca: "+updateBrand.error.message);
+      currentBrand=updateBrand.data;
+    }else{
+      const createBrand=await db.from("brands").insert(brandPayload).select("*").single();
+      if(createBrand.error)throw new Error("No pudimos guardar la marca: "+createBrand.error.message);
+      currentBrand=createBrand.data;
+    }
+
+    const selectedProvinceIds=Array.from(document.querySelectorAll(".shipping-province:checked")).map(input=>Number(input.value));
+
+    const deleteShipping=await db.from("brand_shipping_provinces").delete().eq("brand_id",currentBrand.id);
+    if(deleteShipping.error)throw new Error("No pudimos actualizar las provincias de envío: "+deleteShipping.error.message);
+
+    const shippingRows=selectedProvinceIds.map(provinceId=>({brand_id:currentBrand.id,province_id:provinceId}));
+
+    if(shippingRows.length){
+      const insertShipping=await db.from("brand_shipping_provinces").insert(shippingRows);
+      if(insertShipping.error)throw new Error("No pudimos guardar las provincias de envío: "+insertShipping.error.message);
+    }
+
+    currentShippingProvinceIds=selectedProvinceIds;
+    showMessage("brandMessage","Marca guardada correctamente.","success");
+
+    setTimeout(async()=>{
+      closeModal($("brandModal"));
+      await loadSellerContext();
+      openSellerPortal();
+    },400);
+  }catch(error){
+    console.error(error);
+    showMessage("brandMessage",error.message||"No pudimos guardar la marca.","error");
+  }finally{
+    button.disabled=false;
+    renderBrandStep();
+  }
+}
+
+async function safeRead(table){
+  try{
+    const {data,error}=await db.from(table).select("*");
+    if(error)throw error;
+    return data||[];
+  }catch(error){console.warn(table,error);return[]}
+}
+
+function renderSimpleList(id,rows,emptyText){
+  const container=$(id);container.innerHTML="";
+  if(!rows.length){container.innerHTML=`<div class="empty-panel">${escapeHtml(emptyText)}</div>`;return}
+  rows.slice(0,20).forEach((row,index)=>{
+    const title=firstValue(row,["nombre","titulo","estado","status","direccion"],"Registro "+(index+1));
+    container.insertAdjacentHTML("beforeend",`<div class="list-row"><div><strong>${escapeHtml(title)}</strong><p>Información guardada en Amigate.</p></div></div>`);
+  });
+}
+
+async function openBuyerPortal(){
+  $("buyerWelcomeName").textContent=userName();
+  $("buyerPortal").classList.add("visible");
+
+  const [orders,favorites,brands,claims,addresses]=await Promise.all([
+    safeRead("orders"),safeRead("favorite_products"),safeRead("favorite_brands"),safeRead("claims"),safeRead("user_addresses")
+  ]);
+
+  $("buyerOrdersCount").textContent=orders.length;
+  $("buyerFavoritesCount").textContent=favorites.length;
+  $("buyerBrandsCount").textContent=brands.length;
+  $("buyerClaimsCount").textContent=claims.length;
+
+  renderSimpleList("buyerOrdersList",orders,"Todavía no realizaste compras.");
+  renderSimpleList("buyerFavoritesList",favorites,"Todavía no guardaste favoritos.");
+  renderSimpleList("buyerClaimsList",claims,"No tenés reclamos.");
+  renderSimpleList("buyerAddressesList",addresses,"Todavía no guardaste direcciones.");
+}
+
+async function openSellerPortal(){
+  await loadSellerContext();
+  if(!currentSellerProfile||!currentBrand){openBrandModal();return}
+
+  $("sellerPortal").classList.add("visible");
+  $("sellerWelcomeTitle").textContent=rowName(currentBrand);
+  $("sellerProductsCount").textContent="0";
+  renderSellerBrand();
+}
+
+function renderSellerBrand(){
+  const province=taxonomyCache.provinces.find(item=>String(item.id)===String(currentBrand?.province_id));
+  const shippingNames=taxonomyCache.provinces.filter(item=>currentShippingProvinceIds.map(String).includes(String(item.id))).map(rowName);
+
+  $("sellerBrandInfo").innerHTML=`
+    <div class="list-row"><div><strong>Nombre</strong><p>${escapeHtml(currentBrand?.nombre||"Sin nombre")}</p></div></div>
+    <div class="list-row"><div><strong>Descripción</strong><p>${escapeHtml(currentBrand?.descripcion||"Sin descripción")}</p></div></div>
+    <div class="list-row"><div><strong>Email comercial</strong><p>${escapeHtml(currentBrand?.email||"Sin completar")}</p></div></div>
+    <div class="list-row"><div><strong>Teléfono</strong><p>${escapeHtml(currentBrand?.telefono||"Sin completar")}</p></div></div>
+    <div class="list-row"><div><strong>WhatsApp</strong><p>${escapeHtml(currentBrand?.whatsapp||"Sin completar")}</p></div></div>
+    <div class="list-row"><div><strong>Instagram</strong><p>${escapeHtml(currentBrand?.instagram||"Sin completar")}</p></div></div>
+    <div class="list-row"><div><strong>Origen</strong><p>${escapeHtml((province?rowName(province):"Sin provincia")+(currentBrand?.localidad?" · "+currentBrand.localidad:""))}</p></div></div>
+    <div class="list-row"><div><strong>Envíos</strong><p>${escapeHtml(shippingNames.length===taxonomyCache.provinces.length?"Toda Argentina":shippingNames.join(", ")||"Sin completar")}</p></div></div>
+    <div class="list-row"><div><strong>CUIT</strong><p>${escapeHtml(currentSellerProfile?.cuit||"Sin completar")}</p></div></div>
+  `;
+}
+
+$("openPortalButton").addEventListener("click",async()=>{
+  closeModal($("accountModal"));
+  await loadSellerContext();
+  if(effectiveRole()==="admin"){alert("El panel administrativo se mantiene reservado.");return}
+  currentSellerProfile?openSellerPortal():openBuyerPortal();
+});
+
+function setupPortalNavigation(attribute,portalId,titleId,sectionPrefix){
+  document.querySelectorAll(`[${attribute}]`).forEach(button=>{
+    button.addEventListener("click",()=>{
+      document.querySelectorAll(`[${attribute}]`).forEach(item=>item.classList.remove("active"));
+      button.classList.add("active");
+      document.querySelectorAll(`#${portalId} .portal-section`).forEach(section=>section.classList.remove("active"));
+      const page=button.getAttribute(attribute);
+      $(sectionPrefix+page)?.classList.add("active");
+      $(titleId).textContent=button.textContent.trim();
+    });
+  });
+}
+
+setupPortalNavigation("data-buyer-page","buyerPortal","buyerPortalTitle","buyer-");
+setupPortalNavigation("data-seller-page","sellerPortal","sellerPortalTitle","seller-");
+
+$("buyerExit").addEventListener("click",()=>$("buyerPortal").classList.remove("visible"));
+$("sellerExit").addEventListener("click",()=>$("sellerPortal").classList.remove("visible"));
+$("buyerAccountButton").addEventListener("click",openAccount);
+$("sellerAccountButton").addEventListener("click",openAccount);
+$("editBrandButton").addEventListener("click",openBrandModal);
 
 async function logout(){
-
-try{
-
-  await db.auth
-  .signOut();
-
-}
-catch(error){
-
-  console.warn(
-    error
-  );
-
+  try{await db.auth.signOut()}catch(error){console.warn(error)}
+  currentUser=null;currentProfile=null;currentSellerProfile=null;currentBrand=null;currentShippingProvinceIds=[];
+  [$("accountModal"),$("buyerPortal"),$("sellerPortal")].forEach(el=>el?.classList.remove("open","visible"));
+  document.body.style.overflow="";
+  updateSessionUI();
 }
 
-
-currentUser =
-null;
-
-currentProfile =
-null;
-
-currentSellerProfile =
-null;
-
-currentBrand =
-null;
-
-
-[
-$("accountModal"),
-$("buyerPortal"),
-$("sellerPortal"),
-$("adminPortal")
-]
-.forEach(
-element => {
-
-element
-?.classList
-.remove(
-  "open",
-  "visible"
-);
-
-}
-);
-
-
-document.body.style.overflow =
-"";
-
-
-updateSessionUI();
-
-}
-
-
-$("logoutButton")
-.addEventListener(
-"click",
-logout
-);
-
-
-$("adminLogoutButton")
-.addEventListener(
-"click",
-logout
-);
-
-
-/* =========================================================
-INITIAL SESSION
-========================================================= */
+$("logoutButton").addEventListener("click",logout);
 
 async function initializeSession(){
-
-try{
-
-  const {
-    data
-  } =
-  await db.auth
-  .getSession();
-
-
-  currentUser =
-  data?.session?.user ||
-  null;
-
-
-  if(currentUser){
-
-    await Promise.all([
-
-      loadCurrentProfile(),
-
-      loadSellerContext()
-
-    ]);
-
-  }
-
-
-  updateSessionUI();
-
+  try{
+    const {data}=await db.auth.getSession();
+    currentUser=data?.session?.user||null;
+    if(currentUser)await Promise.all([loadCurrentProfile(),loadSellerContext(),loadTaxonomy()]);
+    updateSessionUI();
+  }catch(error){console.warn(error)}
 }
-catch(error){
-
-  console.warn(
-    error
-  );
-
-}
-
-}
-
 
 initializeSession();
 
-
-/* =========================================================
-BUTTONS / CLOSE
-========================================================= */
-
-$("buyerExit")
-.addEventListener(
-"click",
-() => {
-
-$("buyerPortal")
-.classList
-.remove(
-  "visible"
-);
-
-}
-);
-
-
-$("sellerExit")
-.addEventListener(
-"click",
-() => {
-
-$("sellerPortal")
-.classList
-.remove(
-  "visible"
-);
-
-}
-);
-
-
-$("buyerAccountButton")
-.addEventListener(
-"click",
-openAccount
-);
-
-
-$("sellerAccountButton")
-.addEventListener(
-"click",
-openAccount
-);
-
-
-$("editBrandButton")
-.addEventListener(
-"click",
-() => {
-
-if(currentBrand){
-
-  $("brandName")
-  .value =
-  currentBrand.nombre ||
-  "";
-
-
-  $("brandDescription")
-  .value =
-  currentBrand.descripcion ||
-  "";
-
-}
-
-
-if(currentSellerProfile){
-
-  $("brandCuit")
-  .value =
-  currentSellerProfile.cuit ||
-  "";
-
-}
-
-
-openModal(
-$("brandModal")
-);
-
-}
-);
-
-
-$("closeAuthButton")
-.addEventListener(
-"click",
-() => closeModal(
-$("authModal")
-)
-);
-
-
-$("closeAccountButton")
-.addEventListener(
-"click",
-() => closeModal(
-$("accountModal")
-)
-);
-
-
-$("closeBrandButton")
-.addEventListener(
-"click",
-() => closeModal(
-$("brandModal")
-)
-);
-
-
-$("closeProductButton")
-.addEventListener(
-"click",
-() => closeModal(
-$("productModal")
-)
-);
-
-
-$("closeAdminButton")
-.addEventListener(
-"click",
-() => closeModal(
-$("adminModal")
-)
-);
-
-
-[
-$("authModal"),
-$("accountModal"),
-$("brandModal"),
-$("productModal"),
-$("adminModal")
-]
-.forEach(
-backgroundClose
-);
-
+$("adminLink").addEventListener("click",()=>alert("El acceso administrativo se mantendrá en una actualización posterior."));
+$("closeAuthButton").addEventListener("click",()=>closeModal($("authModal")));
+$("closeAccountButton").addEventListener("click",()=>closeModal($("accountModal")));
+$("closeBrandButton").addEventListener("click",()=>closeModal($("brandModal")));
+[$("authModal"),$("accountModal"),$("brandModal")].forEach(backgroundClose);
 </script>
-
 </body>
 </html>
