@@ -1747,6 +1747,293 @@
       .product-detail-gallery{min-height:300px}
     }
 
+  
+    /* =====================================================
+       TIENDA PERSONALIZABLE + COMPRA + CARRITO
+    ===================================================== */
+
+    .store-template-1{--store-radius:18px}
+    .store-template-2{--store-radius:2px}
+    .store-template-3{--store-radius:12px}
+    .store-template-4{--store-radius:26px}
+
+    .store-shell{
+      background:var(--store-bg,#fff);
+      color:var(--store-text,#2d160a);
+      min-height:100%;
+    }
+
+    .store-shell .brand-public-hero,
+    .store-shell .public-product-card,
+    .store-shell .product-detail-info{
+      border-radius:var(--store-radius,18px);
+    }
+
+    .store-template-2 .brand-public-hero{
+      min-height:440px;
+      align-items:end;
+      background-size:cover!important;
+      background-position:center!important;
+      color:#fff;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .store-template-2 .brand-public-hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.68));
+    }
+
+    .store-template-2 .brand-public-hero > *{position:relative;z-index:1}
+    .store-template-2 .brand-public-hero p{color:rgba(255,255,255,.84)}
+    .store-template-2 .brand-contact-list a{background:rgba(255,255,255,.92)}
+
+    .store-template-3 .brand-public-hero{
+      border-top:9px solid var(--store-main,#eb6841);
+    }
+
+    .store-template-4 .brand-public-hero{
+      background:linear-gradient(135deg,var(--store-main,#eb6841),var(--store-secondary,#f5cfb7));
+      border:none;
+    }
+
+    .store-template-4 .brand-public-hero p{color:inherit;opacity:.78}
+
+    .brand-logo-public{
+      width:92px;
+      height:92px;
+      border-radius:22px;
+      object-fit:cover;
+      border:1px solid rgba(0,0,0,.08);
+      background:#fff;
+    }
+
+    .brand-design-gallery{
+      margin-top:22px;
+      display:grid;
+      grid-template-columns:2fr 1fr 1fr;
+      gap:10px;
+    }
+
+    .brand-design-gallery img{
+      width:100%;
+      height:190px;
+      object-fit:cover;
+      border-radius:var(--store-radius,16px);
+    }
+
+    .brand-design-gallery img:first-child{grid-row:span 2;height:390px}
+
+    .choice-group{margin-top:22px}
+    .choice-label{display:block;margin-bottom:9px;font-size:11px;font-weight:800}
+    .choice-buttons{display:flex;flex-wrap:wrap;gap:8px}
+
+    .choice-button{
+      min-width:48px;
+      min-height:42px;
+      padding:0 14px;
+      border:1px solid var(--border);
+      border-radius:10px;
+      background:#fff;
+      color:var(--dark);
+      font-size:11px;
+      font-weight:800;
+    }
+
+    .choice-button.selected{
+      border-color:var(--store-button,#2d160a);
+      background:var(--store-button,#2d160a);
+      color:#fff;
+    }
+
+    .choice-button:disabled{
+      opacity:.35;
+      cursor:not-allowed;
+    }
+
+    .quantity-control{
+      display:inline-grid;
+      grid-template-columns:42px 56px 42px;
+      margin-top:18px;
+      border:1px solid var(--border);
+      border-radius:11px;
+      overflow:hidden;
+    }
+
+    .quantity-control button,
+    .quantity-control span{
+      min-height:42px;
+      display:grid;
+      place-items:center;
+      border:none;
+      background:#fff;
+      font-weight:800;
+    }
+
+    .quantity-control span{border-left:1px solid var(--border);border-right:1px solid var(--border)}
+
+    .buy-actions{
+      margin-top:18px;
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:10px;
+    }
+
+    .add-cart-button{
+      min-height:50px;
+      border:none;
+      border-radius:12px;
+      background:var(--store-button,#2d160a);
+      color:#fff;
+      font-weight:800;
+    }
+
+    .cart-floating{
+      position:fixed;
+      z-index:7300;
+      right:22px;
+      bottom:22px;
+      min-width:58px;
+      height:58px;
+      padding:0 18px;
+      border:none;
+      border-radius:100px;
+      background:var(--dark);
+      color:#fff;
+      box-shadow:0 14px 34px rgba(45,22,10,.22);
+      font-weight:800;
+    }
+
+    .cart-drawer{
+      position:fixed;
+      z-index:7600;
+      inset:0;
+      display:none;
+      justify-content:flex-end;
+      background:rgba(20,10,5,.45);
+    }
+
+    .cart-drawer.visible{display:flex}
+
+    .cart-panel{
+      width:min(470px,100%);
+      height:100%;
+      padding:22px;
+      overflow:auto;
+      background:#fff;
+      box-shadow:-20px 0 50px rgba(0,0,0,.14);
+    }
+
+    .cart-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:15px;
+    }
+
+    .cart-items{margin-top:22px;display:grid;gap:10px}
+
+    .cart-item{
+      padding:12px;
+      display:grid;
+      grid-template-columns:72px 1fr auto;
+      gap:11px;
+      border:1px solid var(--border);
+      border-radius:13px;
+    }
+
+    .cart-item img{
+      width:72px;
+      height:72px;
+      object-fit:cover;
+      border-radius:9px;
+      background:var(--cream-2);
+    }
+
+    .cart-item-name{font-size:12px;font-weight:800}
+    .cart-item-meta{margin-top:4px;color:var(--gray);font-size:9px}
+    .cart-item-price{margin-top:7px;font-size:12px;font-weight:800}
+    .cart-remove{border:none;background:none;color:var(--red);font-weight:800}
+
+    .cart-summary{
+      margin-top:22px;
+      padding-top:18px;
+      border-top:1px solid var(--border);
+    }
+
+    .cart-summary-line{
+      display:flex;
+      justify-content:space-between;
+      gap:15px;
+      font-size:14px;
+      font-weight:800;
+    }
+
+    .checkout-button{
+      width:100%;
+      min-height:50px;
+      margin-top:14px;
+      border:none;
+      border-radius:12px;
+      background:#25D366;
+      color:#fff;
+      font-weight:800;
+    }
+
+    .design-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:10px;
+      margin-top:14px;
+    }
+
+    .design-option{
+      padding:12px;
+      border:2px solid var(--border);
+      border-radius:13px;
+      background:#fff;
+      text-align:left;
+    }
+
+    .design-option.selected{border-color:var(--orange)}
+    .design-preview{height:92px;border-radius:9px;background:#f4eeea;overflow:hidden}
+    .design-preview span{display:block;margin:8px;height:12px;border-radius:4px;background:#d8c7bd}
+    .design-preview span:first-child{height:36px;background:#efb59d}
+
+    .color-editor-grid{
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:10px;
+      margin-top:15px;
+    }
+
+    .color-editor-grid input{width:100%;height:42px;padding:3px;border:1px solid var(--border);border-radius:9px}
+
+    .design-upload-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:10px;
+      margin-top:14px;
+    }
+
+    .design-upload-card{
+      padding:12px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:#fff;
+    }
+
+    @media(max-width:760px){
+      .brand-design-gallery{grid-template-columns:1fr 1fr}
+      .brand-design-gallery img:first-child{grid-column:span 2;grid-row:auto;height:230px}
+      .design-grid{grid-template-columns:1fr 1fr}
+      .color-editor-grid{grid-template-columns:1fr 1fr}
+      .design-upload-grid{grid-template-columns:1fr}
+      .buy-actions{grid-template-columns:1fr}
+    }
+
   </style>
 </head>
 
@@ -2323,10 +2610,11 @@
       <button class="modal-close" id="closePublicBrandButton">×</button>
     </header>
 
-    <main class="public-page-body">
+    <main class="public-page-body store-shell" id="publicStoreShell">
       <section class="brand-public-hero">
         <div>
-          <div class="eyebrow">Marca en Amigate</div>
+          <img class="brand-logo-public hidden" id="publicBrandLogo" alt="Logo de la marca">
+          <div class="eyebrow" style="margin-top:12px">Marca en Amigate</div>
           <h2 id="publicBrandName">Marca</h2>
           <p id="publicBrandDescription"></p>
           <p id="publicBrandLocation" style="margin-top:10px;font-weight:700"></p>
@@ -2334,6 +2622,8 @@
 
         <div class="brand-contact-list" id="publicBrandContacts"></div>
       </section>
+
+      <div class="brand-design-gallery hidden" id="publicBrandDesignGallery"></div>
 
       <div class="results-toolbar">
         <strong>Productos de la marca</strong>
@@ -2370,7 +2660,30 @@
         <div class="price-line" id="publicProductPrice"></div>
         <p class="product-detail-description" id="publicProductDescription"></p>
 
-        <div class="variant-public-list" id="publicProductVariants"></div>
+        <div class="choice-group hidden" id="publicColorGroup">
+          <span class="choice-label">Color</span>
+          <div class="choice-buttons" id="publicColorChoices"></div>
+        </div>
+
+        <div class="choice-group hidden" id="publicSizeGroup">
+          <span class="choice-label">Tamaño</span>
+          <div class="choice-buttons" id="publicSizeChoices"></div>
+        </div>
+
+        <div class="quantity-control">
+          <button type="button" id="decreasePublicQuantity">−</button>
+          <span id="publicQuantity">1</span>
+          <button type="button" id="increasePublicQuantity">+</button>
+        </div>
+
+        <div class="buy-actions">
+          <button class="add-cart-button" id="addPublicProductToCart" type="button">
+            Agregar al carrito
+          </button>
+        </div>
+
+        <div class="message" id="publicProductMessage"></div>
+        <div class="variant-public-list hidden" id="publicProductVariants"></div>
       </div>
     </main>
   </div>
@@ -2450,6 +2763,7 @@
       <button class="portal-nav active" data-seller-page="inicio">Inicio</button>
       <button class="portal-nav" data-seller-page="marca">Mi marca</button>
       <button class="portal-nav" data-seller-page="productos">Productos</button>
+      <button class="portal-nav" data-seller-page="diseno">Diseño de la tienda</button>
       <button class="portal-nav" data-seller-page="pedidos">Pedidos</button>
       <button class="portal-nav" data-seller-page="clientes">Clientes</button>
       <button class="portal-nav" data-seller-page="mensajes">Mensajes</button>
@@ -2515,6 +2829,89 @@
         </div>
       </section>
 
+
+      <section class="portal-section" id="seller-diseno">
+        <div class="panel">
+          <div class="panel-top">
+            <div>
+              <h3>Diseño de la tienda</h3>
+              <p style="margin-top:5px;color:var(--gray);font-size:11px">
+                Elegí una estructura, cargá el logo y personalizá los colores de tu marca.
+              </p>
+            </div>
+          </div>
+
+          <form id="storeDesignForm">
+            <h4 style="margin-top:18px">Elegí uno de los cuatro diseños</h4>
+
+            <div class="design-grid" id="designOptions">
+              <button class="design-option selected" type="button" data-template="1">
+                <div class="design-preview"><span></span><span></span><span></span></div>
+                <strong>1. Minimalista</strong>
+              </button>
+
+              <button class="design-option" type="button" data-template="2">
+                <div class="design-preview"><span></span><span></span></div>
+                <strong>2. Editorial</strong>
+              </button>
+
+              <button class="design-option" type="button" data-template="3">
+                <div class="design-preview"><span></span><span></span><span></span></div>
+                <strong>3. Tienda clásica</strong>
+              </button>
+
+              <button class="design-option" type="button" data-template="4">
+                <div class="design-preview"><span></span><span></span></div>
+                <strong>4. Visual</strong>
+              </button>
+            </div>
+
+            <div class="editor-section">
+              <h3>Logo y portada</h3>
+
+              <div class="design-upload-grid">
+                <div class="design-upload-card">
+                  <label>Logo de la marca</label>
+                  <input class="form-control" id="brandLogoFile" type="file" accept="image/jpeg,image/png,image/webp">
+                </div>
+
+                <div class="design-upload-card">
+                  <label>Imagen de portada</label>
+                  <input class="form-control" id="brandCoverFile" type="file" accept="image/jpeg,image/png,image/webp">
+                </div>
+              </div>
+            </div>
+
+            <div class="editor-section">
+              <h3>Imágenes del diseño</h3>
+              <p>Podés cargar hasta cuatro imágenes para los espacios visuales de la tienda.</p>
+
+              <div class="design-upload-grid">
+                <div class="design-upload-card"><label>Imagen 1</label><input class="form-control design-image-file" data-slot="1" type="file" accept="image/jpeg,image/png,image/webp"></div>
+                <div class="design-upload-card"><label>Imagen 2</label><input class="form-control design-image-file" data-slot="2" type="file" accept="image/jpeg,image/png,image/webp"></div>
+                <div class="design-upload-card"><label>Imagen 3</label><input class="form-control design-image-file" data-slot="3" type="file" accept="image/jpeg,image/png,image/webp"></div>
+                <div class="design-upload-card"><label>Imagen 4</label><input class="form-control design-image-file" data-slot="4" type="file" accept="image/jpeg,image/png,image/webp"></div>
+              </div>
+            </div>
+
+            <div class="editor-section">
+              <h3>Colores</h3>
+
+              <div class="color-editor-grid">
+                <label>Principal<input id="storeColorMain" type="color" value="#eb6841"></label>
+                <label>Secundario<input id="storeColorSecondary" type="color" value="#f3c8b4"></label>
+                <label>Fondo<input id="storeColorBackground" type="color" value="#fffaf7"></label>
+                <label>Texto<input id="storeColorText" type="color" value="#2d160a"></label>
+                <label>Botones<input id="storeColorButton" type="color" value="#2d160a"></label>
+              </div>
+            </div>
+
+            <button class="submit-button" id="saveStoreDesignButton" type="submit">Guardar diseño</button>
+            <div class="message" id="storeDesignMessage"></div>
+          </form>
+        </div>
+      </section>
+
       <section class="portal-section" id="seller-pedidos"><div class="panel"><h3>Pedidos</h3><div class="empty-panel">Tus pedidos aparecerán acá.</div></div></section>
       <section class="portal-section" id="seller-clientes"><div class="panel"><h3>Clientes</h3><div class="empty-panel">Tus clientes aparecerán acá.</div></div></section>
       <section class="portal-section" id="seller-mensajes"><div class="panel"><h3>Mensajes</h3><div class="empty-panel">Tus conversaciones aparecerán acá.</div></div></section>
@@ -2525,6 +2922,35 @@
       <section class="portal-section" id="seller-configuracion"><div class="panel"><h3>Configuración</h3><div class="empty-panel">Envíos, apariencia y configuración.</div></div></section>
     </div>
   </main>
+</div>
+
+
+<button class="cart-floating" id="openCartButton" type="button">Carrito <span id="cartCount">0</span></button>
+
+<div class="cart-drawer" id="cartDrawer">
+  <aside class="cart-panel">
+    <div class="cart-top">
+      <div>
+        <div class="modal-brand">Amigate</div>
+        <h2>Tu carrito</h2>
+      </div>
+      <button class="modal-close" id="closeCartButton">×</button>
+    </div>
+
+    <div class="cart-items" id="cartItems"></div>
+    <div class="empty-panel" id="cartEmpty">Todavía no agregaste productos.</div>
+
+    <div class="cart-summary">
+      <div class="cart-summary-line">
+        <span>Total</span>
+        <strong id="cartTotal">$0</strong>
+      </div>
+
+      <button class="checkout-button" id="checkoutCartButton" type="button">
+        Finalizar compra por WhatsApp
+      </button>
+    </div>
+  </aside>
 </div>
 
 <script>
@@ -2565,6 +2991,14 @@
   let publicProductImagesCache = [];
   let publicFeaturedCache = [];
   let activePublicBrand = null;
+  let activePublicProduct = null;
+  let activePublicVariants = [];
+  let activePublicColors = [];
+  let selectedPublicColorId = null;
+  let selectedPublicSize = null;
+  let publicQuantity = 1;
+  let selectedStoreTemplate = 1;
+  let cart = [];
 
   const taxonomyCache = {
     loaded:false,
@@ -3277,15 +3711,55 @@
     });
   }
 
+  async function loadBrandDesignImages(brandId){
+    const result = await db
+      .from("brand_design_images")
+      .select("*")
+      .eq("brand_id",brandId)
+      .order("slot",{ascending:true});
+
+    if(result.error){
+      console.warn(result.error);
+      return [];
+    }
+
+    return result.data || [];
+  }
+
+  function applyPublicStoreTheme(brand){
+    const shell = $("publicStoreShell");
+    const template = Number(brand.template_number || 1);
+
+    shell.className = `public-page-body store-shell store-template-${template}`;
+    shell.style.setProperty("--store-main",brand.color_principal || "#eb6841");
+    shell.style.setProperty("--store-secondary",brand.color_secundario || "#f3c8b4");
+    shell.style.setProperty("--store-bg",brand.color_fondo || "#fffaf7");
+    shell.style.setProperty("--store-text",brand.color_texto || "#2d160a");
+    shell.style.setProperty("--store-button",brand.color_botones || "#2d160a");
+    shell.style.background = brand.color_fondo || "#fffaf7";
+    shell.style.color = brand.color_texto || "#2d160a";
+
+    const hero = shell.querySelector(".brand-public-hero");
+
+    if(template === 2 && brand.portada_url){
+      hero.style.backgroundImage = `url("${brand.portada_url}")`;
+    }else{
+      hero.style.backgroundImage = "";
+      hero.style.background = template === 4
+        ? `linear-gradient(135deg,${brand.color_principal || "#eb6841"},${brand.color_secundario || "#f3c8b4"})`
+        : "#fff";
+    }
+  }
+
   async function openPublicBrand(brandId){
     const brand = publicBrandsCache.find(item=>String(item.id) === String(brandId));
-
     if(!brand) return;
 
     activePublicBrand = brand;
+    applyPublicStoreTheme(brand);
 
     const province = taxonomyCache.provinces.find(row=>{
-      return String(row.id) === String(brand.province_id);
+      return String(row.id) === String(brand.province_id || brand.provincia_id);
     });
 
     $("publicBrandName").textContent = brand.nombre || "Marca";
@@ -3296,26 +3770,43 @@
       (province ? rowName(province) : "Argentina") +
       (brand.localidad ? " · " + brand.localidad : "");
 
-    const contacts = [];
+    const logo = $("publicBrandLogo");
+    if(brand.logo_url){
+      logo.src = brand.logo_url;
+      logo.classList.remove("hidden");
+    }else{
+      logo.classList.add("hidden");
+    }
 
-    if(brand.whatsapp){
-      const whatsapp = String(brand.whatsapp).replace(/\D/g,"");
-      contacts.push(
-        `<a href="https://wa.me/${escapeHtml(whatsapp)}" target="_blank" rel="noopener">WhatsApp</a>`
+    const designImages = await loadBrandDesignImages(brand.id);
+    const gallery = $("publicBrandDesignGallery");
+    gallery.innerHTML = "";
+
+    designImages.forEach(image=>{
+      gallery.insertAdjacentHTML(
+        "beforeend",
+        `<img src="${escapeHtml(image.image_url)}" alt="Imagen de ${escapeHtml(brand.nombre)}">`
       );
+    });
+
+    gallery.classList.toggle("hidden",designImages.length === 0);
+
+    const contacts = [];
+    const whatsappValue = brand.whatsapp || brand.telefono;
+
+    if(whatsappValue){
+      const whatsapp = String(whatsappValue).replace(/\D/g,"");
+      contacts.push(`<a href="https://wa.me/${escapeHtml(whatsapp)}" target="_blank" rel="noopener">WhatsApp</a>`);
     }
 
     if(brand.instagram){
       const instagramName = String(brand.instagram).replace(/^@/,"");
-      contacts.push(
-        `<a href="https://instagram.com/${escapeHtml(instagramName)}" target="_blank" rel="noopener">Instagram</a>`
-      );
+      contacts.push(`<a href="https://instagram.com/${escapeHtml(instagramName)}" target="_blank" rel="noopener">Instagram</a>`);
     }
 
-    if(brand.email){
-      contacts.push(
-        `<a href="mailto:${escapeHtml(brand.email)}">Email</a>`
-      );
+    const emailValue = brand.email_comercial || brand.email;
+    if(emailValue){
+      contacts.push(`<a href="mailto:${escapeHtml(emailValue)}">Email</a>`);
     }
 
     $("publicBrandContacts").innerHTML = contacts.join("");
@@ -3349,15 +3840,12 @@
 
         <div class="public-product-body">
           <div class="public-product-name">${escapeHtml(product.nombre)}</div>
-
           <div class="price-line">
             <span class="current-price">${escapeHtml(formatMoney(product.precio_actual))}</span>
-
             ${product.precio_anterior !== null
               ? `<span class="previous-price">${escapeHtml(formatMoney(product.precio_anterior))}</span>`
               : ""
             }
-
             ${discount !== null
               ? `<span class="discount-chip">${discount}% OFF</span>`
               : ""
@@ -3370,38 +3858,122 @@
     });
 
     document.querySelectorAll("[data-open-product]").forEach(card=>{
-      card.addEventListener("click",()=>{
-        openPublicProduct(card.dataset.openProduct);
-      });
+      card.addEventListener("click",()=>openPublicProduct(card.dataset.openProduct));
     });
 
     openModal($("publicBrandModal"));
   }
 
-  async function openPublicProduct(productId){
-    const product = publicProductsCache.find(item=>String(item.id) === String(productId));
-
-    if(!product) return;
-
-    const brand = publicBrandsCache.find(item=>{
-      return String(item.id) === String(product.brand_id);
+  function renderPublicChoices(){
+    const colorsUsed = activePublicColors.filter(color=>{
+      return activePublicVariants.some(variant=>String(variant.color_id) === String(color.id));
     });
 
+    const sizes = [...new Set(
+      activePublicVariants.map(variant=>variant.talle).filter(Boolean)
+    )];
+
+    const colorContainer = $("publicColorChoices");
+    colorContainer.innerHTML = "";
+
+    colorsUsed.forEach(color=>{
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "choice-button";
+      button.textContent = color.nombre;
+      button.classList.toggle("selected",String(selectedPublicColorId) === String(color.id));
+      button.addEventListener("click",()=>{
+        selectedPublicColorId = color.id;
+        selectedPublicSize = null;
+        renderPublicChoices();
+        updatePublicVariantPrice();
+      });
+      colorContainer.appendChild(button);
+    });
+
+    $("publicColorGroup").classList.toggle("hidden",colorsUsed.length === 0);
+
+    const sizeContainer = $("publicSizeChoices");
+    sizeContainer.innerHTML = "";
+
+    sizes.forEach(size=>{
+      const matchingVariants = activePublicVariants.filter(variant=>{
+        const colorMatches = !selectedPublicColorId ||
+          String(variant.color_id) === String(selectedPublicColorId);
+        return colorMatches && variant.talle === size;
+      });
+
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "choice-button";
+      button.textContent = size;
+      button.disabled = matchingVariants.length === 0;
+      button.classList.toggle("selected",selectedPublicSize === size);
+      button.addEventListener("click",()=>{
+        selectedPublicSize = size;
+        renderPublicChoices();
+        updatePublicVariantPrice();
+      });
+      sizeContainer.appendChild(button);
+    });
+
+    $("publicSizeGroup").classList.toggle("hidden",sizes.length === 0);
+  }
+
+  function selectedPublicVariant(){
+    return activePublicVariants.find(variant=>{
+      const colorMatches = selectedPublicColorId
+        ? String(variant.color_id) === String(selectedPublicColorId)
+        : !variant.color_id;
+
+      const sizeMatches = selectedPublicSize
+        ? variant.talle === selectedPublicSize
+        : !variant.talle;
+
+      return colorMatches && sizeMatches;
+    }) || null;
+  }
+
+  function updatePublicVariantPrice(){
+    if(!activePublicProduct) return;
+
+    const variant = selectedPublicVariant();
+    const currentPrice = variant?.precio ?? activePublicProduct.precio_actual;
+    const oldPrice = variant?.precio_anterior ?? activePublicProduct.precio_anterior;
+    const discount = discountPercentage(oldPrice,currentPrice);
+
+    $("publicProductPrice").innerHTML = `
+      <span class="current-price">${escapeHtml(formatMoney(currentPrice))}</span>
+      ${oldPrice !== null && oldPrice !== undefined
+        ? `<span class="previous-price">${escapeHtml(formatMoney(oldPrice))}</span>`
+        : ""
+      }
+      ${discount !== null ? `<span class="discount-chip">${discount}% OFF</span>` : ""}
+    `;
+  }
+
+  async function openPublicProduct(productId){
+    const product = publicProductsCache.find(item=>String(item.id) === String(productId));
+    if(!product) return;
+
+    activePublicProduct = product;
+    selectedPublicColorId = null;
+    selectedPublicSize = null;
+    publicQuantity = 1;
+    $("publicQuantity").textContent = "1";
+    clearMessage("publicProductMessage");
+
+    const brand = publicBrandsCache.find(item=>String(item.id) === String(product.brand_id));
+
     const [variantsResult,colorsResult] = await Promise.all([
-      db.from("product_variants")
-        .select("*")
-        .eq("product_id",product.id)
-        .eq("activo",true),
-      db.from("product_colors")
-        .select("*")
-        .eq("product_id",product.id)
-        .eq("activo",true)
+      db.from("product_variants").select("*").eq("product_id",product.id).eq("activo",true),
+      db.from("product_colors").select("*").eq("product_id",product.id).eq("activo",true)
     ]);
 
-    const variants = variantsResult.data || [];
-    const colors = colorsResult.data || [];
+    activePublicVariants = variantsResult.data || [];
+    activePublicColors = colorsResult.data || [];
+
     const image = productImage(product.id);
-    const discount = discountPercentage(product.precio_anterior,product.precio_actual);
 
     $("publicProductBrandName").textContent = brand?.nombre || "Marca";
     $("publicProductName").textContent = product.nombre;
@@ -3411,53 +3983,8 @@
       ? `<img src="${escapeHtml(image.image_url)}" alt="${escapeHtml(product.nombre)}">`
       : escapeHtml(String(product.nombre || "P").substring(0,2).toUpperCase());
 
-    $("publicProductPrice").innerHTML = `
-      <span class="current-price">${escapeHtml(formatMoney(product.precio_actual))}</span>
-
-      ${product.precio_anterior !== null
-        ? `<span class="previous-price">${escapeHtml(formatMoney(product.precio_anterior))}</span>`
-        : ""
-      }
-
-      ${discount !== null
-        ? `<span class="discount-chip">${discount}% OFF</span>`
-        : ""
-      }
-    `;
-
-    const variantsContainer = $("publicProductVariants");
-    variantsContainer.innerHTML = "";
-
-    variants.forEach(variant=>{
-      const color = colors.find(item=>String(item.id) === String(variant.color_id));
-      const variantDiscount = discountPercentage(variant.precio_anterior,variant.precio);
-
-      variantsContainer.insertAdjacentHTML(
-        "beforeend",
-        `<div class="variant-public-row">
-          <span>
-            <strong>${escapeHtml(variant.talle || "Sin tamaño")}</strong><br>
-            ${escapeHtml(color?.nombre || "Sin color")}
-          </span>
-
-          <span>
-            <strong>${escapeHtml(formatMoney(variant.precio ?? product.precio_actual))}</strong><br>
-            ${variant.precio_anterior !== null
-              ? `<span class="previous-price">${escapeHtml(formatMoney(variant.precio_anterior))}</span>`
-              : ""
-            }
-          </span>
-
-          <span>
-            ${variantDiscount !== null
-              ? `<span class="discount-chip">${variantDiscount}% OFF</span><br>`
-              : ""
-            }
-            Stock: ${variant.stock ?? "Consultar"}
-          </span>
-        </div>`
-      );
-    });
+    renderPublicChoices();
+    updatePublicVariantPrice();
 
     closeModal($("publicBrandModal"));
     openModal($("publicProductModal"));
@@ -4973,6 +5500,328 @@
       alert("No pudimos eliminar el producto: " + error.message);
     }
   }
+
+
+  /* =====================================================
+     CARRITO
+  ===================================================== */
+
+  function loadCart(){
+    try{
+      cart = JSON.parse(localStorage.getItem("amigate_cart") || "[]");
+      if(!Array.isArray(cart)) cart = [];
+    }catch(error){
+      cart = [];
+    }
+
+    renderCart();
+  }
+
+  function saveCart(){
+    localStorage.setItem("amigate_cart",JSON.stringify(cart));
+    renderCart();
+  }
+
+  function renderCart(){
+    const count = cart.reduce((sum,item)=>sum + Number(item.cantidad || 0),0);
+    $("cartCount").textContent = count;
+
+    const container = $("cartItems");
+    container.innerHTML = "";
+    $("cartEmpty").classList.toggle("hidden",cart.length > 0);
+
+    let total = 0;
+
+    cart.forEach((item,index)=>{
+      total += Number(item.precio) * Number(item.cantidad);
+
+      container.insertAdjacentHTML(
+        "beforeend",
+        `<div class="cart-item">
+          <img src="${escapeHtml(item.imagen || "")}" alt="${escapeHtml(item.nombre)}">
+
+          <div>
+            <div class="cart-item-name">${escapeHtml(item.nombre)}</div>
+            <div class="cart-item-meta">
+              ${escapeHtml(item.marca)}
+              ${item.color ? " · " + escapeHtml(item.color) : ""}
+              ${item.talle ? " · " + escapeHtml(item.talle) : ""}
+              · Cantidad ${item.cantidad}
+            </div>
+            <div class="cart-item-price">${escapeHtml(formatMoney(item.precio * item.cantidad))}</div>
+          </div>
+
+          <button class="cart-remove" type="button" data-cart-remove="${index}">×</button>
+        </div>`
+      );
+    });
+
+    $("cartTotal").textContent = formatMoney(total);
+
+    document.querySelectorAll("[data-cart-remove]").forEach(button=>{
+      button.addEventListener("click",()=>{
+        cart.splice(Number(button.dataset.cartRemove),1);
+        saveCart();
+      });
+    });
+  }
+
+  function addActiveProductToCart(){
+    if(!activePublicProduct) return;
+
+    const hasColors = activePublicColors.some(color=>
+      activePublicVariants.some(variant=>String(variant.color_id) === String(color.id))
+    );
+
+    const hasSizes = activePublicVariants.some(variant=>Boolean(variant.talle));
+
+    if(hasColors && !selectedPublicColorId){
+      showMessage("publicProductMessage","Seleccioná un color.","error");
+      return;
+    }
+
+    if(hasSizes && !selectedPublicSize){
+      showMessage("publicProductMessage","Seleccioná un tamaño.","error");
+      return;
+    }
+
+    const variant = selectedPublicVariant();
+
+    if((hasColors || hasSizes) && !variant){
+      showMessage("publicProductMessage","Esa combinación no está disponible.","error");
+      return;
+    }
+
+    if(variant?.stock !== null && variant?.stock !== undefined && variant.stock < publicQuantity){
+      showMessage("publicProductMessage","No hay stock suficiente.","error");
+      return;
+    }
+
+    const brand = publicBrandsCache.find(item=>String(item.id) === String(activePublicProduct.brand_id));
+    const color = activePublicColors.find(item=>String(item.id) === String(selectedPublicColorId));
+    const image = productImage(activePublicProduct.id);
+    const price = variant?.precio ?? activePublicProduct.precio_actual;
+
+    const key = [
+      activePublicProduct.id,
+      variant?.id || "general"
+    ].join("|");
+
+    const existing = cart.find(item=>item.key === key);
+
+    if(existing){
+      existing.cantidad += publicQuantity;
+    }else{
+      cart.push({
+        key,
+        product_id:activePublicProduct.id,
+        variant_id:variant?.id || null,
+        brand_id:activePublicProduct.brand_id,
+        marca:brand?.nombre || "Marca",
+        whatsapp:brand?.whatsapp || brand?.telefono || "",
+        nombre:activePublicProduct.nombre,
+        color:color?.nombre || null,
+        talle:variant?.talle || null,
+        precio:Number(price),
+        cantidad:publicQuantity,
+        imagen:image?.image_url || ""
+      });
+    }
+
+    saveCart();
+    showMessage("publicProductMessage","Producto agregado al carrito.","success");
+  }
+
+  $("decreasePublicQuantity").addEventListener("click",()=>{
+    publicQuantity = Math.max(1,publicQuantity - 1);
+    $("publicQuantity").textContent = publicQuantity;
+  });
+
+  $("increasePublicQuantity").addEventListener("click",()=>{
+    publicQuantity += 1;
+    $("publicQuantity").textContent = publicQuantity;
+  });
+
+  $("addPublicProductToCart").addEventListener("click",addActiveProductToCart);
+  $("openCartButton").addEventListener("click",()=>$("cartDrawer").classList.add("visible"));
+  $("closeCartButton").addEventListener("click",()=>$("cartDrawer").classList.remove("visible"));
+
+  $("cartDrawer").addEventListener("click",event=>{
+    if(event.target === $("cartDrawer")) $("cartDrawer").classList.remove("visible");
+  });
+
+  $("checkoutCartButton").addEventListener("click",()=>{
+    if(!cart.length) return;
+
+    const brands = [...new Set(cart.map(item=>item.brand_id))];
+
+    if(brands.length > 1){
+      alert("El carrito contiene productos de distintas marcas. Finalizá una marca por vez.");
+      return;
+    }
+
+    const whatsapp = String(cart[0].whatsapp || "").replace(/\D/g,"");
+
+    if(!whatsapp){
+      alert("Esta marca todavía no configuró su WhatsApp.");
+      return;
+    }
+
+    const lines = [
+      "Hola, quiero realizar este pedido desde Amigate:",
+      ""
+    ];
+
+    cart.forEach(item=>{
+      lines.push(
+        `• ${item.nombre}` +
+        `${item.color ? " | Color: " + item.color : ""}` +
+        `${item.talle ? " | Tamaño: " + item.talle : ""}` +
+        ` | Cantidad: ${item.cantidad}` +
+        ` | ${formatMoney(item.precio * item.cantidad)}`
+      );
+    });
+
+    const total = cart.reduce((sum,item)=>sum + item.precio * item.cantidad,0);
+    lines.push("",`Total de productos: ${formatMoney(total)}`);
+
+    window.open(
+      `https://wa.me/${whatsapp}?text=${encodeURIComponent(lines.join("\n"))}`,
+      "_blank"
+    );
+  });
+
+  /* =====================================================
+     DISEÑO DE LA TIENDA
+  ===================================================== */
+
+  function setDesignOption(template){
+    selectedStoreTemplate = Number(template);
+
+    document.querySelectorAll("[data-template]").forEach(button=>{
+      button.classList.toggle(
+        "selected",
+        Number(button.dataset.template) === selectedStoreTemplate
+      );
+    });
+  }
+
+  document.querySelectorAll("[data-template]").forEach(button=>{
+    button.addEventListener("click",()=>setDesignOption(button.dataset.template));
+  });
+
+  async function loadStoreDesign(){
+    if(!currentBrand) return;
+
+    setDesignOption(currentBrand.template_number || 1);
+    $("storeColorMain").value = currentBrand.color_principal || "#eb6841";
+    $("storeColorSecondary").value = currentBrand.color_secundario || "#f3c8b4";
+    $("storeColorBackground").value = currentBrand.color_fondo || "#fffaf7";
+    $("storeColorText").value = currentBrand.color_texto || "#2d160a";
+    $("storeColorButton").value = currentBrand.color_botones || "#2d160a";
+  }
+
+  async function uploadBrandAsset(bucket,file,path){
+    if(!file) return null;
+
+    const result = await db.storage
+      .from(bucket)
+      .upload(path,file,{upsert:true,cacheControl:"3600"});
+
+    if(result.error) throw result.error;
+
+    return db.storage.from(bucket).getPublicUrl(path).data.publicUrl;
+  }
+
+  $("storeDesignForm").addEventListener("submit",async event=>{
+    event.preventDefault();
+
+    if(!currentBrand || !currentUser){
+      showMessage("storeDesignMessage","No encontramos tu marca.","error");
+      return;
+    }
+
+    const button = $("saveStoreDesignButton");
+    button.disabled = true;
+    button.textContent = "Guardando...";
+    clearMessage("storeDesignMessage");
+
+    try{
+      const logoFile = $("brandLogoFile").files[0];
+      const coverFile = $("brandCoverFile").files[0];
+
+      let logoUrl = currentBrand.logo_url || null;
+      let coverUrl = currentBrand.portada_url || null;
+
+      if(logoFile){
+        logoUrl = await uploadBrandAsset(
+          "brand-logos",
+          logoFile,
+          `${currentUser.id}/${currentBrand.id}/logo_${safeStorageName(logoFile.name)}`
+        );
+      }
+
+      if(coverFile){
+        coverUrl = await uploadBrandAsset(
+          "brand-covers",
+          coverFile,
+          `${currentUser.id}/${currentBrand.id}/cover_${safeStorageName(coverFile.name)}`
+        );
+      }
+
+      const updateResult = await db
+        .from("brands")
+        .update({
+          logo_url:logoUrl,
+          portada_url:coverUrl,
+          template_number:selectedStoreTemplate,
+          color_principal:$("storeColorMain").value,
+          color_secundario:$("storeColorSecondary").value,
+          color_fondo:$("storeColorBackground").value,
+          color_texto:$("storeColorText").value,
+          color_botones:$("storeColorButton").value,
+          updated_at:new Date().toISOString()
+        })
+        .eq("id",currentBrand.id)
+        .select("*")
+        .single();
+
+      if(updateResult.error) throw updateResult.error;
+      currentBrand = updateResult.data;
+
+      for(const input of document.querySelectorAll(".design-image-file")){
+        const file = input.files[0];
+        if(!file) continue;
+
+        const slot = Number(input.dataset.slot);
+        const imageUrl = await uploadBrandAsset(
+          "brand-covers",
+          file,
+          `${currentUser.id}/${currentBrand.id}/design_${slot}_${safeStorageName(file.name)}`
+        );
+
+        const upsertResult = await db
+          .from("brand_design_images")
+          .upsert({
+            brand_id:currentBrand.id,
+            slot,
+            image_url:imageUrl
+          },{onConflict:"brand_id,slot"});
+
+        if(upsertResult.error) throw upsertResult.error;
+      }
+
+      showMessage("storeDesignMessage","Diseño guardado correctamente.","success");
+    }catch(error){
+      console.error(error);
+      showMessage("storeDesignMessage",error.message || "No pudimos guardar el diseño.","error");
+    }finally{
+      button.disabled = false;
+      button.textContent = "Guardar diseño";
+    }
+  });
+
+  loadCart();
 
   /* =====================================================
      NAVEGACIÓN DE PORTALES
