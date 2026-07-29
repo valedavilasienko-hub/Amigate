@@ -2294,6 +2294,75 @@
       }
     }
 
+  
+    /* =====================================================
+       GRÁFICOS ECONÓMICOS Y FINANCIEROS
+    ===================================================== */
+
+    .charts-grid{
+      margin-top:18px;
+      display:grid;
+      grid-template-columns:1.25fr .75fr;
+      gap:14px;
+    }
+
+    .chart-card{
+      padding:18px;
+      border:1px solid var(--border);
+      border-radius:15px;
+      background:#fff;
+      min-width:0;
+    }
+
+    .chart-card h4{
+      font-size:14px;
+    }
+
+    .chart-card p{
+      margin-top:4px;
+      color:var(--gray);
+      font-size:9px;
+      line-height:1.45;
+    }
+
+    .chart-wrap{
+      position:relative;
+      width:100%;
+      height:300px;
+      margin-top:15px;
+    }
+
+    .chart-wrap.small{
+      height:260px;
+    }
+
+    .chart-legend{
+      margin-top:12px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      font-size:9px;
+      font-weight:700;
+    }
+
+    .chart-legend-item{
+      display:flex;
+      align-items:center;
+      gap:6px;
+    }
+
+    .chart-legend-dot{
+      width:9px;
+      height:9px;
+      border-radius:50%;
+      background:#444;
+    }
+
+    @media(max-width:900px){
+      .charts-grid{grid-template-columns:1fr}
+      .chart-wrap{height:260px}
+    }
+
   </style>
 </head>
 
@@ -3221,6 +3290,24 @@
             <div class="analytics-card"><small>Comisión Amigate</small><strong>$12.845</strong><span>1% de ventas</span></div>
           </div>
 
+          <div class="charts-grid">
+            <div class="chart-card">
+              <h4>Evolución de ventas</h4>
+              <p>Facturación mensual de los últimos seis meses.</p>
+              <div class="chart-wrap">
+                <canvas id="economicSalesChart"></canvas>
+              </div>
+            </div>
+
+            <div class="chart-card">
+              <h4>Participación por producto</h4>
+              <p>Distribución estimada de la facturación actual.</p>
+              <div class="chart-wrap small">
+                <canvas id="economicProductsChart"></canvas>
+              </div>
+            </div>
+          </div>
+
           <table class="simple-table">
             <thead><tr><th>Producto</th><th>Unidades</th><th>Facturación</th><th>Margen</th></tr></thead>
             <tbody>
@@ -3249,6 +3336,24 @@
             <div class="analytics-card"><small>Pagos pendientes</small><strong>$126.500</strong><span>3 operaciones</span></div>
             <div class="analytics-card"><small>Cobrado por Mercado Pago</small><strong>$923.400</strong><span>Este mes</span></div>
             <div class="analytics-card"><small>Cobrado por otros medios</small><strong>$361.100</strong><span>Este mes</span></div>
+          </div>
+
+          <div class="charts-grid">
+            <div class="chart-card">
+              <h4>Ingresos y egresos</h4>
+              <p>Comparación mensual entre cobros recibidos y retiros realizados.</p>
+              <div class="chart-wrap">
+                <canvas id="financialFlowChart"></canvas>
+              </div>
+            </div>
+
+            <div class="chart-card">
+              <h4>Estado de los fondos</h4>
+              <p>Distribución entre saldo disponible, pendiente y retirado.</p>
+              <div class="chart-wrap small">
+                <canvas id="financialBalanceChart"></canvas>
+              </div>
+            </div>
           </div>
 
           <table class="simple-table">
@@ -3314,6 +3419,7 @@
   </aside>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
   const SUPABASE_URL = "https://jqdyaafwixnjasszsvkt.supabase.co";
   const SUPABASE_KEY = "sb_publishable_KHbLlwbhlkyaiz-7KXW6Mw_nAnTVsLa";
@@ -6435,6 +6541,189 @@
   });
 
   loadCart();
+
+
+  /* =====================================================
+     GRÁFICOS ECONÓMICOS Y FINANCIEROS
+  ===================================================== */
+
+  let economicSalesChartInstance = null;
+  let economicProductsChartInstance = null;
+  let financialFlowChartInstance = null;
+  let financialBalanceChartInstance = null;
+
+  function chartCurrency(value){
+    return new Intl.NumberFormat("es-AR",{
+      style:"currency",
+      currency:"ARS",
+      maximumFractionDigits:0
+    }).format(value);
+  }
+
+  function destroyChart(instance){
+    if(instance) instance.destroy();
+  }
+
+  function renderEconomicCharts(){
+    if(typeof Chart === "undefined") return;
+
+    const salesCanvas = $("economicSalesChart");
+    const productsCanvas = $("economicProductsChart");
+
+    if(!salesCanvas || !productsCanvas) return;
+
+    destroyChart(economicSalesChartInstance);
+    destroyChart(economicProductsChartInstance);
+
+    economicSalesChartInstance = new Chart(salesCanvas,{
+      type:"line",
+      data:{
+        labels:["Feb","Mar","Abr","May","Jun","Jul"],
+        datasets:[{
+          label:"Facturación",
+          data:[620000,710000,795000,930000,1085000,1284500],
+          borderWidth:3,
+          tension:.35,
+          fill:false
+        }]
+      },
+      options:{
+        responsive:true,
+        maintainAspectRatio:false,
+        plugins:{
+          legend:{display:false},
+          tooltip:{
+            callbacks:{
+              label:context=>chartCurrency(context.raw)
+            }
+          }
+        },
+        scales:{
+          y:{
+            beginAtZero:true,
+            ticks:{
+              callback:value=>chartCurrency(value)
+            }
+          }
+        }
+      }
+    });
+
+    economicProductsChartInstance = new Chart(productsCanvas,{
+      type:"doughnut",
+      data:{
+        labels:["Remera Essential","Buzo Urban","Bolso Weekend","Otros"],
+        datasets:[{
+          data:[27,34,25,14],
+          borderWidth:2
+        }]
+      },
+      options:{
+        responsive:true,
+        maintainAspectRatio:false,
+        plugins:{
+          legend:{
+            position:"bottom",
+            labels:{
+              boxWidth:10,
+              font:{size:9}
+            }
+          },
+          tooltip:{
+            callbacks:{
+              label:context=>`${context.label}: ${context.raw}%`
+            }
+          }
+        }
+      }
+    });
+  }
+
+  function renderFinancialCharts(){
+    if(typeof Chart === "undefined") return;
+
+    const flowCanvas = $("financialFlowChart");
+    const balanceCanvas = $("financialBalanceChart");
+
+    if(!flowCanvas || !balanceCanvas) return;
+
+    destroyChart(financialFlowChartInstance);
+    destroyChart(financialBalanceChartInstance);
+
+    financialFlowChartInstance = new Chart(flowCanvas,{
+      type:"bar",
+      data:{
+        labels:["Feb","Mar","Abr","May","Jun","Jul"],
+        datasets:[
+          {
+            label:"Ingresos",
+            data:[540000,610000,720000,845000,970000,1284500],
+            borderWidth:1
+          },
+          {
+            label:"Egresos",
+            data:[180000,225000,260000,315000,390000,465000],
+            borderWidth:1
+          }
+        ]
+      },
+      options:{
+        responsive:true,
+        maintainAspectRatio:false,
+        plugins:{
+          legend:{
+            position:"bottom",
+            labels:{
+              boxWidth:10,
+              font:{size:9}
+            }
+          },
+          tooltip:{
+            callbacks:{
+              label:context=>`${context.dataset.label}: ${chartCurrency(context.raw)}`
+            }
+          }
+        },
+        scales:{
+          y:{
+            beginAtZero:true,
+            ticks:{
+              callback:value=>chartCurrency(value)
+            }
+          }
+        }
+      }
+    });
+
+    financialBalanceChartInstance = new Chart(balanceCanvas,{
+      type:"pie",
+      data:{
+        labels:["Disponible","Pendiente","Retirado"],
+        datasets:[{
+          data:[734200,126500,220000],
+          borderWidth:2
+        }]
+      },
+      options:{
+        responsive:true,
+        maintainAspectRatio:false,
+        plugins:{
+          legend:{
+            position:"bottom",
+            labels:{
+              boxWidth:10,
+              font:{size:9}
+            }
+          },
+          tooltip:{
+            callbacks:{
+              label:context=>`${context.label}: ${chartCurrency(context.raw)}`
+            }
+          }
+        }
+      }
+    });
+  }
 
   /* =====================================================
      NAVEGACIÓN DE PORTALES
