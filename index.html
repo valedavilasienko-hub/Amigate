@@ -5170,7 +5170,10 @@
 
   function applyPublicStoreTheme(brand){
     const shell = $("publicStoreShell");
+    const cover = $("publicStoreCover");
     const template = Number(brand.template_number || 1);
+
+    if(!shell) return;
 
     shell.className = `public-page-body store-shell store-template-${template}`;
     shell.style.setProperty("--store-main",brand.color_principal || "#eb6841");
@@ -5181,15 +5184,23 @@
     shell.style.background = brand.color_fondo || "#fffaf7";
     shell.style.color = brand.color_texto || "#2d160a";
 
-    const hero = shell.querySelector(".brand-public-hero");
+    if(!cover) return;
 
-    if(template === 2 && brand.portada_url){
-      hero.style.backgroundImage = `url("${brand.portada_url}")`;
+    cover.style.borderRadius = template === 2 ? "2px" : template === 4 ? "28px" : "22px";
+
+    if(brand.portada_url){
+      cover.style.backgroundImage = `
+        linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.72)),
+        url("${brand.portada_url}")
+      `;
+      cover.style.backgroundSize = "cover";
+      cover.style.backgroundPosition = "center";
     }else{
-      hero.style.backgroundImage = "";
-      hero.style.background = template === 4
-        ? `linear-gradient(135deg,${brand.color_principal || "#eb6841"},${brand.color_secundario || "#f3c8b4"})`
-        : "#fff";
+      cover.style.backgroundImage = `linear-gradient(
+        135deg,
+        ${brand.color_principal || "#2d160a"},
+        ${brand.color_secundario || "#eb6841"}
+      )`;
     }
   }
 
