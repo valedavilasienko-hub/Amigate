@@ -2969,6 +2969,156 @@
       }
     }
 
+  
+    /* =====================================================
+       COMPRAS DEL COMPRADOR Y SEGUIMIENTO
+    ===================================================== */
+
+    .buyer-orders-list{
+      display:grid;
+      gap:14px;
+      margin-top:18px;
+    }
+
+    .buyer-order-card{
+      padding:17px;
+      border:1px solid var(--border);
+      border-radius:15px;
+      background:#fff;
+    }
+
+    .buyer-order-top{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+    }
+
+    .buyer-order-meta{
+      margin-top:5px;
+      color:var(--gray);
+      font-size:10px;
+      line-height:1.5;
+    }
+
+    .tracking-line{
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:7px;
+      margin-top:16px;
+    }
+
+    .tracking-step{
+      position:relative;
+      padding-top:15px;
+      color:#999;
+      font-size:9px;
+      font-weight:800;
+      text-align:center;
+    }
+
+    .tracking-step::before{
+      content:"";
+      position:absolute;
+      top:0;
+      left:50%;
+      width:9px;
+      height:9px;
+      border-radius:50%;
+      background:#d8d8d8;
+      transform:translateX(-50%);
+      z-index:2;
+    }
+
+    .tracking-step::after{
+      content:"";
+      position:absolute;
+      top:4px;
+      left:-50%;
+      width:100%;
+      height:2px;
+      background:#e4e4e4;
+      z-index:1;
+    }
+
+    .tracking-step:first-child::after{
+      display:none;
+    }
+
+    .tracking-step.done{
+      color:var(--dark);
+    }
+
+    .tracking-step.done::before,
+    .tracking-step.done::after{
+      background:var(--green);
+    }
+
+    .tracking-details{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+      margin-top:15px;
+    }
+
+    .tracking-detail{
+      padding:11px;
+      border-radius:10px;
+      background:#f7f7f7;
+      font-size:10px;
+      line-height:1.5;
+    }
+
+    .tracking-detail strong{
+      display:block;
+      margin-bottom:3px;
+    }
+
+    .tracking-link{
+      display:inline-flex;
+      margin-top:10px;
+      font-size:10px;
+      font-weight:900;
+      text-decoration:none;
+    }
+
+    .required-hint{
+      margin-top:8px;
+      padding:10px;
+      border-radius:9px;
+      background:#fff4df;
+      color:#7d5b00;
+      font-size:10px;
+      line-height:1.45;
+    }
+
+    @media(max-width:650px){
+      .tracking-line{
+        grid-template-columns:1fr;
+      }
+
+      .tracking-step{
+        padding:0 0 0 20px;
+        text-align:left;
+      }
+
+      .tracking-step::before{
+        top:2px;
+        left:4px;
+      }
+
+      .tracking-step::after{
+        top:-10px;
+        left:8px;
+        width:2px;
+        height:20px;
+      }
+
+      .tracking-details{
+        grid-template-columns:1fr;
+      }
+    }
+
   </style>
 </head>
 
@@ -3367,8 +3517,26 @@
       </div>
 
       <div class="form-group">
-        <label>Empresa de transporte</label>
-        <input class="form-control" id="sellerOrderCarrier">
+        <label>Empresa o persona que realiza la entrega</label>
+        <input
+          class="form-control"
+          id="sellerOrderCarrier"
+          placeholder="Ej.: Andreani, Correo Argentino o cadetería propia"
+        >
+      </div>
+
+      <label class="toggle-row">
+        <input type="checkbox" id="sellerOrderNoTrackingCode">
+        Entrega propia o modalidad sin código de seguimiento
+      </label>
+
+      <div class="form-group">
+        <label>Contacto de quien entrega</label>
+        <input
+          class="form-control"
+          id="sellerOrderDeliveryContact"
+          placeholder="Teléfono o medio de contacto"
+        >
       </div>
 
       <div class="form-row">
@@ -3381,6 +3549,11 @@
           <label>Enlace de seguimiento</label>
           <input class="form-control" id="sellerOrderTrackingLink" type="url">
         </div>
+      </div>
+
+      <div class="required-hint" id="dispatchRequiredHint">
+        Para marcar el pedido como despachado, debés cargar quién realiza la entrega y un código
+        de seguimiento. Si la entrega es propia, marcá la opción “sin código”.
       </div>
 
       <div class="form-group">
@@ -4654,6 +4827,7 @@
   let cart = [];
   let selectedCheckoutMethod = "mercadopago";
   let sellerOrdersCache = [];
+  let buyerOrdersCache = [];
   let editingSellerOrder = null;
   let shippingSettingsCache = null;
   let shippingRatesCache = [];
@@ -7193,6 +7367,158 @@
   // La salida del administrador utiliza returnToMainPortal().
 
 
+
+  async function loadBuyerOrders(){
+    if(!currentUser) return;
+
+    const result = await db
+      .from("orders")
+      .select(`
+        *,
+        brands (
+          id,
+          nombre,
+          logo_url,
+          whatsapp,
+          email_comercial,
+          email
+        ),
+        order_items (
+          id,
+          nombre_producto,
+          cantidad,
+          precio_unitario,
+          subtotal,
+          variante_descripcion
+        )
+      `)
+      .eq("buyer_id",currentUser.id)
+      .order("created_at",{ascending:false});
+
+    if(result.error){
+      console.warn(result.error);
+      return;
+    }
+
+    buyerOrdersCache = result.data || [];
+    renderBuyerOrders();
+  }
+
+  function buyerOrderProgress(status){
+    const normalized = status || "pendiente";
+
+    if(normalized === "cancelado") return 0;
+
+    const index = {
+      pendiente:1,
+      confirmado:2,
+      preparando:3,
+      despachado:4,
+      entregado:5
+    }[normalized] || 1;
+
+    return index;
+  }
+
+  function renderBuyerOrders(){
+    const container = $("buyerOrdersList");
+    const empty = $("buyerOrdersEmpty");
+
+    container.innerHTML = "";
+    empty.classList.toggle("hidden",buyerOrdersCache.length > 0);
+
+    if(!buyerOrdersCache.length) return;
+
+    buyerOrdersCache.forEach(order=>{
+      const progress = buyerOrderProgress(order.estado_pedido);
+      const brand = order.brands || {};
+      const items = order.order_items || [];
+      const itemText = items.length
+        ? items.map(item=>`${item.cantidad || 1}× ${item.nombre_producto || "Producto"}`).join(" · ")
+        : "Productos del pedido";
+
+      const trackingCode = order.sin_codigo_seguimiento
+        ? "Entrega sin código"
+        : (order.codigo_seguimiento || "Todavía no informado");
+
+      const trackingLink = order.link_seguimiento
+        ? `<a class="tracking-link" href="${escapeHtml(order.link_seguimiento)}" target="_blank" rel="noopener">Ver seguimiento ↗</a>`
+        : "";
+
+      const contactLink = brand.whatsapp
+        ? `<a class="tracking-link" href="https://wa.me/${escapeHtml(String(brand.whatsapp).replace(/\D/g,""))}" target="_blank" rel="noopener">Contactar a la marca ↗</a>`
+        : "";
+
+      container.insertAdjacentHTML(
+        "beforeend",
+        `<article class="buyer-order-card">
+          <div class="buyer-order-top">
+            <div>
+              <h4>Pedido #${escapeHtml(order.numero_pedido || String(order.id).slice(0,8))}</h4>
+              <div class="buyer-order-meta">
+                ${escapeHtml(brand.nombre || "Marca")} ·
+                ${escapeHtml(new Date(order.created_at).toLocaleDateString("es-AR"))}<br>
+                ${escapeHtml(itemText)}
+              </div>
+            </div>
+
+            <div style="text-align:right">
+              <strong>${escapeHtml(formatMoney(order.total))}</strong><br>
+              <span class="order-status-pill ${
+                order.estado_pedido === "despachado" || order.estado_pedido === "entregado"
+                  ? "sent"
+                  : "pending"
+              }">
+                ${escapeHtml(order.estado_pedido || "pendiente")}
+              </span>
+            </div>
+          </div>
+
+          <div class="tracking-line">
+            <div class="tracking-step ${progress >= 1 ? "done" : ""}">Pedido recibido</div>
+            <div class="tracking-step ${progress >= 2 ? "done" : ""}">Confirmado</div>
+            <div class="tracking-step ${progress >= 3 ? "done" : ""}">Preparando</div>
+            <div class="tracking-step ${progress >= 4 ? "done" : ""}">Despachado</div>
+            <div class="tracking-step ${progress >= 5 ? "done" : ""}">Entregado</div>
+          </div>
+
+          <div class="tracking-details">
+            <div class="tracking-detail">
+              <strong>Método de entrega</strong>
+              ${escapeHtml(
+                order.metodo_envio === "retiro_local"
+                  ? "Retiro en local"
+                  : order.metodo_envio === "envio_domicilio"
+                    ? "Envío a domicilio"
+                    : "Todavía no definido"
+              )}
+            </div>
+
+            <div class="tracking-detail">
+              <strong>Quién realiza la entrega</strong>
+              ${escapeHtml(order.empresa_transporte || "Todavía no informado")}
+            </div>
+
+            <div class="tracking-detail">
+              <strong>Código de seguimiento</strong>
+              ${escapeHtml(trackingCode)}
+            </div>
+
+            <div class="tracking-detail">
+              <strong>Contacto de entrega</strong>
+              ${escapeHtml(order.contacto_entrega || "No informado")}
+            </div>
+          </div>
+
+          ${trackingLink}
+          ${contactLink}
+        </article>`
+      );
+    });
+  }
+
+  $("refreshBuyerOrdersButton")?.addEventListener("click",loadBuyerOrders);
+
   /* =====================================================
      ENVÍOS Y SEGUIMIENTO DE PEDIDOS
   ===================================================== */
@@ -7450,13 +7776,36 @@
     $("sellerOrderStatus").value = editingSellerOrder.estado_pedido || "pendiente";
     $("sellerOrderShippingMethod").value = editingSellerOrder.metodo_envio || "";
     $("sellerOrderCarrier").value = editingSellerOrder.empresa_transporte || "";
+    $("sellerOrderNoTrackingCode").checked = editingSellerOrder.sin_codigo_seguimiento === true;
+    $("sellerOrderDeliveryContact").value = editingSellerOrder.contacto_entrega || "";
     $("sellerOrderTrackingCode").value = editingSellerOrder.codigo_seguimiento || "";
     $("sellerOrderTrackingLink").value = editingSellerOrder.link_seguimiento || "";
     $("sellerOrderInternalNote").value = editingSellerOrder.nota_interna_vendedor || "";
 
+    updateDispatchRequirementUI();
+
     clearMessage("sellerOrderMessage");
     openModal($("sellerOrderModal"));
   }
+
+
+  function updateDispatchRequirementUI(){
+    const dispatched = ["despachado","entregado"].includes($("sellerOrderStatus").value);
+    const noCode = $("sellerOrderNoTrackingCode").checked;
+
+    $("dispatchRequiredHint").classList.toggle("hidden",!dispatched);
+    $("sellerOrderCarrier").required = dispatched;
+    $("sellerOrderTrackingCode").required = dispatched && !noCode;
+    $("sellerOrderDeliveryContact").required = dispatched && noCode;
+
+    $("sellerOrderTrackingCode").disabled = noCode;
+    if(noCode){
+      $("sellerOrderTrackingCode").value = "";
+    }
+  }
+
+  $("sellerOrderStatus").addEventListener("change",updateDispatchRequirementUI);
+  $("sellerOrderNoTrackingCode").addEventListener("change",updateDispatchRequirementUI);
 
   $("sellerOrderForm").addEventListener("submit",async event=>{
     event.preventDefault();
@@ -7470,12 +7819,31 @@
 
     try{
       const newStatus = $("sellerOrderStatus").value;
+      const dispatched = ["despachado","entregado"].includes(newStatus);
+      const noTrackingCode = $("sellerOrderNoTrackingCode").checked;
+      const carrier = $("sellerOrderCarrier").value.trim();
+      const trackingCode = $("sellerOrderTrackingCode").value.trim();
+      const deliveryContact = $("sellerOrderDeliveryContact").value.trim();
+
+      if(dispatched && !carrier){
+        throw new Error("Debés indicar quién realiza la entrega.");
+      }
+
+      if(dispatched && !noTrackingCode && !trackingCode){
+        throw new Error("Debés cargar el código de seguimiento o marcar que la entrega no utiliza código.");
+      }
+
+      if(dispatched && noTrackingCode && !deliveryContact){
+        throw new Error("Para una entrega sin código, debés cargar el contacto de quien entrega.");
+      }
 
       const payload = {
         estado_pedido:newStatus,
         metodo_envio:$("sellerOrderShippingMethod").value || null,
-        empresa_transporte:$("sellerOrderCarrier").value.trim() || null,
-        codigo_seguimiento:$("sellerOrderTrackingCode").value.trim() || null,
+        empresa_transporte:carrier || null,
+        sin_codigo_seguimiento:noTrackingCode,
+        contacto_entrega:deliveryContact || null,
+        codigo_seguimiento:noTrackingCode ? null : (trackingCode || null),
         link_seguimiento:$("sellerOrderTrackingLink").value.trim() || null,
         nota_interna_vendedor:$("sellerOrderInternalNote").value.trim() || null
       };
@@ -9085,6 +9453,10 @@
 
         if(attribute === "data-seller-page" && page === "diseno"){
           loadStoreDesign().catch(console.warn);
+        }
+
+        if(attribute === "data-buyer-page" && page === "compras"){
+          loadBuyerOrders().catch(console.warn);
         }
 
         if(attribute === "data-seller-page" && page === "productos"){
