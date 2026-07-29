@@ -1935,7 +1935,14 @@
 <script>
   const SUPABASE_URL = "https://jqdyaafwixnjasszsvkt.supabase.co";
   const SUPABASE_KEY = "sb_publishable_KHbLlwbhlkyaiz-7KXW6Mw_nAnTVsLa";
-  const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY,{
+    auth:{
+      persistSession:true,
+      autoRefreshToken:true,
+      detectSessionInUrl:true,
+      storage:window.localStorage
+    }
+  });
 
   const $ = id => document.getElementById(id);
 
@@ -3435,74 +3442,103 @@
   });
 
   async function openProductModal(productId=null){
-    if(!currentBrand){
-      await loadSellerContext();
-    }
-
-    await loadTaxonomy();
-
-    editingProduct = productId
-      ? sellerProductsCache.find(product=>String(product.id) === String(productId)) || null
-      : null;
-
-    productColorsDraft = [];
-    productVariantsDraft = [];
-
-    $("productForm").reset();
-    $("productControlsStock").checked = true;
-    $("productActive").checked = true;
-    $("productImagesInput").value = "";
+    openModal($("productModal"));
     clearMessage("productMessage");
 
-    if(editingProduct){
-      $("productModalTitle").textContent = "Editar producto";
+    $("productModalTitle").textContent = productId
+      ? "Cargando producto..."
+      : "Preparando producto...";
 
-      const [colorsResult,variantsResult] = await Promise.all([
-        db.from("product_colors").select("*").eq("product_id",editingProduct.id),
-        db.from("product_variants").select("*").eq("product_id",editingProduct.id)
-      ]);
+    try{
+      if(!currentBrand){
+        await loadSellerContext();
+      }
 
-      if(colorsResult.error) throw colorsResult.error;
-      if(variantsResult.error) throw variantsResult.error;
+      if(!currentBrand){
+        throw new Error("No encontramos una marca vinculada a tu cuenta.");
+      }
 
-      const databaseColors = colorsResult.data || [];
+      await loadTaxonomy();
 
-      productColorsDraft = databaseColors.map(color=>({
-        ...color,
-        localId:color.id
-      }));
+      editingProduct = productId
+        ? sellerProductsCache.find(product=>String(product.id) === String(productId)) || null
+        : null;
 
-      productVariantsDraft = (variantsResult.data || []).map(variant=>({
-        ...variant,
-        localId:variant.id,
-        colorLocalId:variant.color_id
-      }));
+      productColorsDraft = [];
+      productVariantsDraft = [];
 
-      $("productName").value = editingProduct.nombre || "";
-      $("productDescription").value = editingProduct.descripcion || "";
-      $("productOldPrice").value = editingProduct.precio_anterior ?? "";
-      $("productCurrentPrice").value = editingProduct.precio_actual ?? "";
-      $("productControlsStock").checked = editingProduct.controla_stock !== false;
-      $("productActive").checked = editingProduct.activo !== false;
-    }else{
-      $("productModalTitle").textContent = "Agregar producto";
+      $("productForm").reset();
+      $("productControlsStock").checked = true;
+      $("productActive").checked = true;
+      $("productImagesInput").value = "";
+
+      if(productId && !editingProduct){
+        throw new Error("No encontramos el producto que querés editar.");
+      }
+
+      if(editingProduct){
+        $("productModalTitle").textContent = "Editar producto";
+
+        const [colorsResult,variantsResult] = await Promise.all([
+          db.from("product_colors").select("*").eq("product_id",editingProduct.id),
+          db.from("product_variants").select("*").eq("product_id",editingProduct.id)
+        ]);
+
+        if(colorsResult.error) throw colorsResult.error;
+        if(variantsResult.error) throw variantsResult.error;
+
+        const databaseColors = colorsResult.data || [];
+
+        productColorsDraft = databaseColors.map(color=>({
+          ...color,
+          localId:color.id
+        }));
+
+        productVariantsDraft = (variantsResult.data || []).map(variant=>({
+          ...variant,
+          localId:variant.id,
+          colorLocalId:variant.color_id
+        }));
+
+        $("productName").value = editingProduct.nombre || "";
+        $("productDescription").value = editingProduct.descripcion || "";
+        $("productOldPrice").value = editingProduct.precio_anterior ?? "";
+        $("productCurrentPrice").value = editingProduct.precio_actual ?? "";
+        $("productControlsStock").checked = editingProduct.controla_stock !== false;
+        $("productActive").checked = editingProduct.activo !== false;
+      }else{
+        $("productModalTitle").textContent = "Agregar producto";
+      }
+
+      populateProductCategories();
+
+      if(editingProduct){
+        $("productCategory").value = editingProduct.category_id || "";
+        populateProductSubcategories();
+        $("productSubcategory").value = editingProduct.subcategory_id || "";
+        populateProductTypes();
+        $("productType").value = editingProduct.category_type_id || "";
+      }
+
+      renderProductDrafts();
+    }catch(error){
+      console.error("No se pudo abrir el formulario de producto:",error);
+
+      $("productModalTitle").textContent = productId
+        ? "Editar producto"
+        : "Agregar producto";
+
+      showMessage(
+        "productMessage",
+        "No se pudo abrir el formulario: " + (error.message || "error desconocido"),
+        "error"
+      );
     }
-
-    populateProductCategories();
-
-    if(editingProduct){
-      $("productCategory").value = editingProduct.category_id || "";
-      populateProductSubcategories();
-      $("productSubcategory").value = editingProduct.subcategory_id || "";
-      populateProductTypes();
-      $("productType").value = editingProduct.category_type_id || "";
-    }
-
-    renderProductDrafts();
-    openModal($("productModal"));
   }
 
-  $("addProductButton").addEventListener("click",()=>openProductModal());
+  $("addProductButton").addEventListener("click",async()=>{
+    await openProductModal();
+  });
 
   function safeStorageName(fileName){
     return String(fileName || "imagen")
@@ -3961,15 +3997,46 @@
       element?.classList.remove("open","visible");
     });
 
+    $("provinceExplorer").classList.remove("visible");
+    $("publicSite").classList.remove("hidden");
     document.body.style.overflow = "";
     updateSessionUI();
   }
 
   $("logoutButton").addEventListener("click",logout);
 
+
+  function getSavedProvince(){
+    try{
+      const raw = localStorage.getItem("amigate_province");
+      return raw ? JSON.parse(raw) : null;
+    }catch(error){
+      localStorage.removeItem("amigate_province");
+      return null;
+    }
+  }
+
+  async function restoreLastProvinceForLoggedUser(){
+    if(!currentUser) return;
+
+    const savedProvince = getSavedProvince();
+
+    if(!savedProvince?.name) return;
+
+    selectedProvince = savedProvince;
+
+    try{
+      await openSelectedProvince();
+    }catch(error){
+      console.warn("No se pudo restaurar la provincia guardada:",error);
+    }
+  }
+
   async function initializeSession(){
     try{
-      const {data} = await db.auth.getSession();
+      const {data,error} = await db.auth.getSession();
+
+      if(error) throw error;
 
       currentUser = data?.session?.user || null;
 
@@ -3982,10 +4049,34 @@
       }
 
       updateSessionUI();
+
+      if(currentUser){
+        await restoreLastProvinceForLoggedUser();
+      }
     }catch(error){
-      console.warn(error);
+      console.warn("No se pudo restaurar la sesión:",error);
     }
   }
+
+  db.auth.onAuthStateChange((event,session)=>{
+    setTimeout(async()=>{
+      currentUser = session?.user || null;
+
+      if(currentUser){
+        await Promise.all([
+          loadCurrentProfile(),
+          loadSellerContext()
+        ]);
+      }else{
+        currentProfile = null;
+        currentSellerProfile = null;
+        currentBrand = null;
+        currentShippingProvinceIds = [];
+      }
+
+      updateSessionUI();
+    },0);
+  });
 
   initializeSession();
 
