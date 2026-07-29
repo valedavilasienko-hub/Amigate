@@ -2796,6 +2796,114 @@
       .category-showcase-grid{grid-template-columns:1fr}
     }
 
+  
+    /* =====================================================
+       ENVÍOS Y SEGUIMIENTO
+    ===================================================== */
+
+    .shipping-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+      margin-top:18px;
+    }
+
+    .shipping-card{
+      padding:18px;
+      border:1px solid var(--border);
+      border-radius:15px;
+      background:#fff;
+    }
+
+    .shipping-card h4{
+      font-size:14px;
+    }
+
+    .shipping-card p{
+      margin-top:5px;
+      color:var(--gray);
+      font-size:10px;
+      line-height:1.5;
+    }
+
+    .shipping-province-list{
+      margin-top:14px;
+      display:grid;
+      gap:8px;
+    }
+
+    .shipping-province-row{
+      display:grid;
+      grid-template-columns:1.2fr .8fr .8fr .8fr auto;
+      gap:8px;
+      align-items:center;
+      padding:10px;
+      border:1px solid var(--border);
+      border-radius:11px;
+      background:#fff;
+    }
+
+    .shipping-province-row input,
+    .shipping-province-row select{
+      width:100%;
+      min-height:38px;
+      padding:8px;
+      border:1px solid var(--border);
+      border-radius:8px;
+      background:#fff;
+    }
+
+    .shipping-help{
+      margin-top:10px;
+      padding:12px;
+      border-radius:11px;
+      background:#f8f4f1;
+      color:var(--gray);
+      font-size:10px;
+      line-height:1.5;
+    }
+
+    .order-status-pill{
+      display:inline-flex;
+      padding:5px 8px;
+      border-radius:100px;
+      background:#eef3ff;
+      color:#445d9b;
+      font-size:8px;
+      font-weight:900;
+      text-transform:uppercase;
+    }
+
+    .order-status-pill.sent{
+      background:#eaf7f1;
+      color:var(--green);
+    }
+
+    .order-status-pill.pending{
+      background:#fff3da;
+      color:#8a6300;
+    }
+
+    .shipping-note-cart{
+      margin-top:12px;
+      padding:12px;
+      border:1px solid #dfe8f6;
+      border-radius:11px;
+      background:#f4f8ff;
+      color:#43566f;
+      font-size:10px;
+      line-height:1.5;
+    }
+
+    @media(max-width:900px){
+      .shipping-grid{grid-template-columns:1fr}
+      .shipping-province-row{grid-template-columns:1fr 1fr}
+    }
+
+    @media(max-width:560px){
+      .shipping-province-row{grid-template-columns:1fr}
+    }
+
   </style>
 </head>
 
@@ -3151,6 +3259,78 @@
 </div>
 
 
+
+
+<!-- =====================================================
+     GESTIÓN DE PEDIDO Y SEGUIMIENTO
+===================================================== -->
+
+<div class="modal" id="sellerOrderModal">
+  <div class="modal-card" style="width:min(680px,100%)">
+    <div class="modal-top">
+      <div class="modal-brand">Amigate</div>
+      <button class="modal-close" id="closeSellerOrderModalButton">×</button>
+    </div>
+
+    <h2 id="sellerOrderModalTitle">Gestionar pedido</h2>
+    <p class="modal-description">
+      Actualizá el estado y cargá la información del despacho.
+    </p>
+
+    <form id="sellerOrderForm">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Estado del pedido</label>
+          <select class="form-control" id="sellerOrderStatus">
+            <option value="pendiente">Pendiente</option>
+            <option value="confirmado">Confirmado</option>
+            <option value="preparando">Preparando</option>
+            <option value="despachado">Despachado</option>
+            <option value="entregado">Entregado</option>
+            <option value="cancelado">Cancelado</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Método de envío</label>
+          <select class="form-control" id="sellerOrderShippingMethod">
+            <option value="">Sin definir</option>
+            <option value="envio_domicilio">Envío a domicilio</option>
+            <option value="retiro_local">Retiro en local</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Empresa de transporte</label>
+        <input class="form-control" id="sellerOrderCarrier">
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Código de seguimiento</label>
+          <input class="form-control" id="sellerOrderTrackingCode">
+        </div>
+
+        <div class="form-group">
+          <label>Enlace de seguimiento</label>
+          <input class="form-control" id="sellerOrderTrackingLink" type="url">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Nota interna</label>
+        <textarea class="form-control" id="sellerOrderInternalNote"></textarea>
+      </div>
+
+      <button class="submit-button" id="saveSellerOrderButton" type="submit">
+        Guardar cambios
+      </button>
+
+      <div class="message" id="sellerOrderMessage"></div>
+    </form>
+  </div>
+</div>
 
 <!-- =====================================================
      PANEL ADMINISTRADOR
@@ -3859,6 +4039,7 @@
       <button class="portal-nav" data-seller-page="productos">Productos</button>
       <button class="portal-nav" data-seller-page="diseno">Diseño de la tienda</button>
       <button class="portal-nav" data-seller-page="pedidos">Pedidos</button>
+      <button class="portal-nav" data-seller-page="envios">Envíos</button>
       <button class="portal-nav" data-seller-page="clientes">Clientes</button>
       <button class="portal-nav" data-seller-page="mensajes">Mensajes</button>
       <button class="portal-nav" data-seller-page="opiniones">Opiniones</button>
@@ -4053,12 +4234,147 @@
         </div>
       </section>
 
-      <section class="portal-section" id="seller-pedidos"><div class="panel"><h3>Pedidos</h3><div class="empty-panel">Tus pedidos aparecerán acá.</div></div></section>
+      <section class="portal-section" id="seller-pedidos">
+        <div class="panel">
+          <div class="panel-top">
+            <div>
+              <h3>Pedidos</h3>
+              <p style="margin-top:5px;color:var(--gray);font-size:11px">
+                Confirmá, prepará y despachá los pedidos de tu marca.
+              </p>
+            </div>
+            <button class="secondary-button" id="refreshSellerOrdersButton" type="button">Actualizar</button>
+          </div>
+
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Pedido</th>
+                  <th>Comprador</th>
+                  <th>Total</th>
+                  <th>Pago</th>
+                  <th>Estado</th>
+                  <th>Envío</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="sellerOrdersTable"></tbody>
+            </table>
+          </div>
+
+          <div class="empty-panel hidden" id="sellerOrdersEmpty">
+            Todavía no hay pedidos para esta marca.
+          </div>
+        </div>
+      </section>
       <section class="portal-section" id="seller-clientes"><div class="panel"><h3>Clientes</h3><div class="empty-panel">Tus clientes aparecerán acá.</div></div></section>
       <section class="portal-section" id="seller-mensajes"><div class="panel"><h3>Mensajes</h3><div class="empty-panel">Tus conversaciones aparecerán acá.</div></div></section>
       <section class="portal-section" id="seller-opiniones"><div class="panel"><h3>Opiniones</h3><div class="empty-panel">Las opiniones aparecerán acá.</div></div></section>
       <section class="portal-section" id="seller-publicidad"><div class="panel"><h3>Publicidad</h3><div class="empty-panel">Acá administrarás contenido patrocinado.</div></div></section>
       <section class="portal-section" id="seller-suscripcion"><div class="panel"><h3>Suscripción</h3><div class="empty-panel">Acá conectaremos Mercado Pago.</div></div></section>
+
+      
+      <section class="portal-section" id="seller-envios">
+        <div class="panel">
+          <div class="panel-top">
+            <div>
+              <h3>Configuración de envíos</h3>
+              <p style="margin-top:5px;color:var(--gray);font-size:11px">
+                La marca define, cobra y gestiona el envío directamente con el comprador.
+              </p>
+            </div>
+          </div>
+
+          <form id="shippingSettingsForm">
+            <div class="shipping-grid">
+              <div class="shipping-card">
+                <h4>Modalidades</h4>
+                <p>Indicá qué opciones ofrece la marca.</p>
+
+                <label class="toggle-row">
+                  <input type="checkbox" id="shippingHomeEnabled" checked>
+                  Envío a domicilio
+                </label>
+
+                <label class="toggle-row">
+                  <input type="checkbox" id="shippingPickupEnabled">
+                  Retiro en local
+                </label>
+
+                <div class="form-group">
+                  <label>Dirección o instrucciones para retiro</label>
+                  <input
+                    class="form-control"
+                    id="shippingPickupInstructions"
+                    placeholder="Ej.: Retiro coordinado en Nueva Córdoba"
+                  >
+                </div>
+              </div>
+
+              <div class="shipping-card">
+                <h4>Condiciones generales</h4>
+                <p>Estos datos se informan al comprador antes de confirmar.</p>
+
+                <div class="form-group">
+                  <label>Costo general orientativo</label>
+                  <input class="form-control" id="shippingDefaultCost" type="number" min="0" step="0.01">
+                </div>
+
+                <div class="form-group">
+                  <label>Envío gratis desde</label>
+                  <input class="form-control" id="shippingFreeFrom" type="number" min="0" step="0.01" placeholder="Opcional">
+                </div>
+
+                <div class="form-group">
+                  <label>Plazo estimado</label>
+                  <input class="form-control" id="shippingEstimatedTime" placeholder="Ej.: 3 a 7 días hábiles">
+                </div>
+              </div>
+            </div>
+
+            <div class="shipping-card" style="margin-top:14px">
+              <h4>Transportes e instrucciones</h4>
+
+              <div class="form-group">
+                <label>Empresas de transporte habituales</label>
+                <input
+                  class="form-control"
+                  id="shippingCarriers"
+                  placeholder="Correo Argentino, Andreani, transporte propio"
+                >
+              </div>
+
+              <div class="form-group">
+                <label>Mensaje para el comprador</label>
+                <textarea
+                  class="form-control"
+                  id="shippingBuyerMessage"
+                  placeholder="Explicá cómo se coordina el costo y el despacho."
+                ></textarea>
+              </div>
+            </div>
+
+            <div class="shipping-card" style="margin-top:14px">
+              <h4>Configuración por provincia</h4>
+              <p>Podés definir un costo y plazo diferente para cada provincia habilitada.</p>
+
+              <div class="shipping-province-list" id="shippingProvinceList"></div>
+
+              <div class="shipping-help">
+                Amigate no realiza el transporte. La marca es responsable de confirmar el costo,
+                despachar el pedido y cargar el seguimiento.
+              </div>
+            </div>
+
+            <button class="submit-button" id="saveShippingSettingsButton" type="submit">
+              Guardar configuración de envíos
+            </button>
+
+            <div class="message" id="shippingSettingsMessage"></div>
+          </form>
+        </div>
+      </section>
 
       <section class="portal-section" id="seller-economico">
         <div class="panel">
@@ -4258,6 +4574,11 @@
   let selectedStoreTemplate = 1;
   let cart = [];
   let selectedCheckoutMethod = "mercadopago";
+  let sellerOrdersCache = [];
+  let editingSellerOrder = null;
+  let shippingSettingsCache = null;
+  let shippingRatesCache = [];
+
   let adminData = {
     profiles:[],
     brands:[],
@@ -6792,6 +7113,344 @@
   $("adminRefreshButton").addEventListener("click",loadAdminData);
   $("adminExit").addEventListener("click",()=>$("adminPortal").classList.remove("visible"));
 
+
+  /* =====================================================
+     ENVÍOS Y SEGUIMIENTO DE PEDIDOS
+  ===================================================== */
+
+  async function loadShippingSettings(){
+    if(!currentBrand) return;
+
+    clearMessage("shippingSettingsMessage");
+
+    const [settingsResult,ratesResult] = await Promise.all([
+      db.from("brand_shipping_settings")
+        .select("*")
+        .eq("brand_id",currentBrand.id)
+        .maybeSingle(),
+      db.from("brand_shipping_provinces")
+        .select("*")
+        .eq("brand_id",currentBrand.id)
+    ]);
+
+    if(settingsResult.error) console.warn(settingsResult.error);
+    if(ratesResult.error) console.warn(ratesResult.error);
+
+    shippingSettingsCache = settingsResult.data || null;
+    shippingRatesCache = ratesResult.data || [];
+
+    $("shippingHomeEnabled").checked = shippingSettingsCache?.envio_domicilio !== false;
+    $("shippingPickupEnabled").checked = shippingSettingsCache?.retiro_local === true;
+    $("shippingPickupInstructions").value = shippingSettingsCache?.instrucciones_retiro || "";
+    $("shippingDefaultCost").value = shippingSettingsCache?.costo_general ?? "";
+    $("shippingFreeFrom").value = shippingSettingsCache?.envio_gratis_desde ?? "";
+    $("shippingEstimatedTime").value = shippingSettingsCache?.plazo_estimado || "";
+    $("shippingCarriers").value = shippingSettingsCache?.transportistas || "";
+    $("shippingBuyerMessage").value = shippingSettingsCache?.mensaje_comprador || "";
+
+    renderShippingProvinceRows();
+  }
+
+  function renderShippingProvinceRows(){
+    const container = $("shippingProvinceList");
+    container.innerHTML = "";
+
+    const rows = shippingRatesCache
+      .map(rate=>{
+        const province = taxonomyCache.provinces.find(
+          item=>String(item.id) === String(rate.province_id)
+        );
+
+        return {rate,province};
+      })
+      .filter(item=>item.province)
+      .sort((a,b)=>rowName(a.province).localeCompare(rowName(b.province),"es"));
+
+    if(!rows.length){
+      container.innerHTML = `
+        <div class="empty-panel">
+          La marca todavía no tiene provincias de envío configuradas.
+        </div>
+      `;
+      return;
+    }
+
+    rows.forEach(({rate,province})=>{
+      container.insertAdjacentHTML(
+        "beforeend",
+        `<div class="shipping-province-row" data-shipping-rate-row="${escapeHtml(rate.province_id)}">
+          <strong>${escapeHtml(rowName(province))}</strong>
+
+          <input
+            type="number"
+            min="0"
+            step="0.01"
+            value="${rate.costo ?? ""}"
+            placeholder="Costo"
+            data-shipping-cost="${escapeHtml(rate.province_id)}"
+          >
+
+          <input
+            type="number"
+            min="0"
+            step="0.01"
+            value="${rate.envio_gratis_desde ?? ""}"
+            placeholder="Gratis desde"
+            data-shipping-free="${escapeHtml(rate.province_id)}"
+          >
+
+          <input
+            value="${escapeHtml(rate.plazo_estimado || "")}"
+            placeholder="Plazo"
+            data-shipping-time="${escapeHtml(rate.province_id)}"
+          >
+
+          <label class="toggle-row" style="margin:0">
+            <input
+              type="checkbox"
+              ${rate.activo !== false ? "checked" : ""}
+              data-shipping-active="${escapeHtml(rate.province_id)}"
+            >
+            Activo
+          </label>
+        </div>`
+      );
+    });
+  }
+
+  $("shippingSettingsForm").addEventListener("submit",async event=>{
+    event.preventDefault();
+
+    if(!currentBrand){
+      showMessage("shippingSettingsMessage","No encontramos tu marca.","error");
+      return;
+    }
+
+    const button = $("saveShippingSettingsButton");
+    button.disabled = true;
+    button.textContent = "Guardando...";
+    clearMessage("shippingSettingsMessage");
+
+    try{
+      const settingsPayload = {
+        brand_id:currentBrand.id,
+        envio_domicilio:$("shippingHomeEnabled").checked,
+        retiro_local:$("shippingPickupEnabled").checked,
+        instrucciones_retiro:$("shippingPickupInstructions").value.trim() || null,
+        costo_general:$("shippingDefaultCost").value === "" ? null : Number($("shippingDefaultCost").value),
+        envio_gratis_desde:$("shippingFreeFrom").value === "" ? null : Number($("shippingFreeFrom").value),
+        plazo_estimado:$("shippingEstimatedTime").value.trim() || null,
+        transportistas:$("shippingCarriers").value.trim() || null,
+        mensaje_comprador:$("shippingBuyerMessage").value.trim() || null,
+        updated_at:new Date().toISOString()
+      };
+
+      const settingsUpsert = await db
+        .from("brand_shipping_settings")
+        .upsert(settingsPayload,{onConflict:"brand_id"});
+
+      if(settingsUpsert.error) throw settingsUpsert.error;
+
+      for(const rate of shippingRatesCache){
+        const provinceId = String(rate.province_id);
+
+        const costInput = document.querySelector(`[data-shipping-cost="${provinceId}"]`);
+        const freeInput = document.querySelector(`[data-shipping-free="${provinceId}"]`);
+        const timeInput = document.querySelector(`[data-shipping-time="${provinceId}"]`);
+        const activeInput = document.querySelector(`[data-shipping-active="${provinceId}"]`);
+
+        const updateResult = await db
+          .from("brand_shipping_provinces")
+          .update({
+            costo:costInput?.value === "" ? null : Number(costInput?.value),
+            envio_gratis_desde:freeInput?.value === "" ? null : Number(freeInput?.value),
+            plazo_estimado:timeInput?.value.trim() || null,
+            activo:activeInput?.checked !== false
+          })
+          .eq("brand_id",currentBrand.id)
+          .eq("province_id",rate.province_id);
+
+        if(updateResult.error) throw updateResult.error;
+      }
+
+      showMessage("shippingSettingsMessage","Configuración de envíos guardada.","success");
+      await loadShippingSettings();
+    }catch(error){
+      console.error(error);
+      showMessage(
+        "shippingSettingsMessage",
+        error.message || "No pudimos guardar los envíos.",
+        "error"
+      );
+    }finally{
+      button.disabled = false;
+      button.textContent = "Guardar configuración de envíos";
+    }
+  });
+
+  async function loadSellerOrders(){
+    if(!currentBrand) return;
+
+    const result = await db
+      .from("orders")
+      .select("*")
+      .eq("brand_id",currentBrand.id)
+      .order("created_at",{ascending:false});
+
+    if(result.error){
+      console.warn(result.error);
+      return;
+    }
+
+    sellerOrdersCache = result.data || [];
+    renderSellerOrders();
+  }
+
+  function renderSellerOrders(){
+    const tbody = $("sellerOrdersTable");
+    const empty = $("sellerOrdersEmpty");
+
+    tbody.innerHTML = "";
+    empty.classList.toggle("hidden",sellerOrdersCache.length > 0);
+
+    if(!sellerOrdersCache.length) return;
+
+    sellerOrdersCache.forEach(order=>{
+      const shippingText = [
+        order.empresa_transporte,
+        order.codigo_seguimiento
+      ].filter(Boolean).join(" · ") || "Sin datos";
+
+      tbody.insertAdjacentHTML(
+        "beforeend",
+        `<tr>
+          <td><strong>#${escapeHtml(order.numero_pedido || String(order.id).slice(0,8))}</strong></td>
+          <td>${escapeHtml(order.nombre_receptor || order.telefono_receptor || "Comprador")}</td>
+          <td>${escapeHtml(formatMoney(order.total))}</td>
+          <td>${escapeHtml(order.estado_pago || "—")}</td>
+          <td>
+            <span class="order-status-pill ${
+              order.estado_pedido === "despachado" || order.estado_pedido === "entregado"
+                ? "sent"
+                : "pending"
+            }">
+              ${escapeHtml(order.estado_pedido || "pendiente")}
+            </span>
+          </td>
+          <td>${escapeHtml(shippingText)}</td>
+          <td>
+            <button
+              class="admin-action-button primary"
+              type="button"
+              data-manage-order="${escapeHtml(order.id)}"
+            >
+              Gestionar
+            </button>
+          </td>
+        </tr>`
+      );
+    });
+
+    document.querySelectorAll("[data-manage-order]").forEach(button=>{
+      button.addEventListener("click",()=>{
+        openSellerOrderModal(button.dataset.manageOrder);
+      });
+    });
+  }
+
+  function openSellerOrderModal(orderId){
+    editingSellerOrder = sellerOrdersCache.find(
+      order=>String(order.id) === String(orderId)
+    );
+
+    if(!editingSellerOrder) return;
+
+    $("sellerOrderModalTitle").textContent =
+      "Gestionar pedido #" + (editingSellerOrder.numero_pedido || String(editingSellerOrder.id).slice(0,8));
+
+    $("sellerOrderStatus").value = editingSellerOrder.estado_pedido || "pendiente";
+    $("sellerOrderShippingMethod").value = editingSellerOrder.metodo_envio || "";
+    $("sellerOrderCarrier").value = editingSellerOrder.empresa_transporte || "";
+    $("sellerOrderTrackingCode").value = editingSellerOrder.codigo_seguimiento || "";
+    $("sellerOrderTrackingLink").value = editingSellerOrder.link_seguimiento || "";
+    $("sellerOrderInternalNote").value = editingSellerOrder.nota_interna_vendedor || "";
+
+    clearMessage("sellerOrderMessage");
+    openModal($("sellerOrderModal"));
+  }
+
+  $("sellerOrderForm").addEventListener("submit",async event=>{
+    event.preventDefault();
+
+    if(!editingSellerOrder) return;
+
+    const button = $("saveSellerOrderButton");
+    button.disabled = true;
+    button.textContent = "Guardando...";
+    clearMessage("sellerOrderMessage");
+
+    try{
+      const newStatus = $("sellerOrderStatus").value;
+
+      const payload = {
+        estado_pedido:newStatus,
+        metodo_envio:$("sellerOrderShippingMethod").value || null,
+        empresa_transporte:$("sellerOrderCarrier").value.trim() || null,
+        codigo_seguimiento:$("sellerOrderTrackingCode").value.trim() || null,
+        link_seguimiento:$("sellerOrderTrackingLink").value.trim() || null,
+        nota_interna_vendedor:$("sellerOrderInternalNote").value.trim() || null
+      };
+
+      if(newStatus === "despachado" && !editingSellerOrder.fecha_envio){
+        payload.fecha_envio = new Date().toISOString();
+      }
+
+      if(newStatus === "entregado" && !editingSellerOrder.fecha_entrega){
+        payload.fecha_entrega = new Date().toISOString();
+      }
+
+      const updateResult = await db
+        .from("orders")
+        .update(payload)
+        .eq("id",editingSellerOrder.id)
+        .select("*")
+        .single();
+
+      if(updateResult.error) throw updateResult.error;
+
+      const historyResult = await db
+        .from("order_status_history")
+        .insert({
+          order_id:editingSellerOrder.id,
+          estado:newStatus,
+          cambiado_por:currentUser.id,
+          comentario:payload.nota_interna_vendedor
+        });
+
+      if(historyResult.error) console.warn(historyResult.error);
+
+      showMessage("sellerOrderMessage","Pedido actualizado correctamente.","success");
+
+      setTimeout(async()=>{
+        closeModal($("sellerOrderModal"));
+        await loadSellerOrders();
+      },300);
+    }catch(error){
+      console.error(error);
+      showMessage(
+        "sellerOrderMessage",
+        error.message || "No pudimos actualizar el pedido.",
+        "error"
+      );
+    }finally{
+      button.disabled = false;
+      button.textContent = "Guardar cambios";
+    }
+  });
+
+  $("refreshSellerOrdersButton").addEventListener("click",loadSellerOrders);
+  $("closeSellerOrderModalButton").addEventListener("click",()=>closeModal($("sellerOrderModal")));
+
   /* =====================================================
      PANEL DE MARCA
   ===================================================== */
@@ -8353,6 +9012,14 @@
           loadSellerProducts().catch(console.warn);
         }
 
+        if(attribute === "data-seller-page" && page === "pedidos"){
+          loadSellerOrders().catch(console.warn);
+        }
+
+        if(attribute === "data-seller-page" && page === "envios"){
+          loadShippingSettings().catch(console.warn);
+        }
+
         if(attribute === "data-admin-page" && page === "posicionamiento"){
           requestAnimationFrame(()=>{
             renderAdminPositioning();
@@ -8555,7 +9222,8 @@
     $("publicBrandModal"),
     $("publicProductModal"),
     $("publicCatalogModal"),
-    $("publicCategoriesModal")
+    $("publicCategoriesModal"),
+    $("sellerOrderModal")
   ].forEach(backgroundClose);
 </script>
 
