@@ -2034,6 +2034,266 @@
       .buy-actions{grid-template-columns:1fr}
     }
 
+  
+    /* =====================================================
+       ACTUALIZACIÓN: MERCADO PAGO, DEMO Y DISEÑOS DISTRIBUIDOS
+    ===================================================== */
+
+    .demo-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:6px 9px;
+      border-radius:100px;
+      background:#FFF1C7;
+      color:#7A5700;
+      font-size:8px;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+    }
+
+    .brand-card-logo{
+      width:58px;
+      height:58px;
+      border:1px solid rgba(0,0,0,.08);
+      border-radius:16px;
+      object-fit:cover;
+      background:#fff;
+      cursor:pointer;
+      transition:.2s;
+    }
+
+    .brand-card-logo:hover{
+      transform:scale(1.04);
+      box-shadow:0 8px 22px rgba(45,22,10,.12);
+    }
+
+    .store-visual-slot{
+      display:none;
+      overflow:hidden;
+      border-radius:var(--store-radius,18px);
+    }
+
+    .store-visual-slot.visible{display:block}
+
+    .store-visual-slot img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    #storeVisualTop{
+      height:320px;
+      margin-bottom:22px;
+    }
+
+    #storeVisualAfterHero{
+      width:42%;
+      height:230px;
+      margin:22px 0 22px auto;
+    }
+
+    #storeVisualBeforeProducts{
+      width:64%;
+      height:210px;
+      margin:20px auto;
+    }
+
+    #storeVisualBottom{
+      height:280px;
+      margin-top:28px;
+    }
+
+    .store-template-1 #storeVisualTop{
+      width:100%;
+      height:260px;
+    }
+
+    .store-template-1 #storeVisualAfterHero{
+      width:38%;
+      height:210px;
+    }
+
+    .store-template-2 #storeVisualTop{
+      display:none!important;
+    }
+
+    .store-template-2 #storeVisualAfterHero{
+      width:52%;
+      height:300px;
+      margin-left:0;
+    }
+
+    .store-template-2 #storeVisualBeforeProducts{
+      width:42%;
+      height:260px;
+      margin-right:0;
+    }
+
+    .store-template-3 #storeVisualTop{
+      width:72%;
+      height:230px;
+      margin-left:auto;
+    }
+
+    .store-template-3 #storeVisualAfterHero{
+      width:34%;
+      height:250px;
+      margin-left:0;
+    }
+
+    .store-template-3 #storeVisualBottom{
+      width:72%;
+      margin-left:auto;
+    }
+
+    .store-template-4 #storeVisualTop{
+      width:55%;
+      height:350px;
+    }
+
+    .store-template-4 #storeVisualAfterHero{
+      width:38%;
+      height:260px;
+      margin-top:-170px;
+      margin-right:4%;
+      position:relative;
+      z-index:2;
+    }
+
+    .store-template-4 #storeVisualBeforeProducts{
+      width:86%;
+      height:180px;
+    }
+
+    .payment-methods{
+      margin-top:16px;
+      display:grid;
+      gap:9px;
+    }
+
+    .payment-method{
+      min-height:50px;
+      padding:0 15px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:15px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:#fff;
+      font-size:11px;
+      font-weight:800;
+    }
+
+    .payment-method.selected{
+      border-color:#009EE3;
+      box-shadow:0 0 0 2px rgba(0,158,227,.12);
+    }
+
+    .mercado-pago-button{
+      width:100%;
+      min-height:52px;
+      margin-top:10px;
+      border:none;
+      border-radius:12px;
+      background:#009EE3;
+      color:#fff;
+      font-weight:900;
+    }
+
+    .whatsapp-payment-button{
+      width:100%;
+      min-height:52px;
+      margin-top:10px;
+      border:none;
+      border-radius:12px;
+      background:#25D366;
+      color:#fff;
+      font-weight:900;
+    }
+
+    .demo-payment-box{
+      margin-top:14px;
+      padding:14px;
+      border:1px dashed #D1A900;
+      border-radius:12px;
+      background:#FFF9DF;
+      color:#6A5400;
+      font-size:10px;
+      line-height:1.5;
+    }
+
+    .analytics-grid{
+      margin-top:18px;
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:12px;
+    }
+
+    .analytics-card{
+      padding:18px;
+      border:1px solid var(--border);
+      border-radius:15px;
+      background:#fff;
+    }
+
+    .analytics-card small{
+      display:block;
+      color:var(--gray);
+      font-size:9px;
+      font-weight:800;
+      text-transform:uppercase;
+    }
+
+    .analytics-card strong{
+      display:block;
+      margin-top:8px;
+      font-size:24px;
+    }
+
+    .analytics-card span{
+      display:block;
+      margin-top:5px;
+      color:var(--green);
+      font-size:9px;
+      font-weight:800;
+    }
+
+    .simple-table{
+      width:100%;
+      margin-top:18px;
+      border-collapse:collapse;
+      font-size:10px;
+    }
+
+    .simple-table th,
+    .simple-table td{
+      padding:12px 10px;
+      border-bottom:1px solid var(--border);
+      text-align:left;
+    }
+
+    .simple-table th{
+      color:var(--gray);
+      font-size:8px;
+      text-transform:uppercase;
+    }
+
+    @media(max-width:850px){
+      .analytics-grid{grid-template-columns:1fr 1fr}
+      #storeVisualAfterHero,
+      #storeVisualBeforeProducts,
+      #storeVisualBottom,
+      #storeVisualTop{
+        width:100%!important;
+        height:220px!important;
+        margin:18px 0!important;
+      }
+    }
+
   </style>
 </head>
 
@@ -2611,6 +2871,8 @@
     </header>
 
     <main class="public-page-body store-shell" id="publicStoreShell">
+      <div class="store-visual-slot" id="storeVisualTop"></div>
+
       <section class="brand-public-hero">
         <div>
           <img class="brand-logo-public hidden" id="publicBrandLogo" alt="Logo de la marca">
@@ -2623,14 +2885,18 @@
         <div class="brand-contact-list" id="publicBrandContacts"></div>
       </section>
 
-      <div class="brand-design-gallery hidden" id="publicBrandDesignGallery"></div>
+      <div class="store-visual-slot" id="storeVisualAfterHero"></div>
 
       <div class="results-toolbar">
         <strong>Productos de la marca</strong>
         <span id="publicBrandProductCount"></span>
       </div>
 
+      <div class="store-visual-slot" id="storeVisualBeforeProducts"></div>
+
       <div class="public-product-grid" id="publicBrandProducts"></div>
+
+      <div class="store-visual-slot" id="storeVisualBottom"></div>
       <div class="empty-state" id="publicBrandEmpty">
         <strong>Esta marca todavía no tiene productos activos</strong>
       </div>
@@ -2770,7 +3036,8 @@
       <button class="portal-nav" data-seller-page="opiniones">Opiniones</button>
       <button class="portal-nav" data-seller-page="publicidad">Publicidad</button>
       <button class="portal-nav" data-seller-page="suscripcion">Suscripción</button>
-      <button class="portal-nav" data-seller-page="finanzas">Finanzas</button>
+      <button class="portal-nav" data-seller-page="economico">Económico</button>
+      <button class="portal-nav" data-seller-page="financiero">Financiero</button>
       <button class="portal-nav" data-seller-page="configuracion">Configuración</button>
     </div>
 
@@ -2906,6 +3173,22 @@
               </div>
             </div>
 
+            <div class="editor-section">
+              <h3>Mercado Pago</h3>
+              <p>
+                Pegá el enlace de cobro o checkout de la cuenta de Mercado Pago de la marca.
+              </p>
+              <div class="form-group">
+                <label>Enlace de Mercado Pago</label>
+                <input
+                  class="form-control"
+                  id="storeMercadoPagoLink"
+                  type="url"
+                  placeholder="https://link.mercadopago.com.ar/tu-marca"
+                >
+              </div>
+            </div>
+
             <button class="submit-button" id="saveStoreDesignButton" type="submit">Guardar diseño</button>
             <div class="message" id="storeDesignMessage"></div>
           </form>
@@ -2918,7 +3201,67 @@
       <section class="portal-section" id="seller-opiniones"><div class="panel"><h3>Opiniones</h3><div class="empty-panel">Las opiniones aparecerán acá.</div></div></section>
       <section class="portal-section" id="seller-publicidad"><div class="panel"><h3>Publicidad</h3><div class="empty-panel">Acá administrarás contenido patrocinado.</div></div></section>
       <section class="portal-section" id="seller-suscripcion"><div class="panel"><h3>Suscripción</h3><div class="empty-panel">Acá conectaremos Mercado Pago.</div></div></section>
-      <section class="portal-section" id="seller-finanzas"><div class="panel"><h3>Finanzas</h3><div class="empty-panel">Ventas y comisiones aparecerán acá.</div></div></section>
+
+      <section class="portal-section" id="seller-economico">
+        <div class="panel">
+          <div class="panel-top">
+            <div>
+              <h3>Gestión económica</h3>
+              <p style="margin-top:5px;color:var(--gray);font-size:11px">
+                Rentabilidad, ventas, comisiones y comportamiento comercial.
+              </p>
+            </div>
+            <span class="demo-badge demo-only">Datos ficticios</span>
+          </div>
+
+          <div class="analytics-grid">
+            <div class="analytics-card"><small>Ventas del mes</small><strong>$1.284.500</strong><span>+18,4%</span></div>
+            <div class="analytics-card"><small>Ticket promedio</small><strong>$42.816</strong><span>+6,2%</span></div>
+            <div class="analytics-card"><small>Margen estimado</small><strong>37,5%</strong><span>+2,1 puntos</span></div>
+            <div class="analytics-card"><small>Comisión Amigate</small><strong>$12.845</strong><span>1% de ventas</span></div>
+          </div>
+
+          <table class="simple-table">
+            <thead><tr><th>Producto</th><th>Unidades</th><th>Facturación</th><th>Margen</th></tr></thead>
+            <tbody>
+              <tr><td>Remera Essential</td><td>12</td><td>$348.000</td><td>42%</td></tr>
+              <tr><td>Buzo Urban</td><td>7</td><td>$441.000</td><td>35%</td></tr>
+              <tr><td>Bolso Weekend</td><td>9</td><td>$315.000</td><td>38%</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="portal-section" id="seller-financiero">
+        <div class="panel">
+          <div class="panel-top">
+            <div>
+              <h3>Gestión financiera</h3>
+              <p style="margin-top:5px;color:var(--gray);font-size:11px">
+                Dinero cobrado, pendiente, disponible y movimientos de fondos.
+              </p>
+            </div>
+            <span class="demo-badge demo-only">Datos ficticios</span>
+          </div>
+
+          <div class="analytics-grid">
+            <div class="analytics-card"><small>Saldo disponible</small><strong>$734.200</strong><span>Listo para retirar</span></div>
+            <div class="analytics-card"><small>Pagos pendientes</small><strong>$126.500</strong><span>3 operaciones</span></div>
+            <div class="analytics-card"><small>Cobrado por Mercado Pago</small><strong>$923.400</strong><span>Este mes</span></div>
+            <div class="analytics-card"><small>Cobrado por otros medios</small><strong>$361.100</strong><span>Este mes</span></div>
+          </div>
+
+          <table class="simple-table">
+            <thead><tr><th>Fecha</th><th>Movimiento</th><th>Estado</th><th>Importe</th></tr></thead>
+            <tbody>
+              <tr><td>28/07/2026</td><td>Pedido #1048</td><td>Acreditado</td><td>$58.000</td></tr>
+              <tr><td>27/07/2026</td><td>Pedido #1047</td><td>Pendiente</td><td>$41.500</td></tr>
+              <tr><td>26/07/2026</td><td>Retiro a banco</td><td>Procesado</td><td>-$220.000</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
       <section class="portal-section" id="seller-configuracion"><div class="panel"><h3>Configuración</h3><div class="empty-panel">Envíos, apariencia y configuración.</div></div></section>
     </div>
   </main>
@@ -2946,9 +3289,27 @@
         <strong id="cartTotal">$0</strong>
       </div>
 
-      <button class="checkout-button" id="checkoutCartButton" type="button">
-        Finalizar compra por WhatsApp
+      <div class="payment-methods">
+        <button class="payment-method selected" id="selectMercadoPagoMethod" type="button">
+          <span>Mercado Pago</span><strong>Online</strong>
+        </button>
+
+        <button class="payment-method" id="selectWhatsappMethod" type="button">
+          <span>Coordinar por WhatsApp</span><strong>Directo</strong>
+        </button>
+      </div>
+
+      <button class="mercado-pago-button" id="checkoutMercadoPagoButton" type="button">
+        Pagar con Mercado Pago
       </button>
+
+      <button class="whatsapp-payment-button hidden" id="checkoutCartButton" type="button">
+        Finalizar por WhatsApp
+      </button>
+
+      <div class="demo-payment-box demo-only">
+        En modo demostración, Mercado Pago muestra el flujo sin realizar un cobro real.
+      </div>
     </div>
   </aside>
 </div>
@@ -2999,6 +3360,11 @@
   let publicQuantity = 1;
   let selectedStoreTemplate = 1;
   let cart = [];
+  let selectedCheckoutMethod = "mercadopago";
+
+  // Al escribir “saquemos todo lo ficticio”, este valor se cambia a false
+  // y se eliminan únicamente los datos de demostración.
+  const DEMO_MODE = true;
 
   const taxonomyCache = {
     loaded:false,
@@ -3451,6 +3817,146 @@
      CARGA DE MARCAS
   ===================================================== */
 
+
+  function demoImage(title,colorA,colorB){
+    const svg = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800">
+        <defs>
+          <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="${colorA}"/>
+            <stop offset="1" stop-color="${colorB}"/>
+          </linearGradient>
+        </defs>
+        <rect width="1200" height="800" fill="url(#g)"/>
+        <circle cx="920" cy="170" r="170" fill="rgba(255,255,255,.18)"/>
+        <circle cx="210" cy="660" r="230" fill="rgba(255,255,255,.12)"/>
+        <text x="70" y="420" fill="white" font-family="Arial" font-size="76" font-weight="700">${title}</text>
+      </svg>
+    `;
+
+    return "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svg);
+  }
+
+  function injectDemoData(provinceId){
+    if(!DEMO_MODE) return;
+
+    const demoBrands = [
+      {
+        id:"demo-brand-1",
+        seller_id:"demo-seller-1",
+        nombre:"Nómada Studio",
+        descripcion:"Indumentaria urbana y accesorios diseñados para todos los días.",
+        logo_url:demoImage("NS","#2d160a","#eb6841"),
+        portada_url:demoImage("Nómada Studio","#2d160a","#8f4c35"),
+        province_id:provinceId,
+        localidad:"Córdoba",
+        instagram:"nomada.demo",
+        whatsapp:"5493513417884",
+        email:"hola@nomada.demo",
+        template_number:2,
+        color_principal:"#8f4c35",
+        color_secundario:"#e8c6b6",
+        color_fondo:"#f7f1ed",
+        color_texto:"#2d160a",
+        color_botones:"#2d160a",
+        estado:"activa",
+        mercado_pago_link:""
+      },
+      {
+        id:"demo-brand-2",
+        seller_id:"demo-seller-2",
+        nombre:"Casa Luma",
+        descripcion:"Objetos, textiles y aromas para crear espacios cálidos.",
+        logo_url:demoImage("CL","#d79f83","#fff4ea"),
+        portada_url:demoImage("Casa Luma","#d79f83","#f3c8b4"),
+        province_id:provinceId,
+        localidad:"Villa Allende",
+        instagram:"casaluma.demo",
+        whatsapp:"5493513417884",
+        email:"tienda@casaluma.demo",
+        template_number:4,
+        color_principal:"#d79f83",
+        color_secundario:"#f3c8b4",
+        color_fondo:"#fffaf7",
+        color_texto:"#4b2c22",
+        color_botones:"#a95f47",
+        estado:"activa",
+        mercado_pago_link:""
+      }
+    ];
+
+    const demoProducts = [
+      {
+        id:"demo-product-1",
+        brand_id:"demo-brand-1",
+        category_id:4,
+        subcategory_id:7,
+        nombre:"Remera Essential",
+        descripcion:"Remera de algodón premium, corte relajado y terminaciones reforzadas.",
+        precio_anterior:36000,
+        precio_actual:29000,
+        activo:true
+      },
+      {
+        id:"demo-product-2",
+        brand_id:"demo-brand-1",
+        category_id:4,
+        subcategory_id:7,
+        nombre:"Buzo Urban",
+        descripcion:"Buzo amplio de frisa con capucha y bolsillo delantero.",
+        precio_anterior:72000,
+        precio_actual:63000,
+        activo:true
+      },
+      {
+        id:"demo-product-3",
+        brand_id:"demo-brand-2",
+        category_id:4,
+        subcategory_id:6,
+        nombre:"Vela Ámbar",
+        descripcion:"Vela aromática de cera vegetal con notas cálidas y especiadas.",
+        precio_anterior:18500,
+        precio_actual:14900,
+        activo:true
+      }
+    ];
+
+    const demoImages = [
+      {id:"demo-img-1",product_id:"demo-product-1",image_url:demoImage("Remera","#35302d","#a46751"),es_principal:true},
+      {id:"demo-img-2",product_id:"demo-product-2",image_url:demoImage("Buzo","#1e2329","#64798b"),es_principal:true},
+      {id:"demo-img-3",product_id:"demo-product-3",image_url:demoImage("Vela","#b66c49","#f1c28c"),es_principal:true}
+    ];
+
+    const demoFeatured = [
+      {id:"demo-featured-1",brand_id:"demo-brand-1",product_id:"demo-product-1",orden:1},
+      {id:"demo-featured-2",brand_id:"demo-brand-2",product_id:"demo-product-3",orden:1}
+    ];
+
+    demoBrands.forEach(item=>{
+      if(!publicBrandsCache.some(existing=>String(existing.id) === item.id)){
+        publicBrandsCache.push(item);
+      }
+    });
+
+    demoProducts.forEach(item=>{
+      if(!publicProductsCache.some(existing=>String(existing.id) === item.id)){
+        publicProductsCache.push(item);
+      }
+    });
+
+    demoImages.forEach(item=>{
+      if(!publicProductImagesCache.some(existing=>String(existing.id) === item.id)){
+        publicProductImagesCache.push(item);
+      }
+    });
+
+    demoFeatured.forEach(item=>{
+      if(!publicFeaturedCache.some(existing=>String(existing.id) === item.id)){
+        publicFeaturedCache.push(item);
+      }
+    });
+  }
+
   async function loadBrandsForProvince(){
     $("brandLoader").classList.add("visible");
     $("brandGrid").innerHTML = "";
@@ -3482,6 +3988,8 @@
       publicProductImagesCache = imagesResult.data || [];
       publicFeaturedCache = featuredResult.data || [];
 
+      injectDemoData(selectedProvince?.databaseId);
+
       const shippingRows = shippingResult.data || [];
       const provinceId = selectedProvince?.databaseId;
 
@@ -3496,7 +4004,12 @@
             String(row.province_id) === String(provinceId);
         });
 
-        return locatedThere || shipsThere;
+        const isDemoHere =
+          DEMO_MODE &&
+          String(brand.id).startsWith("demo-brand-") &&
+          String(brand.province_id) === String(provinceId);
+
+        return locatedThere || shipsThere || isDemoHere;
       });
 
       let filteredProducts = publicProductsCache.slice();
@@ -3660,7 +4173,19 @@
 
       card.innerHTML = `
         <div class="brand-card-cover">
-          ${escapeHtml(name.substring(0,2).toUpperCase())}
+          ${brand.logo_url
+            ? `<img
+                class="brand-card-logo"
+                src="${escapeHtml(brand.logo_url)}"
+                alt="${escapeHtml(name)}"
+                data-public-brand="${escapeHtml(brand.id)}"
+              >`
+            : `<button
+                class="brand-card-logo"
+                data-public-brand="${escapeHtml(brand.id)}"
+                type="button"
+              >${escapeHtml(name.substring(0,2).toUpperCase())}</button>`
+          }
         </div>
 
         <div class="brand-card-body">
@@ -3778,18 +4303,36 @@
       logo.classList.add("hidden");
     }
 
-    const designImages = await loadBrandDesignImages(brand.id);
-    const gallery = $("publicBrandDesignGallery");
-    gallery.innerHTML = "";
+    let designImages = await loadBrandDesignImages(brand.id);
 
-    designImages.forEach(image=>{
-      gallery.insertAdjacentHTML(
-        "beforeend",
-        `<img src="${escapeHtml(image.image_url)}" alt="Imagen de ${escapeHtml(brand.nombre)}">`
-      );
+    if(DEMO_MODE && String(brand.id).startsWith("demo-brand-") && !designImages.length){
+      designImages = [
+        {slot:1,image_url:demoImage("Colección","#2d160a","#8f4c35")},
+        {slot:2,image_url:demoImage("Detalles","#8f4c35","#e8c6b6")},
+        {slot:3,image_url:demoImage("Diseño","#d79f83","#fff4ea")},
+        {slot:4,image_url:demoImage("Nueva temporada","#3d2b25","#bc7e68")}
+      ];
+    }
+
+    const visualSlots = {
+      1:$("storeVisualTop"),
+      2:$("storeVisualAfterHero"),
+      3:$("storeVisualBeforeProducts"),
+      4:$("storeVisualBottom")
+    };
+
+    Object.values(visualSlots).forEach(slot=>{
+      slot.innerHTML = "";
+      slot.classList.remove("visible");
     });
 
-    gallery.classList.toggle("hidden",designImages.length === 0);
+    designImages.forEach(image=>{
+      const target = visualSlots[Number(image.slot)];
+      if(!target) return;
+
+      target.innerHTML = `<img src="${escapeHtml(image.image_url)}" alt="Imagen de ${escapeHtml(brand.nombre)}">`;
+      target.classList.add("visible");
+    });
 
     const contacts = [];
     const whatsappValue = brand.whatsapp || brand.telefono;
@@ -3972,6 +4515,20 @@
 
     activePublicVariants = variantsResult.data || [];
     activePublicColors = colorsResult.data || [];
+
+    if(DEMO_MODE && String(product.id).startsWith("demo-product-")){
+      activePublicColors = [
+        {id:"demo-color-black",nombre:"Negro",activo:true},
+        {id:"demo-color-white",nombre:"Blanco",activo:true}
+      ];
+
+      activePublicVariants = [
+        {id:product.id+"-n-s",product_id:product.id,color_id:"demo-color-black",talle:"S",precio_anterior:product.precio_anterior,precio:product.precio_actual,stock:5,activo:true},
+        {id:product.id+"-n-m",product_id:product.id,color_id:"demo-color-black",talle:"M",precio_anterior:product.precio_anterior,precio:product.precio_actual,stock:8,activo:true},
+        {id:product.id+"-b-m",product_id:product.id,color_id:"demo-color-white",talle:"M",precio_anterior:product.precio_anterior,precio:product.precio_actual,stock:3,activo:true},
+        {id:product.id+"-b-l",product_id:product.id,color_id:"demo-color-white",talle:"L",precio_anterior:product.precio_anterior,precio:product.precio_actual,stock:4,activo:true}
+      ];
+    }
 
     const image = productImage(product.id);
 
@@ -5650,6 +6207,56 @@
     if(event.target === $("cartDrawer")) $("cartDrawer").classList.remove("visible");
   });
 
+
+  function updateCheckoutMethodUI(){
+    $("selectMercadoPagoMethod").classList.toggle("selected",selectedCheckoutMethod === "mercadopago");
+    $("selectWhatsappMethod").classList.toggle("selected",selectedCheckoutMethod === "whatsapp");
+    $("checkoutMercadoPagoButton").classList.toggle("hidden",selectedCheckoutMethod !== "mercadopago");
+    $("checkoutCartButton").classList.toggle("hidden",selectedCheckoutMethod !== "whatsapp");
+  }
+
+  $("selectMercadoPagoMethod").addEventListener("click",()=>{
+    selectedCheckoutMethod = "mercadopago";
+    updateCheckoutMethodUI();
+  });
+
+  $("selectWhatsappMethod").addEventListener("click",()=>{
+    selectedCheckoutMethod = "whatsapp";
+    updateCheckoutMethodUI();
+  });
+
+  $("checkoutMercadoPagoButton").addEventListener("click",()=>{
+    if(!cart.length) return;
+
+    const brandIds = [...new Set(cart.map(item=>item.brand_id))];
+
+    if(brandIds.length > 1){
+      alert("Para pagar con Mercado Pago, el carrito debe contener productos de una sola marca.");
+      return;
+    }
+
+    const brand = publicBrandsCache.find(item=>String(item.id) === String(brandIds[0]));
+
+    if(DEMO_MODE && String(brand?.id || "").startsWith("demo-brand-")){
+      alert(
+        "MODO DEMOSTRACIÓN\n\n" +
+        "Se abriría Mercado Pago con el total de " +
+        formatMoney(cart.reduce((sum,item)=>sum + item.precio * item.cantidad,0)) +
+        ".\n\nNo se realizará ningún cobro real."
+      );
+      return;
+    }
+
+    if(!brand?.mercado_pago_link){
+      alert("Esta marca todavía no configuró su enlace de Mercado Pago.");
+      return;
+    }
+
+    window.open(brand.mercado_pago_link,"_blank","noopener");
+  });
+
+  updateCheckoutMethodUI();
+
   $("checkoutCartButton").addEventListener("click",()=>{
     if(!cart.length) return;
 
@@ -5719,6 +6326,7 @@
     $("storeColorBackground").value = currentBrand.color_fondo || "#fffaf7";
     $("storeColorText").value = currentBrand.color_texto || "#2d160a";
     $("storeColorButton").value = currentBrand.color_botones || "#2d160a";
+    $("storeMercadoPagoLink").value = currentBrand.mercado_pago_link || "";
   }
 
   async function uploadBrandAsset(bucket,file,path){
@@ -5780,6 +6388,7 @@
           color_fondo:$("storeColorBackground").value,
           color_texto:$("storeColorText").value,
           color_botones:$("storeColorButton").value,
+          mercado_pago_link:$("storeMercadoPagoLink").value.trim() || null,
           updated_at:new Date().toISOString()
         })
         .eq("id",currentBrand.id)
@@ -5819,6 +6428,10 @@
       button.disabled = false;
       button.textContent = "Guardar diseño";
     }
+  });
+
+  document.querySelectorAll(".demo-only").forEach(element=>{
+    element.classList.toggle("hidden",!DEMO_MODE);
   });
 
   loadCart();
