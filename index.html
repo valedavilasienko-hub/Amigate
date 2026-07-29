@@ -1648,7 +1648,7 @@
 
     <h2 id="productModalTitle">Agregar producto</h2>
     <p class="modal-description">
-      Completá la información principal y agregá variantes cuando el precio o el stock cambien por talle o color.
+      Cargá el producto de forma simple. Los tamaños y colores se separan con comas, como en Amorina.
     </p>
 
     <form id="productForm">
@@ -1708,63 +1708,45 @@
       </label>
 
       <div class="draft-builder">
-        <h4>Colores</h4>
-        <p>Agregá los colores disponibles. Podés dejar esta sección vacía.</p>
-
-        <div class="inline-builder">
-          <div class="compact-field">
-            <label>Nombre</label>
-            <input id="draftColorName" placeholder="Ej.: Negro">
-          </div>
-
-          <div class="compact-field">
-            <label>Color</label>
-            <input id="draftColorHex" type="color" value="#000000">
-          </div>
-
-          <button class="add-draft-button" id="addColorButton" type="button">Agregar</button>
-        </div>
-
-        <div class="draft-list" id="draftColorsList"></div>
-      </div>
-
-      <div class="draft-builder">
-        <h4>Variantes</h4>
+        <h4>Opciones del producto</h4>
         <p>
-          Usá variantes cuando existan talles, colores, precios o stocks diferentes.
-          Cada combinación se guarda por separado.
+          Escribí cada opción separada por una coma. Ejemplo:
+          <strong>Chico, Mediano, Grande</strong>.
         </p>
 
-        <div class="variant-builder">
-          <div class="compact-field">
-            <label>Color</label>
-            <select id="draftVariantColor"><option value="">Sin color</option></select>
-          </div>
-
-          <div class="compact-field">
-            <label>Talle</label>
-            <input id="draftVariantSize" placeholder="Ej.: M">
-          </div>
-
-          <div class="compact-field">
-            <label>Precio</label>
-            <input id="draftVariantPrice" type="number" min="0" step="0.01">
-          </div>
-
-          <div class="compact-field">
-            <label>Stock</label>
-            <input id="draftVariantStock" type="number" min="0" step="1">
-          </div>
-
-          <div class="compact-field">
-            <label>SKU</label>
-            <input id="draftVariantSku" placeholder="Opcional">
-          </div>
-
-          <button class="add-draft-button" id="addVariantButton" type="button">Agregar</button>
+        <div class="form-group">
+          <label>Tamaños disponibles</label>
+          <input
+            class="form-control"
+            id="productSizesCsv"
+            placeholder="Chico, Mediano, Grande"
+          >
         </div>
 
-        <div class="variant-list" id="draftVariantsList"></div>
+        <div class="form-group">
+          <label>Colores disponibles</label>
+          <input
+            class="form-control"
+            id="productColorsCsv"
+            placeholder="Negro, Blanco, Azul"
+          >
+        </div>
+
+        <button
+          class="secondary-button"
+          id="generateOptionsButton"
+          type="button"
+          style="width:100%;margin-top:14px"
+        >
+          Generar opciones
+        </button>
+
+        <p class="image-help">
+          Se crearán automáticamente todas las combinaciones de tamaño y color.
+          Después podés cambiar el precio y el stock de cada una.
+        </p>
+
+        <div class="variant-list" id="generatedOptionsList"></div>
       </div>
 
       <div class="form-group">
@@ -3321,124 +3303,164 @@
     populateProductTypes();
   });
 
-  function renderProductDrafts(){
-    const colorsList = $("draftColorsList");
-    const variantColorSelect = $("draftVariantColor");
+  function parseCommaOptions(value){
+    return [...new Set(
+      String(value || "")
+        .split(",")
+        .map(item=>item.trim())
+        .filter(Boolean)
+    )];
+  }
 
-    colorsList.innerHTML = "";
-    variantColorSelect.innerHTML = '<option value="">Sin color</option>';
+  function variantKey(colorName,size){
+    return `${normalizeText(colorName || "")}|${normalizeText(size || "")}`;
+  }
 
-    productColorsDraft.forEach(color=>{
-      colorsList.insertAdjacentHTML(
-        "beforeend",
-        `<div class="draft-chip">
-          <span class="color-dot" style="background:${escapeHtml(color.color_hex || "#ffffff")}"></span>
-          <span>${escapeHtml(color.nombre)}</span>
-          <button class="draft-remove" type="button" data-remove-color="${escapeHtml(color.localId)}">×</button>
-        </div>`
-      );
+  function generateProductOptions(){
+    const sizes = parseCommaOptions($("productSizesCsv").value);
+    const colors = parseCommaOptions($("productColorsCsv").value);
+    const generalPrice = Number($("productCurrentPrice").value || 0);
 
-      variantColorSelect.insertAdjacentHTML(
-        "beforeend",
-        `<option value="${escapeHtml(color.localId)}">${escapeHtml(color.nombre)}</option>`
-      );
-    });
+    const effectiveSizes = sizes.length ? sizes : [null];
+    const effectiveColors = colors.length ? colors : [null];
 
-    document.querySelectorAll("[data-remove-color]").forEach(button=>{
-      button.addEventListener("click",()=>{
-        const localId = button.dataset.removeColor;
-
-        productColorsDraft = productColorsDraft.filter(color=>color.localId !== localId);
-        productVariantsDraft = productVariantsDraft.filter(variant=>variant.colorLocalId !== localId);
-
-        renderProductDrafts();
-      });
-    });
-
-    const variantsList = $("draftVariantsList");
-    variantsList.innerHTML = "";
+    const previousVariants = new Map();
 
     productVariantsDraft.forEach(variant=>{
       const color = productColorsDraft.find(item=>item.localId === variant.colorLocalId);
+      previousVariants.set(
+        variantKey(color?.nombre || null,variant.talle || null),
+        variant
+      );
+    });
 
-      variantsList.insertAdjacentHTML(
+    productColorsDraft = colors.map(name=>{
+      const previousColor = productColorsDraft.find(
+        color=>normalizeText(color.nombre) === normalizeText(name)
+      );
+
+      return previousColor || {
+        localId:crypto.randomUUID(),
+        nombre:name,
+        color_hex:null,
+        activo:true
+      };
+    });
+
+    productVariantsDraft = [];
+
+    effectiveColors.forEach(colorName=>{
+      effectiveSizes.forEach(size=>{
+        if(!colorName && !size) return;
+
+        const previous = previousVariants.get(variantKey(colorName,size));
+        const color = colorName
+          ? productColorsDraft.find(
+              item=>normalizeText(item.nombre) === normalizeText(colorName)
+            )
+          : null;
+
+        productVariantsDraft.push({
+          localId:previous?.localId || crypto.randomUUID(),
+          colorLocalId:color?.localId || null,
+          talle:size,
+          precio:previous?.precio ?? (generalPrice || null),
+          stock:previous?.stock ?? null,
+          sku:previous?.sku || null,
+          activo:true
+        });
+      });
+    });
+
+    renderGeneratedOptions();
+  }
+
+  function renderGeneratedOptions(){
+    const container = $("generatedOptionsList");
+    container.innerHTML = "";
+
+    if(!productVariantsDraft.length){
+      container.innerHTML = `
+        <div class="empty-panel" style="margin-top:12px">
+          Escribí tamaños o colores y tocá “Generar opciones”.
+        </div>
+      `;
+      return;
+    }
+
+    productVariantsDraft.forEach((variant,index)=>{
+      const color = productColorsDraft.find(
+        item=>item.localId === variant.colorLocalId
+      );
+
+      container.insertAdjacentHTML(
         "beforeend",
-        `<div class="variant-row">
-          <span><strong>${escapeHtml(color?.nombre || "Sin color")}</strong></span>
-          <span>Talle: ${escapeHtml(variant.talle || "—")}</span>
-          <span>${variant.precio !== null ? escapeHtml(formatMoney(variant.precio)) : "Precio general"}</span>
-          <span>Stock: ${variant.stock ?? "—"}</span>
-          <span>SKU: ${escapeHtml(variant.sku || "—")}</span>
-          <button class="draft-remove" type="button" data-remove-variant="${escapeHtml(variant.localId)}">×</button>
+        `<div class="variant-row" style="grid-template-columns:1.1fr 1.1fr 1fr 1fr auto">
+          <span>
+            <strong>${escapeHtml(variant.talle || "Sin tamaño")}</strong>
+          </span>
+
+          <span>${escapeHtml(color?.nombre || "Sin color")}</span>
+
+          <label class="compact-field">
+            <span style="display:block;margin-bottom:4px;font-size:8px;font-weight:800">Precio</span>
+            <input
+              type="number"
+              min="0"
+              step="0.01"
+              value="${variant.precio ?? ""}"
+              data-option-price="${index}"
+            >
+          </label>
+
+          <label class="compact-field">
+            <span style="display:block;margin-bottom:4px;font-size:8px;font-weight:800">Stock</span>
+            <input
+              type="number"
+              min="0"
+              step="1"
+              value="${variant.stock ?? ""}"
+              data-option-stock="${index}"
+            >
+          </label>
+
+          <button
+            class="draft-remove"
+            type="button"
+            data-remove-option="${index}"
+          >×</button>
         </div>`
       );
     });
 
-    document.querySelectorAll("[data-remove-variant]").forEach(button=>{
-      button.addEventListener("click",()=>{
-        productVariantsDraft = productVariantsDraft.filter(
-          variant=>variant.localId !== button.dataset.removeVariant
-        );
+    document.querySelectorAll("[data-option-price]").forEach(input=>{
+      input.addEventListener("input",()=>{
+        const index = Number(input.dataset.optionPrice);
+        productVariantsDraft[index].precio =
+          input.value === "" ? null : Number(input.value);
+      });
+    });
 
-        renderProductDrafts();
+    document.querySelectorAll("[data-option-stock]").forEach(input=>{
+      input.addEventListener("input",()=>{
+        const index = Number(input.dataset.optionStock);
+        productVariantsDraft[index].stock =
+          input.value === "" ? null : Number(input.value);
+      });
+    });
+
+    document.querySelectorAll("[data-remove-option]").forEach(button=>{
+      button.addEventListener("click",()=>{
+        const index = Number(button.dataset.removeOption);
+        productVariantsDraft.splice(index,1);
+        renderGeneratedOptions();
       });
     });
   }
 
-  $("addColorButton").addEventListener("click",()=>{
-    const name = $("draftColorName").value.trim();
-    const hex = $("draftColorHex").value;
-
-    if(!name){
-      showMessage("productMessage","Escribí el nombre del color.","error");
-      return;
-    }
-
-    productColorsDraft.push({
-      localId:crypto.randomUUID(),
-      nombre:name,
-      color_hex:hex,
-      activo:true
-    });
-
-    $("draftColorName").value = "";
+  $("generateOptionsButton").addEventListener("click",()=>{
     clearMessage("productMessage");
-    renderProductDrafts();
-  });
-
-  $("addVariantButton").addEventListener("click",()=>{
-    const colorLocalId = $("draftVariantColor").value || null;
-    const talle = $("draftVariantSize").value.trim() || null;
-    const priceValue = $("draftVariantPrice").value;
-    const stockValue = $("draftVariantStock").value;
-    const sku = $("draftVariantSku").value.trim() || null;
-
-    if(!colorLocalId && !talle){
-      showMessage(
-        "productMessage",
-        "La variante debe tener al menos un color o un talle.",
-        "error"
-      );
-      return;
-    }
-
-    productVariantsDraft.push({
-      localId:crypto.randomUUID(),
-      colorLocalId,
-      talle,
-      precio:priceValue === "" ? null : Number(priceValue),
-      stock:stockValue === "" ? null : Number(stockValue),
-      sku,
-      activo:true
-    });
-
-    $("draftVariantSize").value = "";
-    $("draftVariantPrice").value = "";
-    $("draftVariantStock").value = "";
-    $("draftVariantSku").value = "";
-
-    clearMessage("productMessage");
-    renderProductDrafts();
+    generateProductOptions();
   });
 
   async function openProductModal(productId=null){
@@ -3468,6 +3490,8 @@
       productVariantsDraft = [];
 
       $("productForm").reset();
+      $("productSizesCsv").value = "";
+      $("productColorsCsv").value = "";
       $("productControlsStock").checked = true;
       $("productActive").checked = true;
       $("productImagesInput").value = "";
@@ -3500,6 +3524,16 @@
           colorLocalId:variant.color_id
         }));
 
+        const sizes = [...new Set(
+          productVariantsDraft.map(variant=>variant.talle).filter(Boolean)
+        )];
+
+        $("productSizesCsv").value = sizes.join(", ");
+        $("productColorsCsv").value = productColorsDraft
+          .map(color=>color.nombre)
+          .filter(Boolean)
+          .join(", ");
+
         $("productName").value = editingProduct.nombre || "";
         $("productDescription").value = editingProduct.descripcion || "";
         $("productOldPrice").value = editingProduct.precio_anterior ?? "";
@@ -3520,7 +3554,7 @@
         $("productType").value = editingProduct.category_type_id || "";
       }
 
-      renderProductDrafts();
+      renderGeneratedOptions();
     }catch(error){
       console.error("No se pudo abrir el formulario de producto:",error);
 
@@ -3680,6 +3714,14 @@
     clearMessage("productMessage");
 
     try{
+      const hasWrittenOptions =
+        $("productSizesCsv").value.trim() ||
+        $("productColorsCsv").value.trim();
+
+      if(hasWrittenOptions && productVariantsDraft.length === 0){
+        generateProductOptions();
+      }
+
       const categoryId = Number($("productCategory").value);
       const subcategoryId = Number($("productSubcategory").value);
       const typeValue = $("productType").value;
