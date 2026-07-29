@@ -1541,6 +1541,7 @@
     }
 
     .public-full-modal{
+      z-index:9800;
       align-items:stretch;
       justify-content:stretch;
       padding:0;
@@ -5074,6 +5075,8 @@
 
       const card = document.createElement("article");
       card.className = "brand-card";
+      card.dataset.openBrandCard = brand.id;
+      card.style.cursor = "pointer";
 
       card.innerHTML = `
         <div class="brand-card-cover">
@@ -5127,13 +5130,23 @@
     });
 
     document.querySelectorAll("[data-public-brand]").forEach(button=>{
-      button.addEventListener("click",()=>{
+      button.addEventListener("click",event=>{
+        event.preventDefault();
+        event.stopPropagation();
         openPublicBrand(button.dataset.publicBrand);
+      });
+    });
+
+    document.querySelectorAll("[data-open-brand-card]").forEach(card=>{
+      card.addEventListener("click",event=>{
+        if(event.target.closest("[data-public-product]")) return;
+        openPublicBrand(card.dataset.openBrandCard);
       });
     });
 
     document.querySelectorAll("[data-public-product]").forEach(card=>{
       card.addEventListener("click",event=>{
+        event.preventDefault();
         event.stopPropagation();
         openPublicProduct(card.dataset.publicProduct);
       });
@@ -5182,89 +5195,113 @@
 
   async function openPublicBrand(brandId){
     const brand = publicBrandsCache.find(item=>String(item.id) === String(brandId));
-    if(!brand) return;
 
-    activePublicBrand = brand;
-    applyPublicStoreTheme(brand);
-
-    $("publicCatalogShell").className = $("publicStoreShell").className;
-    $("publicCategoriesShell").className = $("publicStoreShell").className;
-
-    const cover = $("publicStoreCover");
-
-    cover.style.backgroundImage = brand.portada_url
-      ? `url("${brand.portada_url}")`
-      : `linear-gradient(135deg,${brand.color_principal || "#2d160a"},${brand.color_secundario || "#eb6841"})`;
-
-    const logo = $("publicBrandLogo");
-
-    if(brand.logo_url){
-      logo.src = brand.logo_url;
-      logo.classList.remove("hidden");
-    }else{
-      logo.classList.add("hidden");
+    if(!brand){
+      alert("No pudimos encontrar esta marca.");
+      return;
     }
 
-    const showText = brand.mostrar_texto_portada !== false;
+    // Cerrar paneles o modales que puedan estar tapando la tienda.
+    closeModal($("accountModal"));
+    $("adminPortal")?.classList.remove("visible");
+    $("sellerPortal")?.classList.remove("visible");
+    $("buyerPortal")?.classList.remove("visible");
 
-    $("publicBrandName").textContent = showText
-      ? (brand.portada_titulo || brand.nombre || "Marca")
-      : "";
-
-    $("publicBrandDescription").textContent = showText
-      ? (brand.portada_texto || brand.descripcion || "")
-      : "";
-
-    $("publicCatalogBrandName").textContent = brand.nombre || "Catálogo";
-    $("publicCategoriesBrandName").textContent = brand.nombre || "Categorías";
-
-    activeBrandProducts = publicProductsCache.filter(product=>{
-      return String(product.brand_id) === String(brand.id) && product.activo !== false;
-    });
-
-    const featuredIds = publicFeaturedCache
-      .filter(row=>String(row.brand_id) === String(brand.id))
-      .sort((a,b)=>Number(a.orden || 0)-Number(b.orden || 0))
-      .map(row=>String(row.product_id));
-
-    activeBrandFeaturedProducts = featuredIds
-      .map(id=>activeBrandProducts.find(product=>String(product.id) === id))
-      .filter(Boolean);
-
-    renderPublicFeaturedProducts();
-    renderBrandCategories();
-
-    let designImages = await loadBrandDesignImages(brand.id);
-
-    if(DEMO_MODE && String(brand.id).startsWith("demo-brand-") && !designImages.length){
-      designImages = [
-        {slot:2,image_url:demoImage("Historia de marca","#8f4c35","#e8c6b6")},
-        {slot:4,image_url:demoImage("Nueva temporada","#3d2b25","#bc7e68")}
-      ];
-    }
-
-    const afterHero = $("storeVisualAfterHero");
-    const bottom = $("storeVisualBottom");
-
-    [afterHero,bottom].forEach(slot=>{
-      slot.innerHTML = "";
-      slot.classList.remove("visible");
-    });
-
-    const afterImage = designImages.find(item=>Number(item.slot) === 2);
-    const bottomImage = designImages.find(item=>Number(item.slot) === 4);
-
-    if(afterImage){
-      afterHero.innerHTML = `<img src="${escapeHtml(afterImage.image_url)}" alt="Imagen de la marca">`;
-      afterHero.classList.add("visible");
-    }
-
-    if(bottomImage){
-      bottom.innerHTML = `<img src="${escapeHtml(bottomImage.image_url)}" alt="Imagen de la marca">`;
-      bottom.classList.add("visible");
-    }
-
+    // Abrir primero la pantalla para que el usuario vea una respuesta inmediata.
     openModal($("publicBrandModal"));
+
+    try{
+      const brand = publicBrandsCache.find(item=>String(item.id) === String(brandId));
+          if(!brand) return;
+
+          activePublicBrand = brand;
+          applyPublicStoreTheme(brand);
+
+          $("publicCatalogShell").className = $("publicStoreShell").className;
+          $("publicCategoriesShell").className = $("publicStoreShell").className;
+
+          const cover = $("publicStoreCover");
+
+          cover.style.backgroundImage = brand.portada_url
+            ? `url("${brand.portada_url}")`
+            : `linear-gradient(135deg,${brand.color_principal || "#2d160a"},${brand.color_secundario || "#eb6841"})`;
+
+          const logo = $("publicBrandLogo");
+
+          if(brand.logo_url){
+            logo.src = brand.logo_url;
+            logo.classList.remove("hidden");
+          }else{
+            logo.classList.add("hidden");
+          }
+
+          const showText = brand.mostrar_texto_portada !== false;
+
+          $("publicBrandName").textContent = showText
+            ? (brand.portada_titulo || brand.nombre || "Marca")
+            : "";
+
+          $("publicBrandDescription").textContent = showText
+            ? (brand.portada_texto || brand.descripcion || "")
+            : "";
+
+          $("publicCatalogBrandName").textContent = brand.nombre || "Catálogo";
+          $("publicCategoriesBrandName").textContent = brand.nombre || "Categorías";
+
+          activeBrandProducts = publicProductsCache.filter(product=>{
+            return String(product.brand_id) === String(brand.id) && product.activo !== false;
+          });
+
+          const featuredIds = publicFeaturedCache
+            .filter(row=>String(row.brand_id) === String(brand.id))
+            .sort((a,b)=>Number(a.orden || 0)-Number(b.orden || 0))
+            .map(row=>String(row.product_id));
+
+          activeBrandFeaturedProducts = featuredIds
+            .map(id=>activeBrandProducts.find(product=>String(product.id) === id))
+            .filter(Boolean);
+
+          renderPublicFeaturedProducts();
+          renderBrandCategories();
+
+          let designImages = await loadBrandDesignImages(brand.id);
+
+          if(DEMO_MODE && String(brand.id).startsWith("demo-brand-") && !designImages.length){
+            designImages = [
+              {slot:2,image_url:demoImage("Historia de marca","#8f4c35","#e8c6b6")},
+              {slot:4,image_url:demoImage("Nueva temporada","#3d2b25","#bc7e68")}
+            ];
+          }
+
+          const afterHero = $("storeVisualAfterHero");
+          const bottom = $("storeVisualBottom");
+
+          [afterHero,bottom].forEach(slot=>{
+            slot.innerHTML = "";
+            slot.classList.remove("visible");
+          });
+
+          const afterImage = designImages.find(item=>Number(item.slot) === 2);
+          const bottomImage = designImages.find(item=>Number(item.slot) === 4);
+
+          if(afterImage){
+            afterHero.innerHTML = `<img src="${escapeHtml(afterImage.image_url)}" alt="Imagen de la marca">`;
+            afterHero.classList.add("visible");
+          }
+
+          if(bottomImage){
+            bottom.innerHTML = `<img src="${escapeHtml(bottomImage.image_url)}" alt="Imagen de la marca">`;
+            bottom.classList.add("visible");
+          }
+    }catch(error){
+      console.error("No se pudo abrir la tienda:",error);
+
+      $("publicBrandName").textContent = brand.nombre || "Marca";
+      $("publicBrandDescription").textContent =
+        "No pudimos cargar toda la información de esta tienda. Recargá la página e intentá nuevamente.";
+
+      alert("No pudimos cargar la tienda: " + (error.message || "error desconocido"));
+    }
   }
 
 
@@ -6376,6 +6413,13 @@
               >
                 ${brand.verificada ? "Quitar verificación" : "Verificar"}
               </button>
+
+              <button
+                class="admin-action-button"
+                data-admin-open-store="${escapeHtml(brand.id)}"
+              >
+                Ver tienda
+              </button>
             </div>
           </td>
         </tr>`
@@ -6388,6 +6432,22 @@
           button.dataset.adminBrandStatus,
           {estado:button.dataset.nextStatus}
         );
+      });
+    });
+
+    document.querySelectorAll("[data-admin-open-store]").forEach(button=>{
+      button.addEventListener("click",()=>{
+        const brandId = button.dataset.adminOpenStore;
+
+        if(!publicBrandsCache.some(item=>String(item.id) === String(brandId))){
+          const adminBrand = adminData.brands.find(
+            item=>String(item.id) === String(brandId)
+          );
+
+          if(adminBrand) publicBrandsCache.push(adminBrand);
+        }
+
+        openPublicBrand(brandId);
       });
     });
 
