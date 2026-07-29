@@ -2460,6 +2460,144 @@
       }
     }
 
+  
+    /* =====================================================
+       PANEL ADMINISTRADOR
+    ===================================================== */
+
+    .admin-table-wrap{
+      margin-top:18px;
+      overflow:auto;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+    }
+
+    .admin-table{
+      width:100%;
+      min-width:760px;
+      border-collapse:collapse;
+      font-size:10px;
+    }
+
+    .admin-table th,
+    .admin-table td{
+      padding:12px;
+      border-bottom:1px solid var(--border);
+      text-align:left;
+      vertical-align:middle;
+    }
+
+    .admin-table th{
+      background:#f8f4f1;
+      color:var(--gray);
+      font-size:8px;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+    }
+
+    .admin-table tr:last-child td{border-bottom:none}
+
+    .admin-status{
+      display:inline-flex;
+      padding:5px 8px;
+      border-radius:100px;
+      background:#eaf7f1;
+      color:var(--green);
+      font-size:8px;
+      font-weight:900;
+      text-transform:uppercase;
+    }
+
+    .admin-status.inactive{
+      background:#f4efec;
+      color:var(--gray);
+    }
+
+    .admin-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px;
+    }
+
+    .admin-action-button{
+      min-height:34px;
+      padding:0 10px;
+      border:1px solid var(--border);
+      border-radius:8px;
+      background:#fff;
+      font-size:9px;
+      font-weight:800;
+    }
+
+    .admin-action-button.primary{
+      border-color:var(--dark);
+      background:var(--dark);
+      color:#fff;
+    }
+
+    .admin-action-button.danger{
+      color:var(--red);
+    }
+
+    .admin-search-row{
+      margin-top:16px;
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:9px;
+    }
+
+    .admin-search-row input{
+      min-height:42px;
+      padding:0 12px;
+      border:1px solid var(--border);
+      border-radius:10px;
+      outline:none;
+    }
+
+    .admin-empty{
+      padding:28px;
+      color:var(--gray);
+      text-align:center;
+      font-size:11px;
+    }
+
+    .admin-kpi-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:12px;
+    }
+
+    .admin-kpi{
+      padding:18px;
+      border:1px solid var(--border);
+      border-radius:15px;
+      background:#fff;
+    }
+
+    .admin-kpi small{
+      display:block;
+      color:var(--gray);
+      font-size:9px;
+      font-weight:800;
+      text-transform:uppercase;
+    }
+
+    .admin-kpi strong{
+      display:block;
+      margin-top:8px;
+      font-size:25px;
+    }
+
+    @media(max-width:900px){
+      .admin-kpi-grid{grid-template-columns:1fr 1fr}
+    }
+
+    @media(max-width:520px){
+      .admin-kpi-grid{grid-template-columns:1fr}
+      .admin-search-row{grid-template-columns:1fr}
+    }
+
   </style>
 </head>
 
@@ -2703,6 +2841,7 @@
       <div class="account-actions">
         <button class="account-action primary" id="openBuyerPortalButton">Mi actividad</button>
         <button class="account-action hidden" id="openBrandPanelButton">Panel de mi marca</button>
+        <button class="account-action hidden" id="openAdminPanelButton">Panel de administrador</button>
         <button class="account-action" id="accountPublishBrandButton">Publicar mi marca</button>
         <button class="account-action logout" id="logoutButton">Cerrar sesión</button>
       </div>
@@ -2813,6 +2952,181 @@
   </div>
 </div>
 
+
+
+<!-- =====================================================
+     PANEL ADMINISTRADOR
+===================================================== -->
+
+<div class="portal" id="adminPortal">
+  <aside class="portal-sidebar">
+    <div class="portal-logo">Amigate</div>
+
+    <div class="portal-menu">
+      <button class="portal-nav active" data-admin-page="inicio">Resumen</button>
+      <button class="portal-nav" data-admin-page="marcas">Marcas</button>
+      <button class="portal-nav" data-admin-page="productos">Productos</button>
+      <button class="portal-nav" data-admin-page="pedidos">Pedidos</button>
+      <button class="portal-nav" data-admin-page="usuarios">Usuarios</button>
+      <button class="portal-nav" data-admin-page="destacados">Destacados</button>
+    </div>
+
+    <button class="portal-exit" id="adminExit">Volver a Amigate</button>
+  </aside>
+
+  <main class="portal-main">
+    <header class="portal-header">
+      <h2 id="adminPortalTitle">Panel administrador</h2>
+      <button class="secondary-button" id="adminRefreshButton">Actualizar datos</button>
+    </header>
+
+    <div class="portal-content">
+      <section class="portal-section active" id="admin-inicio">
+        <div class="admin-kpi-grid">
+          <div class="admin-kpi"><small>Usuarios</small><strong id="adminUsersCount">—</strong></div>
+          <div class="admin-kpi"><small>Marcas</small><strong id="adminBrandsCount">—</strong></div>
+          <div class="admin-kpi"><small>Productos</small><strong id="adminProductsCount">—</strong></div>
+          <div class="admin-kpi"><small>Pedidos</small><strong id="adminOrdersCount">—</strong></div>
+        </div>
+
+        <div class="charts-grid">
+          <div class="chart-card">
+            <h4>Actividad general</h4>
+            <p>Comparación de usuarios, marcas, productos y pedidos.</p>
+            <div class="chart-wrap">
+              <div class="native-chart" id="adminActivityChart"></div>
+            </div>
+          </div>
+
+          <div class="chart-card">
+            <h4>Facturación registrada</h4>
+            <p>Total acumulado en pedidos visibles.</p>
+            <div class="analytics-card" style="margin-top:15px">
+              <small>Total</small>
+              <strong id="adminRevenueTotal">—</strong>
+              <span>Datos de Supabase</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="portal-section" id="admin-marcas">
+        <div class="panel">
+          <div class="panel-top">
+            <div>
+              <h3>Administración de marcas</h3>
+              <p style="margin-top:5px;color:var(--gray);font-size:11px">
+                Activá, pausá o revisá marcas registradas.
+              </p>
+            </div>
+          </div>
+
+          <div class="admin-search-row">
+            <input id="adminBrandSearch" placeholder="Buscar por nombre o localidad">
+            <button class="secondary-button" id="adminBrandSearchButton">Buscar</button>
+          </div>
+
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Marca</th>
+                  <th>Localidad</th>
+                  <th>Estado</th>
+                  <th>Verificada</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="adminBrandsTable"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="portal-section" id="admin-productos">
+        <div class="panel">
+          <h3>Productos publicados</h3>
+
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Producto</th>
+                  <th>Marca</th>
+                  <th>Precio</th>
+                  <th>Estado</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="adminProductsTable"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="portal-section" id="admin-pedidos">
+        <div class="panel">
+          <h3>Pedidos</h3>
+
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Número</th>
+                  <th>Marca</th>
+                  <th>Total</th>
+                  <th>Pago</th>
+                  <th>Pedido</th>
+                </tr>
+              </thead>
+              <tbody id="adminOrdersTable"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="portal-section" id="admin-usuarios">
+        <div class="panel">
+          <h3>Usuarios</h3>
+
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Email</th>
+                  <th>Rol</th>
+                  <th>Alta</th>
+                </tr>
+              </thead>
+              <tbody id="adminUsersTable"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="portal-section" id="admin-destacados">
+        <div class="panel">
+          <h3>Productos destacados</h3>
+
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Producto</th>
+                  <th>Marca</th>
+                  <th>Orden</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="adminFeaturedTable"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>
 
 <!-- =====================================================
      ALTA Y EDICIÓN DE PRODUCTOS
@@ -3563,6 +3877,13 @@
   let selectedStoreTemplate = 1;
   let cart = [];
   let selectedCheckoutMethod = "mercadopago";
+  let adminData = {
+    profiles:[],
+    brands:[],
+    products:[],
+    orders:[],
+    featured:[]
+  };
 
   // Al escribir “saquemos todo lo ficticio”, este valor se cambia a false
   // y se eliminan únicamente los datos de demostración.
@@ -5016,6 +5337,7 @@
       .join("") || "A";
 
     $("openBrandPanelButton").classList.toggle("hidden",!currentBrand);
+    $("openAdminPanelButton").classList.toggle("hidden",!isAdminUser());
     $("buyerBrandPanelShortcut").classList.toggle("hidden",!currentBrand);
 
     $("accountPublishBrandButton").textContent = currentBrand
@@ -5351,6 +5673,399 @@
     renderSimpleList("buyerClaimsList",claims,"No tenés reclamos.");
     renderSimpleList("buyerAddressesList",addresses,"Todavía no guardaste direcciones.");
   }
+
+
+  /* =====================================================
+     PANEL ADMINISTRADOR
+  ===================================================== */
+
+  function isAdminUser(){
+    return currentProfile?.tipo_usuario === "admin";
+  }
+
+  function adminBrandName(brandId){
+    return rowName(
+      adminData.brands.find(brand=>String(brand.id) === String(brandId))
+    ) || "Sin marca";
+  }
+
+  function renderAdminActivityChart(){
+    const container = $("adminActivityChart");
+    if(!container) return;
+
+    const values = [
+      adminData.profiles.length,
+      adminData.brands.length,
+      adminData.products.length,
+      adminData.orders.length
+    ];
+
+    const labels = ["Usuarios","Marcas","Productos","Pedidos"];
+    const width = 720;
+    const height = 290;
+    const left = 55;
+    const bottom = 45;
+    const top = 20;
+    const plotHeight = height - top - bottom;
+    const plotWidth = width - left - 20;
+    const max = Math.max(1,...values) * 1.15;
+    const group = plotWidth / values.length;
+    const barWidth = Math.min(70,group * .55);
+    const fills = ["#eb6841","#2f8f6b","#d9a441","#6e78a8"];
+
+    const bars = values.map((value,index)=>{
+      const barHeight = value / max * plotHeight;
+      const x = left + group * index + (group-barWidth)/2;
+      const y = top + plotHeight - barHeight;
+
+      return `
+        <rect x="${x}" y="${y}" width="${barWidth}" height="${barHeight}" rx="8" fill="${fills[index]}">
+          <title>${labels[index]}: ${value}</title>
+        </rect>
+        <text class="axis-label" x="${x+barWidth/2}" y="${height-16}" text-anchor="middle">${labels[index]}</text>
+        <text x="${x+barWidth/2}" y="${Math.max(16,y-8)}" text-anchor="middle" font-size="12" font-weight="800" fill="#2d160a">${value}</text>
+      `;
+    }).join("");
+
+    container.innerHTML = `
+      <svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Actividad general">
+        <line class="grid-line" x1="${left}" y1="${top+plotHeight}" x2="${width-20}" y2="${top+plotHeight}"/>
+        ${bars}
+      </svg>
+    `;
+  }
+
+  async function loadAdminData(){
+    if(!isAdminUser()){
+      alert("Tu cuenta no tiene permisos de administrador.");
+      return;
+    }
+
+    const [
+      profilesResult,
+      brandsResult,
+      productsResult,
+      ordersResult,
+      featuredResult
+    ] = await Promise.all([
+      db.from("profiles").select("*").order("created_at",{ascending:false}),
+      db.from("brands").select("*").order("created_at",{ascending:false}),
+      db.from("products").select("*").order("created_at",{ascending:false}),
+      db.from("orders").select("*").order("created_at",{ascending:false}),
+      db.from("featured_products").select("*").order("orden",{ascending:true})
+    ]);
+
+    [
+      profilesResult,
+      brandsResult,
+      productsResult,
+      ordersResult,
+      featuredResult
+    ].forEach(result=>{
+      if(result.error) console.warn("Admin:",result.error);
+    });
+
+    adminData.profiles = profilesResult.data || [];
+    adminData.brands = brandsResult.data || [];
+    adminData.products = productsResult.data || [];
+    adminData.orders = ordersResult.data || [];
+    adminData.featured = featuredResult.data || [];
+
+    $("adminUsersCount").textContent = adminData.profiles.length;
+    $("adminBrandsCount").textContent = adminData.brands.length;
+    $("adminProductsCount").textContent = adminData.products.length;
+    $("adminOrdersCount").textContent = adminData.orders.length;
+
+    const totalRevenue = adminData.orders.reduce(
+      (sum,order)=>sum + Number(order.total || 0),
+      0
+    );
+
+    $("adminRevenueTotal").textContent = formatMoney(totalRevenue);
+
+    renderAdminBrands();
+    renderAdminProducts();
+    renderAdminOrders();
+    renderAdminUsers();
+    renderAdminFeatured();
+    renderAdminActivityChart();
+  }
+
+  function renderAdminBrands(filter=""){
+    const tbody = $("adminBrandsTable");
+    tbody.innerHTML = "";
+
+    const normalizedFilter = normalizeText(filter);
+
+    const brands = adminData.brands.filter(brand=>{
+      if(!normalizedFilter) return true;
+
+      return normalizeText(
+        `${brand.nombre || ""} ${brand.localidad || ""}`
+      ).includes(normalizedFilter);
+    });
+
+    if(!brands.length){
+      tbody.innerHTML = `<tr><td colspan="5"><div class="admin-empty">No hay marcas para mostrar.</div></td></tr>`;
+      return;
+    }
+
+    brands.forEach(brand=>{
+      tbody.insertAdjacentHTML(
+        "beforeend",
+        `<tr>
+          <td><strong>${escapeHtml(brand.nombre || "Sin nombre")}</strong></td>
+          <td>${escapeHtml(brand.localidad || "—")}</td>
+          <td>
+            <span class="admin-status ${brand.estado === "activa" ? "" : "inactive"}">
+              ${escapeHtml(brand.estado || "sin estado")}
+            </span>
+          </td>
+          <td>${brand.verificada ? "Sí" : "No"}</td>
+          <td>
+            <div class="admin-actions">
+              <button
+                class="admin-action-button primary"
+                data-admin-brand-status="${escapeHtml(brand.id)}"
+                data-next-status="${brand.estado === "activa" ? "pausada" : "activa"}"
+              >
+                ${brand.estado === "activa" ? "Pausar" : "Activar"}
+              </button>
+
+              <button
+                class="admin-action-button"
+                data-admin-brand-verify="${escapeHtml(brand.id)}"
+              >
+                ${brand.verificada ? "Quitar verificación" : "Verificar"}
+              </button>
+            </div>
+          </td>
+        </tr>`
+      );
+    });
+
+    document.querySelectorAll("[data-admin-brand-status]").forEach(button=>{
+      button.addEventListener("click",async()=>{
+        await updateAdminBrand(
+          button.dataset.adminBrandStatus,
+          {estado:button.dataset.nextStatus}
+        );
+      });
+    });
+
+    document.querySelectorAll("[data-admin-brand-verify]").forEach(button=>{
+      button.addEventListener("click",async()=>{
+        const brand = adminData.brands.find(
+          item=>String(item.id) === String(button.dataset.adminBrandVerify)
+        );
+
+        await updateAdminBrand(brand.id,{verificada:!brand.verificada});
+      });
+    });
+  }
+
+  async function updateAdminBrand(brandId,changes){
+    const result = await db
+      .from("brands")
+      .update({...changes,updated_at:new Date().toISOString()})
+      .eq("id",brandId)
+      .select("*")
+      .single();
+
+    if(result.error){
+      alert("No pudimos actualizar la marca: " + result.error.message);
+      return;
+    }
+
+    const index = adminData.brands.findIndex(
+      brand=>String(brand.id) === String(brandId)
+    );
+
+    if(index >= 0) adminData.brands[index] = result.data;
+
+    renderAdminBrands($("adminBrandSearch").value);
+  }
+
+  function renderAdminProducts(){
+    const tbody = $("adminProductsTable");
+    tbody.innerHTML = "";
+
+    if(!adminData.products.length){
+      tbody.innerHTML = `<tr><td colspan="5"><div class="admin-empty">No hay productos.</div></td></tr>`;
+      return;
+    }
+
+    adminData.products.forEach(product=>{
+      tbody.insertAdjacentHTML(
+        "beforeend",
+        `<tr>
+          <td><strong>${escapeHtml(product.nombre || "Sin nombre")}</strong></td>
+          <td>${escapeHtml(adminBrandName(product.brand_id))}</td>
+          <td>${escapeHtml(formatMoney(product.precio_actual))}</td>
+          <td>
+            <span class="admin-status ${product.activo ? "" : "inactive"}">
+              ${product.activo ? "Activo" : "Inactivo"}
+            </span>
+          </td>
+          <td>
+            <button
+              class="admin-action-button"
+              data-admin-product-toggle="${escapeHtml(product.id)}"
+            >
+              ${product.activo ? "Desactivar" : "Activar"}
+            </button>
+          </td>
+        </tr>`
+      );
+    });
+
+    document.querySelectorAll("[data-admin-product-toggle]").forEach(button=>{
+      button.addEventListener("click",async()=>{
+        const product = adminData.products.find(
+          item=>String(item.id) === String(button.dataset.adminProductToggle)
+        );
+
+        const result = await db
+          .from("products")
+          .update({activo:!product.activo,updated_at:new Date().toISOString()})
+          .eq("id",product.id)
+          .select("*")
+          .single();
+
+        if(result.error){
+          alert(result.error.message);
+          return;
+        }
+
+        Object.assign(product,result.data);
+        renderAdminProducts();
+      });
+    });
+  }
+
+  function renderAdminOrders(){
+    const tbody = $("adminOrdersTable");
+    tbody.innerHTML = "";
+
+    if(!adminData.orders.length){
+      tbody.innerHTML = `<tr><td colspan="5"><div class="admin-empty">No hay pedidos.</div></td></tr>`;
+      return;
+    }
+
+    adminData.orders.forEach(order=>{
+      tbody.insertAdjacentHTML(
+        "beforeend",
+        `<tr>
+          <td>#${escapeHtml(order.numero_pedido || order.id?.slice(0,8) || "—")}</td>
+          <td>${escapeHtml(adminBrandName(order.brand_id))}</td>
+          <td><strong>${escapeHtml(formatMoney(order.total))}</strong></td>
+          <td>${escapeHtml(order.estado_pago || "—")}</td>
+          <td>${escapeHtml(order.estado_pedido || "—")}</td>
+        </tr>`
+      );
+    });
+  }
+
+  function renderAdminUsers(){
+    const tbody = $("adminUsersTable");
+    tbody.innerHTML = "";
+
+    if(!adminData.profiles.length){
+      tbody.innerHTML = `<tr><td colspan="4"><div class="admin-empty">No hay usuarios visibles.</div></td></tr>`;
+      return;
+    }
+
+    adminData.profiles.forEach(profile=>{
+      const fullName = [
+        profile.nombre,
+        profile.apellido
+      ].filter(Boolean).join(" ") || "Usuario";
+
+      tbody.insertAdjacentHTML(
+        "beforeend",
+        `<tr>
+          <td><strong>${escapeHtml(fullName)}</strong></td>
+          <td>${escapeHtml(profile.email || "—")}</td>
+          <td>${escapeHtml(profile.tipo_usuario || "comprador")}</td>
+          <td>${profile.created_at ? new Date(profile.created_at).toLocaleDateString("es-AR") : "—"}</td>
+        </tr>`
+      );
+    });
+  }
+
+  function renderAdminFeatured(){
+    const tbody = $("adminFeaturedTable");
+    tbody.innerHTML = "";
+
+    if(!adminData.featured.length){
+      tbody.innerHTML = `<tr><td colspan="4"><div class="admin-empty">No hay productos destacados.</div></td></tr>`;
+      return;
+    }
+
+    adminData.featured.forEach(featured=>{
+      const product = adminData.products.find(
+        item=>String(item.id) === String(featured.product_id)
+      );
+
+      tbody.insertAdjacentHTML(
+        "beforeend",
+        `<tr>
+          <td>${escapeHtml(product?.nombre || "Producto")}</td>
+          <td>${escapeHtml(adminBrandName(featured.brand_id))}</td>
+          <td>${escapeHtml(featured.orden ?? "—")}</td>
+          <td>
+            <button
+              class="admin-action-button danger"
+              data-admin-featured-delete="${escapeHtml(featured.id)}"
+            >
+              Quitar
+            </button>
+          </td>
+        </tr>`
+      );
+    });
+
+    document.querySelectorAll("[data-admin-featured-delete]").forEach(button=>{
+      button.addEventListener("click",async()=>{
+        const result = await db
+          .from("featured_products")
+          .delete()
+          .eq("id",button.dataset.adminFeaturedDelete);
+
+        if(result.error){
+          alert(result.error.message);
+          return;
+        }
+
+        adminData.featured = adminData.featured.filter(
+          item=>String(item.id) !== String(button.dataset.adminFeaturedDelete)
+        );
+
+        renderAdminFeatured();
+      });
+    });
+  }
+
+  async function openAdminPortal(){
+    if(!isAdminUser()){
+      alert("Esta cuenta no tiene permisos de administrador.");
+      return;
+    }
+
+    $("adminPortal").classList.add("visible");
+    await loadAdminData();
+  }
+
+  $("adminBrandSearchButton").addEventListener("click",()=>{
+    renderAdminBrands($("adminBrandSearch").value);
+  });
+
+  $("adminBrandSearch").addEventListener("input",()=>{
+    renderAdminBrands($("adminBrandSearch").value);
+  });
+
+  $("adminRefreshButton").addEventListener("click",loadAdminData);
+  $("adminExit").addEventListener("click",()=>$("adminPortal").classList.remove("visible"));
 
   /* =====================================================
      PANEL DE MARCA
@@ -6912,6 +7627,7 @@
 
   setupPortalNavigation("data-buyer-page","buyerPortal","buyerPortalTitle","buyer-");
   setupPortalNavigation("data-seller-page","sellerPortal","sellerPortalTitle","seller-");
+  setupPortalNavigation("data-admin-page","adminPortal","adminPortalTitle","admin-");
 
   window.addEventListener("resize",()=>{
     const economicVisible = $("seller-economico")?.classList.contains("active");
@@ -6929,6 +7645,11 @@
   $("openBrandPanelButton").addEventListener("click",async()=>{
     closeModal($("accountModal"));
     await openSellerPortal();
+  });
+
+  $("openAdminPanelButton").addEventListener("click",async()=>{
+    closeModal($("accountModal"));
+    await openAdminPortal();
   });
 
   $("buyerBrandPanelShortcut").addEventListener("click",async()=>{
@@ -6968,7 +7689,8 @@
     [
       $("accountModal"),
       $("buyerPortal"),
-      $("sellerPortal")
+      $("sellerPortal"),
+      $("adminPortal")
     ].forEach(element=>{
       element?.classList.remove("open","visible");
     });
