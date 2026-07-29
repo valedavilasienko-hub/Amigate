@@ -3119,6 +3119,61 @@
       }
     }
 
+  
+    /* =====================================================
+       CONFIRMACIÓN REAL DEL PEDIDO
+    ===================================================== */
+
+    .checkout-brand-summary{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin:14px 0;
+      padding:13px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:#fafafa;
+    }
+
+    .checkout-brand-summary small{
+      display:block;
+      margin-bottom:3px;
+      color:var(--gray);
+      font-size:9px;
+    }
+
+    .checkout-brand-summary strong{
+      font-size:13px;
+    }
+
+    .checkout-total-box{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-top:14px;
+      padding:14px;
+      border-radius:12px;
+      background:var(--dark);
+      color:#fff;
+    }
+
+    .checkout-total-box span{
+      font-size:10px;
+    }
+
+    .checkout-total-box strong{
+      font-size:18px;
+    }
+
+    .checkout-legal-note{
+      margin-top:12px;
+      color:var(--gray);
+      font-size:9px;
+      line-height:1.55;
+    }
+
   </style>
 </head>
 
@@ -3475,6 +3530,110 @@
 
 
 
+
+
+<!-- =====================================================
+     CONFIRMAR PEDIDO
+===================================================== -->
+
+<div class="modal" id="checkoutConfirmModal">
+  <div class="modal-card" style="width:min(680px,100%)">
+    <div class="modal-top">
+      <div class="modal-brand">Amigate</div>
+      <button class="modal-close" id="closeCheckoutConfirmModalButton" type="button">×</button>
+    </div>
+
+    <h2>Confirmar pedido</h2>
+    <p class="modal-description">
+      Revisá tus datos. El pedido quedará guardado y será enviado a la marca.
+    </p>
+
+    <div class="checkout-brand-summary">
+      <div>
+        <small>Marca</small>
+        <strong id="checkoutBrandName">—</strong>
+      </div>
+
+      <div style="text-align:right">
+        <small>Productos</small>
+        <strong id="checkoutItemsCount">0</strong>
+      </div>
+    </div>
+
+    <form id="checkoutConfirmForm">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Nombre y apellido</label>
+          <input class="form-control" id="checkoutReceiverName" required>
+        </div>
+
+        <div class="form-group">
+          <label>Teléfono</label>
+          <input class="form-control" id="checkoutReceiverPhone" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Modalidad de entrega</label>
+        <select class="form-control" id="checkoutShippingMethod" required>
+          <option value="">Seleccionar</option>
+          <option value="envio_domicilio">Envío a domicilio</option>
+          <option value="retiro_local">Retiro en local</option>
+        </select>
+      </div>
+
+      <div id="checkoutAddressFields">
+        <div class="form-group">
+          <label>Domicilio de entrega</label>
+          <input
+            class="form-control"
+            id="checkoutAddress"
+            placeholder="Calle, número, piso o departamento"
+          >
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Localidad</label>
+            <input class="form-control" id="checkoutCity">
+          </div>
+
+          <div class="form-group">
+            <label>Provincia</label>
+            <select class="form-control" id="checkoutProvince">
+              <option value="">Seleccionar</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Indicaciones para la marca</label>
+        <textarea
+          class="form-control"
+          id="checkoutBuyerNotes"
+          placeholder="Referencias del domicilio, horario preferido u otra observación"
+        ></textarea>
+      </div>
+
+      <div class="checkout-total-box">
+        <span>Total de productos</span>
+        <strong id="checkoutConfirmTotal">$0</strong>
+      </div>
+
+      <div class="checkout-legal-note">
+        El costo del envío no está incluido en este total. La marca confirmará el importe,
+        el transporte y el plazo antes del despacho.
+      </div>
+
+      <button class="submit-button" id="createOrderButton" type="submit">
+        Crear pedido y continuar
+      </button>
+
+      <div class="message" id="checkoutConfirmMessage"></div>
+    </form>
+  </div>
+</div>
 
 <!-- =====================================================
      GESTIÓN DE PEDIDO Y SEGUIMIENTO
@@ -4826,6 +4985,8 @@
   let selectedStoreTemplate = 1;
   let cart = [];
   let selectedCheckoutMethod = "mercadopago";
+  let pendingCheckoutMethod = null;
+  let orderCreationInProgress = false;
   let sellerOrdersCache = [];
   let buyerOrdersCache = [];
   let editingSellerOrder = null;
@@ -8807,6 +8968,252 @@
   }
 
 
+
+  function cartBrandIds(){
+    return [...new Set(cart.map(item=>String(item.brand_id)))];
+  }
+
+  function cartTotalValue(){
+    return cart.reduce(
+      (sum,item)=>sum + Number(item.precio || 0) * Number(item.cantidad || 0),
+      0
+    );
+  }
+
+  function fillCheckoutProvinceOptions(){
+    const select = $("checkoutProvince");
+    if(!select) return;
+
+    const selected = select.value;
+    select.innerHTML = '<option value="">Seleccionar</option>';
+
+    [...taxonomyCache.provinces]
+      .sort((a,b)=>rowName(a).localeCompare(rowName(b),"es"))
+      .forEach(province=>{
+        select.insertAdjacentHTML(
+          "beforeend",
+          `<option value="${escapeHtml(province.id)}">${escapeHtml(rowName(province))}</option>`
+        );
+      });
+
+    if(selected) select.value = selected;
+  }
+
+  function updateCheckoutAddressFields(){
+    const homeDelivery = $("checkoutShippingMethod").value === "envio_domicilio";
+    $("checkoutAddressFields").classList.toggle("hidden",!homeDelivery);
+    $("checkoutAddress").required = homeDelivery;
+    $("checkoutCity").required = homeDelivery;
+    $("checkoutProvince").required = homeDelivery;
+  }
+
+  function openCheckoutConfirmation(method){
+    if(!cart.length) return;
+
+    if(!currentUser){
+      alert("Iniciá sesión para crear el pedido.");
+      openModal($("accountModal"));
+      return;
+    }
+
+    const brandIds = cartBrandIds();
+
+    if(brandIds.length !== 1){
+      alert("El carrito debe contener productos de una sola marca. Finalizá una marca por vez.");
+      return;
+    }
+
+    pendingCheckoutMethod = method;
+
+    const brand = publicBrandsCache.find(
+      item=>String(item.id) === String(brandIds[0])
+    );
+
+    $("checkoutBrandName").textContent = brand?.nombre || cart[0]?.marca || "Marca";
+    $("checkoutItemsCount").textContent = cart.reduce(
+      (sum,item)=>sum + Number(item.cantidad || 0),
+      0
+    );
+    $("checkoutConfirmTotal").textContent = formatMoney(cartTotalValue());
+
+    const profileName =
+      currentProfile?.nombre_completo ||
+      currentProfile?.nombre ||
+      currentUser?.user_metadata?.full_name ||
+      "";
+
+    const profilePhone =
+      currentProfile?.telefono ||
+      currentUser?.user_metadata?.phone ||
+      "";
+
+    $("checkoutReceiverName").value = profileName;
+    $("checkoutReceiverPhone").value = profilePhone;
+    $("checkoutShippingMethod").value = "";
+    $("checkoutAddress").value = "";
+    $("checkoutCity").value = "";
+    $("checkoutProvince").value = "";
+    $("checkoutBuyerNotes").value = "";
+
+    fillCheckoutProvinceOptions();
+    updateCheckoutAddressFields();
+    clearMessage("checkoutConfirmMessage");
+    openModal($("checkoutConfirmModal"));
+  }
+
+  $("checkoutShippingMethod").addEventListener("change",updateCheckoutAddressFields);
+  $("closeCheckoutConfirmModalButton").addEventListener(
+    "click",
+    ()=>closeModal($("checkoutConfirmModal"))
+  );
+
+  async function createOrderFromCart(){
+    if(orderCreationInProgress) return null;
+    orderCreationInProgress = true;
+
+    try{
+      const brandIds = cartBrandIds();
+
+      if(brandIds.length !== 1){
+        throw new Error("El carrito debe contener productos de una sola marca.");
+      }
+
+      const payloadItems = cart.map(item=>({
+        product_id:item.product_id,
+        variant_id:item.variant_id,
+        cantidad:Number(item.cantidad)
+      }));
+
+      const rpcResult = await db.rpc("create_order_from_cart",{
+        p_brand_id:brandIds[0],
+        p_items:payloadItems,
+        p_payment_method:pendingCheckoutMethod,
+        p_shipping_method:$("checkoutShippingMethod").value,
+        p_receiver_name:$("checkoutReceiverName").value.trim(),
+        p_receiver_phone:$("checkoutReceiverPhone").value.trim(),
+        p_address:$("checkoutAddress").value.trim() || null,
+        p_city:$("checkoutCity").value.trim() || null,
+        p_province_id:$("checkoutProvince").value || null,
+        p_buyer_notes:$("checkoutBuyerNotes").value.trim() || null
+      });
+
+      if(rpcResult.error) throw rpcResult.error;
+
+      return rpcResult.data;
+    }finally{
+      orderCreationInProgress = false;
+    }
+  }
+
+  $("checkoutConfirmForm").addEventListener("submit",async event=>{
+    event.preventDefault();
+
+    const button = $("createOrderButton");
+    button.disabled = true;
+    button.textContent = "Creando pedido...";
+    clearMessage("checkoutConfirmMessage");
+
+    try{
+      const orderResult = await createOrderFromCart();
+      if(!orderResult) throw new Error("No pudimos crear el pedido.");
+
+      const brandId = cartBrandIds()[0];
+      const brand = publicBrandsCache.find(
+        item=>String(item.id) === String(brandId)
+      );
+
+      const orderNumber =
+        orderResult.numero_pedido ||
+        orderResult.order_number ||
+        String(orderResult.id || "").slice(0,8);
+
+      const checkoutCartSnapshot = [...cart];
+      cart = [];
+      saveCart();
+
+      showMessage(
+        "checkoutConfirmMessage",
+        `Pedido #${orderNumber} creado correctamente.`,
+        "success"
+      );
+
+      setTimeout(()=>{
+        closeModal($("checkoutConfirmModal"));
+        $("cartDrawer").classList.remove("visible");
+      },350);
+
+      if(pendingCheckoutMethod === "mercadopago"){
+        if(DEMO_MODE && String(brand?.id || "").startsWith("demo-brand-")){
+          alert(
+            `Pedido #${orderNumber} creado en modo demostración.\n\n` +
+            `Total: ${formatMoney(orderResult.total || cartTotalValue())}\n` +
+            `No se realizará un cobro real.`
+          );
+        }else if(brand?.mercado_pago_link){
+          window.open(brand.mercado_pago_link,"_blank","noopener");
+        }else{
+          alert(
+            `El pedido #${orderNumber} quedó guardado, pero la marca todavía no configuró Mercado Pago.`
+          );
+        }
+      }
+
+      if(pendingCheckoutMethod === "whatsapp"){
+        const whatsapp = String(
+          brand?.whatsapp ||
+          brand?.telefono ||
+          checkoutCartSnapshot[0]?.whatsapp ||
+          ""
+        ).replace(/\D/g,"");
+
+        if(whatsapp){
+          const lines = [
+            `Hola, realicé el pedido #${orderNumber} desde Amigate:`,
+            ""
+          ];
+
+          checkoutCartSnapshot.forEach(item=>{
+            lines.push(
+              `• ${item.nombre}` +
+              `${item.color ? " | Color: " + item.color : ""}` +
+              `${item.talle ? " | Tamaño: " + item.talle : ""}` +
+              ` | Cantidad: ${item.cantidad}` +
+              ` | ${formatMoney(item.precio * item.cantidad)}`
+            );
+          });
+
+          lines.push(
+            "",
+            `Total de productos: ${formatMoney(orderResult.total || 0)}`,
+            "El envío será coordinado directamente con la marca."
+          );
+
+          window.open(
+            `https://wa.me/${whatsapp}?text=${encodeURIComponent(lines.join("\n"))}`,
+            "_blank",
+            "noopener"
+          );
+        }else{
+          alert(
+            `El pedido #${orderNumber} quedó guardado. La marca todavía no configuró su WhatsApp.`
+          );
+        }
+      }
+
+      pendingCheckoutMethod = null;
+    }catch(error){
+      console.error(error);
+      showMessage(
+        "checkoutConfirmMessage",
+        error.message || "No pudimos crear el pedido.",
+        "error"
+      );
+    }finally{
+      button.disabled = false;
+      button.textContent = "Crear pedido y continuar";
+    }
+  });
+
   /* =====================================================
      CARRITO
   ===================================================== */
@@ -8974,76 +9381,13 @@
   });
 
   $("checkoutMercadoPagoButton").addEventListener("click",()=>{
-    if(!cart.length) return;
-
-    const brandIds = [...new Set(cart.map(item=>item.brand_id))];
-
-    if(brandIds.length > 1){
-      alert("Para pagar con Mercado Pago, el carrito debe contener productos de una sola marca.");
-      return;
-    }
-
-    const brand = publicBrandsCache.find(item=>String(item.id) === String(brandIds[0]));
-
-    if(DEMO_MODE && String(brand?.id || "").startsWith("demo-brand-")){
-      alert(
-        "MODO DEMOSTRACIÓN\n\n" +
-        "Se abriría Mercado Pago con el total de " +
-        formatMoney(cart.reduce((sum,item)=>sum + item.precio * item.cantidad,0)) +
-        ".\n\nNo se realizará ningún cobro real."
-      );
-      return;
-    }
-
-    if(!brand?.mercado_pago_link){
-      alert("Esta marca todavía no configuró su enlace de Mercado Pago.");
-      return;
-    }
-
-    window.open(brand.mercado_pago_link,"_blank","noopener");
+    openCheckoutConfirmation("mercadopago");
   });
 
   updateCheckoutMethodUI();
 
   $("checkoutCartButton").addEventListener("click",()=>{
-    if(!cart.length) return;
-
-    const brands = [...new Set(cart.map(item=>item.brand_id))];
-
-    if(brands.length > 1){
-      alert("El carrito contiene productos de distintas marcas. Finalizá una marca por vez.");
-      return;
-    }
-
-    const whatsapp = String(cart[0].whatsapp || "").replace(/\D/g,"");
-
-    if(!whatsapp){
-      alert("Esta marca todavía no configuró su WhatsApp.");
-      return;
-    }
-
-    const lines = [
-      "Hola, quiero realizar este pedido desde Amigate:",
-      ""
-    ];
-
-    cart.forEach(item=>{
-      lines.push(
-        `• ${item.nombre}` +
-        `${item.color ? " | Color: " + item.color : ""}` +
-        `${item.talle ? " | Tamaño: " + item.talle : ""}` +
-        ` | Cantidad: ${item.cantidad}` +
-        ` | ${formatMoney(item.precio * item.cantidad)}`
-      );
-    });
-
-    const total = cart.reduce((sum,item)=>sum + item.precio * item.cantidad,0);
-    lines.push("",`Total de productos: ${formatMoney(total)}`);
-
-    window.open(
-      `https://wa.me/${whatsapp}?text=${encodeURIComponent(lines.join("\n"))}`,
-      "_blank"
-    );
+    openCheckoutConfirmation("whatsapp");
   });
 
   /* =====================================================
@@ -9693,7 +10037,8 @@
     $("publicProductModal"),
     $("publicCatalogModal"),
     $("publicCategoriesModal"),
-    $("sellerOrderModal")
+    $("sellerOrderModal"),
+    $("checkoutConfirmModal")
   ].forEach(backgroundClose);
 </script>
 
