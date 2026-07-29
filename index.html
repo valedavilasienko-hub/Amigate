@@ -2363,6 +2363,103 @@
       .chart-wrap{height:260px}
     }
 
+  
+    /* =====================================================
+       GRÁFICOS NATIVOS Y CORRECCIÓN MÓVIL
+    ===================================================== */
+
+    .native-chart{
+      width:100%;
+      height:100%;
+      min-height:240px;
+      overflow:hidden;
+    }
+
+    .native-chart svg{
+      width:100%;
+      height:100%;
+      display:block;
+    }
+
+    .native-chart text{
+      font-family:Inter,Arial,sans-serif;
+    }
+
+    .native-chart .axis-label{
+      fill:#7c6f68;
+      font-size:10px;
+    }
+
+    .native-chart .grid-line{
+      stroke:#eadfd9;
+      stroke-width:1;
+    }
+
+    .native-chart .chart-line{
+      fill:none;
+      stroke:#eb6841;
+      stroke-width:4;
+      stroke-linecap:round;
+      stroke-linejoin:round;
+    }
+
+    .native-chart .chart-area{
+      fill:rgba(235,104,65,.10);
+    }
+
+    .native-chart .chart-point{
+      fill:#fff;
+      stroke:#eb6841;
+      stroke-width:3;
+    }
+
+    .native-chart .income-bar{fill:#2f8f6b}
+    .native-chart .expense-bar{fill:#d66a4d}
+    .native-chart .pie-label{fill:#2d160a;font-size:10px;font-weight:700}
+
+    @media(max-width:850px){
+      .portal-logo{
+        padding:0 0 18px;
+        font-size:15px!important;
+        line-height:1.1;
+        text-align:center;
+        writing-mode:vertical-rl;
+        transform:rotate(180deg);
+      }
+
+      .portal-logo::before{
+        content:none!important;
+      }
+
+      .landing-top .brand-word{
+        display:block!important;
+        position:relative;
+        z-index:20;
+        font-size:30px;
+      }
+
+      .public-page-header .modal-brand,
+      .product-editor-header .modal-brand{
+        display:block!important;
+        font-size:18px;
+      }
+    }
+
+    @media(max-width:520px){
+      .landing-top{
+        align-items:flex-start;
+      }
+
+      .landing-top .brand-word{
+        font-size:28px!important;
+      }
+
+      .chart-wrap,
+      .chart-wrap.small{
+        height:250px;
+      }
+    }
+
   </style>
 </head>
 
@@ -3295,7 +3392,7 @@
               <h4>Evolución de ventas</h4>
               <p>Facturación mensual de los últimos seis meses.</p>
               <div class="chart-wrap">
-                <canvas id="economicSalesChart"></canvas>
+                <div class="native-chart" id="economicSalesChart"></div>
               </div>
             </div>
 
@@ -3303,7 +3400,7 @@
               <h4>Participación por producto</h4>
               <p>Distribución estimada de la facturación actual.</p>
               <div class="chart-wrap small">
-                <canvas id="economicProductsChart"></canvas>
+                <div class="native-chart" id="economicProductsChart"></div>
               </div>
             </div>
           </div>
@@ -3343,7 +3440,7 @@
               <h4>Ingresos y egresos</h4>
               <p>Comparación mensual entre cobros recibidos y retiros realizados.</p>
               <div class="chart-wrap">
-                <canvas id="financialFlowChart"></canvas>
+                <div class="native-chart" id="financialFlowChart"></div>
               </div>
             </div>
 
@@ -3351,7 +3448,7 @@
               <h4>Estado de los fondos</h4>
               <p>Distribución entre saldo disponible, pendiente y retirado.</p>
               <div class="chart-wrap small">
-                <canvas id="financialBalanceChart"></canvas>
+                <div class="native-chart" id="financialBalanceChart"></div>
               </div>
             </div>
           </div>
@@ -3419,7 +3516,6 @@
   </aside>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
   const SUPABASE_URL = "https://jqdyaafwixnjasszsvkt.supabase.co";
   const SUPABASE_KEY = "sb_publishable_KHbLlwbhlkyaiz-7KXW6Mw_nAnTVsLa";
@@ -6547,182 +6643,225 @@
      GRÁFICOS ECONÓMICOS Y FINANCIEROS
   ===================================================== */
 
-  let economicSalesChartInstance = null;
-  let economicProductsChartInstance = null;
-  let financialFlowChartInstance = null;
-  let financialBalanceChartInstance = null;
+  function compactCurrency(value){
+    const number = Number(value) || 0;
 
-  function chartCurrency(value){
-    return new Intl.NumberFormat("es-AR",{
-      style:"currency",
-      currency:"ARS",
-      maximumFractionDigits:0
-    }).format(value);
+    if(number >= 1000000){
+      return "$" + (number / 1000000).toFixed(1).replace(".",",") + " M";
+    }
+
+    if(number >= 1000){
+      return "$" + Math.round(number / 1000) + " mil";
+    }
+
+    return "$" + Math.round(number);
   }
 
-  function destroyChart(instance){
-    if(instance) instance.destroy();
+  function lineChartSvg(labels,values){
+    const width = 760;
+    const height = 300;
+    const left = 68;
+    const right = 24;
+    const top = 22;
+    const bottom = 45;
+    const plotWidth = width - left - right;
+    const plotHeight = height - top - bottom;
+    const maxValue = Math.max(...values) * 1.12;
+    const minValue = 0;
+
+    const points = values.map((value,index)=>{
+      const x = left + (plotWidth * index / Math.max(1,values.length - 1));
+      const y = top + plotHeight - ((value - minValue) / (maxValue - minValue)) * plotHeight;
+      return {x,y,value};
+    });
+
+    const grid = [0,.25,.5,.75,1].map(position=>{
+      const y = top + plotHeight - plotHeight * position;
+      const value = maxValue * position;
+
+      return `
+        <line class="grid-line" x1="${left}" y1="${y}" x2="${width-right}" y2="${y}"/>
+        <text class="axis-label" x="${left-10}" y="${y+4}" text-anchor="end">${compactCurrency(value)}</text>
+      `;
+    }).join("");
+
+    const areaPath = [
+      `M ${points[0].x} ${top + plotHeight}`,
+      ...points.map(point=>`L ${point.x} ${point.y}`),
+      `L ${points[points.length-1].x} ${top + plotHeight}`,
+      "Z"
+    ].join(" ");
+
+    const linePath = points.map((point,index)=>{
+      return `${index === 0 ? "M" : "L"} ${point.x} ${point.y}`;
+    }).join(" ");
+
+    const labelsSvg = labels.map((label,index)=>{
+      const x = left + (plotWidth * index / Math.max(1,labels.length - 1));
+      return `<text class="axis-label" x="${x}" y="${height-15}" text-anchor="middle">${label}</text>`;
+    }).join("");
+
+    const pointsSvg = points.map(point=>{
+      return `
+        <circle class="chart-point" cx="${point.x}" cy="${point.y}" r="5">
+          <title>${compactCurrency(point.value)}</title>
+        </circle>
+      `;
+    }).join("");
+
+    return `
+      <svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Evolución de ventas">
+        ${grid}
+        <path class="chart-area" d="${areaPath}"/>
+        <path class="chart-line" d="${linePath}"/>
+        ${pointsSvg}
+        ${labelsSvg}
+      </svg>
+    `;
+  }
+
+  function groupedBarChartSvg(labels,income,expense){
+    const width = 760;
+    const height = 300;
+    const left = 68;
+    const right = 24;
+    const top = 24;
+    const bottom = 48;
+    const plotWidth = width - left - right;
+    const plotHeight = height - top - bottom;
+    const maxValue = Math.max(...income,...expense) * 1.12;
+    const groupWidth = plotWidth / labels.length;
+    const barWidth = Math.min(30,groupWidth * .28);
+
+    const grid = [0,.25,.5,.75,1].map(position=>{
+      const y = top + plotHeight - plotHeight * position;
+      const value = maxValue * position;
+
+      return `
+        <line class="grid-line" x1="${left}" y1="${y}" x2="${width-right}" y2="${y}"/>
+        <text class="axis-label" x="${left-10}" y="${y+4}" text-anchor="end">${compactCurrency(value)}</text>
+      `;
+    }).join("");
+
+    const bars = labels.map((label,index)=>{
+      const center = left + groupWidth * index + groupWidth / 2;
+      const incomeHeight = income[index] / maxValue * plotHeight;
+      const expenseHeight = expense[index] / maxValue * plotHeight;
+
+      return `
+        <rect class="income-bar" x="${center-barWidth-3}" y="${top+plotHeight-incomeHeight}" width="${barWidth}" height="${incomeHeight}" rx="5">
+          <title>Ingresos: ${compactCurrency(income[index])}</title>
+        </rect>
+        <rect class="expense-bar" x="${center+3}" y="${top+plotHeight-expenseHeight}" width="${barWidth}" height="${expenseHeight}" rx="5">
+          <title>Egresos: ${compactCurrency(expense[index])}</title>
+        </rect>
+        <text class="axis-label" x="${center}" y="${height-16}" text-anchor="middle">${label}</text>
+      `;
+    }).join("");
+
+    return `
+      <svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Ingresos y egresos">
+        ${grid}
+        ${bars}
+        <g transform="translate(${width-220},14)">
+          <rect class="income-bar" width="12" height="12" rx="3"></rect>
+          <text class="axis-label" x="18" y="10">Ingresos</text>
+          <rect class="expense-bar" x="92" width="12" height="12" rx="3"></rect>
+          <text class="axis-label" x="110" y="10">Egresos</text>
+        </g>
+      </svg>
+    `;
+  }
+
+  function donutChartSvg(items){
+    const width = 420;
+    const height = 280;
+    const cx = 140;
+    const cy = 135;
+    const radius = 82;
+    const circumference = 2 * Math.PI * radius;
+    const total = items.reduce((sum,item)=>sum + item.value,0);
+    const colors = ["#eb6841","#2f8f6b","#d9a441","#7a6ca8","#4e83a6"];
+    let offset = 0;
+
+    const circles = items.map((item,index)=>{
+      const length = item.value / total * circumference;
+      const circle = `
+        <circle
+          cx="${cx}"
+          cy="${cy}"
+          r="${radius}"
+          fill="none"
+          stroke="${colors[index % colors.length]}"
+          stroke-width="34"
+          stroke-dasharray="${length} ${circumference-length}"
+          stroke-dashoffset="${-offset}"
+          transform="rotate(-90 ${cx} ${cy})"
+        >
+          <title>${item.label}: ${item.display || item.value}</title>
+        </circle>
+      `;
+
+      offset += length;
+      return circle;
+    }).join("");
+
+    const legend = items.map((item,index)=>{
+      const y = 62 + index * 36;
+      return `
+        <circle cx="284" cy="${y}" r="6" fill="${colors[index % colors.length]}"/>
+        <text class="pie-label" x="298" y="${y+4}">${item.label}</text>
+        <text class="axis-label" x="298" y="${y+18}">${item.display || item.value}</text>
+      `;
+    }).join("");
+
+    return `
+      <svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Distribución">
+        <circle cx="${cx}" cy="${cy}" r="${radius}" fill="none" stroke="#f1e9e5" stroke-width="34"/>
+        ${circles}
+        <text x="${cx}" y="${cy-2}" text-anchor="middle" font-size="24" font-weight="800" fill="#2d160a">${total}</text>
+        <text class="axis-label" x="${cx}" y="${cy+17}" text-anchor="middle">Total</text>
+        ${legend}
+      </svg>
+    `;
   }
 
   function renderEconomicCharts(){
-    if(typeof Chart === "undefined") return;
+    const sales = $("economicSalesChart");
+    const products = $("economicProductsChart");
 
-    const salesCanvas = $("economicSalesChart");
-    const productsCanvas = $("economicProductsChart");
+    if(!sales || !products) return;
 
-    if(!salesCanvas || !productsCanvas) return;
+    sales.innerHTML = lineChartSvg(
+      ["Feb","Mar","Abr","May","Jun","Jul"],
+      [620000,710000,795000,930000,1085000,1284500]
+    );
 
-    destroyChart(economicSalesChartInstance);
-    destroyChart(economicProductsChartInstance);
-
-    economicSalesChartInstance = new Chart(salesCanvas,{
-      type:"line",
-      data:{
-        labels:["Feb","Mar","Abr","May","Jun","Jul"],
-        datasets:[{
-          label:"Facturación",
-          data:[620000,710000,795000,930000,1085000,1284500],
-          borderWidth:3,
-          tension:.35,
-          fill:false
-        }]
-      },
-      options:{
-        responsive:true,
-        maintainAspectRatio:false,
-        plugins:{
-          legend:{display:false},
-          tooltip:{
-            callbacks:{
-              label:context=>chartCurrency(context.raw)
-            }
-          }
-        },
-        scales:{
-          y:{
-            beginAtZero:true,
-            ticks:{
-              callback:value=>chartCurrency(value)
-            }
-          }
-        }
-      }
-    });
-
-    economicProductsChartInstance = new Chart(productsCanvas,{
-      type:"doughnut",
-      data:{
-        labels:["Remera Essential","Buzo Urban","Bolso Weekend","Otros"],
-        datasets:[{
-          data:[27,34,25,14],
-          borderWidth:2
-        }]
-      },
-      options:{
-        responsive:true,
-        maintainAspectRatio:false,
-        plugins:{
-          legend:{
-            position:"bottom",
-            labels:{
-              boxWidth:10,
-              font:{size:9}
-            }
-          },
-          tooltip:{
-            callbacks:{
-              label:context=>`${context.label}: ${context.raw}%`
-            }
-          }
-        }
-      }
-    });
+    products.innerHTML = donutChartSvg([
+      {label:"Remera Essential",value:27,display:"27%"},
+      {label:"Buzo Urban",value:34,display:"34%"},
+      {label:"Bolso Weekend",value:25,display:"25%"},
+      {label:"Otros",value:14,display:"14%"}
+    ]);
   }
 
   function renderFinancialCharts(){
-    if(typeof Chart === "undefined") return;
+    const flow = $("financialFlowChart");
+    const balance = $("financialBalanceChart");
 
-    const flowCanvas = $("financialFlowChart");
-    const balanceCanvas = $("financialBalanceChart");
+    if(!flow || !balance) return;
 
-    if(!flowCanvas || !balanceCanvas) return;
+    flow.innerHTML = groupedBarChartSvg(
+      ["Feb","Mar","Abr","May","Jun","Jul"],
+      [540000,610000,720000,845000,970000,1284500],
+      [180000,225000,260000,315000,390000,465000]
+    );
 
-    destroyChart(financialFlowChartInstance);
-    destroyChart(financialBalanceChartInstance);
-
-    financialFlowChartInstance = new Chart(flowCanvas,{
-      type:"bar",
-      data:{
-        labels:["Feb","Mar","Abr","May","Jun","Jul"],
-        datasets:[
-          {
-            label:"Ingresos",
-            data:[540000,610000,720000,845000,970000,1284500],
-            borderWidth:1
-          },
-          {
-            label:"Egresos",
-            data:[180000,225000,260000,315000,390000,465000],
-            borderWidth:1
-          }
-        ]
-      },
-      options:{
-        responsive:true,
-        maintainAspectRatio:false,
-        plugins:{
-          legend:{
-            position:"bottom",
-            labels:{
-              boxWidth:10,
-              font:{size:9}
-            }
-          },
-          tooltip:{
-            callbacks:{
-              label:context=>`${context.dataset.label}: ${chartCurrency(context.raw)}`
-            }
-          }
-        },
-        scales:{
-          y:{
-            beginAtZero:true,
-            ticks:{
-              callback:value=>chartCurrency(value)
-            }
-          }
-        }
-      }
-    });
-
-    financialBalanceChartInstance = new Chart(balanceCanvas,{
-      type:"pie",
-      data:{
-        labels:["Disponible","Pendiente","Retirado"],
-        datasets:[{
-          data:[734200,126500,220000],
-          borderWidth:2
-        }]
-      },
-      options:{
-        responsive:true,
-        maintainAspectRatio:false,
-        plugins:{
-          legend:{
-            position:"bottom",
-            labels:{
-              boxWidth:10,
-              font:{size:9}
-            }
-          },
-          tooltip:{
-            callbacks:{
-              label:context=>`${context.label}: ${chartCurrency(context.raw)}`
-            }
-          }
-        }
-      }
-    });
+    balance.innerHTML = donutChartSvg([
+      {label:"Disponible",value:734200,display:compactCurrency(734200)},
+      {label:"Pendiente",value:126500,display:compactCurrency(126500)},
+      {label:"Retirado",value:220000,display:compactCurrency(220000)}
+    ]);
   }
 
   /* =====================================================
