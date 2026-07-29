@@ -2598,6 +2598,203 @@
       .admin-search-row{grid-template-columns:1fr}
     }
 
+  
+    /* =====================================================
+       PORTADA DE MARCA, DESTACADOS, CATÁLOGO Y CATEGORÍAS
+    ===================================================== */
+
+    .store-cover{
+      position:relative;
+      min-height:520px;
+      padding:52px;
+      display:flex;
+      align-items:flex-end;
+      overflow:hidden;
+      border-radius:24px;
+      background:#2d160a;
+      color:#fff;
+      background-size:cover;
+      background-position:center;
+    }
+
+    .store-cover::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.72));
+    }
+
+    .store-cover-content{
+      position:relative;
+      z-index:1;
+      max-width:720px;
+    }
+
+    .store-cover-logo{
+      width:88px;
+      height:88px;
+      margin-bottom:18px;
+      border-radius:22px;
+      object-fit:cover;
+      background:#fff;
+      border:1px solid rgba(255,255,255,.35);
+    }
+
+    .store-cover h1{
+      font-family:"Playfair Display",serif;
+      font-size:clamp(46px,7vw,84px);
+      line-height:.95;
+    }
+
+    .store-cover p{
+      margin-top:17px;
+      max-width:620px;
+      color:rgba(255,255,255,.86);
+      font-size:14px;
+      line-height:1.65;
+    }
+
+    .store-cover-actions{
+      margin-top:24px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+
+    .store-cover-button{
+      min-height:48px;
+      padding:0 18px;
+      border:1px solid rgba(255,255,255,.7);
+      border-radius:12px;
+      background:#fff;
+      color:#2d160a;
+      font-size:11px;
+      font-weight:900;
+    }
+
+    .store-cover-button.secondary{
+      background:rgba(255,255,255,.12);
+      color:#fff;
+      backdrop-filter:blur(10px);
+    }
+
+    .featured-store-section{
+      margin-top:34px;
+    }
+
+    .featured-store-header{
+      display:flex;
+      align-items:end;
+      justify-content:space-between;
+      gap:20px;
+    }
+
+    .featured-store-header h3{
+      font-family:"Playfair Display",serif;
+      font-size:34px;
+    }
+
+    .featured-store-grid{
+      margin-top:16px;
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:14px;
+    }
+
+    .catalog-page-grid{
+      display:grid;
+      grid-template-columns:260px 1fr;
+      gap:24px;
+    }
+
+    .catalog-sidebar{
+      position:sticky;
+      top:94px;
+      align-self:start;
+      padding:18px;
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:#fff;
+    }
+
+    .catalog-category-list{
+      margin-top:12px;
+      display:grid;
+      gap:7px;
+    }
+
+    .catalog-category-button{
+      min-height:42px;
+      padding:0 12px;
+      border:1px solid var(--border);
+      border-radius:10px;
+      background:#fff;
+      text-align:left;
+      font-size:10px;
+      font-weight:800;
+    }
+
+    .catalog-category-button.active{
+      border-color:var(--store-button,#2d160a);
+      background:var(--store-button,#2d160a);
+      color:#fff;
+    }
+
+    .category-showcase-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+    }
+
+    .category-showcase-card{
+      min-height:210px;
+      padding:22px;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-end;
+      border:none;
+      border-radius:18px;
+      background:linear-gradient(135deg,var(--store-main,#eb6841),var(--store-secondary,#f3c8b4));
+      color:var(--store-text,#2d160a);
+      text-align:left;
+      cursor:pointer;
+    }
+
+    .category-showcase-card strong{
+      font-family:"Playfair Display",serif;
+      font-size:28px;
+    }
+
+    .category-showcase-card span{
+      margin-top:7px;
+      font-size:10px;
+      font-weight:800;
+    }
+
+    .cover-text-toggle{
+      margin-top:12px;
+      padding:13px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:#fcfaf9;
+    }
+
+    @media(max-width:980px){
+      .featured-store-grid{grid-template-columns:repeat(2,1fr)}
+      .catalog-page-grid{grid-template-columns:1fr}
+      .catalog-sidebar{position:static}
+      .category-showcase-grid{grid-template-columns:1fr 1fr}
+    }
+
+    @media(max-width:620px){
+      .store-cover{min-height:460px;padding:28px 20px}
+      .store-cover h1{font-size:48px}
+      .store-cover-actions{display:grid}
+      .store-cover-button{width:100%}
+      .featured-store-grid{grid-template-columns:1fr}
+      .category-showcase-grid{grid-template-columns:1fr}
+    }
+
   </style>
 </head>
 
@@ -2969,6 +3166,7 @@
       <button class="portal-nav" data-admin-page="pedidos">Pedidos</button>
       <button class="portal-nav" data-admin-page="usuarios">Usuarios</button>
       <button class="portal-nav" data-admin-page="destacados">Destacados</button>
+      <button class="portal-nav" data-admin-page="posicionamiento">Posicionamiento</button>
     </div>
 
     <button class="portal-exit" id="adminExit">Volver a Amigate</button>
@@ -3124,6 +3322,84 @@
           </div>
         </div>
       </section>
+
+      <section class="portal-section" id="admin-posicionamiento">
+        <div class="panel">
+          <div class="panel-top">
+            <div>
+              <h3>Pagos por posicionamiento</h3>
+              <p style="margin-top:5px;color:var(--gray);font-size:11px">
+                Controlá qué marcas pagaron para aparecer más arriba o destacar publicaciones.
+              </p>
+            </div>
+
+            <span class="demo-badge demo-only">Incluye datos ficticios</span>
+          </div>
+
+          <div class="admin-kpi-grid" style="margin-top:18px">
+            <div class="admin-kpi">
+              <small>Planes activos</small>
+              <strong id="adminPositioningActiveCount">0</strong>
+            </div>
+
+            <div class="admin-kpi">
+              <small>Ingresos del mes</small>
+              <strong id="adminPositioningRevenue">$0</strong>
+            </div>
+
+            <div class="admin-kpi">
+              <small>Por vencer</small>
+              <strong id="adminPositioningExpiringCount">0</strong>
+            </div>
+
+            <div class="admin-kpi">
+              <small>Pagos pendientes</small>
+              <strong id="adminPositioningPendingCount">0</strong>
+            </div>
+          </div>
+
+          <div class="charts-grid">
+            <div class="chart-card">
+              <h4>Ingresos por posicionamiento</h4>
+              <p>Comparación mensual de los pagos recibidos.</p>
+              <div class="chart-wrap">
+                <div class="native-chart" id="adminPositioningChart"></div>
+              </div>
+            </div>
+
+            <div class="chart-card">
+              <h4>Tipos de posicionamiento</h4>
+              <p>Distribución por modalidad contratada.</p>
+              <div class="chart-wrap small">
+                <div class="native-chart" id="adminPositioningTypesChart"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="admin-search-row">
+            <input id="adminPositioningSearch" placeholder="Buscar por marca, tipo o estado">
+            <button class="secondary-button" id="adminPositioningSearchButton">Buscar</button>
+          </div>
+
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Marca</th>
+                  <th>Tipo</th>
+                  <th>Monto</th>
+                  <th>Inicio</th>
+                  <th>Vencimiento</th>
+                  <th>Estado</th>
+                  <th>Referencia</th>
+                </tr>
+              </thead>
+              <tbody id="adminPositioningTable"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
     </div>
   </main>
 </div>
@@ -3351,35 +3627,106 @@
     </header>
 
     <main class="public-page-body store-shell" id="publicStoreShell">
-      <div class="store-visual-slot" id="storeVisualTop"></div>
-
-      <section class="brand-public-hero">
-        <div>
-          <img class="brand-logo-public hidden" id="publicBrandLogo" alt="Logo de la marca">
-          <div class="eyebrow" style="margin-top:12px">Marca en Amigate</div>
-          <h2 id="publicBrandName">Marca</h2>
+      <section class="store-cover" id="publicStoreCover">
+        <div class="store-cover-content">
+          <img class="store-cover-logo hidden" id="publicBrandLogo" alt="Logo de la marca">
+          <div class="eyebrow">Marca en Amigate</div>
+          <h1 id="publicBrandName">Marca</h1>
           <p id="publicBrandDescription"></p>
-          <p id="publicBrandLocation" style="margin-top:10px;font-weight:700"></p>
-        </div>
 
-        <div class="brand-contact-list" id="publicBrandContacts"></div>
+          <div class="store-cover-actions">
+            <button class="store-cover-button" id="openFullCatalogButton" type="button">
+              Ver catálogo completo
+            </button>
+
+            <button class="store-cover-button secondary" id="openBrandCategoriesButton" type="button">
+              Ver categorías
+            </button>
+          </div>
+        </div>
       </section>
 
       <div class="store-visual-slot" id="storeVisualAfterHero"></div>
 
-      <div class="results-toolbar">
-        <strong>Productos de la marca</strong>
-        <span id="publicBrandProductCount"></span>
-      </div>
+      <section class="featured-store-section">
+        <div class="featured-store-header">
+          <div>
+            <div class="eyebrow">Selección de la marca</div>
+            <h3>Productos destacados</h3>
+          </div>
 
-      <div class="store-visual-slot" id="storeVisualBeforeProducts"></div>
+          <button class="secondary-button" id="openFullCatalogButtonSecondary" type="button">
+            Ver todos
+          </button>
+        </div>
 
-      <div class="public-product-grid" id="publicBrandProducts"></div>
+        <div class="featured-store-grid" id="publicFeaturedProducts"></div>
+
+        <div class="empty-state" id="publicFeaturedEmpty">
+          <strong>Esta marca todavía no tiene productos destacados</strong>
+          <p>Podés ingresar al catálogo completo para ver todas sus publicaciones.</p>
+        </div>
+      </section>
 
       <div class="store-visual-slot" id="storeVisualBottom"></div>
-      <div class="empty-state" id="publicBrandEmpty">
-        <strong>Esta marca todavía no tiene productos activos</strong>
+    </main>
+  </div>
+</div>
+
+<!-- =====================================================
+     CATÁLOGO COMPLETO DE LA MARCA
+===================================================== -->
+
+<div class="modal public-full-modal" id="publicCatalogModal">
+  <div class="modal-card">
+    <header class="public-page-header">
+      <button class="ghost-button" id="backCatalogToBrandButton">← Volver a la portada</button>
+      <div class="modal-brand" id="publicCatalogBrandName">Catálogo</div>
+      <button class="modal-close" id="closePublicCatalogButton">×</button>
+    </header>
+
+    <main class="public-page-body store-shell" id="publicCatalogShell">
+      <div class="catalog-page-grid">
+        <aside class="catalog-sidebar">
+          <h3>Categorías</h3>
+          <div class="catalog-category-list" id="publicCatalogCategories"></div>
+        </aside>
+
+        <section>
+          <div class="results-toolbar">
+            <strong>Catálogo completo</strong>
+            <span id="publicCatalogCount"></span>
+          </div>
+
+          <div class="public-product-grid" id="publicCatalogProducts"></div>
+          <div class="empty-state" id="publicCatalogEmpty">
+            <strong>No hay productos en esta categoría</strong>
+          </div>
+        </section>
       </div>
+    </main>
+  </div>
+</div>
+
+<!-- =====================================================
+     CATEGORÍAS DE LA MARCA
+===================================================== -->
+
+<div class="modal public-full-modal" id="publicCategoriesModal">
+  <div class="modal-card">
+    <header class="public-page-header">
+      <button class="ghost-button" id="backCategoriesToBrandButton">← Volver a la portada</button>
+      <div class="modal-brand" id="publicCategoriesBrandName">Categorías</div>
+      <button class="modal-close" id="closePublicCategoriesButton">×</button>
+    </header>
+
+    <main class="public-page-body store-shell" id="publicCategoriesShell">
+      <div class="eyebrow">Explorá por categoría</div>
+      <h2 style="margin-top:8px;font-family:'Playfair Display',serif;font-size:44px">
+        Categorías de la marca
+      </h2>
+
+      <div class="category-showcase-grid" id="publicCategoriesGrid" style="margin-top:24px"></div>
     </main>
   </div>
 </div>
@@ -3630,6 +3977,36 @@
             </div>
 
             <div class="editor-section">
+              <h3>Texto de la portada</h3>
+              <p>Podés mostrar un título y una descripción sobre la portada, o dejarla solamente con imágenes.</p>
+
+              <div class="form-group">
+                <label>Título principal</label>
+                <input
+                  class="form-control"
+                  id="storeCoverTitle"
+                  placeholder="Ej.: Nueva colección"
+                >
+              </div>
+
+              <div class="form-group">
+                <label>Texto de portada</label>
+                <textarea
+                  class="form-control"
+                  id="storeCoverText"
+                  placeholder="Contá brevemente qué hace especial a tu marca."
+                ></textarea>
+              </div>
+
+              <div class="cover-text-toggle">
+                <label class="toggle-row">
+                  <input type="checkbox" id="storeShowCoverText" checked>
+                  Mostrar título y texto sobre la portada
+                </label>
+              </div>
+            </div>
+
+            <div class="editor-section">
               <h3>Imágenes del diseño</h3>
               <p>Podés cargar hasta cuatro imágenes para los espacios visuales de la tienda.</p>
 
@@ -3868,6 +4245,9 @@
   let publicProductImagesCache = [];
   let publicFeaturedCache = [];
   let activePublicBrand = null;
+  let activeBrandProducts = [];
+  let activeBrandFeaturedProducts = [];
+  let activeCatalogCategoryId = null;
   let activePublicProduct = null;
   let activePublicVariants = [];
   let activePublicColors = [];
@@ -3882,7 +4262,8 @@
     brands:[],
     products:[],
     orders:[],
-    featured:[]
+    featured:[],
+    subscriptions:[]
   };
 
   // Al escribir “saquemos todo lo ficticio”, este valor se cambia a false
@@ -4806,19 +5187,17 @@
     activePublicBrand = brand;
     applyPublicStoreTheme(brand);
 
-    const province = taxonomyCache.provinces.find(row=>{
-      return String(row.id) === String(brand.province_id || brand.provincia_id);
-    });
+    $("publicCatalogShell").className = $("publicStoreShell").className;
+    $("publicCategoriesShell").className = $("publicStoreShell").className;
 
-    $("publicBrandName").textContent = brand.nombre || "Marca";
-    $("publicBrandDescription").textContent =
-      brand.descripcion || "Conocé los productos publicados por esta marca.";
+    const cover = $("publicStoreCover");
 
-    $("publicBrandLocation").textContent =
-      (province ? rowName(province) : "Argentina") +
-      (brand.localidad ? " · " + brand.localidad : "");
+    cover.style.backgroundImage = brand.portada_url
+      ? `url("${brand.portada_url}")`
+      : `linear-gradient(135deg,${brand.color_principal || "#2d160a"},${brand.color_secundario || "#eb6841"})`;
 
     const logo = $("publicBrandLogo");
+
     if(brand.logo_url){
       logo.src = brand.logo_url;
       logo.classList.remove("hidden");
@@ -4826,77 +5205,75 @@
       logo.classList.add("hidden");
     }
 
+    const showText = brand.mostrar_texto_portada !== false;
+
+    $("publicBrandName").textContent = showText
+      ? (brand.portada_titulo || brand.nombre || "Marca")
+      : "";
+
+    $("publicBrandDescription").textContent = showText
+      ? (brand.portada_texto || brand.descripcion || "")
+      : "";
+
+    $("publicCatalogBrandName").textContent = brand.nombre || "Catálogo";
+    $("publicCategoriesBrandName").textContent = brand.nombre || "Categorías";
+
+    activeBrandProducts = publicProductsCache.filter(product=>{
+      return String(product.brand_id) === String(brand.id) && product.activo !== false;
+    });
+
+    const featuredIds = publicFeaturedCache
+      .filter(row=>String(row.brand_id) === String(brand.id))
+      .sort((a,b)=>Number(a.orden || 0)-Number(b.orden || 0))
+      .map(row=>String(row.product_id));
+
+    activeBrandFeaturedProducts = featuredIds
+      .map(id=>activeBrandProducts.find(product=>String(product.id) === id))
+      .filter(Boolean);
+
+    renderPublicFeaturedProducts();
+    renderBrandCategories();
+
     let designImages = await loadBrandDesignImages(brand.id);
 
     if(DEMO_MODE && String(brand.id).startsWith("demo-brand-") && !designImages.length){
       designImages = [
-        {slot:1,image_url:demoImage("Colección","#2d160a","#8f4c35")},
-        {slot:2,image_url:demoImage("Detalles","#8f4c35","#e8c6b6")},
-        {slot:3,image_url:demoImage("Diseño","#d79f83","#fff4ea")},
+        {slot:2,image_url:demoImage("Historia de marca","#8f4c35","#e8c6b6")},
         {slot:4,image_url:demoImage("Nueva temporada","#3d2b25","#bc7e68")}
       ];
     }
 
-    const visualSlots = {
-      1:$("storeVisualTop"),
-      2:$("storeVisualAfterHero"),
-      3:$("storeVisualBeforeProducts"),
-      4:$("storeVisualBottom")
-    };
+    const afterHero = $("storeVisualAfterHero");
+    const bottom = $("storeVisualBottom");
 
-    Object.values(visualSlots).forEach(slot=>{
+    [afterHero,bottom].forEach(slot=>{
       slot.innerHTML = "";
       slot.classList.remove("visible");
     });
 
-    designImages.forEach(image=>{
-      const target = visualSlots[Number(image.slot)];
-      if(!target) return;
+    const afterImage = designImages.find(item=>Number(item.slot) === 2);
+    const bottomImage = designImages.find(item=>Number(item.slot) === 4);
 
-      target.innerHTML = `<img src="${escapeHtml(image.image_url)}" alt="Imagen de ${escapeHtml(brand.nombre)}">`;
-      target.classList.add("visible");
-    });
-
-    const contacts = [];
-    const whatsappValue = brand.whatsapp || brand.telefono;
-
-    if(whatsappValue){
-      const whatsapp = String(whatsappValue).replace(/\D/g,"");
-      contacts.push(`<a href="https://wa.me/${escapeHtml(whatsapp)}" target="_blank" rel="noopener">WhatsApp</a>`);
+    if(afterImage){
+      afterHero.innerHTML = `<img src="${escapeHtml(afterImage.image_url)}" alt="Imagen de la marca">`;
+      afterHero.classList.add("visible");
     }
 
-    if(brand.instagram){
-      const instagramName = String(brand.instagram).replace(/^@/,"");
-      contacts.push(`<a href="https://instagram.com/${escapeHtml(instagramName)}" target="_blank" rel="noopener">Instagram</a>`);
+    if(bottomImage){
+      bottom.innerHTML = `<img src="${escapeHtml(bottomImage.image_url)}" alt="Imagen de la marca">`;
+      bottom.classList.add("visible");
     }
 
-    const emailValue = brand.email_comercial || brand.email;
-    if(emailValue){
-      contacts.push(`<a href="mailto:${escapeHtml(emailValue)}">Email</a>`);
-    }
+    openModal($("publicBrandModal"));
+  }
 
-    $("publicBrandContacts").innerHTML = contacts.join("");
 
-    const products = publicProductsCache.filter(product=>{
-      return String(product.brand_id) === String(brand.id) && product.activo !== false;
-    });
+  function publicProductCardHtml(product){
+    const image = productImage(product.id);
+    const discount = discountPercentage(product.precio_anterior,product.precio_actual);
 
-    $("publicBrandProductCount").textContent =
-      products.length + (products.length === 1 ? " producto" : " productos");
-
-    const grid = $("publicBrandProducts");
-    grid.innerHTML = "";
-    $("publicBrandEmpty").classList.toggle("visible",products.length === 0);
-
-    products.forEach(product=>{
-      const image = productImage(product.id);
-      const discount = discountPercentage(product.precio_anterior,product.precio_actual);
-
-      const card = document.createElement("article");
-      card.className = "public-product-card";
-      card.dataset.openProduct = product.id;
-
-      card.innerHTML = `
+    return `
+      <article class="public-product-card" data-open-product="${escapeHtml(product.id)}">
         <div class="public-product-image">
           ${image
             ? `<img src="${escapeHtml(image.image_url)}" alt="${escapeHtml(product.nombre)}">`
@@ -4906,29 +5283,149 @@
 
         <div class="public-product-body">
           <div class="public-product-name">${escapeHtml(product.nombre)}</div>
+
           <div class="price-line">
             <span class="current-price">${escapeHtml(formatMoney(product.precio_actual))}</span>
+
             ${product.precio_anterior !== null
               ? `<span class="previous-price">${escapeHtml(formatMoney(product.precio_anterior))}</span>`
               : ""
             }
+
             ${discount !== null
               ? `<span class="discount-chip">${discount}% OFF</span>`
               : ""
             }
           </div>
         </div>
-      `;
+      </article>
+    `;
+  }
 
-      grid.appendChild(card);
-    });
-
-    document.querySelectorAll("[data-open-product]").forEach(card=>{
+  function bindPublicProductCards(scope=document){
+    scope.querySelectorAll("[data-open-product]").forEach(card=>{
       card.addEventListener("click",()=>openPublicProduct(card.dataset.openProduct));
     });
-
-    openModal($("publicBrandModal"));
   }
+
+  function renderPublicFeaturedProducts(){
+    const container = $("publicFeaturedProducts");
+    container.innerHTML = activeBrandFeaturedProducts
+      .map(publicProductCardHtml)
+      .join("");
+
+    $("publicFeaturedEmpty").classList.toggle(
+      "visible",
+      activeBrandFeaturedProducts.length === 0
+    );
+
+    bindPublicProductCards(container);
+  }
+
+  function brandCategoryRows(){
+    const ids = [...new Set(
+      activeBrandProducts
+        .map(product=>product.subcategory_id)
+        .filter(Boolean)
+        .map(String)
+    )];
+
+    return ids
+      .map(id=>taxonomyCache.subcategories.find(row=>String(row.id) === id))
+      .filter(Boolean)
+      .sort((a,b)=>rowName(a).localeCompare(rowName(b),"es"));
+  }
+
+  function renderBrandCategories(){
+    const rows = brandCategoryRows();
+    const grid = $("publicCategoriesGrid");
+
+    grid.innerHTML = rows.map(row=>{
+      const count = activeBrandProducts.filter(product=>{
+        return String(product.subcategory_id) === String(row.id);
+      }).length;
+
+      return `
+        <button class="category-showcase-card" type="button" data-brand-category="${escapeHtml(row.id)}">
+          <strong>${escapeHtml(rowName(row))}</strong>
+          <span>${count} ${count === 1 ? "producto" : "productos"}</span>
+        </button>
+      `;
+    }).join("");
+
+    grid.querySelectorAll("[data-brand-category]").forEach(button=>{
+      button.addEventListener("click",()=>{
+        activeCatalogCategoryId = button.dataset.brandCategory;
+        closeModal($("publicCategoriesModal"));
+        openPublicCatalog();
+      });
+    });
+  }
+
+  function renderPublicCatalog(){
+    const categories = brandCategoryRows();
+    const categoryContainer = $("publicCatalogCategories");
+
+    categoryContainer.innerHTML = `
+      <button class="catalog-category-button ${activeCatalogCategoryId ? "" : "active"}" data-catalog-category="">
+        Todos los productos
+      </button>
+    ` + categories.map(row=>`
+      <button
+        class="catalog-category-button ${String(activeCatalogCategoryId) === String(row.id) ? "active" : ""}"
+        data-catalog-category="${escapeHtml(row.id)}"
+      >
+        ${escapeHtml(rowName(row))}
+      </button>
+    `).join("");
+
+    categoryContainer.querySelectorAll("[data-catalog-category]").forEach(button=>{
+      button.addEventListener("click",()=>{
+        activeCatalogCategoryId = button.dataset.catalogCategory || null;
+        renderPublicCatalog();
+      });
+    });
+
+    const products = activeCatalogCategoryId
+      ? activeBrandProducts.filter(product=>String(product.subcategory_id) === String(activeCatalogCategoryId))
+      : activeBrandProducts;
+
+    $("publicCatalogCount").textContent =
+      products.length + (products.length === 1 ? " producto" : " productos");
+
+    $("publicCatalogProducts").innerHTML = products
+      .map(publicProductCardHtml)
+      .join("");
+
+    $("publicCatalogEmpty").classList.toggle("visible",products.length === 0);
+
+    bindPublicProductCards($("publicCatalogProducts"));
+  }
+
+  function openPublicCatalog(){
+    renderPublicCatalog();
+    closeModal($("publicBrandModal"));
+    closeModal($("publicCategoriesModal"));
+    openModal($("publicCatalogModal"));
+  }
+
+  function openPublicCategories(){
+    renderBrandCategories();
+    closeModal($("publicBrandModal"));
+    openModal($("publicCategoriesModal"));
+  }
+
+  $("openFullCatalogButton").addEventListener("click",()=>{
+    activeCatalogCategoryId = null;
+    openPublicCatalog();
+  });
+
+  $("openFullCatalogButtonSecondary").addEventListener("click",()=>{
+    activeCatalogCategoryId = null;
+    openPublicCatalog();
+  });
+
+  $("openBrandCategoriesButton").addEventListener("click",openPublicCategories);
 
   function renderPublicChoices(){
     const colorsUsed = activePublicColors.filter(color=>{
@@ -5746,13 +6243,15 @@
       brandsResult,
       productsResult,
       ordersResult,
-      featuredResult
+      featuredResult,
+      subscriptionsResult
     ] = await Promise.all([
       db.from("profiles").select("*").order("created_at",{ascending:false}),
       db.from("brands").select("*").order("created_at",{ascending:false}),
       db.from("products").select("*").order("created_at",{ascending:false}),
       db.from("orders").select("*").order("created_at",{ascending:false}),
-      db.from("featured_products").select("*").order("orden",{ascending:true})
+      db.from("featured_products").select("*").order("orden",{ascending:true}),
+      db.from("brand_subscriptions").select("*").order("created_at",{ascending:false})
     ]);
 
     [
@@ -5760,7 +6259,8 @@
       brandsResult,
       productsResult,
       ordersResult,
-      featuredResult
+      featuredResult,
+      subscriptionsResult
     ].forEach(result=>{
       if(result.error) console.warn("Admin:",result.error);
     });
@@ -5770,6 +6270,42 @@
     adminData.products = productsResult.data || [];
     adminData.orders = ordersResult.data || [];
     adminData.featured = featuredResult.data || [];
+    adminData.subscriptions = subscriptionsResult.data || [];
+
+    if(DEMO_MODE){
+      const demoSubscriptions = [
+        {
+          id:"demo-sub-1",
+          brand_id:"demo-brand-1",
+          tipo:"Primera posición",
+          monto:45000,
+          fecha_inicio:"2026-07-01T00:00:00Z",
+          fecha_vencimiento:"2026-08-01T00:00:00Z",
+          renovacion_automatica:true,
+          estado:"activa",
+          referencia_pago:"MP-DEMO-1048",
+          created_at:"2026-07-01T00:00:00Z"
+        },
+        {
+          id:"demo-sub-2",
+          brand_id:"demo-brand-2",
+          tipo:"Producto destacado",
+          monto:18000,
+          fecha_inicio:"2026-07-15T00:00:00Z",
+          fecha_vencimiento:"2026-08-15T00:00:00Z",
+          renovacion_automatica:false,
+          estado:"pendiente",
+          referencia_pago:"MP-DEMO-1054",
+          created_at:"2026-07-15T00:00:00Z"
+        }
+      ];
+
+      demoSubscriptions.forEach(subscription=>{
+        if(!adminData.subscriptions.some(item=>String(item.id) === String(subscription.id))){
+          adminData.subscriptions.push(subscription);
+        }
+      });
+    }
 
     $("adminUsersCount").textContent = adminData.profiles.length;
     $("adminBrandsCount").textContent = adminData.brands.length;
@@ -5788,7 +6324,9 @@
     renderAdminOrders();
     renderAdminUsers();
     renderAdminFeatured();
+    renderAdminPositioning();
     renderAdminActivityChart();
+    renderAdminPositioningCharts();
   }
 
   function renderAdminBrands(filter=""){
@@ -6046,6 +6584,114 @@
     });
   }
 
+
+  function filteredPositioningRows(filter=""){
+    const normalizedFilter = normalizeText(filter);
+
+    return adminData.subscriptions.filter(subscription=>{
+      const brandName = adminBrandName(subscription.brand_id);
+
+      if(!normalizedFilter) return true;
+
+      return normalizeText(
+        `${brandName} ${subscription.tipo || ""} ${subscription.estado || ""}`
+      ).includes(normalizedFilter);
+    });
+  }
+
+  function renderAdminPositioning(filter=""){
+    const rows = filteredPositioningRows(filter);
+    const tbody = $("adminPositioningTable");
+    tbody.innerHTML = "";
+
+    const now = new Date();
+    const month = now.getMonth();
+    const year = now.getFullYear();
+
+    const active = adminData.subscriptions.filter(item=>item.estado === "activa");
+
+    const monthRevenue = adminData.subscriptions
+      .filter(item=>{
+        const date = item.fecha_inicio ? new Date(item.fecha_inicio) : null;
+        return date && date.getMonth() === month && date.getFullYear() === year;
+      })
+      .reduce((sum,item)=>sum + Number(item.monto || 0),0);
+
+    const expiring = active.filter(item=>{
+      if(!item.fecha_vencimiento) return false;
+      const days = (new Date(item.fecha_vencimiento) - now) / 86400000;
+      return days >= 0 && days <= 15;
+    });
+
+    const pending = adminData.subscriptions.filter(item=>item.estado === "pendiente");
+
+    $("adminPositioningActiveCount").textContent = active.length;
+    $("adminPositioningRevenue").textContent = formatMoney(monthRevenue);
+    $("adminPositioningExpiringCount").textContent = expiring.length;
+    $("adminPositioningPendingCount").textContent = pending.length;
+
+    if(!rows.length){
+      tbody.innerHTML = `<tr><td colspan="7"><div class="admin-empty">No hay pagos por posicionamiento.</div></td></tr>`;
+      return;
+    }
+
+    rows.forEach(subscription=>{
+      const startDate = subscription.fecha_inicio
+        ? new Date(subscription.fecha_inicio).toLocaleDateString("es-AR")
+        : "—";
+
+      const endDate = subscription.fecha_vencimiento
+        ? new Date(subscription.fecha_vencimiento).toLocaleDateString("es-AR")
+        : "—";
+
+      tbody.insertAdjacentHTML(
+        "beforeend",
+        `<tr>
+          <td><strong>${escapeHtml(adminBrandName(subscription.brand_id))}</strong></td>
+          <td>${escapeHtml(subscription.tipo || "—")}</td>
+          <td><strong>${escapeHtml(formatMoney(subscription.monto))}</strong></td>
+          <td>${escapeHtml(startDate)}</td>
+          <td>${escapeHtml(endDate)}</td>
+          <td>
+            <span class="admin-status ${subscription.estado === "activa" ? "" : "inactive"}">
+              ${escapeHtml(subscription.estado || "—")}
+            </span>
+          </td>
+          <td>${escapeHtml(subscription.referencia_pago || "—")}</td>
+        </tr>`
+      );
+    });
+  }
+
+  function renderAdminPositioningCharts(){
+    const revenueChart = $("adminPositioningChart");
+    const typesChart = $("adminPositioningTypesChart");
+
+    if(!revenueChart || !typesChart) return;
+
+    revenueChart.innerHTML = lineChartSvg(
+      ["Feb","Mar","Abr","May","Jun","Jul"],
+      [12000,18000,24000,31000,44000,63000]
+    );
+
+    const typeCounts = {};
+
+    adminData.subscriptions.forEach(item=>{
+      const key = item.tipo || "Otro";
+      typeCounts[key] = (typeCounts[key] || 0) + 1;
+    });
+
+    const items = Object.entries(typeCounts).map(([label,value])=>({
+      label,
+      value,
+      display:String(value)
+    }));
+
+    typesChart.innerHTML = donutChartSvg(
+      items.length ? items : [{label:"Sin datos",value:1,display:"0"}]
+    );
+  }
+
   async function openAdminPortal(){
     if(!isAdminUser()){
       alert("Esta cuenta no tiene permisos de administrador.");
@@ -6055,6 +6701,14 @@
     $("adminPortal").classList.add("visible");
     await loadAdminData();
   }
+
+  $("adminPositioningSearchButton").addEventListener("click",()=>{
+    renderAdminPositioning($("adminPositioningSearch").value);
+  });
+
+  $("adminPositioningSearch").addEventListener("input",()=>{
+    renderAdminPositioning($("adminPositioningSearch").value);
+  });
 
   $("adminBrandSearchButton").addEventListener("click",()=>{
     renderAdminBrands($("adminBrandSearch").value);
@@ -7244,6 +7898,9 @@
     $("storeColorText").value = currentBrand.color_texto || "#2d160a";
     $("storeColorButton").value = currentBrand.color_botones || "#2d160a";
     $("storeMercadoPagoLink").value = currentBrand.mercado_pago_link || "";
+    $("storeCoverTitle").value = currentBrand.portada_titulo || "";
+    $("storeCoverText").value = currentBrand.portada_texto || "";
+    $("storeShowCoverText").checked = currentBrand.mostrar_texto_portada !== false;
   }
 
   async function uploadBrandAsset(bucket,file,path){
@@ -7306,6 +7963,9 @@
           color_texto:$("storeColorText").value,
           color_botones:$("storeColorButton").value,
           mercado_pago_link:$("storeMercadoPagoLink").value.trim() || null,
+          portada_titulo:$("storeCoverTitle").value.trim() || null,
+          portada_texto:$("storeCoverText").value.trim() || null,
+          mostrar_texto_portada:$("storeShowCoverText").checked,
           updated_at:new Date().toISOString()
         })
         .eq("id",currentBrand.id)
@@ -7621,6 +8281,13 @@
         if(attribute === "data-seller-page" && page === "productos"){
           loadSellerProducts().catch(console.warn);
         }
+
+        if(attribute === "data-admin-page" && page === "posicionamiento"){
+          requestAnimationFrame(()=>{
+            renderAdminPositioning();
+            renderAdminPositioningCharts();
+          });
+        }
       });
     });
   }
@@ -7788,6 +8455,18 @@
   $("closeProductButton").addEventListener("click",()=>closeModal($("productModal")));
   $("closePublicBrandButton").addEventListener("click",()=>closeModal($("publicBrandModal")));
   $("closePublicProductButton").addEventListener("click",()=>closeModal($("publicProductModal")));
+  $("closePublicCatalogButton").addEventListener("click",()=>closeModal($("publicCatalogModal")));
+  $("closePublicCategoriesButton").addEventListener("click",()=>closeModal($("publicCategoriesModal")));
+
+  $("backCatalogToBrandButton").addEventListener("click",()=>{
+    closeModal($("publicCatalogModal"));
+    if(activePublicBrand) openPublicBrand(activePublicBrand.id);
+  });
+
+  $("backCategoriesToBrandButton").addEventListener("click",()=>{
+    closeModal($("publicCategoriesModal"));
+    if(activePublicBrand) openPublicBrand(activePublicBrand.id);
+  });
 
   $("backToPublicBrandButton").addEventListener("click",()=>{
     closeModal($("publicProductModal"));
@@ -7803,7 +8482,9 @@
     $("brandModal"),
     $("productModal"),
     $("publicBrandModal"),
-    $("publicProductModal")
+    $("publicProductModal"),
+    $("publicCatalogModal"),
+    $("publicCategoriesModal")
   ].forEach(backgroundClose);
 </script>
 
