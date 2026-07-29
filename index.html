@@ -23,254 +23,1031 @@
       --cream-2:#FFF2E9;
       --dark:#211D1B;
       --gray:#706762;
+      --muted:#9B918C;
       --border:#EEDFD7;
-      --white:#fff;
+      --white:#FFFFFF;
       --green:#2D8A62;
       --red:#B64839;
+      --shadow:0 20px 60px rgba(50,25,12,.10);
     }
 
     *{box-sizing:border-box;margin:0;padding:0}
     html{scroll-behavior:smooth}
-    body{font-family:"DM Sans",sans-serif;background:var(--cream);color:var(--dark);overflow-x:hidden}
-    button,input,select,textarea{font:inherit}
-    button{cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
-    .hidden{display:none!important}
-    .section-label{color:var(--orange);font-size:11px;font-weight:800;letter-spacing:.13em;text-transform:uppercase}
+    body{
+      font-family:"DM Sans",sans-serif;
+      background:var(--cream);
+      color:var(--dark);
+      overflow-x:hidden;
+    }
 
-    .home{
+    button,input,textarea,select{font:inherit}
+    button{cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+    img{max-width:100%;display:block}
+    .hidden{display:none!important}
+
+    .brand-word{
+      color:var(--orange);
+      font-size:34px;
+      line-height:1;
+      font-weight:800;
+      letter-spacing:-2px;
+    }
+
+    .eyebrow{
+      color:var(--orange);
+      text-transform:uppercase;
+      letter-spacing:.14em;
+      font-size:11px;
+      font-weight:800;
+    }
+
+    .primary-button,
+    .secondary-button,
+    .ghost-button{
+      min-height:46px;
+      padding:0 17px;
+      border-radius:13px;
+      font-weight:800;
+    }
+
+    .primary-button{
+      border:none;
+      background:var(--orange);
+      color:#fff;
+    }
+
+    .primary-button:hover{background:var(--orange-dark)}
+    .secondary-button{border:1px solid var(--border);background:#fff;color:var(--dark)}
+    .ghost-button{border:none;background:transparent;color:var(--gray)}
+
+    /* =====================================================
+       INICIO: EL MAPA ES LA PÁGINA PRINCIPAL
+    ===================================================== */
+
+    .landing{
       min-height:100vh;
       display:grid;
-      grid-template-columns:44% 56%;
-      background:radial-gradient(circle at 80% 45%,rgba(235,104,65,.10),transparent 32%),var(--cream);
+      grid-template-columns:38% 62%;
+      background:
+        radial-gradient(circle at 76% 48%,rgba(235,104,65,.11),transparent 31%),
+        var(--cream);
     }
 
-    .hero{min-height:100vh;padding:40px 3vw 40px 5vw;display:flex;flex-direction:column;position:relative;z-index:5}
-    .hero-top{display:flex;justify-content:space-between;align-items:center;gap:20px}
-    .logo,.market-logo,.modal-brand,.portal-logo{color:var(--orange);font-weight:800;letter-spacing:-1.5px}
-    .logo{font-size:36px}
+    .landing-copy{
+      min-height:100vh;
+      padding:34px 3vw 38px 5vw;
+      display:flex;
+      flex-direction:column;
+      position:relative;
+      z-index:4;
+    }
+
+    .landing-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:15px;
+    }
 
     .session-chip{
-      display:none;align-items:center;gap:7px;padding:7px 11px;border:1px solid rgba(235,104,65,.18);
-      border-radius:100px;background:rgba(255,255,255,.72);color:var(--gray);font-size:11px
+      display:none;
+      align-items:center;
+      gap:7px;
+      padding:8px 11px;
+      border:1px solid rgba(235,104,65,.18);
+      border-radius:100px;
+      background:rgba(255,255,255,.74);
+      color:var(--gray);
+      font-size:11px;
     }
+
     .session-chip.visible{display:flex}
-    .session-dot{width:7px;height:7px;border-radius:50%;background:#42A87C}
+    .session-dot{width:7px;height:7px;border-radius:50%;background:#43A47B}
 
-    .hero-content{flex:1;max-width:680px;display:flex;flex-direction:column;justify-content:center}
-    .eyebrow{margin-bottom:19px;color:var(--orange);font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
-    h1{font-family:"Playfair Display",serif;font-size:clamp(54px,5.4vw,92px);line-height:.95;letter-spacing:-.055em;font-weight:600}
-    h1 span{color:var(--orange)}
-    .hero-line{width:70px;height:4px;margin:27px 0 23px;border-radius:100px;background:var(--orange)}
-    .hero-text{max-width:600px;color:var(--gray);font-size:17px;line-height:1.6}
-    .hero-buttons{margin-top:31px;display:flex;gap:12px}
-    .hero-button{min-height:56px;padding:0 23px;border-radius:15px;font-weight:800}
-    .hero-button.primary{border:none;background:var(--orange);color:white}
-    .hero-button.secondary{border:1px solid rgba(235,104,65,.22);background:rgba(255,255,255,.67);color:var(--dark)}
+    .landing-message{
+      flex:1;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      max-width:600px;
+    }
 
-    .map-area{min-height:100vh;position:relative;overflow:hidden}
-    .map-heading{position:absolute;top:36px;left:30px;z-index:20;pointer-events:none}
-    .map-heading span{display:block;color:var(--orange);font-size:11px;font-weight:800;letter-spacing:.13em;text-transform:uppercase}
-    .map-heading strong{display:block;margin-top:4px;font-family:"Playfair Display",serif;font-size:25px}
+    .landing-message h1{
+      margin-top:20px;
+      font-family:"Playfair Display",serif;
+      font-size:clamp(48px,5vw,82px);
+      line-height:.97;
+      letter-spacing:-.055em;
+      font-weight:600;
+    }
+
+    .landing-message h1 span{color:var(--orange)}
+    .landing-message p{
+      margin-top:24px;
+      max-width:550px;
+      color:var(--gray);
+      font-size:16px;
+      line-height:1.65;
+    }
+
+    .landing-actions{
+      margin-top:29px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+
+    .map-panel{
+      min-height:100vh;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .map-heading{
+      position:absolute;
+      z-index:10;
+      left:28px;
+      top:31px;
+      pointer-events:none;
+    }
+
+    .map-heading strong{
+      display:block;
+      margin-top:4px;
+      font-family:"Playfair Display",serif;
+      font-size:27px;
+    }
+
     #chartdiv{width:100%;height:100vh}
 
     .province-card{
-      position:absolute;right:3vw;bottom:4vh;width:260px;padding:18px;z-index:30;opacity:0;pointer-events:none;
-      transform:translateY(15px);border:1px solid rgba(235,104,65,.1);border-radius:19px;background:rgba(255,255,255,.95);
-      box-shadow:0 20px 50px rgba(60,30,15,.10);transition:.2s
+      position:absolute;
+      z-index:20;
+      right:3vw;
+      bottom:4vh;
+      width:280px;
+      padding:19px;
+      border:1px solid rgba(235,104,65,.12);
+      border-radius:20px;
+      background:rgba(255,255,255,.96);
+      box-shadow:var(--shadow);
+      opacity:0;
+      pointer-events:none;
+      transform:translateY(15px);
+      transition:.22s;
     }
-    .province-card.visible{opacity:1;pointer-events:auto;transform:none}
-    .province-card small{display:block;color:var(--gray);font-size:10px;font-weight:800;text-transform:uppercase}
-    .province-card strong{display:block;margin-top:4px;font-family:"Playfair Display",serif;font-size:27px}
-    .province-card p{margin-top:6px;color:var(--gray);font-size:12px;line-height:1.45}
-    .province-card button{width:100%;margin-top:13px;padding:13px;border:none;border-radius:12px;background:var(--orange);color:white;font-weight:800}
-    .clear-province{margin-top:10px;color:var(--gray);text-align:center;font-size:11px;cursor:pointer}
 
-    .explore{padding:105px 6% 115px;position:relative;z-index:100;background:white}
-    .section-heading{max-width:850px;margin-bottom:50px}
-    .section-heading h2{margin-top:10px;font-family:"Playfair Display",serif;font-size:clamp(42px,5vw,70px);line-height:1;letter-spacing:-.045em}
-    .section-heading p{margin-top:15px;color:var(--gray);font-size:17px}
-    .category-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:15px}
-    .category{
-      min-height:220px;padding:23px;display:flex;flex-direction:column;position:relative;z-index:101;border:1px solid var(--border);
-      border-radius:23px;background:var(--cream);cursor:pointer;user-select:none;transition:.2s
+    .province-card.visible{
+      opacity:1;
+      pointer-events:auto;
+      transform:none;
     }
-    .category:hover{transform:translateY(-4px);border-color:rgba(235,104,65,.45)}
-    .category-icon{width:46px;height:46px;display:grid;place-items:center;border-radius:14px;background:var(--cream-2);font-size:24px;pointer-events:none}
-    .category strong{margin-top:auto;font-size:20px;pointer-events:none}
-    .category p{margin-top:5px;color:var(--gray);font-size:13px;line-height:1.4;pointer-events:none}
 
-    .about{padding:100px 6%}
-    .about-inner{max-width:1250px;margin:auto;display:grid;grid-template-columns:.8fr 1.2fr;gap:70px;align-items:center}
-    .about-ar{color:rgba(235,104,65,.12);font-family:"Playfair Display",serif;font-size:clamp(100px,15vw,220px);line-height:.7}
-    .about h3{font-family:"Playfair Display",serif;font-size:clamp(38px,4vw,62px);line-height:1}
-    .about p{max-width:650px;margin-top:19px;color:var(--gray);font-size:16px;line-height:1.65}
-
-    footer{padding:55px 6% 32px;background:var(--dark);color:white}
-    .footer-logo{color:var(--orange);font-size:29px;font-weight:800}
-    .footer-copy{margin-top:6px;color:#BBB1AC;font-size:12px}
-    .footer-bottom{margin-top:45px;padding-top:20px;display:flex;justify-content:space-between;gap:20px;border-top:1px solid rgba(255,255,255,.08);color:#817873;font-size:10px}
-    .footer-links{display:flex;gap:18px}
-    .admin-link{cursor:pointer}
-
-    .marketplace{display:none;min-height:100vh;background:#FBF8F6}
-    .marketplace.visible{display:block}
-    .market-header{
-      min-height:76px;position:sticky;top:0;z-index:500;padding:0 5%;display:flex;align-items:center;justify-content:space-between;
-      gap:20px;background:rgba(255,255,255,.96);backdrop-filter:blur(16px);border-bottom:1px solid #EEE5E0
+    .province-card small{
+      display:block;
+      color:var(--gray);
+      text-transform:uppercase;
+      font-size:9px;
+      font-weight:800;
+      letter-spacing:.08em;
     }
-    .market-logo{font-size:27px}
-    .market-header-right{display:flex;align-items:center;gap:9px}
-    .province-pill,.account-small{padding:9px 13px;border:1px solid var(--border);border-radius:100px;background:white;font-size:11px;font-weight:800}
-    .province-pill{background:var(--cream)}
-    .market-content{width:min(1220px,90%);margin:auto;padding:50px 0 100px}
-    .breadcrumb{display:flex;flex-wrap:wrap;align-items:center;gap:7px;color:var(--gray);font-size:11px}
-    .breadcrumb button{border:none;background:none;color:var(--gray)}
-    .market-hero{margin-top:25px;display:flex;align-items:flex-end;justify-content:space-between;gap:25px}
-    .market-hero h2{margin-top:7px;font-family:"Playfair Display",serif;font-size:clamp(44px,5vw,70px);line-height:.98}
-    .market-hero p{max-width:680px;margin-top:14px;color:var(--gray);font-size:14px;line-height:1.6}
-    .back-button{min-height:43px;padding:0 16px;border:1px solid var(--border);border-radius:12px;background:white;font-weight:800}
-    .loader-box{display:none;padding:45px;color:var(--gray);text-align:center}
-    .loader-box.visible{display:block}
-    .loader{width:30px;height:30px;margin:0 auto 12px;border:3px solid #F0DFD7;border-top-color:var(--orange);border-radius:50%;animation:spin .7s linear infinite}
+
+    .province-card strong{
+      display:block;
+      margin-top:5px;
+      font-family:"Playfair Display",serif;
+      font-size:29px;
+    }
+
+    .province-card p{
+      margin-top:7px;
+      color:var(--gray);
+      font-size:12px;
+      line-height:1.5;
+    }
+
+    .province-card .primary-button{
+      width:100%;
+      margin-top:14px;
+    }
+
+    .clear-province{
+      margin-top:10px;
+      text-align:center;
+      color:var(--gray);
+      font-size:10px;
+      cursor:pointer;
+    }
+
+    /* =====================================================
+       PANTALLA DE PROVINCIA
+    ===================================================== */
+
+    .province-explorer{
+      display:none;
+      min-height:100vh;
+      background:#FBF8F6;
+    }
+
+    .province-explorer.visible{display:block}
+
+    .explorer-header{
+      position:sticky;
+      top:0;
+      z-index:1000;
+      background:rgba(255,255,255,.97);
+      backdrop-filter:blur(16px);
+      border-bottom:1px solid #EEE5E0;
+    }
+
+    .explorer-mainbar{
+      min-height:72px;
+      padding:0 5%;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+    }
+
+    .explorer-mainbar-left{
+      display:flex;
+      align-items:center;
+      gap:18px;
+      min-width:0;
+    }
+
+    .province-heading{
+      min-width:0;
+    }
+
+    .province-heading small{
+      display:block;
+      color:var(--gray);
+      font-size:9px;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.1em;
+    }
+
+    .province-heading strong{
+      display:block;
+      margin-top:2px;
+      max-width:280px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      font-family:"Playfair Display",serif;
+      font-size:24px;
+    }
+
+    .explorer-actions{
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+
+    .category-strip{
+      padding:0 5% 12px;
+      display:flex;
+      gap:8px;
+      overflow-x:auto;
+      scrollbar-width:none;
+    }
+
+    .category-strip::-webkit-scrollbar{display:none}
+
+    .category-tab{
+      flex:0 0 auto;
+      min-height:40px;
+      padding:0 15px;
+      border:1px solid var(--border);
+      border-radius:100px;
+      background:#fff;
+      color:var(--gray);
+      font-size:11px;
+      font-weight:800;
+    }
+
+    .category-tab.active{
+      border-color:var(--orange);
+      background:var(--orange);
+      color:#fff;
+    }
+
+    .explorer-body{
+      width:min(1260px,92%);
+      margin:auto;
+      padding:36px 0 100px;
+    }
+
+    .explorer-title-row{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:20px;
+    }
+
+    .explorer-title-row h2{
+      margin-top:8px;
+      font-family:"Playfair Display",serif;
+      font-size:clamp(38px,5vw,63px);
+      line-height:.98;
+      letter-spacing:-.04em;
+    }
+
+    .explorer-title-row p{
+      margin-top:11px;
+      color:var(--gray);
+      font-size:13px;
+      line-height:1.55;
+    }
+
+    .subcategories{
+      display:none;
+      margin-top:27px;
+    }
+
+    .subcategories.visible{display:block}
+
+    .subcategories-label{
+      margin-bottom:11px;
+      color:var(--gray);
+      font-size:10px;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.1em;
+    }
+
+    .subcategory-strip{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+
+    .subcategory-tab{
+      min-height:37px;
+      padding:0 13px;
+      border:1px solid var(--border);
+      border-radius:100px;
+      background:#fff;
+      color:var(--gray);
+      font-size:10px;
+      font-weight:800;
+    }
+
+    .subcategory-tab.active{
+      border-color:var(--dark);
+      background:var(--dark);
+      color:#fff;
+    }
+
+    .results-toolbar{
+      margin-top:30px;
+      padding-top:22px;
+      border-top:1px solid #ECE3DE;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:15px;
+    }
+
+    .results-toolbar strong{
+      font-size:13px;
+    }
+
+    .results-toolbar span{
+      color:var(--gray);
+      font-size:11px;
+    }
+
+    .brand-loader{
+      display:none;
+      padding:50px 20px;
+      text-align:center;
+      color:var(--gray);
+      font-size:12px;
+    }
+
+    .brand-loader.visible{display:block}
+
+    .spinner{
+      width:30px;
+      height:30px;
+      margin:0 auto 12px;
+      border:3px solid #EEDFD7;
+      border-top-color:var(--orange);
+      border-radius:50%;
+      animation:spin .72s linear infinite;
+    }
+
     @keyframes spin{to{transform:rotate(360deg)}}
-    .subcategories{margin-top:45px}
-    .subcategories-top{margin-bottom:18px;display:flex;align-items:center;justify-content:space-between}
-    .subcategories-top h3{font-family:"Playfair Display",serif;font-size:30px}
-    .subcategory-count{color:var(--gray);font-size:11px}
-    .subcategory-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-    .subcategory{min-height:140px;padding:19px;display:flex;flex-direction:column;border:1px solid #E8DFDA;border-radius:18px;background:white;cursor:pointer;transition:.2s}
-    .subcategory:hover{transform:translateY(-3px);border-color:rgba(235,104,65,.45)}
-    .subcategory small{color:var(--orange);font-size:9px;font-weight:800;text-transform:uppercase;pointer-events:none}
-    .subcategory strong{margin-top:auto;font-size:17px;pointer-events:none}
-    .subcategory div{margin-top:7px;color:var(--gray);font-size:11px;pointer-events:none}
-    .results{display:none;margin-top:45px}
-    .results.visible{display:block}
-    .results h3{font-family:"Playfair Display",serif;font-size:31px}
-    .results p{margin-top:5px;color:var(--gray);font-size:12px}
-    .empty-box{display:none;margin-top:35px;padding:40px 25px;border:1px dashed #DDCDC5;border-radius:20px;background:white;text-align:center}
-    .empty-box.visible{display:block}
-    .empty-box strong{display:block;font-family:"Playfair Display",serif;font-size:24px}
-    .empty-box p{max-width:520px;margin:8px auto 0;color:var(--gray);font-size:12px;line-height:1.5}
-    .retry-button{min-height:41px;margin-top:16px;padding:0 15px;border:none;border-radius:11px;background:var(--orange);color:white;font-weight:800}
+
+    .brand-grid{
+      margin-top:18px;
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:16px;
+    }
+
+    .brand-card{
+      overflow:hidden;
+      border:1px solid var(--border);
+      border-radius:21px;
+      background:#fff;
+      box-shadow:0 8px 28px rgba(55,28,15,.05);
+    }
+
+    .brand-card-cover{
+      height:145px;
+      display:grid;
+      place-items:center;
+      background:
+        linear-gradient(135deg,rgba(235,104,65,.10),rgba(244,192,174,.42)),
+        var(--cream);
+      color:var(--orange);
+      font-family:"Playfair Display",serif;
+      font-size:44px;
+    }
+
+    .brand-card-body{padding:18px}
+
+    .brand-card-top{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+    }
+
+    .brand-card-name{
+      font-size:18px;
+      font-weight:800;
+    }
+
+    .brand-badge{
+      flex:none;
+      padding:5px 8px;
+      border-radius:100px;
+      background:var(--cream-2);
+      color:var(--orange-dark);
+      font-size:8px;
+      font-weight:800;
+      text-transform:uppercase;
+    }
+
+    .brand-location{
+      margin-top:4px;
+      color:var(--gray);
+      font-size:10px;
+    }
+
+    .brand-description{
+      margin-top:12px;
+      min-height:38px;
+      color:var(--gray);
+      font-size:11px;
+      line-height:1.55;
+    }
+
+    .mini-products{
+      margin-top:14px;
+      display:grid;
+      gap:6px;
+    }
+
+    .mini-product{
+      padding:9px 10px;
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      border-radius:10px;
+      background:#FBF8F6;
+      font-size:10px;
+    }
+
+    .brand-card-button{
+      width:100%;
+      min-height:42px;
+      margin-top:14px;
+      border:none;
+      border-radius:11px;
+      background:var(--dark);
+      color:#fff;
+      font-size:11px;
+      font-weight:800;
+    }
+
+    .empty-state{
+      display:none;
+      margin-top:25px;
+      padding:42px 25px;
+      border:1px dashed #DCCBC2;
+      border-radius:20px;
+      background:#fff;
+      text-align:center;
+    }
+
+    .empty-state.visible{display:block}
+
+    .empty-state strong{
+      display:block;
+      font-family:"Playfair Display",serif;
+      font-size:25px;
+    }
+
+    .empty-state p{
+      max-width:520px;
+      margin:8px auto 0;
+      color:var(--gray);
+      font-size:12px;
+      line-height:1.55;
+    }
+
+    /* =====================================================
+       MODALES
+    ===================================================== */
 
     .modal{
-      position:fixed;inset:0;z-index:5000;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;
-      background:rgba(20,15,13,.58);backdrop-filter:blur(12px);transition:.2s
+      position:fixed;
+      inset:0;
+      z-index:5000;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      opacity:0;
+      pointer-events:none;
+      background:rgba(20,15,13,.58);
+      backdrop-filter:blur(12px);
+      transition:.2s;
     }
+
     .modal.open{opacity:1;pointer-events:auto}
-    .modal-card{width:min(560px,100%);max-height:calc(100vh - 40px);overflow:auto;padding:30px;border-radius:24px;background:white;box-shadow:0 30px 100px rgba(0,0,0,.22)}
-    .modal-top{display:flex;justify-content:space-between;align-items:center}
+
+    .modal-card{
+      width:min(560px,100%);
+      max-height:calc(100vh - 40px);
+      overflow:auto;
+      padding:30px;
+      border-radius:24px;
+      background:#fff;
+      box-shadow:0 30px 100px rgba(0,0,0,.22);
+    }
+
+    .modal-top{display:flex;align-items:center;justify-content:space-between}
     .modal-brand{font-size:25px}
-    .modal-close{width:36px;height:36px;display:grid;place-items:center;border:none;border-radius:50%;background:#F7F2EF;font-size:22px}
-    .modal-card h2{margin-top:23px;font-family:"Playfair Display",serif;font-size:35px}
-    .modal-description{margin-top:7px;color:var(--gray);font-size:12px;line-height:1.5}
-    .auth-tabs{margin-top:20px;padding:4px;display:grid;grid-template-columns:1fr 1fr;gap:4px;border-radius:13px;background:#F7F3F1}
-    .auth-tab{padding:10px;border:none;border-radius:10px;background:transparent;color:var(--gray);font-size:11px;font-weight:800}
-    .auth-tab.active{background:white;color:var(--dark)}
+
+    .modal-close{
+      width:36px;
+      height:36px;
+      display:grid;
+      place-items:center;
+      border:none;
+      border-radius:50%;
+      background:#F7F2EF;
+      font-size:22px;
+    }
+
+    .modal-card h2{
+      margin-top:23px;
+      font-family:"Playfair Display",serif;
+      font-size:35px;
+    }
+
+    .modal-description{
+      margin-top:7px;
+      color:var(--gray);
+      font-size:12px;
+      line-height:1.5;
+    }
+
+    .auth-tabs{
+      margin-top:20px;
+      padding:4px;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:4px;
+      border-radius:13px;
+      background:#F7F3F1;
+    }
+
+    .auth-tab{
+      padding:10px;
+      border:none;
+      border-radius:10px;
+      background:transparent;
+      color:var(--gray);
+      font-size:11px;
+      font-weight:800;
+    }
+
+    .auth-tab.active{background:#fff;color:var(--dark)}
     .auth-panel{display:none}
     .auth-panel.active{display:block}
-    .seller-intent{display:none;margin-top:14px;padding:12px;border-radius:12px;background:var(--cream-2);color:var(--gray);font-size:11px;line-height:1.5}
+
+    .seller-intent{
+      display:none;
+      margin-top:14px;
+      padding:12px;
+      border-radius:12px;
+      background:var(--cream-2);
+      color:var(--gray);
+      font-size:11px;
+      line-height:1.5;
+    }
+
     .seller-intent.visible{display:block}
-    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+    .form-row{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+    }
+
     .form-group{margin-top:15px}
-    .form-group label{display:block;margin-bottom:6px;font-size:10px;font-weight:800}
-    .form-control{width:100%;padding:13px;border:1px solid var(--border);border-radius:11px;outline:none;background:white}
+
+    .form-group label{
+      display:block;
+      margin-bottom:6px;
+      font-size:10px;
+      font-weight:800;
+    }
+
+    .form-control{
+      width:100%;
+      padding:13px;
+      border:1px solid var(--border);
+      border-radius:11px;
+      background:#fff;
+      outline:none;
+    }
+
     .form-control:focus{border-color:var(--orange)}
     textarea.form-control{min-height:100px;resize:vertical}
+    .readonly{background:#F8F5F3;color:var(--gray)}
+
     .password-wrap{position:relative}
     .password-wrap input{padding-right:65px}
-    .password-toggle{position:absolute;right:10px;top:50%;transform:translateY(-50%);border:none;background:none;color:var(--gray);font-size:10px;font-weight:800}
-    .submit-button{width:100%;min-height:48px;margin-top:20px;border:none;border-radius:12px;background:var(--orange);color:white;font-weight:800}
+
+    .password-toggle{
+      position:absolute;
+      right:10px;
+      top:50%;
+      transform:translateY(-50%);
+      border:none;
+      background:none;
+      color:var(--gray);
+      font-size:10px;
+      font-weight:800;
+    }
+
+    .submit-button{
+      width:100%;
+      min-height:48px;
+      margin-top:20px;
+      border:none;
+      border-radius:12px;
+      background:var(--orange);
+      color:#fff;
+      font-weight:800;
+    }
+
     .submit-button:disabled{opacity:.55}
-    .message{display:none;margin-top:12px;padding:11px;border-radius:10px;font-size:11px;line-height:1.45}
+
+    .message{
+      display:none;
+      margin-top:12px;
+      padding:11px;
+      border-radius:10px;
+      font-size:11px;
+      line-height:1.45;
+    }
+
     .message.visible{display:block}
     .message.error{background:#FFF0ED;color:#963B2F}
     .message.success{background:#ECF8F2;color:#276A4E}
 
-    .account-card{margin-top:20px;padding:18px;border:1px solid var(--border);border-radius:17px;background:var(--cream)}
-    .avatar{width:54px;height:54px;display:grid;place-items:center;border-radius:50%;background:var(--orange);color:white;font-family:"Playfair Display",serif;font-size:23px}
+    .account-card{
+      margin-top:20px;
+      padding:18px;
+      border:1px solid var(--border);
+      border-radius:17px;
+      background:var(--cream);
+    }
+
+    .avatar{
+      width:54px;
+      height:54px;
+      display:grid;
+      place-items:center;
+      border-radius:50%;
+      background:var(--orange);
+      color:#fff;
+      font-family:"Playfair Display",serif;
+      font-size:23px;
+    }
+
     .account-name{margin-top:12px;font-size:19px;font-weight:800}
     .account-email{margin-top:3px;color:var(--gray);font-size:11px}
-    .account-role{display:inline-flex;margin-top:10px;padding:6px 9px;border-radius:100px;background:var(--cream-2);color:var(--orange-dark);font-size:9px;font-weight:800;text-transform:uppercase}
-    .account-actions{margin-top:16px;display:grid;gap:8px}
-    .account-action{min-height:44px;border:1px solid var(--border);border-radius:11px;background:white;font-weight:700}
-    .account-action.primary{border-color:var(--orange);background:var(--orange);color:white}
+
+    .account-role{
+      display:inline-flex;
+      margin-top:10px;
+      padding:6px 9px;
+      border-radius:100px;
+      background:var(--cream-2);
+      color:var(--orange-dark);
+      font-size:9px;
+      font-weight:800;
+      text-transform:uppercase;
+    }
+
+    .account-actions{
+      margin-top:16px;
+      display:grid;
+      gap:8px;
+    }
+
+    .account-action{
+      min-height:44px;
+      border:1px solid var(--border);
+      border-radius:11px;
+      background:#fff;
+      font-weight:700;
+    }
+
+    .account-action.primary{
+      border-color:var(--orange);
+      background:var(--orange);
+      color:#fff;
+    }
+
     .account-action.logout{color:var(--red)}
 
-    .steps{display:flex;gap:6px;margin-top:20px}
-    .step-dot{height:5px;flex:1;border-radius:100px;background:#EEE4DF}
+    /* =====================================================
+       ALTA DE MARCA
+    ===================================================== */
+
+    .steps{
+      margin-top:20px;
+      display:flex;
+      gap:6px;
+    }
+
+    .step-dot{
+      height:5px;
+      flex:1;
+      border-radius:100px;
+      background:#EEE4DF;
+    }
+
     .step-dot.active{background:var(--orange)}
     .brand-step{display:none}
     .brand-step.active{display:block}
-    .step-actions{display:flex;justify-content:space-between;gap:10px;margin-top:22px}
-    .step-actions button{min-height:44px;padding:0 17px;border-radius:11px;font-weight:800}
-    .step-back{border:1px solid var(--border);background:white}
-    .step-next{border:none;background:var(--orange);color:white}
-    .email-readonly{background:#F8F5F3;color:var(--gray)}
-    .shipping-tools{margin-top:15px;padding:13px;border:1px solid var(--border);border-radius:13px;background:var(--cream)}
-    .check-row{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:700}
-    .check-row input{width:17px;height:17px;accent-color:var(--orange)}
-    .province-checks{margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px;max-height:260px;overflow:auto;padding-right:4px}
-    .province-option{display:flex;align-items:center;gap:8px;padding:10px;border:1px solid var(--border);border-radius:10px;background:white;font-size:11px}
+
+    .step-actions{
+      margin-top:22px;
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+    }
+
+    .step-actions button{
+      min-height:44px;
+      padding:0 17px;
+      border-radius:11px;
+      font-weight:800;
+    }
+
+    .step-back{border:1px solid var(--border);background:#fff}
+    .step-next{border:none;background:var(--orange);color:#fff}
+
+    .shipping-tools{
+      margin-top:15px;
+      padding:13px;
+      border:1px solid var(--border);
+      border-radius:13px;
+      background:var(--cream);
+    }
+
+    .check-row{
+      display:flex;
+      align-items:center;
+      gap:9px;
+      font-size:12px;
+      font-weight:700;
+    }
+
+    .check-row input{
+      width:17px;
+      height:17px;
+      accent-color:var(--orange);
+    }
+
+    .province-checks{
+      margin-top:12px;
+      max-height:280px;
+      overflow:auto;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:8px;
+    }
+
+    .province-option{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      padding:10px;
+      border:1px solid var(--border);
+      border-radius:10px;
+      background:#fff;
+      font-size:11px;
+    }
+
     .province-option input{accent-color:var(--orange)}
 
-    .portal{position:fixed;inset:0;z-index:5800;display:none;background:#F6F3F1}
+    /* =====================================================
+       CUENTA Y PANEL DE MARCA
+    ===================================================== */
+
+    .portal{
+      position:fixed;
+      inset:0;
+      z-index:5800;
+      display:none;
+      background:#F6F3F1;
+    }
+
     .portal.visible{display:flex}
-    .portal-sidebar{width:255px;padding:25px 17px;display:flex;flex-direction:column;background:var(--dark)}
-    .portal-logo{padding:0 10px 25px;font-size:27px}
+
+    .portal-sidebar{
+      width:255px;
+      padding:25px 17px;
+      display:flex;
+      flex-direction:column;
+      background:var(--dark);
+    }
+
+    .portal-logo{
+      padding:0 10px 25px;
+      font-size:27px;
+    }
+
     .portal-menu{display:grid;gap:3px}
-    .portal-nav{width:100%;padding:11px 12px;border:none;border-radius:10px;background:transparent;color:#B9AEAA;text-align:left;font-size:12px;font-weight:700}
-    .portal-nav.active{background:rgba(235,104,65,.15);color:white}
-    .portal-exit{margin-top:auto;padding:11px;border:1px solid rgba(255,255,255,.08);border-radius:10px;background:none;color:#AAA19D}
-    .portal-main{flex:1;min-width:0;overflow:auto}
-    .portal-header{min-height:77px;padding:0 30px;display:flex;align-items:center;justify-content:space-between;background:white;border-bottom:1px solid #E8E1DD}
-    .portal-header h2{font-family:"Playfair Display",serif;font-size:28px}
+
+    .portal-nav{
+      width:100%;
+      padding:11px 12px;
+      border:none;
+      border-radius:10px;
+      background:transparent;
+      color:#B9AEAA;
+      text-align:left;
+      font-size:12px;
+      font-weight:700;
+    }
+
+    .portal-nav.active{
+      background:rgba(235,104,65,.15);
+      color:#fff;
+    }
+
+    .portal-exit{
+      margin-top:auto;
+      padding:11px;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:10px;
+      background:none;
+      color:#AAA19D;
+    }
+
+    .portal-main{
+      flex:1;
+      min-width:0;
+      overflow:auto;
+    }
+
+    .portal-header{
+      min-height:77px;
+      padding:0 30px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      background:#fff;
+      border-bottom:1px solid #E8E1DD;
+    }
+
+    .portal-header h2{
+      font-family:"Playfair Display",serif;
+      font-size:28px;
+    }
+
     .portal-content{padding:30px}
     .portal-section{display:none}
     .portal-section.active{display:block}
-    .portal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}
-    .portal-stat{padding:19px;border:1px solid #E6DFDB;border-radius:16px;background:white}
-    .portal-stat small{color:var(--gray);font-size:9px;font-weight:800;text-transform:uppercase}
-    .portal-stat strong{display:block;margin-top:12px;font-family:"Playfair Display",serif;font-size:33px}
-    .panel{margin-top:17px;padding:23px;border:1px solid #E6DFDB;border-radius:17px;background:white}
-    .panel-top{display:flex;justify-content:space-between;align-items:center;gap:15px}
-    .panel-top button{min-height:40px;padding:0 14px;border:none;border-radius:10px;background:var(--orange);color:white;font-size:11px;font-weight:800}
-    .list{margin-top:15px;display:grid;gap:9px}
-    .list-row{padding:14px;border:1px solid #ECE5E1;border-radius:12px;background:#FCFAF9;display:flex;align-items:center;justify-content:space-between;gap:15px}
+
+    .portal-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:13px;
+    }
+
+    .portal-stat{
+      padding:19px;
+      border:1px solid #E6DFDB;
+      border-radius:16px;
+      background:#fff;
+    }
+
+    .portal-stat small{
+      color:var(--gray);
+      font-size:9px;
+      font-weight:800;
+      text-transform:uppercase;
+    }
+
+    .portal-stat strong{
+      display:block;
+      margin-top:12px;
+      font-family:"Playfair Display",serif;
+      font-size:33px;
+    }
+
+    .panel{
+      margin-top:17px;
+      padding:23px;
+      border:1px solid #E6DFDB;
+      border-radius:17px;
+      background:#fff;
+    }
+
+    .panel-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:15px;
+    }
+
+    .panel-top button{
+      min-height:40px;
+      padding:0 14px;
+      border:none;
+      border-radius:10px;
+      background:var(--orange);
+      color:#fff;
+      font-size:11px;
+      font-weight:800;
+    }
+
+    .list{
+      margin-top:15px;
+      display:grid;
+      gap:9px;
+    }
+
+    .list-row{
+      padding:14px;
+      border:1px solid #ECE5E1;
+      border-radius:12px;
+      background:#FCFAF9;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:15px;
+    }
+
     .list-row strong{font-size:12px}
     .list-row p{margin-top:3px;color:var(--gray);font-size:10px}
-    .empty-panel{margin-top:15px;padding:24px;border:1px dashed #DED2CC;border-radius:13px;color:var(--gray);text-align:center;font-size:12px}
 
-    @media(max-width:1050px){
-      .category-grid{grid-template-columns:repeat(3,1fr)}
-      .subcategory-grid{grid-template-columns:repeat(3,1fr)}
+    .empty-panel{
+      margin-top:15px;
+      padding:24px;
+      border:1px dashed #DED2CC;
+      border-radius:13px;
+      color:var(--gray);
+      text-align:center;
+      font-size:12px;
+    }
+
+    @media(max-width:1060px){
+      .brand-grid{grid-template-columns:repeat(2,1fr)}
       .portal-grid{grid-template-columns:repeat(2,1fr)}
     }
 
     @media(max-width:850px){
-      .home{display:block}
-      .hero{min-height:auto;padding:28px 22px 52px}
-      .hero-content{padding-top:55px}
-      h1{font-size:clamp(49px,13vw,73px)}
-      .hero-buttons{flex-direction:column}
-      .map-area{min-height:auto;padding-top:25px;overflow:visible}
-      .map-heading{position:relative;top:auto;left:auto;padding:0 22px 8px}
+      .landing{display:block}
+      .landing-copy{min-height:auto;padding:27px 21px 44px}
+      .landing-message{padding-top:60px}
+      .landing-message h1{font-size:clamp(48px,13vw,72px)}
+      .landing-actions{flex-direction:column}
+      .map-panel{min-height:auto;padding-top:20px;overflow:visible}
+      .map-heading{position:relative;top:auto;left:auto;padding:0 21px 8px}
       #chartdiv{height:650px}
       .province-card{left:17px;right:auto;bottom:18px;width:calc(100% - 34px)}
-      .explore{z-index:1000;isolation:isolate}
-      .category-grid{grid-template-columns:1fr 1fr;gap:10px}
-      .category{min-height:145px;padding:16px;z-index:1001;pointer-events:auto!important}
-      .category:last-child:nth-child(odd){grid-column:1/-1;min-height:105px}
-      .category strong{font-size:16px}
-      .category p{font-size:11px}
-      .market-content{width:calc(100% - 34px);padding-top:34px}
-      .market-hero{flex-direction:column;align-items:flex-start}
-      .subcategory-grid{display:block}
-      .subcategory{min-height:0;margin-bottom:8px;padding:16px;display:grid;grid-template-columns:1fr auto;align-items:center;border-radius:13px}
-      .subcategory small{display:none}
-      .subcategory strong{margin:0;font-size:14px}
-      .subcategory div{margin:0}
-      .about-inner{grid-template-columns:1fr;gap:25px}
+      .explorer-mainbar{padding:0 16px}
+      .category-strip{padding:0 16px 12px}
+      .explorer-body{width:calc(100% - 32px)}
+      .explorer-title-row{display:block}
+      .brand-grid{grid-template-columns:1fr}
       .portal-sidebar{width:74px;padding:20px 9px}
       .portal-logo{padding:0 0 20px;font-size:0;text-align:center}
       .portal-logo::before{content:"A";color:var(--orange);font-size:27px;font-weight:800}
@@ -281,152 +1058,162 @@
     }
 
     @media(max-width:520px){
-      .logo{font-size:29px}
-      .explore,.about{padding:68px 17px}
+      .brand-word{font-size:29px}
       #chartdiv{height:610px}
-      .market-header{padding:0 14px}
-      .market-logo{font-size:22px}
-      .province-pill{max-width:110px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
-      .form-row,.portal-grid,.province-checks{grid-template-columns:1fr}
+      .province-heading strong{max-width:145px;font-size:20px}
+      .explorer-actions .secondary-button{display:none}
+      .form-row,.province-checks,.portal-grid{grid-template-columns:1fr}
       .modal-card{padding:21px 18px}
-      .footer-bottom{flex-direction:column}
+      .brand-card-cover{height:125px}
     }
   </style>
 </head>
 
 <body>
 
+<!-- =====================================================
+     PANTALLA PRINCIPAL: MAPA
+===================================================== -->
+
 <div id="publicSite">
-  <section class="home">
-    <div class="hero">
-      <div class="hero-top">
-        <div class="logo">Amigate</div>
-        <div class="session-chip" id="sessionChip"><span class="session-dot"></span><span id="sessionName"></span></div>
+  <section class="landing">
+    <div class="landing-copy">
+      <div class="landing-top">
+        <div class="brand-word">Amigate</div>
+
+        <div class="session-chip" id="sessionChip">
+          <span class="session-dot"></span>
+          <span id="sessionName"></span>
+        </div>
       </div>
 
-      <div class="hero-content">
+      <div class="landing-message">
         <div class="eyebrow">Argentina está llena de oportunidades</div>
-        <h1>Todo lo que buscás,<br>más cerca<br><span>de lo que pensás.</span></h1>
-        <div class="hero-line"></div>
-        <p class="hero-text">
-          Amigate conecta personas con marcas, emprendimientos, profesionales, oficios y oportunidades de toda Argentina.
-          Elegí tu provincia y descubrí todo lo que tiene para ofrecer.
+
+        <h1>
+          Todo lo que buscás,<br>
+          más cerca<br>
+          <span>de lo que pensás.</span>
+        </h1>
+
+        <p>
+          Elegí una provincia para descubrir marcas, productos, servicios,
+          oficios, empleos y oportunidades disponibles para vos.
         </p>
-        <div class="hero-buttons">
-          <button class="hero-button primary" id="publishBrandButton">Publicar mi marca</button>
-          <button class="hero-button secondary" id="loginButton">Iniciar sesión</button>
+
+        <div class="landing-actions">
+          <button class="primary-button" id="publishBrandButton">Publicar mi marca</button>
+          <button class="secondary-button" id="loginButton">Iniciar sesión</button>
         </div>
       </div>
     </div>
 
-    <div class="map-area">
-      <div class="map-heading"><span>Explorá Argentina</span><strong>Elegí tu provincia</strong></div>
+    <div class="map-panel">
+      <div class="map-heading">
+        <div class="eyebrow">Explorá Argentina</div>
+        <strong>Elegí tu provincia</strong>
+      </div>
+
       <div id="chartdiv"></div>
+
       <div class="province-card" id="provinceCard">
         <small>Provincia seleccionada</small>
         <strong id="provinceName"></strong>
-        <p>Descubrí todo lo disponible para vos.</p>
-        <button id="exploreProvinceButton">Explorar</button>
+        <p>Entrá para descubrir marcas que están allí o hacen envíos a esa provincia.</p>
+        <button class="primary-button" id="enterProvinceButton">Explorar provincia</button>
         <div class="clear-province" id="clearProvinceButton">Quitar selección</div>
       </div>
     </div>
   </section>
-
-  <section class="explore" id="exploreSection">
-    <div class="section-heading">
-      <span class="section-label">Explorá Amigate</span>
-      <h2 id="exploreTitle">¿Qué estás buscando?</h2>
-      <p id="exploreText">Elegí una provincia para personalizar los resultados.</p>
-    </div>
-
-    <div class="category-grid">
-      <article class="category" data-category="Productos" role="button" tabindex="0"><div class="category-icon">🛍️</div><strong>Productos</strong><p>Descubrí marcas y emprendimientos.</p></article>
-      <article class="category" data-category="Servicios" role="button" tabindex="0"><div class="category-icon">✨</div><strong>Servicios</strong><p>Profesionales y empresas.</p></article>
-      <article class="category" data-category="Oficios" role="button" tabindex="0"><div class="category-icon">🛠️</div><strong>Oficios</strong><p>Especialistas cerca tuyo.</p></article>
-      <article class="category" data-category="Empleos" role="button" tabindex="0"><div class="category-icon">💼</div><strong>Empleos</strong><p>Encontrá oportunidades laborales.</p></article>
-      <article class="category" data-category="Necesito" role="button" tabindex="0"><div class="category-icon">📣</div><strong>Necesito</strong><p>Publicá lo que estás buscando.</p></article>
-    </div>
-  </section>
-
-  <section class="about">
-    <div class="about-inner">
-      <div class="about-ar">AR</div>
-      <div>
-        <span class="section-label">Una plataforma, todo el país</span>
-        <h3>Lo que existe cerca tuyo merece ser más fácil de encontrar.</h3>
-        <p>Desde una marca que recién empieza hasta un profesional, un oficio, una oportunidad laboral o una necesidad concreta. Amigate conecta todo eso en un mismo lugar.</p>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <div class="footer-logo">Amigate</div>
-    <div class="footer-copy">Hecho acá. Encontralo en Amigate.</div>
-    <div class="footer-bottom">
-      <div class="footer-links"><span>Términos</span><span>Privacidad</span><span>Ayuda</span></div>
-      <span class="admin-link" id="adminLink">Administración</span>
-    </div>
-  </footer>
 </div>
 
-<section class="marketplace" id="marketplace">
-  <header class="market-header">
-    <div class="market-logo" id="marketLogo">Amigate</div>
-    <div class="market-header-right">
-      <div class="province-pill" id="marketProvince">Argentina</div>
-      <button class="account-small" id="marketAccountButton">Iniciar sesión</button>
+<!-- =====================================================
+     PANTALLA DE PROVINCIA
+===================================================== -->
+
+<section class="province-explorer" id="provinceExplorer">
+  <header class="explorer-header">
+    <div class="explorer-mainbar">
+      <div class="explorer-mainbar-left">
+        <button class="ghost-button" id="backToMapButton">← Mapa</button>
+
+        <div class="province-heading">
+          <small>Explorando</small>
+          <strong id="explorerProvinceName">Argentina</strong>
+        </div>
+      </div>
+
+      <div class="explorer-actions">
+        <button class="secondary-button" id="changeProvinceButton">Cambiar provincia</button>
+        <button class="secondary-button" id="explorerAccountButton">Iniciar sesión</button>
+      </div>
     </div>
+
+    <nav class="category-strip" id="categoryStrip">
+      <button class="category-tab active" data-category="">Todo</button>
+      <button class="category-tab" data-category="Productos">Productos</button>
+      <button class="category-tab" data-category="Servicios">Servicios</button>
+      <button class="category-tab" data-category="Oficios">Oficios</button>
+      <button class="category-tab" data-category="Empleos">Empleos</button>
+      <button class="category-tab" data-category="Necesito">Necesito</button>
+    </nav>
   </header>
 
-  <div class="market-content">
-    <div class="breadcrumb">
-      <button id="marketHomeButton">Inicio</button><span>›</span><span id="marketBreadcrumbProvince">Argentina</span>
-      <span>›</span><span id="marketBreadcrumbCategory"></span><span class="hidden" id="subcategorySeparator">›</span>
-      <span class="hidden" id="marketBreadcrumbSubcategory"></span>
-    </div>
-
-    <div class="market-hero">
+  <main class="explorer-body">
+    <div class="explorer-title-row">
       <div>
-        <span class="section-label" id="marketEyebrow"></span>
-        <h2 id="marketTitle"></h2>
-        <p id="marketDescription"></p>
+        <div class="eyebrow" id="explorerEyebrow">Marcas disponibles</div>
+        <h2 id="explorerTitle">Descubrí Amigate</h2>
+        <p id="explorerDescription">
+          Conocé marcas ubicadas en esta provincia o que realizan envíos hasta allí.
+        </p>
       </div>
-      <button class="back-button" id="marketBackButton">← Volver</button>
     </div>
-
-    <div class="loader-box" id="marketLoader"><div class="loader"></div>Cargando...</div>
 
     <section class="subcategories" id="subcategoriesSection">
-      <div class="subcategories-top"><h3>Categorías</h3><span class="subcategory-count" id="subcategoryCount"></span></div>
-      <div class="subcategory-grid" id="subcategoryGrid"></div>
+      <div class="subcategories-label">Filtrar por subcategoría</div>
+      <div class="subcategory-strip" id="subcategoryStrip"></div>
     </section>
 
-    <section class="results" id="resultsSection">
-      <h3 id="resultsTitle"></h3>
-      <p id="resultsSubtitle"></p>
-      <div class="empty-box visible" style="display:block">
-        <strong>Estamos preparando esta sección</strong>
-        <p>Las publicaciones reales aparecerán cuando los vendedores carguen contenido.</p>
-      </div>
-    </section>
-
-    <div class="empty-box" id="marketError">
-      <strong id="marketErrorTitle">No pudimos cargar esta sección</strong>
-      <p id="marketErrorText"></p>
-      <button class="retry-button" id="retryMarketButton">Reintentar</button>
+    <div class="results-toolbar">
+      <strong id="resultLabel">Marcas</strong>
+      <span id="resultCount">0 resultados</span>
     </div>
-  </div>
+
+    <div class="brand-loader" id="brandLoader">
+      <div class="spinner"></div>
+      Cargando marcas...
+    </div>
+
+    <div class="brand-grid" id="brandGrid"></div>
+
+    <div class="empty-state" id="brandEmpty">
+      <strong>Todavía no hay marcas para mostrar</strong>
+      <p>
+        Cuando se publiquen marcas que estén en esta provincia o hagan envíos allí,
+        aparecerán automáticamente.
+      </p>
+    </div>
+  </main>
 </section>
+
+<!-- =====================================================
+     AUTENTICACIÓN
+===================================================== -->
 
 <div class="modal" id="authModal">
   <div class="modal-card">
-    <div class="modal-top"><div class="modal-brand">Amigate</div><button class="modal-close" id="closeAuthButton">×</button></div>
+    <div class="modal-top">
+      <div class="modal-brand">Amigate</div>
+      <button class="modal-close" id="closeAuthButton">×</button>
+    </div>
+
     <h2>Bienvenido</h2>
     <p class="modal-description">Iniciá sesión o creá tu cuenta.</p>
 
     <div class="seller-intent" id="sellerIntent">
       <strong>¿Querés publicar una marca?</strong><br>
-      Creá tu cuenta y después completá los datos del vendedor y de la marca.
+      Primero creá tu cuenta. Después completamos los datos comerciales.
     </div>
 
     <div class="auth-tabs">
@@ -436,7 +1223,11 @@
 
     <div class="auth-panel active" id="auth-login">
       <form id="loginForm">
-        <div class="form-group"><label>Email</label><input class="form-control" id="loginEmail" type="email" required></div>
+        <div class="form-group">
+          <label>Email</label>
+          <input class="form-control" id="loginEmail" type="email" required>
+        </div>
+
         <div class="form-group">
           <label>Contraseña</label>
           <div class="password-wrap">
@@ -444,6 +1235,7 @@
             <button class="password-toggle" type="button" data-password-target="loginPassword">Ver</button>
           </div>
         </div>
+
         <button class="submit-button" id="loginSubmit" type="submit">Iniciar sesión</button>
         <div class="message" id="loginMessage"></div>
       </form>
@@ -452,14 +1244,34 @@
     <div class="auth-panel" id="auth-register">
       <form id="registerForm">
         <div class="form-row">
-          <div class="form-group"><label>Nombre</label><input class="form-control" id="registerName" required></div>
-          <div class="form-group"><label>Apellido</label><input class="form-control" id="registerSurname" required></div>
+          <div class="form-group">
+            <label>Nombre</label>
+            <input class="form-control" id="registerName" required>
+          </div>
+
+          <div class="form-group">
+            <label>Apellido</label>
+            <input class="form-control" id="registerSurname" required>
+          </div>
         </div>
+
         <div class="form-row">
-          <div class="form-group"><label>DNI</label><input class="form-control" id="registerDni" required></div>
-          <div class="form-group"><label>Teléfono</label><input class="form-control" id="registerPhone" type="tel" required></div>
+          <div class="form-group">
+            <label>DNI</label>
+            <input class="form-control" id="registerDni" required>
+          </div>
+
+          <div class="form-group">
+            <label>Teléfono</label>
+            <input class="form-control" id="registerPhone" type="tel" required>
+          </div>
         </div>
-        <div class="form-group"><label>Email</label><input class="form-control" id="registerEmail" type="email" required></div>
+
+        <div class="form-group">
+          <label>Email</label>
+          <input class="form-control" id="registerEmail" type="email" required>
+        </div>
+
         <div class="form-group">
           <label>Contraseña</label>
           <div class="password-wrap">
@@ -467,6 +1279,7 @@
             <button class="password-toggle" type="button" data-password-target="registerPassword">Ver</button>
           </div>
         </div>
+
         <button class="submit-button" id="registerSubmit" type="submit">Crear mi cuenta</button>
         <div class="message" id="registerMessage"></div>
       </form>
@@ -474,17 +1287,28 @@
   </div>
 </div>
 
+<!-- =====================================================
+     MI CUENTA: COMPRADOR + PANEL DE MARCA
+===================================================== -->
+
 <div class="modal" id="accountModal">
   <div class="modal-card">
-    <div class="modal-top"><div class="modal-brand">Amigate</div><button class="modal-close" id="closeAccountButton">×</button></div>
+    <div class="modal-top">
+      <div class="modal-brand">Amigate</div>
+      <button class="modal-close" id="closeAccountButton">×</button>
+    </div>
+
     <h2>Mi cuenta</h2>
+
     <div class="account-card">
       <div class="avatar" id="accountAvatar">A</div>
       <div class="account-name" id="accountName"></div>
       <div class="account-email" id="accountEmail"></div>
       <div class="account-role" id="accountRole">Comprador</div>
+
       <div class="account-actions">
-        <button class="account-action primary" id="openPortalButton">Ir a mi portal</button>
+        <button class="account-action primary" id="openBuyerPortalButton">Mi actividad</button>
+        <button class="account-action hidden" id="openBrandPanelButton">Panel de mi marca</button>
         <button class="account-action" id="accountPublishBrandButton">Publicar mi marca</button>
         <button class="account-action logout" id="logoutButton">Cerrar sesión</button>
       </div>
@@ -492,9 +1316,17 @@
   </div>
 </div>
 
+<!-- =====================================================
+     ALTA Y EDICIÓN DE MARCA
+===================================================== -->
+
 <div class="modal" id="brandModal">
   <div class="modal-card">
-    <div class="modal-top"><div class="modal-brand">Amigate</div><button class="modal-close" id="closeBrandButton">×</button></div>
+    <div class="modal-top">
+      <div class="modal-brand">Amigate</div>
+      <button class="modal-close" id="closeBrandButton">×</button>
+    </div>
+
     <h2>Publicar mi marca</h2>
     <p class="modal-description">Completá los datos básicos, ubicación y envíos.</p>
 
@@ -507,33 +1339,73 @@
 
     <form id="brandForm">
       <section class="brand-step active" data-brand-step="1">
-        <div class="form-group"><label>CUIT</label><input class="form-control" id="brandCuit" placeholder="XX-XXXXXXXX-X" required></div>
-        <div class="form-group"><label>Email de la cuenta</label><input class="form-control email-readonly" id="brandAccountEmail" type="email" readonly></div>
+        <div class="form-group">
+          <label>CUIT</label>
+          <input class="form-control" id="brandCuit" placeholder="XX-XXXXXXXX-X" required>
+        </div>
+
+        <div class="form-group">
+          <label>Email de la cuenta</label>
+          <input class="form-control readonly" id="brandAccountEmail" type="email" readonly>
+        </div>
       </section>
 
       <section class="brand-step" data-brand-step="2">
-        <div class="form-group"><label>Nombre de la marca</label><input class="form-control" id="brandName" required></div>
-        <div class="form-group"><label>Descripción</label><textarea class="form-control" id="brandDescription" placeholder="¿Qué ofrece tu marca?"></textarea></div>
-        <div class="form-group"><label>Email comercial</label><input class="form-control" id="brandCommercialEmail" type="email" required></div>
-        <div class="form-row">
-          <div class="form-group"><label>Teléfono</label><input class="form-control" id="brandPhone" type="tel"></div>
-          <div class="form-group"><label>WhatsApp</label><input class="form-control" id="brandWhatsapp" type="tel"></div>
+        <div class="form-group">
+          <label>Nombre de la marca</label>
+          <input class="form-control" id="brandName" required>
         </div>
-        <div class="form-group"><label>Instagram</label><input class="form-control" id="brandInstagram" placeholder="@mimarca"></div>
+
+        <div class="form-group">
+          <label>Descripción</label>
+          <textarea class="form-control" id="brandDescription" placeholder="¿Qué ofrece tu marca?"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Email comercial</label>
+          <input class="form-control" id="brandCommercialEmail" type="email" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Teléfono</label>
+            <input class="form-control" id="brandPhone" type="tel">
+          </div>
+
+          <div class="form-group">
+            <label>WhatsApp</label>
+            <input class="form-control" id="brandWhatsapp" type="tel">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Instagram</label>
+          <input class="form-control" id="brandInstagram" placeholder="@mimarca">
+        </div>
       </section>
 
       <section class="brand-step" data-brand-step="3">
         <div class="form-group">
           <label>Provincia de origen</label>
-          <select class="form-control" id="brandProvince" required><option value="">Seleccionar provincia</option></select>
+          <select class="form-control" id="brandProvince" required>
+            <option value="">Seleccionar provincia</option>
+          </select>
         </div>
-        <div class="form-group"><label>Localidad</label><input class="form-control" id="brandLocality" required></div>
+
+        <div class="form-group">
+          <label>Localidad</label>
+          <input class="form-control" id="brandLocality" required>
+        </div>
       </section>
 
       <section class="brand-step" data-brand-step="4">
         <div class="shipping-tools">
-          <label class="check-row"><input type="checkbox" id="allArgentina"> Hago envíos a toda Argentina</label>
+          <label class="check-row">
+            <input type="checkbox" id="allArgentina">
+            Hago envíos a toda Argentina
+          </label>
         </div>
+
         <div class="province-checks" id="shippingProvinceList"></div>
       </section>
 
@@ -547,20 +1419,32 @@
   </div>
 </div>
 
+<!-- =====================================================
+     PORTAL DEL COMPRADOR
+===================================================== -->
+
 <div class="portal" id="buyerPortal">
   <aside class="portal-sidebar">
     <div class="portal-logo">Amigate</div>
+
     <div class="portal-menu">
       <button class="portal-nav active" data-buyer-page="inicio">Inicio</button>
       <button class="portal-nav" data-buyer-page="compras">Compras</button>
       <button class="portal-nav" data-buyer-page="favoritos">Favoritos</button>
       <button class="portal-nav" data-buyer-page="direcciones">Direcciones</button>
       <button class="portal-nav" data-buyer-page="reclamos">Reclamos</button>
+      <button class="portal-nav hidden" id="buyerBrandPanelShortcut">Mi marca</button>
     </div>
+
     <button class="portal-exit" id="buyerExit">Volver</button>
   </aside>
+
   <main class="portal-main">
-    <header class="portal-header"><h2 id="buyerPortalTitle">Mi Amigate</h2><button class="account-small" id="buyerAccountButton">Mi cuenta</button></header>
+    <header class="portal-header">
+      <h2 id="buyerPortalTitle">Mi actividad</h2>
+      <button class="secondary-button" id="buyerAccountButton">Mi cuenta</button>
+    </header>
+
     <div class="portal-content">
       <section class="portal-section active" id="buyer-inicio">
         <div class="portal-grid">
@@ -569,24 +1453,48 @@
           <div class="portal-stat"><small>Marcas seguidas</small><strong id="buyerBrandsCount">—</strong></div>
           <div class="portal-stat"><small>Reclamos</small><strong id="buyerClaimsCount">—</strong></div>
         </div>
-        <div class="panel"><h3>Hola, <span id="buyerWelcomeName">Usuario</span></h3><p style="margin-top:8px;color:var(--gray);font-size:12px">Desde acá administrás tu actividad en Amigate.</p></div>
+
+        <div class="panel">
+          <h3>Hola, <span id="buyerWelcomeName">Usuario</span></h3>
+          <p style="margin-top:8px;color:var(--gray);font-size:12px">
+            Podés seguir explorando Amigate como cualquier comprador.
+          </p>
+        </div>
       </section>
-      <section class="portal-section" id="buyer-compras"><div class="panel"><h3>Compras</h3><div class="list" id="buyerOrdersList"></div></div></section>
-      <section class="portal-section" id="buyer-favoritos"><div class="panel"><h3>Favoritos</h3><div class="list" id="buyerFavoritesList"></div></div></section>
-      <section class="portal-section" id="buyer-direcciones"><div class="panel"><h3>Direcciones</h3><div class="list" id="buyerAddressesList"></div></div></section>
-      <section class="portal-section" id="buyer-reclamos"><div class="panel"><h3>Reclamos</h3><div class="list" id="buyerClaimsList"></div></div></section>
+
+      <section class="portal-section" id="buyer-compras">
+        <div class="panel"><h3>Compras</h3><div class="list" id="buyerOrdersList"></div></div>
+      </section>
+
+      <section class="portal-section" id="buyer-favoritos">
+        <div class="panel"><h3>Favoritos</h3><div class="list" id="buyerFavoritesList"></div></div>
+      </section>
+
+      <section class="portal-section" id="buyer-direcciones">
+        <div class="panel"><h3>Direcciones</h3><div class="list" id="buyerAddressesList"></div></div>
+      </section>
+
+      <section class="portal-section" id="buyer-reclamos">
+        <div class="panel"><h3>Reclamos</h3><div class="list" id="buyerClaimsList"></div></div>
+      </section>
     </div>
   </main>
 </div>
 
+<!-- =====================================================
+     PANEL DE MARCA
+===================================================== -->
+
 <div class="portal" id="sellerPortal">
   <aside class="portal-sidebar">
     <div class="portal-logo">Amigate</div>
+
     <div class="portal-menu">
       <button class="portal-nav active" data-seller-page="inicio">Inicio</button>
       <button class="portal-nav" data-seller-page="marca">Mi marca</button>
       <button class="portal-nav" data-seller-page="productos">Productos</button>
       <button class="portal-nav" data-seller-page="pedidos">Pedidos</button>
+      <button class="portal-nav" data-seller-page="clientes">Clientes</button>
       <button class="portal-nav" data-seller-page="mensajes">Mensajes</button>
       <button class="portal-nav" data-seller-page="opiniones">Opiniones</button>
       <button class="portal-nav" data-seller-page="publicidad">Publicidad</button>
@@ -594,11 +1502,16 @@
       <button class="portal-nav" data-seller-page="finanzas">Finanzas</button>
       <button class="portal-nav" data-seller-page="configuracion">Configuración</button>
     </div>
-    <button class="portal-exit" id="sellerExit">Volver</button>
+
+    <button class="portal-exit" id="sellerExit">Volver a Amigate</button>
   </aside>
 
   <main class="portal-main">
-    <header class="portal-header"><h2 id="sellerPortalTitle">Portal Vendedor</h2><button class="account-small" id="sellerAccountButton">Mi cuenta</button></header>
+    <header class="portal-header">
+      <h2 id="sellerPortalTitle">Panel de mi marca</h2>
+      <button class="secondary-button" id="sellerAccountButton">Mi cuenta</button>
+    </header>
+
     <div class="portal-content">
       <section class="portal-section active" id="seller-inicio">
         <div class="portal-grid">
@@ -607,21 +1520,38 @@
           <div class="portal-stat"><small>Ventas</small><strong>—</strong></div>
           <div class="portal-stat"><small>Opiniones</small><strong>—</strong></div>
         </div>
-        <div class="panel"><h3 id="sellerWelcomeTitle">Mi marca</h3><p style="margin-top:8px;color:var(--gray);font-size:12px">Administrá tu presencia comercial en Amigate.</p></div>
+
+        <div class="panel">
+          <h3 id="sellerWelcomeTitle">Mi marca</h3>
+          <p style="margin-top:8px;color:var(--gray);font-size:12px">
+            Administrá la marca sin perder tu experiencia normal como comprador.
+          </p>
+        </div>
       </section>
 
       <section class="portal-section" id="seller-marca">
         <div class="panel">
-          <div class="panel-top"><h3>Mi marca</h3><button id="editBrandButton">Editar</button></div>
+          <div class="panel-top">
+            <h3>Mi marca</h3>
+            <button id="editBrandButton">Editar</button>
+          </div>
+
           <div class="list" id="sellerBrandInfo"></div>
         </div>
       </section>
 
-      <section class="portal-section" id="seller-productos"><div class="panel"><div class="panel-top"><h3>Productos</h3><button type="button">Próximamente</button></div><div class="empty-panel">La carga completa de productos se conectará en el siguiente bloque.</div></div></section>
+      <section class="portal-section" id="seller-productos">
+        <div class="panel">
+          <div class="panel-top"><h3>Productos</h3><button type="button">Próximamente</button></div>
+          <div class="empty-panel">La carga completa de productos se conectará en el siguiente bloque.</div>
+        </div>
+      </section>
+
       <section class="portal-section" id="seller-pedidos"><div class="panel"><h3>Pedidos</h3><div class="empty-panel">Tus pedidos aparecerán acá.</div></div></section>
+      <section class="portal-section" id="seller-clientes"><div class="panel"><h3>Clientes</h3><div class="empty-panel">Tus clientes aparecerán acá.</div></div></section>
       <section class="portal-section" id="seller-mensajes"><div class="panel"><h3>Mensajes</h3><div class="empty-panel">Tus conversaciones aparecerán acá.</div></div></section>
       <section class="portal-section" id="seller-opiniones"><div class="panel"><h3>Opiniones</h3><div class="empty-panel">Las opiniones aparecerán acá.</div></div></section>
-      <section class="portal-section" id="seller-publicidad"><div class="panel"><h3>Publicidad</h3><div class="empty-panel">Acá vas a administrar contenido patrocinado.</div></div></section>
+      <section class="portal-section" id="seller-publicidad"><div class="panel"><h3>Publicidad</h3><div class="empty-panel">Acá administrarás contenido patrocinado.</div></div></section>
       <section class="portal-section" id="seller-suscripcion"><div class="panel"><h3>Suscripción</h3><div class="empty-panel">Acá conectaremos Mercado Pago.</div></div></section>
       <section class="portal-section" id="seller-finanzas"><div class="panel"><h3>Finanzas</h3><div class="empty-panel">Ventas y comisiones aparecerán acá.</div></div></section>
       <section class="portal-section" id="seller-configuracion"><div class="panel"><h3>Configuración</h3><div class="empty-panel">Envíos, apariencia y configuración.</div></div></section>
@@ -630,674 +1560,1397 @@
 </div>
 
 <script>
-const SUPABASE_URL="https://jqdyaafwixnjasszsvkt.supabase.co";
-const SUPABASE_KEY="sb_publishable_KHbLlwbhlkyaiz-7KXW6Mw_nAnTVsLa";
-const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
-const $=id=>document.getElementById(id);
+  const SUPABASE_URL = "https://jqdyaafwixnjasszsvkt.supabase.co";
+  const SUPABASE_KEY = "sb_publishable_KHbLlwbhlkyaiz-7KXW6Mw_nAnTVsLa";
+  const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-let currentUser=null,currentProfile=null,currentSellerProfile=null,currentBrand=null,currentShippingProvinceIds=[];
-let authIntent="buyer",brandStep=1,selectedProvince=null,selectedPolygon=null;
-let currentCategory=null,currentRootCategory=null,currentSubcategory=null,navigationVersion=0;
+  const $ = id => document.getElementById(id);
 
-const taxonomyCache={loaded:false,promise:null,categories:[],subcategories:[],provinces:[]};
-const descriptions={
-  Productos:"Descubrí marcas, emprendimientos y productos disponibles cerca tuyo.",
-  Servicios:"Encontrá profesionales y empresas que ofrecen servicios.",
-  Oficios:"Conectate con especialistas de distintos oficios.",
-  Empleos:"Explorá oportunidades laborales y búsquedas de personal.",
-  Necesito:"Publicá exactamente lo que necesitás y encontrá quién pueda ayudarte."
-};
+  let currentUser = null;
+  let currentProfile = null;
+  let currentSellerProfile = null;
+  let currentBrand = null;
+  let currentShippingProvinceIds = [];
 
-function normalizeText(v){return String(v||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").trim().toLowerCase()}
-function rowName(r){return r?.nombre||r?.name||r?.titulo||r?.title||"Sin nombre"}
-function escapeHtml(v){return String(v??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;")}
-function firstValue(row,keys,fallback=null){for(const key of keys){if(row&&row[key]!==undefined&&row[key]!==null&&row[key]!=="")return row[key]}return fallback}
-function withTimeout(promise,ms=10000,code="TIMEOUT"){let timer;const timeout=new Promise((_,reject)=>{timer=setTimeout(()=>reject(new Error(code)),ms)});return Promise.race([promise,timeout]).finally(()=>clearTimeout(timer))}
-function openModal(el){el.classList.add("open");document.body.style.overflow="hidden"}
-function closeModal(el){el.classList.remove("open");document.body.style.overflow=""}
-function showMessage(id,text,type){const el=$(id);el.className="message visible "+type;el.textContent=text}
-function clearMessage(id){const el=$(id);el.className="message";el.textContent=""}
-function backgroundClose(el){el.addEventListener("click",e=>{if(e.target===el)closeModal(el)})}
-function userName(){return currentProfile?.nombre||currentUser?.user_metadata?.nombre||currentUser?.email?.split("@")[0]||"Usuario"}
-function userFullName(){const n=currentProfile?.nombre||currentUser?.user_metadata?.nombre||"";const a=currentProfile?.apellido||currentUser?.user_metadata?.apellido||"";return((n+" "+a).trim()||currentUser?.email||"Usuario")}
-function effectiveRole(){if(currentProfile?.tipo_usuario==="admin")return"admin";if(currentSellerProfile)return"vendedor";return"comprador"}
+  let authIntent = "buyer";
+  let brandStep = 1;
 
-function updateProvinceUI(){
-  if(!selectedProvince){
-    $("exploreTitle").textContent="¿Qué estás buscando?";
-    $("exploreText").textContent="Elegí una provincia para personalizar los resultados.";
-    return;
-  }
-  $("exploreTitle").textContent="¿Qué estás buscando en "+selectedProvince.name+"?";
-  $("exploreText").textContent="Descubrí marcas, profesionales y oportunidades disponibles en "+selectedProvince.name+".";
-}
+  let selectedProvince = null;
+  let selectedPolygon = null;
+  let selectedCategoryName = "";
+  let selectedSubcategoryId = null;
 
-am5.ready(function(){
-  const root=am5.Root.new("chartdiv");
-  if(root._logo)root._logo.dispose();
+  const taxonomyCache = {
+    loaded:false,
+    promise:null,
+    categories:[],
+    subcategories:[],
+    provinces:[]
+  };
 
-  const chart=root.container.children.push(am5map.MapChart.new(root,{
-    panX:"none",panY:"none",wheelX:"none",wheelY:"none",pinchZoom:false,projection:am5map.geoMercator()
-  }));
-
-  const series=chart.series.push(am5map.MapPolygonSeries.new(root,{geoJSON:am5geodata_argentinaHigh}));
-
-  series.mapPolygons.template.setAll({
-    fill:am5.color(0xF4C0AE),stroke:am5.color(0xFFF8F2),strokeWidth:1.6,interactive:true,cursorOverStyle:"pointer",tooltipText:"{name}"
-  });
-
-  series.mapPolygons.template.states.create("hover",{fill:am5.color(0xF08B65)});
-  series.mapPolygons.template.states.create("active",{fill:am5.color(0xEB6841)});
-
-  function clearProvince(){
-    if(selectedPolygon)selectedPolygon.set("active",false);
-    selectedPolygon=null;selectedProvince=null;
-    $("provinceCard").classList.remove("visible");
-    localStorage.removeItem("amigate_province");
-    updateProvinceUI();
+  function normalizeText(value){
+    return String(value || "")
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g,"")
+      .trim()
+      .toLowerCase();
   }
 
-  series.mapPolygons.template.events.on("click",event=>{
-    const polygon=event.target,item=polygon.dataItem;
-    if(!item)return;
-    if(polygon===selectedPolygon){clearProvince();return}
-    if(selectedPolygon)selectedPolygon.set("active",false);
-    selectedPolygon=polygon;polygon.set("active",true);
-    selectedProvince={id:item.dataContext.id,name:item.dataContext.name};
-    $("provinceName").textContent=selectedProvince.name;
-    $("exploreProvinceButton").textContent="Explorar "+selectedProvince.name;
-    $("provinceCard").classList.add("visible");
-    localStorage.setItem("amigate_province",JSON.stringify(selectedProvince));
-    updateProvinceUI();
+  function rowName(row){
+    return row?.nombre || row?.name || row?.titulo || row?.title || "Sin nombre";
+  }
+
+  function escapeHtml(value){
+    return String(value ?? "")
+      .replaceAll("&","&amp;")
+      .replaceAll("<","&lt;")
+      .replaceAll(">","&gt;")
+      .replaceAll('"',"&quot;")
+      .replaceAll("'","&#039;");
+  }
+
+  function firstValue(row,keys,fallback=null){
+    for(const key of keys){
+      if(row && row[key] !== undefined && row[key] !== null && row[key] !== ""){
+        return row[key];
+      }
+    }
+    return fallback;
+  }
+
+  function withTimeout(promise,ms=10000,code="TIMEOUT"){
+    let timer;
+    const timeout = new Promise((_,reject)=>{
+      timer = setTimeout(()=>reject(new Error(code)),ms);
+    });
+
+    return Promise.race([promise,timeout]).finally(()=>clearTimeout(timer));
+  }
+
+  function openModal(element){
+    element.classList.add("open");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeModal(element){
+    element.classList.remove("open");
+    document.body.style.overflow = "";
+  }
+
+  function backgroundClose(element){
+    element.addEventListener("click",event=>{
+      if(event.target === element) closeModal(element);
+    });
+  }
+
+  function showMessage(id,text,type){
+    const element = $(id);
+    element.className = "message visible " + type;
+    element.textContent = text;
+  }
+
+  function clearMessage(id){
+    const element = $(id);
+    element.className = "message";
+    element.textContent = "";
+  }
+
+  function userName(){
+    return currentProfile?.nombre ||
+      currentUser?.user_metadata?.nombre ||
+      currentUser?.email?.split("@")[0] ||
+      "Usuario";
+  }
+
+  function userFullName(){
+    const nombre = currentProfile?.nombre || currentUser?.user_metadata?.nombre || "";
+    const apellido = currentProfile?.apellido || currentUser?.user_metadata?.apellido || "";
+
+    return ((nombre + " " + apellido).trim() || currentUser?.email || "Usuario");
+  }
+
+  function effectiveRole(){
+    if(currentProfile?.tipo_usuario === "admin") return "admin";
+    if(currentSellerProfile) return "vendedor";
+    return "comprador";
+  }
+
+  /* =====================================================
+     MAPA
+  ===================================================== */
+
+  am5.ready(function(){
+    const root = am5.Root.new("chartdiv");
+
+    if(root._logo) root._logo.dispose();
+
+    const chart = root.container.children.push(am5map.MapChart.new(root,{
+      panX:"none",
+      panY:"none",
+      wheelX:"none",
+      wheelY:"none",
+      pinchZoom:false,
+      projection:am5map.geoMercator()
+    }));
+
+    const series = chart.series.push(am5map.MapPolygonSeries.new(root,{
+      geoJSON:am5geodata_argentinaHigh
+    }));
+
+    series.mapPolygons.template.setAll({
+      fill:am5.color(0xF4C0AE),
+      stroke:am5.color(0xFFF8F2),
+      strokeWidth:1.6,
+      interactive:true,
+      cursorOverStyle:"pointer",
+      tooltipText:"{name}"
+    });
+
+    series.mapPolygons.template.states.create("hover",{fill:am5.color(0xF08B65)});
+    series.mapPolygons.template.states.create("active",{fill:am5.color(0xEB6841)});
+
+    function clearProvince(){
+      if(selectedPolygon) selectedPolygon.set("active",false);
+
+      selectedPolygon = null;
+      selectedProvince = null;
+
+      $("provinceCard").classList.remove("visible");
+      localStorage.removeItem("amigate_province");
+    }
+
+    series.mapPolygons.template.events.on("click",event=>{
+      const polygon = event.target;
+      const item = polygon.dataItem;
+
+      if(!item) return;
+
+      if(polygon === selectedPolygon){
+        clearProvince();
+        return;
+      }
+
+      if(selectedPolygon) selectedPolygon.set("active",false);
+
+      selectedPolygon = polygon;
+      polygon.set("active",true);
+
+      selectedProvince = {
+        mapId:item.dataContext.id,
+        name:item.dataContext.name
+      };
+
+      $("provinceName").textContent = selectedProvince.name;
+      $("enterProvinceButton").textContent = "Explorar " + selectedProvince.name;
+      $("provinceCard").classList.add("visible");
+
+      localStorage.setItem("amigate_province",JSON.stringify(selectedProvince));
+    });
+
+    $("clearProvinceButton").addEventListener("click",clearProvince);
+
+    series.events.on("datavalidated",()=>{
+      const stored = localStorage.getItem("amigate_province");
+
+      if(!stored) return;
+
+      try{
+        const saved = JSON.parse(stored);
+
+        series.dataItems.forEach(item=>{
+          if(item.dataContext.id === saved.mapId){
+            const polygon = item.get("mapPolygon");
+
+            if(!polygon) return;
+
+            selectedPolygon = polygon;
+            selectedProvince = saved;
+
+            polygon.set("active",true);
+            $("provinceName").textContent = saved.name;
+            $("enterProvinceButton").textContent = "Explorar " + saved.name;
+            $("provinceCard").classList.add("visible");
+          }
+        });
+      }catch(error){
+        localStorage.removeItem("amigate_province");
+      }
+    });
+
+    series.appear(500);
   });
 
-  $("clearProvinceButton").addEventListener("click",clearProvince);
+  $("enterProvinceButton").addEventListener("click",openSelectedProvince);
+  $("backToMapButton").addEventListener("click",closeProvinceExplorer);
+  $("changeProvinceButton").addEventListener("click",closeProvinceExplorer);
 
-  series.events.on("datavalidated",()=>{
-    const stored=localStorage.getItem("amigate_province");
-    if(!stored)return;
-    try{
-      const saved=JSON.parse(stored);
-      series.dataItems.forEach(item=>{
-        if(item.dataContext.id===saved.id){
-          const polygon=item.get("mapPolygon");
-          if(!polygon)return;
-          selectedPolygon=polygon;selectedProvince=saved;polygon.set("active",true);
-          $("provinceName").textContent=saved.name;
-          $("exploreProvinceButton").textContent="Explorar "+saved.name;
-          $("provinceCard").classList.add("visible");
-          updateProvinceUI();
-        }
+  function closeProvinceExplorer(){
+    $("provinceExplorer").classList.remove("visible");
+    $("publicSite").classList.remove("hidden");
+    document.body.style.overflow = "";
+    window.scrollTo({top:0,left:0,behavior:"auto"});
+  }
+
+  async function openSelectedProvince(){
+    if(!selectedProvince) return;
+
+    await loadTaxonomy();
+
+    const databaseProvince = taxonomyCache.provinces.find(row=>{
+      return normalizeText(rowName(row)) === normalizeText(selectedProvince.name);
+    });
+
+    selectedProvince.databaseId = databaseProvince?.id ?? null;
+
+    $("publicSite").classList.add("hidden");
+    $("provinceExplorer").classList.add("visible");
+    $("explorerProvinceName").textContent = selectedProvince.name;
+
+    selectedCategoryName = "";
+    selectedSubcategoryId = null;
+
+    document.querySelectorAll(".category-tab").forEach(button=>{
+      button.classList.toggle("active",button.dataset.category === "");
+    });
+
+    renderSubcategories();
+    updateExplorerHeading();
+    await loadBrandsForProvince();
+
+    window.scrollTo({top:0,left:0,behavior:"auto"});
+  }
+
+  /* =====================================================
+     TAXONOMÍA
+  ===================================================== */
+
+  async function loadTaxonomy(force=false){
+    if(taxonomyCache.loaded && !force) return taxonomyCache;
+    if(taxonomyCache.promise && !force) return taxonomyCache.promise;
+
+    taxonomyCache.promise = (async()=>{
+      try{
+        const [categoriesResult,subcategoriesResult,provincesResult] = await withTimeout(
+          Promise.all([
+            db.from("categories").select("*"),
+            db.from("subcategories").select("*"),
+            db.from("provinces").select("*")
+          ]),
+          10000,
+          "TAXONOMY_TIMEOUT"
+        );
+
+        if(categoriesResult.error) throw categoriesResult.error;
+        if(subcategoriesResult.error) throw subcategoriesResult.error;
+        if(provincesResult.error) throw provincesResult.error;
+
+        taxonomyCache.categories = categoriesResult.data || [];
+        taxonomyCache.subcategories = subcategoriesResult.data || [];
+        taxonomyCache.provinces = provincesResult.data || [];
+        taxonomyCache.loaded = true;
+
+        populateProvinceControls();
+
+        return taxonomyCache;
+      }finally{
+        taxonomyCache.promise = null;
+      }
+    })();
+
+    return taxonomyCache.promise;
+  }
+
+  setTimeout(()=>loadTaxonomy().catch(console.warn),500);
+
+  function populateProvinceControls(){
+    const provinceSelect = $("brandProvince");
+    const shippingList = $("shippingProvinceList");
+
+    provinceSelect.innerHTML = '<option value="">Seleccionar provincia</option>';
+    shippingList.innerHTML = "";
+
+    taxonomyCache.provinces
+      .slice()
+      .sort((a,b)=>rowName(a).localeCompare(rowName(b),"es"))
+      .forEach(province=>{
+        provinceSelect.insertAdjacentHTML(
+          "beforeend",
+          `<option value="${escapeHtml(province.id)}">${escapeHtml(rowName(province))}</option>`
+        );
+
+        shippingList.insertAdjacentHTML(
+          "beforeend",
+          `<label class="province-option">
+            <input type="checkbox" class="shipping-province" value="${escapeHtml(province.id)}">
+            ${escapeHtml(rowName(province))}
+          </label>`
+        );
       });
-    }catch(error){localStorage.removeItem("amigate_province")}
-  });
 
-  series.appear(500);
-});
-
-$("exploreProvinceButton").addEventListener("click",()=>$("exploreSection").scrollIntoView({behavior:"smooth"}));
-
-async function loadTaxonomy(force=false){
-  if(taxonomyCache.loaded&&!force)return taxonomyCache;
-  if(taxonomyCache.promise&&!force)return taxonomyCache.promise;
-
-  taxonomyCache.promise=(async()=>{
-    try{
-      const [categoriesResult,subcategoriesResult,provincesResult]=await withTimeout(Promise.all([
-        db.from("categories").select("*"),
-        db.from("subcategories").select("*"),
-        db.from("provinces").select("*")
-      ]),10000,"TAXONOMY_TIMEOUT");
-
-      if(categoriesResult.error)throw categoriesResult.error;
-      if(subcategoriesResult.error)throw subcategoriesResult.error;
-      if(provincesResult.error)throw provincesResult.error;
-
-      taxonomyCache.categories=categoriesResult.data||[];
-      taxonomyCache.subcategories=subcategoriesResult.data||[];
-      taxonomyCache.provinces=provincesResult.data||[];
-      taxonomyCache.loaded=true;
-      populateProvinceControls();
-      return taxonomyCache;
-    }finally{taxonomyCache.promise=null}
-  })();
-
-  return taxonomyCache.promise;
-}
-
-setTimeout(()=>loadTaxonomy().catch(console.warn),500);
-
-function populateProvinceControls(){
-  const provinceSelect=$("brandProvince"),shippingList=$("shippingProvinceList");
-  provinceSelect.innerHTML='<option value="">Seleccionar provincia</option>';
-  shippingList.innerHTML="";
-
-  taxonomyCache.provinces.slice().sort((a,b)=>rowName(a).localeCompare(rowName(b),"es")).forEach(province=>{
-    provinceSelect.insertAdjacentHTML("beforeend",`<option value="${escapeHtml(province.id)}">${escapeHtml(rowName(province))}</option>`);
-    shippingList.insertAdjacentHTML("beforeend",`<label class="province-option"><input type="checkbox" class="shipping-province" value="${escapeHtml(province.id)}">${escapeHtml(rowName(province))}</label>`);
-  });
-
-  syncShippingChecks();
-}
-
-function syncShippingChecks(){
-  document.querySelectorAll(".shipping-province").forEach(input=>{input.checked=currentShippingProvinceIds.map(String).includes(String(input.value))});
-  const total=document.querySelectorAll(".shipping-province").length;
-  const selected=document.querySelectorAll(".shipping-province:checked").length;
-  $("allArgentina").checked=total>0&&total===selected;
-}
-
-$("allArgentina").addEventListener("change",event=>{
-  document.querySelectorAll(".shipping-province").forEach(input=>{input.checked=event.target.checked});
-});
-
-function bindPress(el,callback){
-  el.addEventListener("click",callback);
-  el.addEventListener("keydown",event=>{
-    if(event.key==="Enter"||event.key===" "){event.preventDefault();callback()}
-  });
-}
-
-document.querySelectorAll("[data-category]").forEach(card=>bindPress(card,()=>openMarketplace(card.dataset.category)));
-
-async function openMarketplace(category){
-  const version=++navigationVersion;
-  currentCategory=category;currentRootCategory=null;currentSubcategory=null;
-
-  $("publicSite").classList.add("hidden");
-  $("marketplace").classList.add("visible");
-  document.body.style.overflow="auto";
-  window.scrollTo({top:0,left:0,behavior:"auto"});
-
-  const province=selectedProvince?.name||"Argentina";
-  $("marketProvince").textContent=province;
-  $("marketBreadcrumbProvince").textContent=province;
-  $("marketBreadcrumbCategory").textContent=category;
-  $("marketEyebrow").textContent=province;
-  $("marketTitle").textContent=category;
-  $("marketDescription").textContent=descriptions[category]||"";
-
-  $("marketError").classList.remove("visible");
-  $("subcategoriesSection").classList.remove("hidden");
-  $("subcategoryGrid").innerHTML="";
-  $("resultsSection").classList.remove("visible");
-  $("subcategorySeparator").classList.add("hidden");
-  $("marketBreadcrumbSubcategory").classList.add("hidden");
-  $("marketLoader").classList.add("visible");
-
-  try{
-    const taxonomy=await loadTaxonomy();
-    if(version!==navigationVersion)return;
-    const root=taxonomy.categories.find(item=>normalizeText(rowName(item))===normalizeText(category));
-    if(!root)throw new Error("ROOT_NOT_FOUND");
-    currentRootCategory=root;
-
-    const rows=taxonomy.subcategories.filter(sub=>{
-      const parent=firstValue(sub,["category_id","categoria_id","parent_category_id","parent_id"]);
-      return String(parent)===String(root.id);
-    }).sort((a,b)=>rowName(a).localeCompare(rowName(b),"es"));
-
-    renderSubcategories(rows);
-  }catch(error){showMarketError(error)}
-  finally{if(version===navigationVersion)$("marketLoader").classList.remove("visible")}
-}
-
-function renderSubcategories(rows){
-  $("subcategoryGrid").innerHTML="";
-  $("subcategoryCount").textContent=rows.length+(rows.length===1?" categoría":" categorías");
-  if(!rows.length){showMarketError(new Error("NO_SUBCATEGORIES"));return}
-
-  rows.forEach(row=>{
-    const card=document.createElement("article");
-    card.className="subcategory";card.tabIndex=0;
-    card.innerHTML=`<small>${escapeHtml(currentCategory)}</small><strong>${escapeHtml(rowName(row))}</strong><div>Explorar →</div>`;
-    bindPress(card,()=>selectSubcategory(row));
-    $("subcategoryGrid").appendChild(card);
-  });
-}
-
-function selectSubcategory(row){
-  ++navigationVersion;
-  currentSubcategory=row;
-  $("subcategoriesSection").classList.add("hidden");
-  $("subcategorySeparator").classList.remove("hidden");
-  $("marketBreadcrumbSubcategory").classList.remove("hidden");
-  $("marketBreadcrumbSubcategory").textContent=rowName(row);
-  $("resultsTitle").textContent=rowName(row);
-  $("resultsSubtitle").textContent=selectedProvince?.name||"Argentina";
-  $("resultsSection").classList.add("visible");
-  window.scrollTo({top:0,left:0,behavior:"auto"});
-}
-
-function showMarketError(error){
-  $("marketError").classList.add("visible");
-  $("subcategoriesSection").classList.add("hidden");
-
-  let title="No pudimos cargar esta sección",text="Ocurrió un problema al consultar Supabase.";
-  if(error.message==="TAXONOMY_TIMEOUT"){title="La conexión está tardando demasiado";text="Tocá Reintentar para volver a cargar las categorías."}
-  if(error.message==="ROOT_NOT_FOUND"){title="No encontramos esta categoría";text="La categoría principal no apareció en la tabla categories."}
-  if(error.message==="NO_SUBCATEGORIES"){title="No hay subcategorías";text="Esta sección todavía no tiene subcategorías asociadas."}
-
-  $("marketErrorTitle").textContent=title;
-  $("marketErrorText").textContent=text;
-}
-
-$("retryMarketButton").addEventListener("click",async()=>{
-  taxonomyCache.loaded=false;
-  await openMarketplace(currentCategory);
-});
-
-function closeMarketplace(){
-  ++navigationVersion;
-  $("marketplace").classList.remove("visible");
-  $("publicSite").classList.remove("hidden");
-  document.body.style.overflow="";
-  requestAnimationFrame(()=>$("exploreSection").scrollIntoView());
-}
-
-$("marketLogo").addEventListener("click",closeMarketplace);
-$("marketHomeButton").addEventListener("click",closeMarketplace);
-
-$("marketBackButton").addEventListener("click",()=>{
-  if(currentSubcategory){
-    ++navigationVersion;currentSubcategory=null;
-    $("resultsSection").classList.remove("visible");
-    $("subcategorySeparator").classList.add("hidden");
-    $("marketBreadcrumbSubcategory").classList.add("hidden");
-    $("subcategoriesSection").classList.remove("hidden");
-    return;
+    syncShippingChecks();
   }
-  closeMarketplace();
-});
 
-function switchAuthTab(tab){
-  document.querySelectorAll(".auth-tab").forEach(button=>button.classList.toggle("active",button.dataset.authTab===tab));
-  document.querySelectorAll(".auth-panel").forEach(panel=>panel.classList.remove("active"));
-  $("auth-"+tab).classList.add("active");
-}
+  function syncShippingChecks(){
+    document.querySelectorAll(".shipping-province").forEach(input=>{
+      input.checked = currentShippingProvinceIds.map(String).includes(String(input.value));
+    });
 
-function openAuth(intent="buyer",tab="login"){
-  authIntent=intent;
-  $("sellerIntent").classList.toggle("visible",intent==="seller");
-  switchAuthTab(tab);
-  openModal($("authModal"));
-}
+    const total = document.querySelectorAll(".shipping-province").length;
+    const selected = document.querySelectorAll(".shipping-province:checked").length;
 
-document.querySelectorAll(".auth-tab").forEach(button=>button.addEventListener("click",()=>switchAuthTab(button.dataset.authTab)));
-document.querySelectorAll("[data-password-target]").forEach(button=>{
-  button.addEventListener("click",()=>{
-    const input=$(button.dataset.passwordTarget),showing=input.type==="text";
-    input.type=showing?"password":"text";
-    button.textContent=showing?"Ver":"Ocultar";
+    $("allArgentina").checked = total > 0 && total === selected;
+  }
+
+  $("allArgentina").addEventListener("change",event=>{
+    document.querySelectorAll(".shipping-province").forEach(input=>{
+      input.checked = event.target.checked;
+    });
   });
-});
 
-$("registerForm").addEventListener("submit",async event=>{
-  event.preventDefault();
-  const submit=$("registerSubmit");
-  submit.disabled=true;submit.textContent="Creando cuenta...";clearMessage("registerMessage");
+  /* =====================================================
+     NAVEGACIÓN DE CATEGORÍAS
+  ===================================================== */
 
-  try{
-    const nombre=$("registerName").value.trim(),apellido=$("registerSurname").value.trim();
-    const dni=$("registerDni").value.replace(/\D/g,""),telefono=$("registerPhone").value.trim();
-    const email=$("registerEmail").value.trim().toLowerCase(),password=$("registerPassword").value;
+  document.querySelectorAll(".category-tab").forEach(button=>{
+    button.addEventListener("click",async()=>{
+      selectedCategoryName = button.dataset.category;
+      selectedSubcategoryId = null;
 
-    const {data,error}=await withTimeout(db.auth.signUp({
-      email,password,
-      options:{data:{nombre,apellido,dni,telefono,nombre_completo:nombre+" "+apellido,origen_registro:authIntent}}
-    }),15000,"REGISTER_TIMEOUT");
+      document.querySelectorAll(".category-tab").forEach(item=>item.classList.remove("active"));
+      button.classList.add("active");
 
-    if(error)throw error;
+      renderSubcategories();
+      updateExplorerHeading();
+      await loadBrandsForProvince();
+    });
+  });
 
-    if(!data?.session){
-      showMessage("registerMessage","La cuenta se creó, pero Supabase todavía está esperando confirmación de correo.","success");
+  function renderSubcategories(){
+    const section = $("subcategoriesSection");
+    const strip = $("subcategoryStrip");
+
+    strip.innerHTML = "";
+
+    if(!selectedCategoryName){
+      section.classList.remove("visible");
       return;
     }
 
-    currentUser=data.user;
-    await loadCurrentProfile();
-    await loadSellerContext();
-    updateSessionUI();
-    showMessage("registerMessage","Cuenta creada correctamente.","success");
+    const root = taxonomyCache.categories.find(row=>{
+      return normalizeText(rowName(row)) === normalizeText(selectedCategoryName);
+    });
 
-    setTimeout(()=>{
-      closeModal($("authModal"));
-      authIntent==="seller"?openBrandModal():openAccount();
-    },300);
-  }catch(error){
-    showMessage("registerMessage",error.message==="REGISTER_TIMEOUT"?"Supabase tardó demasiado. Revisá Authentication → Users.":error.message,"error");
-  }finally{
-    submit.disabled=false;submit.textContent="Crear mi cuenta";
-  }
-});
-
-$("loginForm").addEventListener("submit",async event=>{
-  event.preventDefault();
-  const submit=$("loginSubmit");
-  submit.disabled=true;submit.textContent="Ingresando...";clearMessage("loginMessage");
-
-  try{
-    const {data,error}=await withTimeout(db.auth.signInWithPassword({
-      email:$("loginEmail").value.trim().toLowerCase(),
-      password:$("loginPassword").value
-    }),12000,"LOGIN_TIMEOUT");
-
-    if(error)throw error;
-    currentUser=data.user;
-    await Promise.all([loadCurrentProfile(),loadSellerContext()]);
-    updateSessionUI();
-    showMessage("loginMessage","Sesión iniciada.","success");
-
-    setTimeout(()=>{closeModal($("authModal"));openAccount()},250);
-  }catch(error){
-    const text=String(error.message||"");
-    showMessage("loginMessage",text.toLowerCase().includes("invalid login")?"Email o contraseña incorrectos.":text,"error");
-  }finally{
-    submit.disabled=false;submit.textContent="Iniciar sesión";
-  }
-});
-
-async function loadCurrentProfile(){
-  if(!currentUser){currentProfile=null;return null}
-  const {data,error}=await db.from("profiles").select("*").eq("id",currentUser.id).maybeSingle();
-  if(error){console.warn(error);return null}
-  currentProfile=data;return data;
-}
-
-async function loadSellerContext(){
-  currentSellerProfile=null;currentBrand=null;currentShippingProvinceIds=[];
-  if(!currentUser)return;
-
-  const sellerResult=await db.from("seller_profiles").select("*").eq("user_id",currentUser.id).maybeSingle();
-  if(sellerResult.error){console.warn("seller_profiles:",sellerResult.error);return}
-  currentSellerProfile=sellerResult.data;
-  if(!currentSellerProfile)return;
-
-  const brandResult=await db.from("brands").select("*").eq("seller_id",currentSellerProfile.id).limit(1).maybeSingle();
-  if(brandResult.error){console.warn("brands:",brandResult.error);return}
-  currentBrand=brandResult.data;
-  if(!currentBrand)return;
-
-  const shippingResult=await db.from("brand_shipping_provinces").select("province_id").eq("brand_id",currentBrand.id);
-  if(!shippingResult.error)currentShippingProvinceIds=(shippingResult.data||[]).map(row=>row.province_id);
-}
-
-function updateSessionUI(){
-  if(currentUser){
-    $("loginButton").textContent="Mi cuenta";
-    $("marketAccountButton").textContent="Mi cuenta";
-    $("sessionChip").classList.add("visible");
-    $("sessionName").textContent=userName();
-  }else{
-    $("loginButton").textContent="Iniciar sesión";
-    $("marketAccountButton").textContent="Iniciar sesión";
-    $("sessionChip").classList.remove("visible");
-  }
-}
-
-function openAccount(){
-  if(!currentUser){openAuth();return}
-  const name=userFullName();
-  $("accountName").textContent=name;
-  $("accountEmail").textContent=currentUser.email||"";
-  $("accountRole").textContent=effectiveRole();
-  $("accountAvatar").textContent=name.split(" ").filter(Boolean).slice(0,2).map(value=>value.charAt(0).toUpperCase()).join("")||"A";
-  $("accountPublishBrandButton").textContent=currentBrand?"Administrar mi marca":"Publicar mi marca";
-  openModal($("accountModal"));
-}
-
-$("loginButton").addEventListener("click",()=>currentUser?openAccount():openAuth());
-$("marketAccountButton").addEventListener("click",()=>currentUser?openAccount():openAuth());
-
-function renderBrandStep(){
-  document.querySelectorAll("[data-brand-step]").forEach(section=>section.classList.toggle("active",Number(section.dataset.brandStep)===brandStep));
-  document.querySelectorAll("[data-step-dot]").forEach(dot=>dot.classList.toggle("active",Number(dot.dataset.stepDot)<=brandStep));
-  $("brandBackButton").style.visibility=brandStep===1?"hidden":"visible";
-  $("brandNextButton").textContent=brandStep===4?(currentBrand?"Guardar cambios":"Crear mi marca"):"Continuar";
-}
-
-function validateBrandStep(){
-  if(brandStep===1&&!$("brandCuit").value.trim()){showMessage("brandMessage","Ingresá el CUIT.","error");return false}
-  if(brandStep===2){
-    if(!$("brandName").value.trim()){showMessage("brandMessage","Ingresá el nombre de la marca.","error");return false}
-    if(!$("brandCommercialEmail").value.trim()){showMessage("brandMessage","Ingresá el email comercial.","error");return false}
-  }
-  if(brandStep===3){
-    if(!$("brandProvince").value){showMessage("brandMessage","Seleccioná la provincia de origen.","error");return false}
-    if(!$("brandLocality").value.trim()){showMessage("brandMessage","Ingresá la localidad.","error");return false}
-  }
-  if(brandStep===4&&document.querySelectorAll(".shipping-province:checked").length===0){
-    showMessage("brandMessage","Seleccioná al menos una provincia de envío.","error");return false;
-  }
-  clearMessage("brandMessage");return true;
-}
-
-async function openBrandModal(){
-  if(!currentUser){openAuth("seller","register");return}
-  await Promise.all([loadTaxonomy(),loadSellerContext()]);
-  brandStep=1;
-
-  $("brandAccountEmail").value=currentUser.email||"";
-  $("brandCommercialEmail").value=currentBrand?.email||currentUser.email||"";
-  $("brandCuit").value=currentSellerProfile?.cuit||"";
-  $("brandName").value=currentBrand?.nombre||"";
-  $("brandDescription").value=currentBrand?.descripcion||"";
-  $("brandPhone").value=currentBrand?.telefono||"";
-  $("brandWhatsapp").value=currentBrand?.whatsapp||"";
-  $("brandInstagram").value=currentBrand?.instagram||"";
-  $("brandProvince").value=currentBrand?.province_id||"";
-  $("brandLocality").value=currentBrand?.localidad||"";
-
-  populateProvinceControls();
-  syncShippingChecks();
-  renderBrandStep();
-  clearMessage("brandMessage");
-  openModal($("brandModal"));
-}
-
-$("publishBrandButton").addEventListener("click",()=>currentUser?openBrandModal():openAuth("seller","register"));
-$("accountPublishBrandButton").addEventListener("click",()=>{closeModal($("accountModal"));openBrandModal()});
-
-$("brandBackButton").addEventListener("click",()=>{
-  if(brandStep>1){brandStep--;renderBrandStep()}
-});
-
-$("brandNextButton").addEventListener("click",async()=>{
-  if(!validateBrandStep())return;
-  if(brandStep<4){brandStep++;renderBrandStep();return}
-  await saveBrand();
-});
-
-async function saveBrand(){
-  const button=$("brandNextButton");
-  button.disabled=true;button.textContent="Guardando...";clearMessage("brandMessage");
-
-  try{
-    let seller=currentSellerProfile;
-
-    if(!seller){
-      const createSeller=await db.from("seller_profiles").insert({
-        user_id:currentUser.id,
-        cuit:$("brandCuit").value.trim()
-      }).select("*").single();
-
-      if(createSeller.error)throw new Error("No pudimos crear el perfil vendedor: "+createSeller.error.message);
-      seller=createSeller.data;currentSellerProfile=seller;
-    }else if(String(seller.cuit||"")!==$("brandCuit").value.trim()){
-      const updateSeller=await db.from("seller_profiles").update({cuit:$("brandCuit").value.trim()}).eq("id",seller.id).select("*").single();
-      if(updateSeller.error)throw new Error("No pudimos actualizar el CUIT: "+updateSeller.error.message);
-      seller=updateSeller.data;currentSellerProfile=seller;
+    if(!root){
+      section.classList.remove("visible");
+      return;
     }
 
-    const brandPayload={
-      seller_id:seller.id,
-      nombre:$("brandName").value.trim(),
-      descripcion:$("brandDescription").value.trim(),
-      email:$("brandCommercialEmail").value.trim().toLowerCase(),
-      telefono:$("brandPhone").value.trim(),
-      whatsapp:$("brandWhatsapp").value.trim(),
-      instagram:$("brandInstagram").value.trim(),
-      province_id:Number($("brandProvince").value),
-      localidad:$("brandLocality").value.trim()
-    };
+    const rows = taxonomyCache.subcategories
+      .filter(row=>{
+        const parent = firstValue(row,["category_id","categoria_id","parent_category_id","parent_id"]);
+        return String(parent) === String(root.id);
+      })
+      .sort((a,b)=>rowName(a).localeCompare(rowName(b),"es"));
 
-    if(currentBrand){
-      const updateBrand=await db.from("brands").update(brandPayload).eq("id",currentBrand.id).select("*").single();
-      if(updateBrand.error)throw new Error("No pudimos actualizar la marca: "+updateBrand.error.message);
-      currentBrand=updateBrand.data;
-    }else{
-      const createBrand=await db.from("brands").insert(brandPayload).select("*").single();
-      if(createBrand.error)throw new Error("No pudimos guardar la marca: "+createBrand.error.message);
-      currentBrand=createBrand.data;
+    if(!rows.length){
+      section.classList.remove("visible");
+      return;
     }
 
-    const selectedProvinceIds=Array.from(document.querySelectorAll(".shipping-province:checked")).map(input=>Number(input.value));
+    const allButton = document.createElement("button");
+    allButton.className = "subcategory-tab active";
+    allButton.textContent = "Todas";
+    allButton.addEventListener("click",async()=>{
+      selectedSubcategoryId = null;
+      document.querySelectorAll(".subcategory-tab").forEach(item=>item.classList.remove("active"));
+      allButton.classList.add("active");
+      updateExplorerHeading();
+      await loadBrandsForProvince();
+    });
 
-    const deleteShipping=await db.from("brand_shipping_provinces").delete().eq("brand_id",currentBrand.id);
-    if(deleteShipping.error)throw new Error("No pudimos actualizar las provincias de envío: "+deleteShipping.error.message);
+    strip.appendChild(allButton);
 
-    const shippingRows=selectedProvinceIds.map(provinceId=>({brand_id:currentBrand.id,province_id:provinceId}));
+    rows.forEach(row=>{
+      const button = document.createElement("button");
+      button.className = "subcategory-tab";
+      button.textContent = rowName(row);
 
-    if(shippingRows.length){
-      const insertShipping=await db.from("brand_shipping_provinces").insert(shippingRows);
-      if(insertShipping.error)throw new Error("No pudimos guardar las provincias de envío: "+insertShipping.error.message);
-    }
+      button.addEventListener("click",async()=>{
+        selectedSubcategoryId = row.id;
 
-    currentShippingProvinceIds=selectedProvinceIds;
-    showMessage("brandMessage","Marca guardada correctamente.","success");
+        document.querySelectorAll(".subcategory-tab").forEach(item=>item.classList.remove("active"));
+        button.classList.add("active");
 
-    setTimeout(async()=>{
-      closeModal($("brandModal"));
-      await loadSellerContext();
-      openSellerPortal();
-    },400);
-  }catch(error){
-    console.error(error);
-    showMessage("brandMessage",error.message||"No pudimos guardar la marca.","error");
-  }finally{
-    button.disabled=false;
-    renderBrandStep();
+        updateExplorerHeading();
+        await loadBrandsForProvince();
+      });
+
+      strip.appendChild(button);
+    });
+
+    section.classList.add("visible");
   }
-}
 
-async function safeRead(table){
-  try{
-    const {data,error}=await db.from(table).select("*");
-    if(error)throw error;
-    return data||[];
-  }catch(error){console.warn(table,error);return[]}
-}
+  function updateExplorerHeading(){
+    const provinceName = selectedProvince?.name || "la provincia";
 
-function renderSimpleList(id,rows,emptyText){
-  const container=$(id);container.innerHTML="";
-  if(!rows.length){container.innerHTML=`<div class="empty-panel">${escapeHtml(emptyText)}</div>`;return}
-  rows.slice(0,20).forEach((row,index)=>{
-    const title=firstValue(row,["nombre","titulo","estado","status","direccion"],"Registro "+(index+1));
-    container.insertAdjacentHTML("beforeend",`<div class="list-row"><div><strong>${escapeHtml(title)}</strong><p>Información guardada en Amigate.</p></div></div>`);
+    if(!selectedCategoryName){
+      $("explorerEyebrow").textContent = "Marcas disponibles";
+      $("explorerTitle").textContent = "Descubrí " + provinceName;
+      $("explorerDescription").textContent =
+        "Marcas ubicadas allí o que realizan envíos hasta " + provinceName + ".";
+      $("resultLabel").textContent = "Todas las marcas";
+      return;
+    }
+
+    const selectedSubcategory = taxonomyCache.subcategories.find(row=>{
+      return String(row.id) === String(selectedSubcategoryId);
+    });
+
+    if(selectedSubcategory){
+      $("explorerEyebrow").textContent = selectedCategoryName;
+      $("explorerTitle").textContent = rowName(selectedSubcategory);
+      $("explorerDescription").textContent =
+        "Marcas relacionadas con " + rowName(selectedSubcategory) + " disponibles en " + provinceName + ".";
+      $("resultLabel").textContent = selectedCategoryName + " · " + rowName(selectedSubcategory);
+      return;
+    }
+
+    $("explorerEyebrow").textContent = "Categoría seleccionada";
+    $("explorerTitle").textContent = selectedCategoryName;
+    $("explorerDescription").textContent =
+      "Marcas de " + selectedCategoryName.toLowerCase() + " disponibles en " + provinceName + ".";
+    $("resultLabel").textContent = selectedCategoryName;
+  }
+
+  /* =====================================================
+     CARGA DE MARCAS
+  ===================================================== */
+
+  async function loadBrandsForProvince(){
+    $("brandLoader").classList.add("visible");
+    $("brandGrid").innerHTML = "";
+    $("brandEmpty").classList.remove("visible");
+
+    try{
+      const [brandsResult,shippingResult] = await Promise.all([
+        db.from("brands").select("*"),
+        db.from("brand_shipping_provinces").select("*")
+      ]);
+
+      if(brandsResult.error) throw brandsResult.error;
+      if(shippingResult.error) throw shippingResult.error;
+
+      const allBrands = brandsResult.data || [];
+      const shippingRows = shippingResult.data || [];
+      const provinceId = selectedProvince?.databaseId;
+
+      let visibleBrands = allBrands.filter(brand=>{
+        const locatedThere =
+          provinceId !== null &&
+          provinceId !== undefined &&
+          String(brand.province_id) === String(provinceId);
+
+        const shipsThere = shippingRows.some(row=>{
+          return String(row.brand_id) === String(brand.id) &&
+            String(row.province_id) === String(provinceId);
+        });
+
+        return locatedThere || shipsThere;
+      });
+
+      let productsByBrand = new Map();
+
+      if(selectedCategoryName === "Productos"){
+        const productsResult = await db.from("products").select("*");
+
+        if(!productsResult.error){
+          let products = productsResult.data || [];
+
+          products = products.filter(product=>{
+            const active = firstValue(product,["activo","active","is_active"],true);
+
+            if(active === false) return false;
+
+            if(selectedSubcategoryId){
+              const productSubcategory = firstValue(product,["subcategory_id","subcategoria_id"]);
+              return String(productSubcategory) === String(selectedSubcategoryId);
+            }
+
+            return true;
+          });
+
+          products.forEach(product=>{
+            const brandId = firstValue(product,["brand_id","marca_id"]);
+
+            if(!brandId) return;
+
+            const key = String(brandId);
+
+            if(!productsByBrand.has(key)) productsByBrand.set(key,[]);
+            if(productsByBrand.get(key).length < 5) productsByBrand.get(key).push(product);
+          });
+
+          visibleBrands = visibleBrands.filter(brand=>{
+            return productsByBrand.has(String(brand.id));
+          });
+        }
+      }
+
+      renderBrands(visibleBrands,productsByBrand);
+    }catch(error){
+      console.error(error);
+      $("brandEmpty").classList.add("visible");
+      $("brandEmpty").querySelector("strong").textContent = "No pudimos cargar las marcas";
+      $("brandEmpty").querySelector("p").textContent =
+        "Ocurrió un problema al consultar la información. Probá nuevamente más tarde.";
+    }finally{
+      $("brandLoader").classList.remove("visible");
+    }
+  }
+
+  function renderBrands(brands,productsByBrand){
+    const grid = $("brandGrid");
+
+    grid.innerHTML = "";
+    $("resultCount").textContent = brands.length + (brands.length === 1 ? " resultado" : " resultados");
+
+    if(!brands.length){
+      $("brandEmpty").classList.add("visible");
+      return;
+    }
+
+    $("brandEmpty").classList.remove("visible");
+
+    brands.forEach(brand=>{
+      const name = rowName(brand);
+      const province = taxonomyCache.provinces.find(row=>{
+        return String(row.id) === String(brand.province_id);
+      });
+
+      const products = productsByBrand.get(String(brand.id)) || [];
+
+      const productHtml = products.map(product=>{
+        const price = firstValue(product,["precio","price","precio_actual"],null);
+
+        return `
+          <div class="mini-product">
+            <strong>${escapeHtml(rowName(product))}</strong>
+            ${price !== null ? `<span>$${escapeHtml(price)}</span>` : ""}
+          </div>
+        `;
+      }).join("");
+
+      const card = document.createElement("article");
+      card.className = "brand-card";
+
+      card.innerHTML = `
+        <div class="brand-card-cover">
+          ${escapeHtml(name.substring(0,2).toUpperCase())}
+        </div>
+
+        <div class="brand-card-body">
+          <div class="brand-card-top">
+            <div>
+              <div class="brand-card-name">${escapeHtml(name)}</div>
+              <div class="brand-location">
+                ${escapeHtml(
+                  (province ? rowName(province) : "Argentina") +
+                  (brand.localidad ? " · " + brand.localidad : "")
+                )}
+              </div>
+            </div>
+
+            <span class="brand-badge">Marca</span>
+          </div>
+
+          <p class="brand-description">
+            ${escapeHtml(brand.descripcion || "Conocé esta marca dentro de Amigate.")}
+          </p>
+
+          ${productHtml ? `<div class="mini-products">${productHtml}</div>` : ""}
+
+          <button class="brand-card-button">Ver marca</button>
+        </div>
+      `;
+
+      grid.appendChild(card);
+    });
+  }
+
+  /* =====================================================
+     AUTENTICACIÓN
+  ===================================================== */
+
+  function switchAuthTab(tab){
+    document.querySelectorAll(".auth-tab").forEach(button=>{
+      button.classList.toggle("active",button.dataset.authTab === tab);
+    });
+
+    document.querySelectorAll(".auth-panel").forEach(panel=>panel.classList.remove("active"));
+    $("auth-" + tab).classList.add("active");
+  }
+
+  function openAuth(intent="buyer",tab="login"){
+    authIntent = intent;
+    $("sellerIntent").classList.toggle("visible",intent === "seller");
+    switchAuthTab(tab);
+    openModal($("authModal"));
+  }
+
+  document.querySelectorAll(".auth-tab").forEach(button=>{
+    button.addEventListener("click",()=>switchAuthTab(button.dataset.authTab));
   });
-}
 
-async function openBuyerPortal(){
-  $("buyerWelcomeName").textContent=userName();
-  $("buyerPortal").classList.add("visible");
-
-  const [orders,favorites,brands,claims,addresses]=await Promise.all([
-    safeRead("orders"),safeRead("favorite_products"),safeRead("favorite_brands"),safeRead("claims"),safeRead("user_addresses")
-  ]);
-
-  $("buyerOrdersCount").textContent=orders.length;
-  $("buyerFavoritesCount").textContent=favorites.length;
-  $("buyerBrandsCount").textContent=brands.length;
-  $("buyerClaimsCount").textContent=claims.length;
-
-  renderSimpleList("buyerOrdersList",orders,"Todavía no realizaste compras.");
-  renderSimpleList("buyerFavoritesList",favorites,"Todavía no guardaste favoritos.");
-  renderSimpleList("buyerClaimsList",claims,"No tenés reclamos.");
-  renderSimpleList("buyerAddressesList",addresses,"Todavía no guardaste direcciones.");
-}
-
-async function openSellerPortal(){
-  await loadSellerContext();
-  if(!currentSellerProfile||!currentBrand){openBrandModal();return}
-
-  $("sellerPortal").classList.add("visible");
-  $("sellerWelcomeTitle").textContent=rowName(currentBrand);
-  $("sellerProductsCount").textContent="0";
-  renderSellerBrand();
-}
-
-function renderSellerBrand(){
-  const province=taxonomyCache.provinces.find(item=>String(item.id)===String(currentBrand?.province_id));
-  const shippingNames=taxonomyCache.provinces.filter(item=>currentShippingProvinceIds.map(String).includes(String(item.id))).map(rowName);
-
-  $("sellerBrandInfo").innerHTML=`
-    <div class="list-row"><div><strong>Nombre</strong><p>${escapeHtml(currentBrand?.nombre||"Sin nombre")}</p></div></div>
-    <div class="list-row"><div><strong>Descripción</strong><p>${escapeHtml(currentBrand?.descripcion||"Sin descripción")}</p></div></div>
-    <div class="list-row"><div><strong>Email comercial</strong><p>${escapeHtml(currentBrand?.email||"Sin completar")}</p></div></div>
-    <div class="list-row"><div><strong>Teléfono</strong><p>${escapeHtml(currentBrand?.telefono||"Sin completar")}</p></div></div>
-    <div class="list-row"><div><strong>WhatsApp</strong><p>${escapeHtml(currentBrand?.whatsapp||"Sin completar")}</p></div></div>
-    <div class="list-row"><div><strong>Instagram</strong><p>${escapeHtml(currentBrand?.instagram||"Sin completar")}</p></div></div>
-    <div class="list-row"><div><strong>Origen</strong><p>${escapeHtml((province?rowName(province):"Sin provincia")+(currentBrand?.localidad?" · "+currentBrand.localidad:""))}</p></div></div>
-    <div class="list-row"><div><strong>Envíos</strong><p>${escapeHtml(shippingNames.length===taxonomyCache.provinces.length?"Toda Argentina":shippingNames.join(", ")||"Sin completar")}</p></div></div>
-    <div class="list-row"><div><strong>CUIT</strong><p>${escapeHtml(currentSellerProfile?.cuit||"Sin completar")}</p></div></div>
-  `;
-}
-
-$("openPortalButton").addEventListener("click",async()=>{
-  closeModal($("accountModal"));
-  await loadSellerContext();
-  if(effectiveRole()==="admin"){alert("El panel administrativo se mantiene reservado.");return}
-  currentSellerProfile?openSellerPortal():openBuyerPortal();
-});
-
-function setupPortalNavigation(attribute,portalId,titleId,sectionPrefix){
-  document.querySelectorAll(`[${attribute}]`).forEach(button=>{
+  document.querySelectorAll("[data-password-target]").forEach(button=>{
     button.addEventListener("click",()=>{
-      document.querySelectorAll(`[${attribute}]`).forEach(item=>item.classList.remove("active"));
-      button.classList.add("active");
-      document.querySelectorAll(`#${portalId} .portal-section`).forEach(section=>section.classList.remove("active"));
-      const page=button.getAttribute(attribute);
-      $(sectionPrefix+page)?.classList.add("active");
-      $(titleId).textContent=button.textContent.trim();
+      const input = $(button.dataset.passwordTarget);
+      const showing = input.type === "text";
+
+      input.type = showing ? "password" : "text";
+      button.textContent = showing ? "Ver" : "Ocultar";
     });
   });
-}
 
-setupPortalNavigation("data-buyer-page","buyerPortal","buyerPortalTitle","buyer-");
-setupPortalNavigation("data-seller-page","sellerPortal","sellerPortalTitle","seller-");
+  $("registerForm").addEventListener("submit",async event=>{
+    event.preventDefault();
 
-$("buyerExit").addEventListener("click",()=>$("buyerPortal").classList.remove("visible"));
-$("sellerExit").addEventListener("click",()=>$("sellerPortal").classList.remove("visible"));
-$("buyerAccountButton").addEventListener("click",openAccount);
-$("sellerAccountButton").addEventListener("click",openAccount);
-$("editBrandButton").addEventListener("click",openBrandModal);
+    const submit = $("registerSubmit");
+    submit.disabled = true;
+    submit.textContent = "Creando cuenta...";
+    clearMessage("registerMessage");
 
-async function logout(){
-  try{await db.auth.signOut()}catch(error){console.warn(error)}
-  currentUser=null;currentProfile=null;currentSellerProfile=null;currentBrand=null;currentShippingProvinceIds=[];
-  [$("accountModal"),$("buyerPortal"),$("sellerPortal")].forEach(el=>el?.classList.remove("open","visible"));
-  document.body.style.overflow="";
-  updateSessionUI();
-}
+    try{
+      const nombre = $("registerName").value.trim();
+      const apellido = $("registerSurname").value.trim();
+      const dni = $("registerDni").value.replace(/\D/g,"");
+      const telefono = $("registerPhone").value.trim();
+      const email = $("registerEmail").value.trim().toLowerCase();
+      const password = $("registerPassword").value;
 
-$("logoutButton").addEventListener("click",logout);
+      const {data,error} = await withTimeout(
+        db.auth.signUp({
+          email,
+          password,
+          options:{
+            data:{
+              nombre,
+              apellido,
+              dni,
+              telefono,
+              nombre_completo:nombre + " " + apellido,
+              origen_registro:authIntent
+            }
+          }
+        }),
+        15000,
+        "REGISTER_TIMEOUT"
+      );
 
-async function initializeSession(){
-  try{
-    const {data}=await db.auth.getSession();
-    currentUser=data?.session?.user||null;
-    if(currentUser)await Promise.all([loadCurrentProfile(),loadSellerContext(),loadTaxonomy()]);
+      if(error) throw error;
+
+      if(!data?.session){
+        showMessage(
+          "registerMessage",
+          "La cuenta se creó, pero Supabase todavía está esperando confirmación de correo.",
+          "success"
+        );
+        return;
+      }
+
+      currentUser = data.user;
+
+      await Promise.all([
+        loadCurrentProfile(),
+        loadSellerContext()
+      ]);
+
+      updateSessionUI();
+
+      showMessage("registerMessage","Cuenta creada correctamente.","success");
+
+      setTimeout(()=>{
+        closeModal($("authModal"));
+
+        if(authIntent === "seller"){
+          openBrandModal();
+        }else{
+          openAccount();
+        }
+      },300);
+    }catch(error){
+      showMessage(
+        "registerMessage",
+        error.message === "REGISTER_TIMEOUT"
+          ? "Supabase tardó demasiado. Revisá Authentication → Users."
+          : error.message,
+        "error"
+      );
+    }finally{
+      submit.disabled = false;
+      submit.textContent = "Crear mi cuenta";
+    }
+  });
+
+  $("loginForm").addEventListener("submit",async event=>{
+    event.preventDefault();
+
+    const submit = $("loginSubmit");
+    submit.disabled = true;
+    submit.textContent = "Ingresando...";
+    clearMessage("loginMessage");
+
+    try{
+      const {data,error} = await withTimeout(
+        db.auth.signInWithPassword({
+          email:$("loginEmail").value.trim().toLowerCase(),
+          password:$("loginPassword").value
+        }),
+        12000,
+        "LOGIN_TIMEOUT"
+      );
+
+      if(error) throw error;
+
+      currentUser = data.user;
+
+      await Promise.all([
+        loadCurrentProfile(),
+        loadSellerContext()
+      ]);
+
+      updateSessionUI();
+
+      showMessage("loginMessage","Sesión iniciada.","success");
+
+      setTimeout(()=>{
+        closeModal($("authModal"));
+        openAccount();
+      },250);
+    }catch(error){
+      const text = String(error.message || "");
+
+      showMessage(
+        "loginMessage",
+        text.toLowerCase().includes("invalid login")
+          ? "Email o contraseña incorrectos."
+          : text,
+        "error"
+      );
+    }finally{
+      submit.disabled = false;
+      submit.textContent = "Iniciar sesión";
+    }
+  });
+
+  async function loadCurrentProfile(){
+    if(!currentUser){
+      currentProfile = null;
+      return null;
+    }
+
+    const {data,error} = await db
+      .from("profiles")
+      .select("*")
+      .eq("id",currentUser.id)
+      .maybeSingle();
+
+    if(error){
+      console.warn(error);
+      return null;
+    }
+
+    currentProfile = data;
+    return data;
+  }
+
+  async function loadSellerContext(){
+    currentSellerProfile = null;
+    currentBrand = null;
+    currentShippingProvinceIds = [];
+
+    if(!currentUser) return;
+
+    const sellerResult = await db
+      .from("seller_profiles")
+      .select("*")
+      .eq("user_id",currentUser.id)
+      .maybeSingle();
+
+    if(sellerResult.error){
+      console.warn("seller_profiles:",sellerResult.error);
+      return;
+    }
+
+    currentSellerProfile = sellerResult.data;
+
+    if(!currentSellerProfile) return;
+
+    const brandResult = await db
+      .from("brands")
+      .select("*")
+      .eq("seller_id",currentSellerProfile.id)
+      .limit(1)
+      .maybeSingle();
+
+    if(brandResult.error){
+      console.warn("brands:",brandResult.error);
+      return;
+    }
+
+    currentBrand = brandResult.data;
+
+    if(!currentBrand) return;
+
+    const shippingResult = await db
+      .from("brand_shipping_provinces")
+      .select("province_id")
+      .eq("brand_id",currentBrand.id);
+
+    if(!shippingResult.error){
+      currentShippingProvinceIds = (shippingResult.data || []).map(row=>row.province_id);
+    }
+  }
+
+  function updateSessionUI(){
+    if(currentUser){
+      $("loginButton").textContent = "Mi cuenta";
+      $("explorerAccountButton").textContent = "Mi cuenta";
+      $("sessionChip").classList.add("visible");
+      $("sessionName").textContent = userName();
+    }else{
+      $("loginButton").textContent = "Iniciar sesión";
+      $("explorerAccountButton").textContent = "Iniciar sesión";
+      $("sessionChip").classList.remove("visible");
+    }
+  }
+
+  function openAccount(){
+    if(!currentUser){
+      openAuth();
+      return;
+    }
+
+    const name = userFullName();
+
+    $("accountName").textContent = name;
+    $("accountEmail").textContent = currentUser.email || "";
+    $("accountRole").textContent = effectiveRole();
+
+    $("accountAvatar").textContent = name
+      .split(" ")
+      .filter(Boolean)
+      .slice(0,2)
+      .map(value=>value.charAt(0).toUpperCase())
+      .join("") || "A";
+
+    $("openBrandPanelButton").classList.toggle("hidden",!currentBrand);
+    $("buyerBrandPanelShortcut").classList.toggle("hidden",!currentBrand);
+
+    $("accountPublishBrandButton").textContent = currentBrand
+      ? "Editar datos de mi marca"
+      : "Publicar mi marca";
+
+    openModal($("accountModal"));
+  }
+
+  $("loginButton").addEventListener("click",()=>currentUser ? openAccount() : openAuth());
+  $("explorerAccountButton").addEventListener("click",()=>currentUser ? openAccount() : openAuth());
+
+  /* =====================================================
+     ALTA DE MARCA
+  ===================================================== */
+
+  function renderBrandStep(){
+    document.querySelectorAll("[data-brand-step]").forEach(section=>{
+      section.classList.toggle("active",Number(section.dataset.brandStep) === brandStep);
+    });
+
+    document.querySelectorAll("[data-step-dot]").forEach(dot=>{
+      dot.classList.toggle("active",Number(dot.dataset.stepDot) <= brandStep);
+    });
+
+    $("brandBackButton").style.visibility = brandStep === 1 ? "hidden" : "visible";
+
+    $("brandNextButton").textContent = brandStep === 4
+      ? (currentBrand ? "Guardar cambios" : "Crear mi marca")
+      : "Continuar";
+  }
+
+  function validateBrandStep(){
+    if(brandStep === 1 && !$("brandCuit").value.trim()){
+      showMessage("brandMessage","Ingresá el CUIT.","error");
+      return false;
+    }
+
+    if(brandStep === 2){
+      if(!$("brandName").value.trim()){
+        showMessage("brandMessage","Ingresá el nombre de la marca.","error");
+        return false;
+      }
+
+      if(!$("brandCommercialEmail").value.trim()){
+        showMessage("brandMessage","Ingresá el email comercial.","error");
+        return false;
+      }
+    }
+
+    if(brandStep === 3){
+      if(!$("brandProvince").value){
+        showMessage("brandMessage","Seleccioná la provincia de origen.","error");
+        return false;
+      }
+
+      if(!$("brandLocality").value.trim()){
+        showMessage("brandMessage","Ingresá la localidad.","error");
+        return false;
+      }
+    }
+
+    if(
+      brandStep === 4 &&
+      document.querySelectorAll(".shipping-province:checked").length === 0
+    ){
+      showMessage("brandMessage","Seleccioná al menos una provincia de envío.","error");
+      return false;
+    }
+
+    clearMessage("brandMessage");
+    return true;
+  }
+
+  async function openBrandModal(){
+    if(!currentUser){
+      openAuth("seller","register");
+      return;
+    }
+
+    await Promise.all([
+      loadTaxonomy(),
+      loadSellerContext()
+    ]);
+
+    brandStep = 1;
+
+    $("brandAccountEmail").value = currentUser.email || "";
+    $("brandCommercialEmail").value = currentBrand?.email || currentUser.email || "";
+    $("brandCuit").value = currentSellerProfile?.cuit || "";
+    $("brandName").value = currentBrand?.nombre || "";
+    $("brandDescription").value = currentBrand?.descripcion || "";
+    $("brandPhone").value = currentBrand?.telefono || "";
+    $("brandWhatsapp").value = currentBrand?.whatsapp || "";
+    $("brandInstagram").value = currentBrand?.instagram || "";
+    $("brandProvince").value = currentBrand?.province_id || "";
+    $("brandLocality").value = currentBrand?.localidad || "";
+
+    populateProvinceControls();
+    syncShippingChecks();
+    renderBrandStep();
+    clearMessage("brandMessage");
+
+    openModal($("brandModal"));
+  }
+
+  $("publishBrandButton").addEventListener("click",()=>{
+    currentUser ? openBrandModal() : openAuth("seller","register");
+  });
+
+  $("accountPublishBrandButton").addEventListener("click",()=>{
+    closeModal($("accountModal"));
+    openBrandModal();
+  });
+
+  $("brandBackButton").addEventListener("click",()=>{
+    if(brandStep > 1){
+      brandStep--;
+      renderBrandStep();
+    }
+  });
+
+  $("brandNextButton").addEventListener("click",async()=>{
+    if(!validateBrandStep()) return;
+
+    if(brandStep < 4){
+      brandStep++;
+      renderBrandStep();
+      return;
+    }
+
+    await saveBrand();
+  });
+
+  async function saveBrand(){
+    const button = $("brandNextButton");
+
+    button.disabled = true;
+    button.textContent = "Guardando...";
+    clearMessage("brandMessage");
+
+    try{
+      let seller = currentSellerProfile;
+
+      if(!seller){
+        const createSeller = await db
+          .from("seller_profiles")
+          .insert({
+            user_id:currentUser.id,
+            cuit:$("brandCuit").value.trim()
+          })
+          .select("*")
+          .single();
+
+        if(createSeller.error){
+          throw new Error("No pudimos crear el perfil vendedor: " + createSeller.error.message);
+        }
+
+        seller = createSeller.data;
+        currentSellerProfile = seller;
+      }else if(String(seller.cuit || "") !== $("brandCuit").value.trim()){
+        const updateSeller = await db
+          .from("seller_profiles")
+          .update({cuit:$("brandCuit").value.trim()})
+          .eq("id",seller.id)
+          .select("*")
+          .single();
+
+        if(updateSeller.error){
+          throw new Error("No pudimos actualizar el CUIT: " + updateSeller.error.message);
+        }
+
+        seller = updateSeller.data;
+        currentSellerProfile = seller;
+      }
+
+      const payload = {
+        seller_id:seller.id,
+        nombre:$("brandName").value.trim(),
+        descripcion:$("brandDescription").value.trim(),
+        email:$("brandCommercialEmail").value.trim().toLowerCase(),
+        telefono:$("brandPhone").value.trim(),
+        whatsapp:$("brandWhatsapp").value.trim(),
+        instagram:$("brandInstagram").value.trim(),
+        province_id:Number($("brandProvince").value),
+        localidad:$("brandLocality").value.trim()
+      };
+
+      if(currentBrand){
+        const updateBrand = await db
+          .from("brands")
+          .update(payload)
+          .eq("id",currentBrand.id)
+          .select("*")
+          .single();
+
+        if(updateBrand.error){
+          throw new Error("No pudimos actualizar la marca: " + updateBrand.error.message);
+        }
+
+        currentBrand = updateBrand.data;
+      }else{
+        const createBrand = await db
+          .from("brands")
+          .insert(payload)
+          .select("*")
+          .single();
+
+        if(createBrand.error){
+          throw new Error("No pudimos guardar la marca: " + createBrand.error.message);
+        }
+
+        currentBrand = createBrand.data;
+      }
+
+      const selectedProvinceIds = Array
+        .from(document.querySelectorAll(".shipping-province:checked"))
+        .map(input=>Number(input.value));
+
+      const deleteShipping = await db
+        .from("brand_shipping_provinces")
+        .delete()
+        .eq("brand_id",currentBrand.id);
+
+      if(deleteShipping.error){
+        throw new Error(
+          "No pudimos actualizar las provincias de envío: " +
+          deleteShipping.error.message
+        );
+      }
+
+      const shippingRows = selectedProvinceIds.map(provinceId=>({
+        brand_id:currentBrand.id,
+        province_id:provinceId
+      }));
+
+      if(shippingRows.length){
+        const insertShipping = await db
+          .from("brand_shipping_provinces")
+          .insert(shippingRows);
+
+        if(insertShipping.error){
+          throw new Error(
+            "No pudimos guardar las provincias de envío: " +
+            insertShipping.error.message
+          );
+        }
+      }
+
+      currentShippingProvinceIds = selectedProvinceIds;
+
+      showMessage("brandMessage","Marca guardada correctamente.","success");
+
+      setTimeout(async()=>{
+        closeModal($("brandModal"));
+        await loadSellerContext();
+        openSellerPortal();
+      },400);
+    }catch(error){
+      console.error(error);
+      showMessage("brandMessage",error.message || "No pudimos guardar la marca.","error");
+    }finally{
+      button.disabled = false;
+      renderBrandStep();
+    }
+  }
+
+  /* =====================================================
+     PORTAL COMPRADOR
+  ===================================================== */
+
+  async function safeRead(table){
+    try{
+      const {data,error} = await db.from(table).select("*");
+
+      if(error) throw error;
+
+      return data || [];
+    }catch(error){
+      console.warn(table,error);
+      return [];
+    }
+  }
+
+  function renderSimpleList(id,rows,emptyText){
+    const container = $(id);
+    container.innerHTML = "";
+
+    if(!rows.length){
+      container.innerHTML = `<div class="empty-panel">${escapeHtml(emptyText)}</div>`;
+      return;
+    }
+
+    rows.slice(0,20).forEach((row,index)=>{
+      const title = firstValue(
+        row,
+        ["nombre","titulo","estado","status","direccion"],
+        "Registro " + (index + 1)
+      );
+
+      container.insertAdjacentHTML(
+        "beforeend",
+        `<div class="list-row">
+          <div>
+            <strong>${escapeHtml(title)}</strong>
+            <p>Información guardada en Amigate.</p>
+          </div>
+        </div>`
+      );
+    });
+  }
+
+  async function openBuyerPortal(){
+    $("buyerWelcomeName").textContent = userName();
+    $("buyerPortal").classList.add("visible");
+    $("buyerBrandPanelShortcut").classList.toggle("hidden",!currentBrand);
+
+    const [orders,favorites,brands,claims,addresses] = await Promise.all([
+      safeRead("orders"),
+      safeRead("favorite_products"),
+      safeRead("favorite_brands"),
+      safeRead("claims"),
+      safeRead("user_addresses")
+    ]);
+
+    $("buyerOrdersCount").textContent = orders.length;
+    $("buyerFavoritesCount").textContent = favorites.length;
+    $("buyerBrandsCount").textContent = brands.length;
+    $("buyerClaimsCount").textContent = claims.length;
+
+    renderSimpleList("buyerOrdersList",orders,"Todavía no realizaste compras.");
+    renderSimpleList("buyerFavoritesList",favorites,"Todavía no guardaste favoritos.");
+    renderSimpleList("buyerClaimsList",claims,"No tenés reclamos.");
+    renderSimpleList("buyerAddressesList",addresses,"Todavía no guardaste direcciones.");
+  }
+
+  /* =====================================================
+     PANEL DE MARCA
+  ===================================================== */
+
+  async function openSellerPortal(){
+    await loadSellerContext();
+
+    if(!currentSellerProfile || !currentBrand){
+      openBrandModal();
+      return;
+    }
+
+    $("sellerPortal").classList.add("visible");
+    $("sellerWelcomeTitle").textContent = rowName(currentBrand);
+    $("sellerProductsCount").textContent = "0";
+
+    renderSellerBrand();
+  }
+
+  function renderSellerBrand(){
+    const province = taxonomyCache.provinces.find(row=>{
+      return String(row.id) === String(currentBrand?.province_id);
+    });
+
+    const shippingNames = taxonomyCache.provinces
+      .filter(row=>currentShippingProvinceIds.map(String).includes(String(row.id)))
+      .map(rowName);
+
+    $("sellerBrandInfo").innerHTML = `
+      <div class="list-row"><div><strong>Nombre</strong><p>${escapeHtml(currentBrand?.nombre || "Sin nombre")}</p></div></div>
+      <div class="list-row"><div><strong>Descripción</strong><p>${escapeHtml(currentBrand?.descripcion || "Sin descripción")}</p></div></div>
+      <div class="list-row"><div><strong>Email comercial</strong><p>${escapeHtml(currentBrand?.email || "Sin completar")}</p></div></div>
+      <div class="list-row"><div><strong>Teléfono</strong><p>${escapeHtml(currentBrand?.telefono || "Sin completar")}</p></div></div>
+      <div class="list-row"><div><strong>WhatsApp</strong><p>${escapeHtml(currentBrand?.whatsapp || "Sin completar")}</p></div></div>
+      <div class="list-row"><div><strong>Instagram</strong><p>${escapeHtml(currentBrand?.instagram || "Sin completar")}</p></div></div>
+      <div class="list-row"><div><strong>Origen</strong><p>${escapeHtml(
+        (province ? rowName(province) : "Sin provincia") +
+        (currentBrand?.localidad ? " · " + currentBrand.localidad : "")
+      )}</p></div></div>
+      <div class="list-row"><div><strong>Envíos</strong><p>${escapeHtml(
+        shippingNames.length === taxonomyCache.provinces.length
+          ? "Toda Argentina"
+          : shippingNames.join(", ") || "Sin completar"
+      )}</p></div></div>
+      <div class="list-row"><div><strong>CUIT</strong><p>${escapeHtml(currentSellerProfile?.cuit || "Sin completar")}</p></div></div>
+    `;
+  }
+
+  /* =====================================================
+     NAVEGACIÓN DE PORTALES
+  ===================================================== */
+
+  function setupPortalNavigation(attribute,portalId,titleId,sectionPrefix){
+    document.querySelectorAll(`[${attribute}]`).forEach(button=>{
+      button.addEventListener("click",()=>{
+        document.querySelectorAll(`[${attribute}]`).forEach(item=>{
+          item.classList.remove("active");
+        });
+
+        button.classList.add("active");
+
+        document.querySelectorAll(`#${portalId} .portal-section`).forEach(section=>{
+          section.classList.remove("active");
+        });
+
+        const page = button.getAttribute(attribute);
+
+        $(sectionPrefix + page)?.classList.add("active");
+        $(titleId).textContent = button.textContent.trim();
+      });
+    });
+  }
+
+  setupPortalNavigation("data-buyer-page","buyerPortal","buyerPortalTitle","buyer-");
+  setupPortalNavigation("data-seller-page","sellerPortal","sellerPortalTitle","seller-");
+
+  $("openBuyerPortalButton").addEventListener("click",async()=>{
+    closeModal($("accountModal"));
+    await openBuyerPortal();
+  });
+
+  $("openBrandPanelButton").addEventListener("click",async()=>{
+    closeModal($("accountModal"));
+    await openSellerPortal();
+  });
+
+  $("buyerBrandPanelShortcut").addEventListener("click",async()=>{
+    $("buyerPortal").classList.remove("visible");
+    await openSellerPortal();
+  });
+
+  $("buyerExit").addEventListener("click",()=>{
+    $("buyerPortal").classList.remove("visible");
+  });
+
+  $("sellerExit").addEventListener("click",()=>{
+    $("sellerPortal").classList.remove("visible");
+  });
+
+  $("buyerAccountButton").addEventListener("click",openAccount);
+  $("sellerAccountButton").addEventListener("click",openAccount);
+  $("editBrandButton").addEventListener("click",openBrandModal);
+
+  /* =====================================================
+     SESIÓN
+  ===================================================== */
+
+  async function logout(){
+    try{
+      await db.auth.signOut();
+    }catch(error){
+      console.warn(error);
+    }
+
+    currentUser = null;
+    currentProfile = null;
+    currentSellerProfile = null;
+    currentBrand = null;
+    currentShippingProvinceIds = [];
+
+    [
+      $("accountModal"),
+      $("buyerPortal"),
+      $("sellerPortal")
+    ].forEach(element=>{
+      element?.classList.remove("open","visible");
+    });
+
+    document.body.style.overflow = "";
     updateSessionUI();
-  }catch(error){console.warn(error)}
-}
+  }
 
-initializeSession();
+  $("logoutButton").addEventListener("click",logout);
 
-$("adminLink").addEventListener("click",()=>alert("El acceso administrativo se mantendrá en una actualización posterior."));
-$("closeAuthButton").addEventListener("click",()=>closeModal($("authModal")));
-$("closeAccountButton").addEventListener("click",()=>closeModal($("accountModal")));
-$("closeBrandButton").addEventListener("click",()=>closeModal($("brandModal")));
-[$("authModal"),$("accountModal"),$("brandModal")].forEach(backgroundClose);
+  async function initializeSession(){
+    try{
+      const {data} = await db.auth.getSession();
+
+      currentUser = data?.session?.user || null;
+
+      if(currentUser){
+        await Promise.all([
+          loadCurrentProfile(),
+          loadSellerContext(),
+          loadTaxonomy()
+        ]);
+      }
+
+      updateSessionUI();
+    }catch(error){
+      console.warn(error);
+    }
+  }
+
+  initializeSession();
+
+  /* =====================================================
+     BOTONES Y CIERRES
+  ===================================================== */
+
+  $("closeAuthButton").addEventListener("click",()=>closeModal($("authModal")));
+  $("closeAccountButton").addEventListener("click",()=>closeModal($("accountModal")));
+  $("closeBrandButton").addEventListener("click",()=>closeModal($("brandModal")));
+
+  [
+    $("authModal"),
+    $("accountModal"),
+    $("brandModal")
+  ].forEach(backgroundClose);
 </script>
+
 </body>
 </html>
