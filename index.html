@@ -1281,6 +1281,472 @@
       .variant-row{grid-template-columns:1fr 1fr}
     }
 
+  
+    /* =====================================================
+       PRODUCTOS A PANTALLA COMPLETA Y VISTAS PÚBLICAS
+    ===================================================== */
+
+    #productModal{
+      align-items:stretch;
+      justify-content:stretch;
+      padding:0;
+      background:#F6F3F1;
+      backdrop-filter:none;
+    }
+
+    #productModal .modal-card{
+      width:100%;
+      max-width:none;
+      height:100vh;
+      max-height:none;
+      border-radius:0;
+      box-shadow:none;
+      padding:0;
+      display:flex;
+      flex-direction:column;
+      overflow:hidden;
+    }
+
+    .product-editor-header{
+      min-height:76px;
+      padding:0 4%;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+      background:#fff;
+      border-bottom:1px solid var(--border);
+      flex:none;
+    }
+
+    .product-editor-title{
+      min-width:0;
+    }
+
+    .product-editor-title h2{
+      margin:0;
+      font-size:27px;
+    }
+
+    .product-editor-title p{
+      margin-top:4px;
+      color:var(--gray);
+      font-size:11px;
+    }
+
+    .product-editor-scroll{
+      flex:1;
+      overflow:auto;
+      padding:28px 4% 110px;
+    }
+
+    .product-editor-content{
+      width:min(1180px,100%);
+      margin:auto;
+      display:grid;
+      grid-template-columns:minmax(0,1.35fr) minmax(320px,.65fr);
+      gap:20px;
+      align-items:start;
+    }
+
+    .product-editor-main,
+    .product-editor-side{
+      padding:23px;
+      border:1px solid #E6DFDB;
+      border-radius:18px;
+      background:#fff;
+    }
+
+    .editor-section + .editor-section{
+      margin-top:24px;
+      padding-top:22px;
+      border-top:1px solid #EEE5E0;
+    }
+
+    .editor-section h3{
+      font-family:"Playfair Display",serif;
+      font-size:22px;
+    }
+
+    .editor-section > p{
+      margin-top:5px;
+      color:var(--gray);
+      font-size:11px;
+      line-height:1.5;
+    }
+
+    .product-editor-footer{
+      position:fixed;
+      z-index:7100;
+      left:0;
+      right:0;
+      bottom:0;
+      min-height:76px;
+      padding:12px 4%;
+      display:flex;
+      align-items:center;
+      justify-content:flex-end;
+      gap:10px;
+      background:rgba(255,255,255,.97);
+      backdrop-filter:blur(15px);
+      border-top:1px solid var(--border);
+    }
+
+    .product-editor-footer .submit-button{
+      width:auto;
+      min-width:210px;
+      margin:0;
+      padding:0 24px;
+    }
+
+    .option-table{
+      margin-top:15px;
+      overflow:auto;
+      border:1px solid var(--border);
+      border-radius:13px;
+    }
+
+    .option-table-header,
+    .option-table-row{
+      min-width:760px;
+      display:grid;
+      grid-template-columns:1.1fr 1.1fr 1fr 1fr .8fr auto;
+      gap:8px;
+      align-items:center;
+      padding:10px;
+    }
+
+    .option-table-header{
+      background:#F7F3F1;
+      color:var(--gray);
+      font-size:9px;
+      font-weight:800;
+      text-transform:uppercase;
+    }
+
+    .option-table-row{
+      border-top:1px solid var(--border);
+      background:#fff;
+      font-size:10px;
+    }
+
+    .option-table-row input{
+      width:100%;
+      min-height:38px;
+      padding:8px;
+      border:1px solid var(--border);
+      border-radius:8px;
+      outline:none;
+    }
+
+    .feature-box{
+      margin-top:18px;
+      padding:15px;
+      border:1px solid rgba(235,104,65,.25);
+      border-radius:14px;
+      background:var(--cream-2);
+    }
+
+    .feature-box strong{
+      display:block;
+      font-size:12px;
+    }
+
+    .feature-box p{
+      margin-top:5px;
+      color:var(--gray);
+      font-size:10px;
+      line-height:1.5;
+    }
+
+    .featured-publication{
+      margin-top:14px;
+      overflow:hidden;
+      border:1px solid rgba(235,104,65,.23);
+      border-radius:15px;
+      background:#fff;
+      cursor:pointer;
+      transition:.2s;
+    }
+
+    .featured-publication:hover{
+      transform:translateY(-2px);
+      box-shadow:0 10px 26px rgba(45,22,10,.08);
+    }
+
+    .featured-publication-image{
+      height:155px;
+      background:var(--cream-2);
+      overflow:hidden;
+      display:grid;
+      place-items:center;
+      color:var(--orange);
+      font-family:"Playfair Display",serif;
+      font-size:35px;
+    }
+
+    .featured-publication-image img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .featured-publication-body{
+      padding:13px;
+    }
+
+    .featured-label{
+      display:inline-flex;
+      padding:5px 8px;
+      border-radius:100px;
+      background:var(--orange);
+      color:#fff;
+      font-size:8px;
+      font-weight:800;
+      text-transform:uppercase;
+    }
+
+    .featured-publication-name{
+      margin-top:9px;
+      font-size:14px;
+      font-weight:800;
+    }
+
+    .price-line{
+      margin-top:7px;
+      display:flex;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:7px;
+    }
+
+    .current-price{
+      font-size:16px;
+      font-weight:800;
+    }
+
+    .previous-price{
+      color:var(--muted);
+      font-size:10px;
+      text-decoration:line-through;
+    }
+
+    .discount-chip{
+      padding:4px 7px;
+      border-radius:100px;
+      background:#EAF7F1;
+      color:var(--green);
+      font-size:8px;
+      font-weight:800;
+    }
+
+    .public-full-modal{
+      align-items:stretch;
+      justify-content:stretch;
+      padding:0;
+      background:#FBF8F6;
+      backdrop-filter:none;
+    }
+
+    .public-full-modal .modal-card{
+      width:100%;
+      max-width:none;
+      height:100vh;
+      max-height:none;
+      border-radius:0;
+      box-shadow:none;
+      padding:0;
+      overflow:auto;
+    }
+
+    .public-page-header{
+      position:sticky;
+      top:0;
+      z-index:5;
+      min-height:74px;
+      padding:0 5%;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:15px;
+      background:rgba(255,255,255,.97);
+      backdrop-filter:blur(15px);
+      border-bottom:1px solid var(--border);
+    }
+
+    .public-page-body{
+      width:min(1200px,92%);
+      margin:auto;
+      padding:40px 0 90px;
+    }
+
+    .brand-public-hero{
+      padding:28px;
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:25px;
+      border:1px solid var(--border);
+      border-radius:22px;
+      background:#fff;
+    }
+
+    .brand-public-hero h2{
+      margin-top:8px;
+      font-family:"Playfair Display",serif;
+      font-size:clamp(38px,5vw,62px);
+      line-height:1;
+    }
+
+    .brand-public-hero p{
+      max-width:700px;
+      margin-top:14px;
+      color:var(--gray);
+      line-height:1.6;
+      font-size:13px;
+    }
+
+    .brand-contact-list{
+      display:grid;
+      gap:8px;
+      align-content:start;
+    }
+
+    .brand-contact-list a{
+      min-height:42px;
+      padding:0 14px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border:1px solid var(--border);
+      border-radius:11px;
+      background:#fff;
+      color:var(--dark);
+      text-decoration:none;
+      font-size:10px;
+      font-weight:800;
+    }
+
+    .public-product-grid{
+      margin-top:25px;
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:14px;
+    }
+
+    .public-product-card{
+      overflow:hidden;
+      border:1px solid var(--border);
+      border-radius:17px;
+      background:#fff;
+      cursor:pointer;
+      transition:.2s;
+    }
+
+    .public-product-card:hover{
+      transform:translateY(-3px);
+      box-shadow:0 12px 30px rgba(45,22,10,.08);
+    }
+
+    .public-product-image{
+      height:190px;
+      display:grid;
+      place-items:center;
+      overflow:hidden;
+      background:var(--cream-2);
+      color:var(--orange);
+      font-family:"Playfair Display",serif;
+      font-size:35px;
+    }
+
+    .public-product-image img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .public-product-body{padding:14px}
+    .public-product-name{font-size:14px;font-weight:800}
+
+    .product-detail-layout{
+      width:min(1100px,92%);
+      margin:35px auto 90px;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:30px;
+    }
+
+    .product-detail-gallery{
+      min-height:460px;
+      overflow:hidden;
+      border-radius:20px;
+      background:#fff;
+      border:1px solid var(--border);
+      display:grid;
+      place-items:center;
+    }
+
+    .product-detail-gallery img{
+      width:100%;
+      height:100%;
+      max-height:650px;
+      object-fit:contain;
+    }
+
+    .product-detail-info{
+      padding:26px;
+      border:1px solid var(--border);
+      border-radius:20px;
+      background:#fff;
+    }
+
+    .product-detail-info h2{
+      margin-top:8px;
+      font-family:"Playfair Display",serif;
+      font-size:42px;
+      line-height:1;
+    }
+
+    .product-detail-description{
+      margin-top:16px;
+      color:var(--gray);
+      font-size:13px;
+      line-height:1.6;
+    }
+
+    .variant-public-list{
+      margin-top:22px;
+      display:grid;
+      gap:8px;
+    }
+
+    .variant-public-row{
+      padding:12px;
+      display:grid;
+      grid-template-columns:1fr 1fr 1fr;
+      gap:10px;
+      border:1px solid var(--border);
+      border-radius:11px;
+      font-size:10px;
+    }
+
+    @media(max-width:1000px){
+      .product-editor-content{grid-template-columns:1fr}
+      .public-product-grid{grid-template-columns:repeat(2,1fr)}
+      .product-detail-layout{grid-template-columns:1fr}
+    }
+
+    @media(max-width:620px){
+      .product-editor-header{padding:0 15px}
+      .product-editor-scroll{padding:18px 15px 105px}
+      .product-editor-main,.product-editor-side{padding:16px}
+      .product-editor-footer{padding:10px 15px}
+      .product-editor-footer .submit-button{width:100%}
+      .brand-public-hero{grid-template-columns:1fr;padding:20px}
+      .public-product-grid{grid-template-columns:1fr}
+      .product-detail-layout{width:calc(100% - 30px);margin-top:20px}
+      .product-detail-gallery{min-height:300px}
+    }
+
   </style>
 </head>
 
@@ -1640,126 +2106,273 @@
 ===================================================== -->
 
 <div class="modal" id="productModal">
-  <div class="modal-card" style="width:min(900px,100%)">
-    <div class="modal-top">
-      <div class="modal-brand">Amigate</div>
+  <div class="modal-card">
+    <div class="product-editor-header">
+      <div class="product-editor-title">
+        <div class="modal-brand">Amigate</div>
+        <h2 id="productModalTitle">Agregar producto</h2>
+        <p>Los tamaños y colores se escriben separados por comas.</p>
+      </div>
+
       <button class="modal-close" id="closeProductButton">×</button>
     </div>
 
-    <h2 id="productModalTitle">Agregar producto</h2>
-    <p class="modal-description">
-      Cargá el producto de forma simple. Los tamaños y colores se separan con comas, como en Amorina.
-    </p>
+    <div class="product-editor-scroll">
+      <form id="productForm" class="product-editor-content">
+        <div class="product-editor-main">
 
-    <form id="productForm">
-      <div class="form-row">
-        <div class="form-group">
-          <label>Categoría</label>
-          <select class="form-control" id="productCategory" required>
-            <option value="">Seleccionar categoría</option>
-          </select>
+          <section class="editor-section">
+            <h3>Información principal</h3>
+            <p>Definí dónde aparecerá el producto y cómo se mostrará.</p>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Categoría</label>
+                <select class="form-control" id="productCategory" required>
+                  <option value="">Seleccionar categoría</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>Subcategoría</label>
+                <select class="form-control" id="productSubcategory" required>
+                  <option value="">Seleccionar subcategoría</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group hidden" id="productTypeGroup">
+              <label>Tipo</label>
+              <select class="form-control" id="productType">
+                <option value="">Seleccionar tipo</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Nombre</label>
+              <input class="form-control" id="productName" required>
+            </div>
+
+            <div class="form-group">
+              <label>Descripción</label>
+              <textarea
+                class="form-control"
+                id="productDescription"
+                placeholder="Características, materiales y cualquier información importante."
+              ></textarea>
+            </div>
+          </section>
+
+          <section class="editor-section">
+            <h3>Tamaños, colores y precios</h3>
+            <p>
+              Escribí las opciones separadas por comas. Después se generan las combinaciones
+              y podés definir precio anterior, precio nuevo y stock para cada tamaño.
+            </p>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Tamaños disponibles</label>
+                <input
+                  class="form-control"
+                  id="productSizesCsv"
+                  placeholder="Chico, Mediano, Grande"
+                >
+              </div>
+
+              <div class="form-group">
+                <label>Colores disponibles</label>
+                <input
+                  class="form-control"
+                  id="productColorsCsv"
+                  placeholder="Negro, Blanco, Azul"
+                >
+              </div>
+            </div>
+
+            <button
+              class="secondary-button"
+              id="generateOptionsButton"
+              type="button"
+              style="width:100%;margin-top:14px"
+            >
+              Generar opciones
+            </button>
+
+            <div class="option-table" id="generatedOptionsTable">
+              <div class="option-table-header">
+                <span>Tamaño</span>
+                <span>Color</span>
+                <span>Precio anterior</span>
+                <span>Precio nuevo</span>
+                <span>Stock</span>
+                <span></span>
+              </div>
+
+              <div id="generatedOptionsList"></div>
+            </div>
+          </section>
+
+          <section class="editor-section">
+            <h3>Imágenes</h3>
+            <p>Seleccioná varias imágenes. La primera se utilizará como imagen principal.</p>
+
+            <div class="form-group">
+              <input
+                class="form-control"
+                id="productImagesInput"
+                type="file"
+                accept="image/jpeg,image/png,image/webp"
+                multiple
+              >
+            </div>
+          </section>
         </div>
 
-        <div class="form-group">
-          <label>Subcategoría</label>
-          <select class="form-control" id="productSubcategory" required>
-            <option value="">Seleccionar subcategoría</option>
-          </select>
-        </div>
-      </div>
+        <aside class="product-editor-side">
+          <section class="editor-section">
+            <h3>Precio general</h3>
+            <p>
+              Se usa cuando el producto no tiene tamaños o cuando una opción no posee precio propio.
+            </p>
 
-      <div class="form-group hidden" id="productTypeGroup">
-        <label>Tipo</label>
-        <select class="form-control" id="productType">
-          <option value="">Seleccionar tipo</option>
-        </select>
-      </div>
+            <div class="form-group">
+              <label>Precio anterior general</label>
+              <input
+                class="form-control"
+                id="productOldPrice"
+                type="number"
+                min="0"
+                step="0.01"
+                placeholder="Opcional"
+              >
+            </div>
 
-      <div class="form-group">
-        <label>Nombre</label>
-        <input class="form-control" id="productName" required>
-      </div>
+            <div class="form-group">
+              <label>Precio nuevo general</label>
+              <input
+                class="form-control"
+                id="productCurrentPrice"
+                type="number"
+                min="0"
+                step="0.01"
+                required
+              >
+            </div>
+          </section>
 
-      <div class="form-group">
-        <label>Descripción</label>
-        <textarea class="form-control" id="productDescription" placeholder="Características, materiales, uso y cualquier información importante."></textarea>
-      </div>
+          <section class="editor-section">
+            <h3>Publicación</h3>
 
-      <div class="form-row">
-        <div class="form-group">
-          <label>Precio anterior</label>
-          <input class="form-control" id="productOldPrice" type="number" min="0" step="0.01" placeholder="Opcional">
-        </div>
+            <label class="toggle-row">
+              <input type="checkbox" id="productControlsStock" checked>
+              Controlar stock
+            </label>
 
-        <div class="form-group">
-          <label>Precio actual</label>
-          <input class="form-control" id="productCurrentPrice" type="number" min="0" step="0.01" required>
-        </div>
-      </div>
+            <label class="toggle-row">
+              <input type="checkbox" id="productActive" checked>
+              Producto activo y visible
+            </label>
 
-      <label class="toggle-row">
-        <input type="checkbox" id="productControlsStock" checked>
-        Controlar stock
-      </label>
+            <div class="feature-box">
+              <label class="check-row">
+                <input type="checkbox" id="productFeatured">
+                Destacar este producto
+              </label>
 
-      <label class="toggle-row">
-        <input type="checkbox" id="productActive" checked>
-        Producto activo y visible
-      </label>
+              <p>
+                El producto destacado aparecerá con imagen y precio dentro de la tarjeta pública
+                de la marca. Se permiten hasta cinco destacados por marca.
+              </p>
+            </div>
+          </section>
 
-      <div class="draft-builder">
-        <h4>Opciones del producto</h4>
-        <p>
-          Escribí cada opción separada por una coma. Ejemplo:
-          <strong>Chico, Mediano, Grande</strong>.
-        </p>
+          <div class="message" id="productMessage"></div>
+        </aside>
 
-        <div class="form-group">
-          <label>Tamaños disponibles</label>
-          <input
-            class="form-control"
-            id="productSizesCsv"
-            placeholder="Chico, Mediano, Grande"
+        <div class="product-editor-footer">
+          <button
+            class="secondary-button"
+            id="cancelProductButton"
+            type="button"
           >
-        </div>
+            Cancelar
+          </button>
 
-        <div class="form-group">
-          <label>Colores disponibles</label>
-          <input
-            class="form-control"
-            id="productColorsCsv"
-            placeholder="Negro, Blanco, Azul"
+          <button
+            class="submit-button"
+            id="productSubmitButton"
+            type="submit"
           >
+            Guardar producto
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- =====================================================
+     VISTA PÚBLICA DE MARCA
+===================================================== -->
+
+<div class="modal public-full-modal" id="publicBrandModal">
+  <div class="modal-card">
+    <header class="public-page-header">
+      <div class="modal-brand">Amigate</div>
+      <button class="modal-close" id="closePublicBrandButton">×</button>
+    </header>
+
+    <main class="public-page-body">
+      <section class="brand-public-hero">
+        <div>
+          <div class="eyebrow">Marca en Amigate</div>
+          <h2 id="publicBrandName">Marca</h2>
+          <p id="publicBrandDescription"></p>
+          <p id="publicBrandLocation" style="margin-top:10px;font-weight:700"></p>
         </div>
 
-        <button
-          class="secondary-button"
-          id="generateOptionsButton"
-          type="button"
-          style="width:100%;margin-top:14px"
-        >
-          Generar opciones
-        </button>
+        <div class="brand-contact-list" id="publicBrandContacts"></div>
+      </section>
 
-        <p class="image-help">
-          Se crearán automáticamente todas las combinaciones de tamaño y color.
-          Después podés cambiar el precio y el stock de cada una.
-        </p>
-
-        <div class="variant-list" id="generatedOptionsList"></div>
+      <div class="results-toolbar">
+        <strong>Productos de la marca</strong>
+        <span id="publicBrandProductCount"></span>
       </div>
 
-      <div class="form-group">
-        <label>Imágenes</label>
-        <input class="form-control" id="productImagesInput" type="file" accept="image/jpeg,image/png,image/webp" multiple>
-        <p class="image-help">
-          Podés seleccionar varias imágenes. La primera imagen nueva será principal cuando el producto todavía no tenga una.
-        </p>
+      <div class="public-product-grid" id="publicBrandProducts"></div>
+      <div class="empty-state" id="publicBrandEmpty">
+        <strong>Esta marca todavía no tiene productos activos</strong>
       </div>
+    </main>
+  </div>
+</div>
 
-      <button class="submit-button" id="productSubmitButton" type="submit">Guardar producto</button>
-      <div class="message" id="productMessage"></div>
-    </form>
+<!-- =====================================================
+     DETALLE PÚBLICO DE PRODUCTO
+===================================================== -->
+
+<div class="modal public-full-modal" id="publicProductModal">
+  <div class="modal-card">
+    <header class="public-page-header">
+      <button class="ghost-button" id="backToPublicBrandButton">← Volver a la marca</button>
+      <div class="modal-brand">Amigate</div>
+      <button class="modal-close" id="closePublicProductButton">×</button>
+    </header>
+
+    <main class="product-detail-layout">
+      <div class="product-detail-gallery" id="publicProductGallery"></div>
+
+      <div class="product-detail-info">
+        <div class="eyebrow" id="publicProductBrandName">Marca</div>
+        <h2 id="publicProductName">Producto</h2>
+
+        <div class="price-line" id="publicProductPrice"></div>
+        <p class="product-detail-description" id="publicProductDescription"></p>
+
+        <div class="variant-public-list" id="publicProductVariants"></div>
+      </div>
+    </main>
   </div>
 </div>
 
@@ -1947,6 +2560,11 @@
   let productVariantsDraft = [];
   let sellerProductsCache = [];
   let sellerProductImagesCache = [];
+  let publicBrandsCache = [];
+  let publicProductsCache = [];
+  let publicProductImagesCache = [];
+  let publicFeaturedCache = [];
+  let activePublicBrand = null;
 
   const taxonomyCache = {
     loaded:false,
@@ -2405,19 +3023,35 @@
     $("brandEmpty").classList.remove("visible");
 
     try{
-      const [brandsResult,shippingResult] = await Promise.all([
+      const [
+        brandsResult,
+        shippingResult,
+        productsResult,
+        imagesResult,
+        featuredResult
+      ] = await Promise.all([
         db.from("brands").select("*"),
-        db.from("brand_shipping_provinces").select("*")
+        db.from("brand_shipping_provinces").select("*"),
+        db.from("products").select("*").eq("activo",true),
+        db.from("product_images").select("*"),
+        db.from("featured_products").select("*").order("orden",{ascending:true})
       ]);
 
       if(brandsResult.error) throw brandsResult.error;
       if(shippingResult.error) throw shippingResult.error;
+      if(productsResult.error) throw productsResult.error;
+      if(imagesResult.error) throw imagesResult.error;
+      if(featuredResult.error) throw featuredResult.error;
 
-      const allBrands = brandsResult.data || [];
+      publicBrandsCache = brandsResult.data || [];
+      publicProductsCache = productsResult.data || [];
+      publicProductImagesCache = imagesResult.data || [];
+      publicFeaturedCache = featuredResult.data || [];
+
       const shippingRows = shippingResult.data || [];
       const provinceId = selectedProvince?.databaseId;
 
-      let visibleBrands = allBrands.filter(brand=>{
+      let visibleBrands = publicBrandsCache.filter(brand=>{
         const locatedThere =
           provinceId !== null &&
           provinceId !== undefined &&
@@ -2431,42 +3065,39 @@
         return locatedThere || shipsThere;
       });
 
-      let productsByBrand = new Map();
+      let filteredProducts = publicProductsCache.slice();
 
-      if(selectedCategoryName === "Productos"){
-        const productsResult = await db.from("products").select("*");
+      if(selectedCategoryName){
+        const category = taxonomyCache.categories.find(row=>{
+          return normalizeText(rowName(row)) === normalizeText(selectedCategoryName);
+        });
 
-        if(!productsResult.error){
-          let products = productsResult.data || [];
-
-          products = products.filter(product=>{
-            const active = firstValue(product,["activo","active","is_active"],true);
-
-            if(active === false) return false;
-
-            if(selectedSubcategoryId){
-              const productSubcategory = firstValue(product,["subcategory_id","subcategoria_id"]);
-              return String(productSubcategory) === String(selectedSubcategoryId);
-            }
-
-            return true;
-          });
-
-          products.forEach(product=>{
-            const brandId = firstValue(product,["brand_id","marca_id"]);
-
-            if(!brandId) return;
-
-            const key = String(brandId);
-
-            if(!productsByBrand.has(key)) productsByBrand.set(key,[]);
-            if(productsByBrand.get(key).length < 5) productsByBrand.get(key).push(product);
-          });
-
-          visibleBrands = visibleBrands.filter(brand=>{
-            return productsByBrand.has(String(brand.id));
+        if(category){
+          filteredProducts = filteredProducts.filter(product=>{
+            return String(product.category_id) === String(category.id);
           });
         }
+      }
+
+      if(selectedSubcategoryId){
+        filteredProducts = filteredProducts.filter(product=>{
+          return String(product.subcategory_id) === String(selectedSubcategoryId);
+        });
+      }
+
+      const productsByBrand = new Map();
+
+      filteredProducts.forEach(product=>{
+        const key = String(product.brand_id);
+
+        if(!productsByBrand.has(key)) productsByBrand.set(key,[]);
+        productsByBrand.get(key).push(product);
+      });
+
+      if(selectedCategoryName || selectedSubcategoryId){
+        visibleBrands = visibleBrands.filter(brand=>{
+          return productsByBrand.has(String(brand.id));
+        });
       }
 
       renderBrands(visibleBrands,productsByBrand);
@@ -2481,11 +3112,36 @@
     }
   }
 
+  function productImage(productId){
+    return publicProductImagesCache.find(image=>{
+      return String(image.product_id) === String(productId) && image.es_principal === true;
+    }) || publicProductImagesCache.find(image=>{
+      return String(image.product_id) === String(productId);
+    }) || null;
+  }
+
+  function discountPercentage(oldPrice,currentPrice){
+    const oldValue = Number(oldPrice);
+    const currentValue = Number(currentPrice);
+
+    if(
+      !Number.isFinite(oldValue) ||
+      !Number.isFinite(currentValue) ||
+      oldValue <= currentValue ||
+      oldValue <= 0
+    ){
+      return null;
+    }
+
+    return Math.round((1 - currentValue / oldValue) * 100);
+  }
+
   function renderBrands(brands,productsByBrand){
     const grid = $("brandGrid");
 
     grid.innerHTML = "";
-    $("resultCount").textContent = brands.length + (brands.length === 1 ? " resultado" : " resultados");
+    $("resultCount").textContent =
+      brands.length + (brands.length === 1 ? " resultado" : " resultados");
 
     if(!brands.length){
       $("brandEmpty").classList.add("visible");
@@ -2496,22 +3152,74 @@
 
     brands.forEach(brand=>{
       const name = rowName(brand);
+
       const province = taxonomyCache.provinces.find(row=>{
         return String(row.id) === String(brand.province_id);
       });
 
-      const products = productsByBrand.get(String(brand.id)) || [];
+      const filteredProducts = productsByBrand.get(String(brand.id)) || [];
 
-      const productHtml = products.map(product=>{
-        const price = firstValue(product,["precio","price","precio_actual"],null);
+      const featuredRows = publicFeaturedCache.filter(row=>{
+        return String(row.brand_id) === String(brand.id);
+      });
 
-        return `
-          <div class="mini-product">
-            <strong>${escapeHtml(rowName(product))}</strong>
-            ${price !== null ? `<span>$${escapeHtml(price)}</span>` : ""}
+      let featuredProduct = null;
+
+      for(const featuredRow of featuredRows){
+        const candidate = publicProductsCache.find(product=>{
+          return String(product.id) === String(featuredRow.product_id);
+        });
+
+        if(!candidate) continue;
+
+        if(
+          selectedCategoryName &&
+          !filteredProducts.some(product=>String(product.id) === String(candidate.id))
+        ){
+          continue;
+        }
+
+        featuredProduct = candidate;
+        break;
+      }
+
+      const featuredImage = featuredProduct ? productImage(featuredProduct.id) : null;
+      const discount = featuredProduct
+        ? discountPercentage(featuredProduct.precio_anterior,featuredProduct.precio_actual)
+        : null;
+
+      const featuredHtml = featuredProduct ? `
+        <div
+          class="featured-publication"
+          data-public-product="${escapeHtml(featuredProduct.id)}"
+        >
+          <div class="featured-publication-image">
+            ${featuredImage
+              ? `<img src="${escapeHtml(featuredImage.image_url)}" alt="${escapeHtml(featuredProduct.nombre)}">`
+              : escapeHtml(String(featuredProduct.nombre || "P").substring(0,2).toUpperCase())
+            }
           </div>
-        `;
-      }).join("");
+
+          <div class="featured-publication-body">
+            <span class="featured-label">Destacado</span>
+            <div class="featured-publication-name">${escapeHtml(featuredProduct.nombre)}</div>
+
+            <div class="price-line">
+              <span class="current-price">${escapeHtml(formatMoney(featuredProduct.precio_actual))}</span>
+
+              ${featuredProduct.precio_anterior !== null
+                ? `<span class="previous-price">${escapeHtml(formatMoney(featuredProduct.precio_anterior))}</span>`
+                : ""
+              }
+
+              ${discount !== null
+                ? `<span class="discount-chip">${discount}% OFF</span>`
+                : ""
+              }
+            </div>
+          </div>
+        </div>
+      ` : "";
 
       const card = document.createElement("article");
       card.className = "brand-card";
@@ -2525,6 +3233,7 @@
           <div class="brand-card-top">
             <div>
               <div class="brand-card-name">${escapeHtml(name)}</div>
+
               <div class="brand-location">
                 ${escapeHtml(
                   (province ? rowName(province) : "Argentina") +
@@ -2540,14 +3249,218 @@
             ${escapeHtml(brand.descripcion || "Conocé esta marca dentro de Amigate.")}
           </p>
 
-          ${productHtml ? `<div class="mini-products">${productHtml}</div>` : ""}
+          ${featuredHtml}
 
-          <button class="brand-card-button">Ver marca</button>
+          <button
+            class="brand-card-button"
+            data-public-brand="${escapeHtml(brand.id)}"
+          >
+            Ver marca
+          </button>
         </div>
       `;
 
       grid.appendChild(card);
     });
+
+    document.querySelectorAll("[data-public-brand]").forEach(button=>{
+      button.addEventListener("click",()=>{
+        openPublicBrand(button.dataset.publicBrand);
+      });
+    });
+
+    document.querySelectorAll("[data-public-product]").forEach(card=>{
+      card.addEventListener("click",event=>{
+        event.stopPropagation();
+        openPublicProduct(card.dataset.publicProduct);
+      });
+    });
+  }
+
+  async function openPublicBrand(brandId){
+    const brand = publicBrandsCache.find(item=>String(item.id) === String(brandId));
+
+    if(!brand) return;
+
+    activePublicBrand = brand;
+
+    const province = taxonomyCache.provinces.find(row=>{
+      return String(row.id) === String(brand.province_id);
+    });
+
+    $("publicBrandName").textContent = brand.nombre || "Marca";
+    $("publicBrandDescription").textContent =
+      brand.descripcion || "Conocé los productos publicados por esta marca.";
+
+    $("publicBrandLocation").textContent =
+      (province ? rowName(province) : "Argentina") +
+      (brand.localidad ? " · " + brand.localidad : "");
+
+    const contacts = [];
+
+    if(brand.whatsapp){
+      const whatsapp = String(brand.whatsapp).replace(/\D/g,"");
+      contacts.push(
+        `<a href="https://wa.me/${escapeHtml(whatsapp)}" target="_blank" rel="noopener">WhatsApp</a>`
+      );
+    }
+
+    if(brand.instagram){
+      const instagramName = String(brand.instagram).replace(/^@/,"");
+      contacts.push(
+        `<a href="https://instagram.com/${escapeHtml(instagramName)}" target="_blank" rel="noopener">Instagram</a>`
+      );
+    }
+
+    if(brand.email){
+      contacts.push(
+        `<a href="mailto:${escapeHtml(brand.email)}">Email</a>`
+      );
+    }
+
+    $("publicBrandContacts").innerHTML = contacts.join("");
+
+    const products = publicProductsCache.filter(product=>{
+      return String(product.brand_id) === String(brand.id) && product.activo !== false;
+    });
+
+    $("publicBrandProductCount").textContent =
+      products.length + (products.length === 1 ? " producto" : " productos");
+
+    const grid = $("publicBrandProducts");
+    grid.innerHTML = "";
+    $("publicBrandEmpty").classList.toggle("visible",products.length === 0);
+
+    products.forEach(product=>{
+      const image = productImage(product.id);
+      const discount = discountPercentage(product.precio_anterior,product.precio_actual);
+
+      const card = document.createElement("article");
+      card.className = "public-product-card";
+      card.dataset.openProduct = product.id;
+
+      card.innerHTML = `
+        <div class="public-product-image">
+          ${image
+            ? `<img src="${escapeHtml(image.image_url)}" alt="${escapeHtml(product.nombre)}">`
+            : escapeHtml(String(product.nombre || "P").substring(0,2).toUpperCase())
+          }
+        </div>
+
+        <div class="public-product-body">
+          <div class="public-product-name">${escapeHtml(product.nombre)}</div>
+
+          <div class="price-line">
+            <span class="current-price">${escapeHtml(formatMoney(product.precio_actual))}</span>
+
+            ${product.precio_anterior !== null
+              ? `<span class="previous-price">${escapeHtml(formatMoney(product.precio_anterior))}</span>`
+              : ""
+            }
+
+            ${discount !== null
+              ? `<span class="discount-chip">${discount}% OFF</span>`
+              : ""
+            }
+          </div>
+        </div>
+      `;
+
+      grid.appendChild(card);
+    });
+
+    document.querySelectorAll("[data-open-product]").forEach(card=>{
+      card.addEventListener("click",()=>{
+        openPublicProduct(card.dataset.openProduct);
+      });
+    });
+
+    openModal($("publicBrandModal"));
+  }
+
+  async function openPublicProduct(productId){
+    const product = publicProductsCache.find(item=>String(item.id) === String(productId));
+
+    if(!product) return;
+
+    const brand = publicBrandsCache.find(item=>{
+      return String(item.id) === String(product.brand_id);
+    });
+
+    const [variantsResult,colorsResult] = await Promise.all([
+      db.from("product_variants")
+        .select("*")
+        .eq("product_id",product.id)
+        .eq("activo",true),
+      db.from("product_colors")
+        .select("*")
+        .eq("product_id",product.id)
+        .eq("activo",true)
+    ]);
+
+    const variants = variantsResult.data || [];
+    const colors = colorsResult.data || [];
+    const image = productImage(product.id);
+    const discount = discountPercentage(product.precio_anterior,product.precio_actual);
+
+    $("publicProductBrandName").textContent = brand?.nombre || "Marca";
+    $("publicProductName").textContent = product.nombre;
+    $("publicProductDescription").textContent = product.descripcion || "";
+
+    $("publicProductGallery").innerHTML = image
+      ? `<img src="${escapeHtml(image.image_url)}" alt="${escapeHtml(product.nombre)}">`
+      : escapeHtml(String(product.nombre || "P").substring(0,2).toUpperCase());
+
+    $("publicProductPrice").innerHTML = `
+      <span class="current-price">${escapeHtml(formatMoney(product.precio_actual))}</span>
+
+      ${product.precio_anterior !== null
+        ? `<span class="previous-price">${escapeHtml(formatMoney(product.precio_anterior))}</span>`
+        : ""
+      }
+
+      ${discount !== null
+        ? `<span class="discount-chip">${discount}% OFF</span>`
+        : ""
+      }
+    `;
+
+    const variantsContainer = $("publicProductVariants");
+    variantsContainer.innerHTML = "";
+
+    variants.forEach(variant=>{
+      const color = colors.find(item=>String(item.id) === String(variant.color_id));
+      const variantDiscount = discountPercentage(variant.precio_anterior,variant.precio);
+
+      variantsContainer.insertAdjacentHTML(
+        "beforeend",
+        `<div class="variant-public-row">
+          <span>
+            <strong>${escapeHtml(variant.talle || "Sin tamaño")}</strong><br>
+            ${escapeHtml(color?.nombre || "Sin color")}
+          </span>
+
+          <span>
+            <strong>${escapeHtml(formatMoney(variant.precio ?? product.precio_actual))}</strong><br>
+            ${variant.precio_anterior !== null
+              ? `<span class="previous-price">${escapeHtml(formatMoney(variant.precio_anterior))}</span>`
+              : ""
+            }
+          </span>
+
+          <span>
+            ${variantDiscount !== null
+              ? `<span class="discount-chip">${variantDiscount}% OFF</span><br>`
+              : ""
+            }
+            Stock: ${variant.stock ?? "Consultar"}
+          </span>
+        </div>`
+      );
+    });
+
+    closeModal($("publicBrandModal"));
+    openModal($("publicProductModal"));
   }
 
   /* =====================================================
@@ -3319,7 +4232,14 @@
   function generateProductOptions(){
     const sizes = parseCommaOptions($("productSizesCsv").value);
     const colors = parseCommaOptions($("productColorsCsv").value);
-    const generalPrice = Number($("productCurrentPrice").value || 0);
+
+    const generalOldPrice = $("productOldPrice").value === ""
+      ? null
+      : Number($("productOldPrice").value);
+
+    const generalCurrentPrice = $("productCurrentPrice").value === ""
+      ? null
+      : Number($("productCurrentPrice").value);
 
     const effectiveSizes = sizes.length ? sizes : [null];
     const effectiveColors = colors.length ? colors : [null];
@@ -3328,6 +4248,7 @@
 
     productVariantsDraft.forEach(variant=>{
       const color = productColorsDraft.find(item=>item.localId === variant.colorLocalId);
+
       previousVariants.set(
         variantKey(color?.nombre || null,variant.talle || null),
         variant
@@ -3354,6 +4275,7 @@
         if(!colorName && !size) return;
 
         const previous = previousVariants.get(variantKey(colorName,size));
+
         const color = colorName
           ? productColorsDraft.find(
               item=>normalizeText(item.nombre) === normalizeText(colorName)
@@ -3364,7 +4286,8 @@
           localId:previous?.localId || crypto.randomUUID(),
           colorLocalId:color?.localId || null,
           talle:size,
-          precio:previous?.precio ?? (generalPrice || null),
+          precio_anterior:previous?.precio_anterior ?? generalOldPrice,
+          precio:previous?.precio ?? generalCurrentPrice,
           stock:previous?.stock ?? null,
           sku:previous?.sku || null,
           activo:true
@@ -3381,7 +4304,7 @@
 
     if(!productVariantsDraft.length){
       container.innerHTML = `
-        <div class="empty-panel" style="margin-top:12px">
+        <div class="empty-panel" style="margin:12px">
           Escribí tamaños o colores y tocá “Generar opciones”.
         </div>
       `;
@@ -3395,34 +4318,36 @@
 
       container.insertAdjacentHTML(
         "beforeend",
-        `<div class="variant-row" style="grid-template-columns:1.1fr 1.1fr 1fr 1fr auto">
-          <span>
-            <strong>${escapeHtml(variant.talle || "Sin tamaño")}</strong>
-          </span>
-
+        `<div class="option-table-row">
+          <strong>${escapeHtml(variant.talle || "Sin tamaño")}</strong>
           <span>${escapeHtml(color?.nombre || "Sin color")}</span>
 
-          <label class="compact-field">
-            <span style="display:block;margin-bottom:4px;font-size:8px;font-weight:800">Precio</span>
-            <input
-              type="number"
-              min="0"
-              step="0.01"
-              value="${variant.precio ?? ""}"
-              data-option-price="${index}"
-            >
-          </label>
+          <input
+            type="number"
+            min="0"
+            step="0.01"
+            value="${variant.precio_anterior ?? ""}"
+            data-option-old-price="${index}"
+            placeholder="Anterior"
+          >
 
-          <label class="compact-field">
-            <span style="display:block;margin-bottom:4px;font-size:8px;font-weight:800">Stock</span>
-            <input
-              type="number"
-              min="0"
-              step="1"
-              value="${variant.stock ?? ""}"
-              data-option-stock="${index}"
-            >
-          </label>
+          <input
+            type="number"
+            min="0"
+            step="0.01"
+            value="${variant.precio ?? ""}"
+            data-option-price="${index}"
+            placeholder="Nuevo"
+          >
+
+          <input
+            type="number"
+            min="0"
+            step="1"
+            value="${variant.stock ?? ""}"
+            data-option-stock="${index}"
+            placeholder="Stock"
+          >
 
           <button
             class="draft-remove"
@@ -3433,9 +4358,19 @@
       );
     });
 
+    document.querySelectorAll("[data-option-old-price]").forEach(input=>{
+      input.addEventListener("input",()=>{
+        const index = Number(input.dataset.optionOldPrice);
+
+        productVariantsDraft[index].precio_anterior =
+          input.value === "" ? null : Number(input.value);
+      });
+    });
+
     document.querySelectorAll("[data-option-price]").forEach(input=>{
       input.addEventListener("input",()=>{
         const index = Number(input.dataset.optionPrice);
+
         productVariantsDraft[index].precio =
           input.value === "" ? null : Number(input.value);
       });
@@ -3444,6 +4379,7 @@
     document.querySelectorAll("[data-option-stock]").forEach(input=>{
       input.addEventListener("input",()=>{
         const index = Number(input.dataset.optionStock);
+
         productVariantsDraft[index].stock =
           input.value === "" ? null : Number(input.value);
       });
@@ -3451,8 +4387,7 @@
 
     document.querySelectorAll("[data-remove-option]").forEach(button=>{
       button.addEventListener("click",()=>{
-        const index = Number(button.dataset.removeOption);
-        productVariantsDraft.splice(index,1);
+        productVariantsDraft.splice(Number(button.dataset.removeOption),1);
         renderGeneratedOptions();
       });
     });
@@ -3495,6 +4430,7 @@
       $("productControlsStock").checked = true;
       $("productActive").checked = true;
       $("productImagesInput").value = "";
+      $("productFeatured").checked = false;
 
       if(productId && !editingProduct){
         throw new Error("No encontramos el producto que querés editar.");
@@ -3503,13 +4439,17 @@
       if(editingProduct){
         $("productModalTitle").textContent = "Editar producto";
 
-        const [colorsResult,variantsResult] = await Promise.all([
+        const [colorsResult,variantsResult,featuredResult] = await Promise.all([
           db.from("product_colors").select("*").eq("product_id",editingProduct.id),
-          db.from("product_variants").select("*").eq("product_id",editingProduct.id)
+          db.from("product_variants").select("*").eq("product_id",editingProduct.id),
+          db.from("featured_products").select("id").eq("product_id",editingProduct.id).maybeSingle()
         ]);
 
         if(colorsResult.error) throw colorsResult.error;
         if(variantsResult.error) throw variantsResult.error;
+        if(featuredResult.error) throw featuredResult.error;
+
+        $("productFeatured").checked = Boolean(featuredResult.data);
 
         const databaseColors = colorsResult.data || [];
 
@@ -3572,6 +4512,10 @@
 
   $("addProductButton").addEventListener("click",async()=>{
     await openProductModal();
+  });
+
+  $("cancelProductButton").addEventListener("click",()=>{
+    closeModal($("productModal"));
   });
 
   function safeStorageName(fileName){
@@ -3686,6 +4630,7 @@
           ? colorIdMap.get(variant.colorLocalId) || null
           : null,
         talle:variant.talle || null,
+        precio_anterior:variant.precio_anterior,
         precio:variant.precio,
         stock:$("productControlsStock").checked ? variant.stock : null,
         sku:variant.sku || null,
@@ -3697,6 +4642,68 @@
         .insert(variantRows);
 
       if(variantInsert.error) throw variantInsert.error;
+    }
+  }
+
+  async function saveFeaturedState(product){
+    const shouldFeature = $("productFeatured").checked;
+
+    const currentFeaturedResult = await db
+      .from("featured_products")
+      .select("*")
+      .eq("product_id",product.id)
+      .maybeSingle();
+
+    if(currentFeaturedResult.error) throw currentFeaturedResult.error;
+
+    if(!shouldFeature){
+      if(currentFeaturedResult.data){
+        const deleteResult = await db
+          .from("featured_products")
+          .delete()
+          .eq("id",currentFeaturedResult.data.id);
+
+        if(deleteResult.error) throw deleteResult.error;
+      }
+
+      return;
+    }
+
+    if(!currentFeaturedResult.data){
+      const countResult = await db
+        .from("featured_products")
+        .select("id",{count:"exact",head:true})
+        .eq("brand_id",currentBrand.id);
+
+      if(countResult.error) throw countResult.error;
+
+      if((countResult.count || 0) >= 5){
+        throw new Error("La marca ya tiene cinco productos destacados.");
+      }
+
+      const insertResult = await db
+        .from("featured_products")
+        .insert({
+          brand_id:currentBrand.id,
+          product_id:product.id,
+          category_id:product.category_id,
+          subcategory_id:product.subcategory_id,
+          category_type_id:product.category_type_id,
+          orden:(countResult.count || 0) + 1
+        });
+
+      if(insertResult.error) throw insertResult.error;
+    }else{
+      const updateResult = await db
+        .from("featured_products")
+        .update({
+          category_id:product.category_id,
+          subcategory_id:product.subcategory_id,
+          category_type_id:product.category_type_id
+        })
+        .eq("id",currentFeaturedResult.data.id);
+
+      if(updateResult.error) throw updateResult.error;
     }
   }
 
@@ -3777,6 +4784,7 @@
 
       await replaceProductColorsAndVariants(savedProduct.id);
       await uploadProductImages(savedProduct);
+      await saveFeaturedState(savedProduct);
 
       showMessage("productMessage","Producto guardado correctamente.","success");
 
@@ -3923,6 +4931,13 @@
 
         if(storageDelete.error) console.warn(storageDelete.error);
       }
+
+      const featuredDelete = await db
+        .from("featured_products")
+        .delete()
+        .eq("product_id",productId);
+
+      if(featuredDelete.error) throw featuredDelete.error;
 
       const imageDelete = await db
         .from("product_images")
@@ -4130,12 +5145,24 @@
   $("closeAccountButton").addEventListener("click",()=>closeModal($("accountModal")));
   $("closeBrandButton").addEventListener("click",()=>closeModal($("brandModal")));
   $("closeProductButton").addEventListener("click",()=>closeModal($("productModal")));
+  $("closePublicBrandButton").addEventListener("click",()=>closeModal($("publicBrandModal")));
+  $("closePublicProductButton").addEventListener("click",()=>closeModal($("publicProductModal")));
+
+  $("backToPublicBrandButton").addEventListener("click",()=>{
+    closeModal($("publicProductModal"));
+
+    if(activePublicBrand){
+      openPublicBrand(activePublicBrand.id);
+    }
+  });
 
   [
     $("authModal"),
     $("accountModal"),
     $("brandModal"),
-    $("productModal")
+    $("productModal"),
+    $("publicBrandModal"),
+    $("publicProductModal")
   ].forEach(backgroundClose);
 </script>
 
