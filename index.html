@@ -2904,6 +2904,71 @@
       .shipping-province-row{grid-template-columns:1fr}
     }
 
+  
+    /* =====================================================
+       VOLVER AL PORTAL PRINCIPAL
+    ===================================================== */
+
+    .portal-sidebar{
+      max-height:100vh;
+      overflow-y:auto;
+    }
+
+    .portal-menu{
+      flex:none;
+    }
+
+    .portal-exit{
+      flex:none;
+      position:sticky;
+      bottom:0;
+      margin-top:18px;
+      background:var(--dark);
+      z-index:3;
+    }
+
+    .portal-header-actions{
+      display:flex;
+      align-items:center;
+      gap:9px;
+    }
+
+    .return-main-button{
+      min-height:40px;
+      padding:0 13px;
+      border:1px solid var(--border);
+      border-radius:10px;
+      background:#fff;
+      color:var(--dark);
+      font-size:10px;
+      font-weight:800;
+    }
+
+    @media(max-width:850px){
+      .portal-sidebar{
+        overflow-y:auto;
+      }
+
+      .portal-exit{
+        position:static;
+        margin-top:10px;
+      }
+
+      .portal-header{
+        gap:8px;
+      }
+
+      .portal-header-actions{
+        gap:6px;
+      }
+
+      .return-main-button{
+        min-height:36px;
+        padding:0 9px;
+        font-size:9px;
+      }
+    }
+
   </style>
 </head>
 
@@ -3356,7 +3421,14 @@
   <main class="portal-main">
     <header class="portal-header">
       <h2 id="adminPortalTitle">Panel administrador</h2>
-      <button class="secondary-button" id="adminRefreshButton">Actualizar datos</button>
+
+      <div class="portal-header-actions">
+        <button class="return-main-button" id="adminReturnMainButton" type="button">
+          ← Volver a Amigate
+        </button>
+
+        <button class="secondary-button" id="adminRefreshButton">Actualizar datos</button>
+      </div>
     </header>
 
     <div class="portal-content">
@@ -4056,7 +4128,14 @@
   <main class="portal-main">
     <header class="portal-header">
       <h2 id="sellerPortalTitle">Panel de mi marca</h2>
-      <button class="secondary-button" id="sellerAccountButton">Mi cuenta</button>
+
+      <div class="portal-header-actions">
+        <button class="return-main-button" id="sellerReturnMainButton" type="button">
+          ← Volver a Amigate
+        </button>
+
+        <button class="secondary-button" id="sellerAccountButton">Mi cuenta</button>
+      </div>
     </header>
 
     <div class="portal-content">
@@ -7111,7 +7190,7 @@
   });
 
   $("adminRefreshButton").addEventListener("click",loadAdminData);
-  $("adminExit").addEventListener("click",()=>$("adminPortal").classList.remove("visible"));
+  // La salida del administrador utiliza returnToMainPortal().
 
 
   /* =====================================================
@@ -9062,13 +9141,32 @@
     await openSellerPortal();
   });
 
-  $("buyerExit").addEventListener("click",()=>{
-    $("buyerPortal").classList.remove("visible");
-  });
 
-  $("sellerExit").addEventListener("click",()=>{
-    $("sellerPortal").classList.remove("visible");
-  });
+  function returnToMainPortal(){
+    $("buyerPortal")?.classList.remove("visible");
+    $("sellerPortal")?.classList.remove("visible");
+    $("adminPortal")?.classList.remove("visible");
+
+    closeModal($("accountModal"));
+    closeModal($("publicBrandModal"));
+    closeModal($("publicCatalogModal"));
+    closeModal($("publicCategoriesModal"));
+    closeModal($("publicProductModal"));
+
+    $("publicSite")?.classList.remove("hidden");
+
+    window.scrollTo({
+      top:0,
+      behavior:"smooth"
+    });
+  }
+
+  $("sellerReturnMainButton")?.addEventListener("click",returnToMainPortal);
+  $("adminReturnMainButton")?.addEventListener("click",returnToMainPortal);
+
+  $("buyerExit").addEventListener("click",returnToMainPortal);
+  $("sellerExit").addEventListener("click",returnToMainPortal);
+  $("adminExit")?.addEventListener("click",returnToMainPortal);
 
   $("buyerAccountButton").addEventListener("click",openAccount);
   $("sellerAccountButton").addEventListener("click",openAccount);
